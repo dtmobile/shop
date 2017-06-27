@@ -640,9 +640,8 @@ elseif ($action == 'profile') {
 } /* 我要贷款页面 */
 elseif ($action == 'daikuan') {
     include_once(ROOT_PATH . 'includes/lib_transaction.php');
-
     $user_info = get_profile($user_id);
-
+//    var_dump($user_info);
     /* 取出注册扩展字段 */
     $sql = 'SELECT * FROM ' . $ecs->table('reg_fields') . ' WHERE type < 2 AND display = 1 ORDER BY dis_order, id';
     $extend_info_list = $db->getAll($sql);
@@ -656,7 +655,6 @@ elseif ($action == 'daikuan') {
     foreach ($extend_info_arr AS $val) {
         $temp_arr[$val['reg_field_id']] = $val['content'];
     }
-
     foreach ($extend_info_list AS $key => $val) {
         switch ($val['id']) {
             case 1:
@@ -685,6 +683,7 @@ elseif ($action == 'daikuan') {
     $smarty->assign('passwd_questions', $_LANG['passwd_questions']);
 
     $smarty->assign('profile', $user_info);
+
     $smarty->display('user_transaction.dwt');
 } /* 修改个人资料的处理 */
 elseif ($action == 'act_edit_profile') {

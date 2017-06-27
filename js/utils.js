@@ -64,6 +64,31 @@ Utils.isInt = function(val)
   return !reg.test(val);
 }
 
+Utils.isFloat = function(val)
+{
+  var strP=/^\d+(\.\d+)?$/;
+  if(!strP.test(val)) return false;
+  try{
+    if(parseFloat(val)!=val) return false;
+  }catch(ex){
+    return false;
+  }
+  return true;
+}
+
+Utils.convertDate = function(frm, prefix)
+{
+  var year = frm.elements[prefix+"Year"];
+  var month = frm.elements[prefix+"Month"];
+  var day = frm.elements[prefix+"Day"];
+  if (Utils.isEmpty(year) || Utils.isEmpty(month) || Utils.isEmpty(day)) {
+    Console.log(prefix+'日期格式不正确');
+    return null;
+  }
+  return new Date(year.value,month.value,day.value);
+}
+
+
 Utils.isEmail = function( email )
 {
   var reg1 = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
@@ -124,6 +149,18 @@ Utils.request = function(url, item)
 Utils.$ = function(name)
 {
     return document.getElementById(name);
+}
+
+Utils.getRadioGroupSelectValue = function(frm,radioName)
+{
+  for (i = 0; i < frm.elements.length ; i ++)
+  {
+    if (frm.elements[i].name==radioName && frm.elements[i].checked)
+    {
+      return frm.elements[i].value;
+    }
+  }
+  return null;
 }
 
 function rowindex(tr)

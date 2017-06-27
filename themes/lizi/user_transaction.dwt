@@ -24,22 +24,36 @@
       	<div class="box">
      <div class="box_1">
       <div class="userCenterBox boxCenterList clearfix" style="_height:1%;">
-         <!-- 用户信息界面 start-->
-         <!--{if $action eq 'profile'}-->
+         <!-- 用户信息和我要贷款界面 start-->
+         <!--{if $action eq 'profile' or $action eq 'daikuan'}-->
          {insert_scripts files='utils.js'}
         <script type="text/javascript">
         </script>
-      <h5><span>{$lang.profile}</span></h5>
+      <h5>
+          {if $action eq 'profile'}
+          <span>{$lang.profile}</span>
+          {else}
+          <span>贷款申请</span>
+          {/if}
+      </h5>
       <div class="blank"></div>
-     <form name="formEdit" action="user.php" method="post" onSubmit="return userEdit()">
-      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+     <!--<form name="formEdit" action="user.php" method="post" onSubmit="return userEdit()">-->
+      <form name="formEdit" action="user.php" method="post"
+            {if $action eq 'profile'}
+          onSubmit="return userEdit()"
+          {else}
+          onSubmit="return daikuanCommit()"
+          {/if}>
 
+         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+
+          {if $action eq 'daikuan'}
           <tr style="background-color:cornflowerblue;">
               <td width="100%" align="center"  colspan="2" ><strong>贷款申请</strong></td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">申请金额： </td>
-              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="total_money" type="text" value="{$profile.total_money}" size="25" class="inputBg" /><span style="color:#FF0000"> *</span></td>
+              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="total_money" type="text" value="{$profile.total_money}" size="25" class="inputBg" />万元<span style="color:#FF0000"> *</span></td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">资金用途： </td>
@@ -63,8 +77,6 @@
                   <span style="color:#FF0000"> *</span>
               </td>
           </tr>
-
-
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">还款方式： </td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
@@ -79,11 +91,12 @@
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">银行卡号： </td>
               <td width="72%" align="left" bgcolor="#FFFFFF"><input name="user_bank_id" type="text" value="{$profile.user_bank_id}" size="25" class="inputBg" />
-                  &nbsp;&nbsp;开户行：
+                  &nbsp;&nbsp;开户行名称：
                   <input name="user_opening_bank" type="text" value="{$profile.user_opening_bank}" size="25" class="inputBg" />
                   <span style="color:#FF0000"> *</span>
               </td>
           </tr>
+          {/if}
 
 
           <tr style="background-color:cornflowerblue;">
@@ -95,7 +108,9 @@
           </tr>
             <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.birthday}： </td>
-              <td width="72%" align="left" bgcolor="#FFFFFF"> {html_select_date field_order=YMD prefix=birthday start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.birthday} </td>
+              <td width="72%" align="left" bgcolor="#FFFFFF"> {html_select_date field_order=YMD prefix=birthday start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.birthday}
+                  <span style="color:#FF0000"> *</span>
+              </td>
             </tr>
             <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.sex}： </td>
@@ -119,13 +134,21 @@
               <td width="28%" align="right" bgcolor="#FFFFFF">身份证号：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
                   <input name="identity_card" type="text" value="{$profile.identity_card}" size="25" class="inputBg" />
-                  &nbsp;&nbsp;证件有效期
-                  <input name="id_begin_date" type="text" value="{$profile.id_begin_date}" size="25" class="inputBg" />
-                  <span>到</span>
-                  <input name="id_end_date" type="text" value="{$profile.id_end_date}" size="25" class="inputBg" />
                   <span style="color:#FF0000"> *</span>
               </td>
           </tr>
+
+             <tr>
+                 <td width="28%" align="right" bgcolor="#FFFFFF">身份证有效期：</td>
+                 <td width="72%" align="left" bgcolor="#FFFFFF">
+                     {html_select_date field_order=YMD prefix=id_begin_date start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.id_begin_date}
+                     &nbsp;&nbsp;
+                     <span>到</span>
+                     &nbsp;&nbsp;
+                     {html_select_date field_order=YMD prefix=id_end_date start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.id_end_date}
+                     <span style="color:#FF0000"> *</span>
+                 </td>
+             </tr>
 
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">户籍所在地：</td>
@@ -146,7 +169,7 @@
                   <input name="home_address" type="text" value="{$profile.home_address}" size="25" class="inputBg" />
                   <span >&nbsp;&nbsp;居住时间</span>
                   <input name="home_live_month" type="text" value="{$profile.home_live_month}" size="25" class="inputBg" />
-                  <span >月</span>
+                  月&nbsp;&nbsp;<span style="color:#FF0000">*</span>
               </td>
           </tr>
           <tr>
@@ -156,7 +179,7 @@
                   租房&nbsp;&nbsp;
                   <input type="radio" name="home_type" value="2" {if $profile.home_type==2}checked="checked"{/if} />
                   买房&nbsp;&nbsp;
-                  <input type="radio" name="home_type" value="2" {if $profile.home_type==3}checked="checked"{/if} />
+                  <input type="radio" name="home_type" value="3" {if $profile.home_type==3}checked="checked"{/if} />
                   其他&nbsp;&nbsp;&nbsp;月租金
                   <input name="home_rent_per_month" type="text" value="{$profile.home_rent_per_month}" size="25" class="inputBg" />
                   元／月 &nbsp;&nbsp;购买金额
@@ -172,7 +195,7 @@
                   无&nbsp;&nbsp;
                   <input type="radio" name="have_house" value="1" {if $profile.have_house==1}checked="checked"{/if} />
                   有&nbsp;&nbsp;
-                  <span >房屋地址</span>
+                  <span >房产地址</span>
                   <input name="house_address" type="text" value="{$profile.house_address}" size="25" class="inputBg" />
               </td>
           </tr>
@@ -208,11 +231,11 @@
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">身体状况：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input type="radio" name="health" value="0" {if $profile.health==0}checked="checked"{/if} />
-                  良好&nbsp;&nbsp;
                   <input type="radio" name="health" value="1" {if $profile.health==1}checked="checked"{/if} />
-                  一般&nbsp;&nbsp;
+                  良好&nbsp;&nbsp;
                   <input type="radio" name="health" value="2" {if $profile.health==2}checked="checked"{/if} />
+                  一般&nbsp;&nbsp;
+                  <input type="radio" name="health" value="3" {if $profile.health==3}checked="checked"{/if} />
                   较差&nbsp;&nbsp;
                   疾病史&nbsp;&nbsp;
                   <input name="sick_history" type="text" value="{$profile.sick_history}" size="25" class="inputBg" />
@@ -230,7 +253,7 @@
                   大专&nbsp;&nbsp;
                   <input type="radio" name="education" value="3" {if $profile.education==3}checked="checked"{/if} />
                   高中／中专&nbsp;&nbsp;
-                  <input type="radio" name="education" value="3" {if $profile.education==3}checked="checked"{/if} />
+                  <input type="radio" name="education" value="4" {if $profile.education==4}checked="checked"{/if} />
                   初中及以下&nbsp;&nbsp;
               </td>
           </tr>
@@ -247,7 +270,7 @@
                   <input type="radio" name="marital_status" value="3" {if $profile.marital_status==3}checked="checked"{/if} />
                   丧偶&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   结婚日期
-                  {html_select_date field_order=YMD prefix=birthday start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.marry_date}
+                  {html_select_date field_order=YMD prefix=marry_date start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.marry_date}
               </td>
           </tr>
 
@@ -261,7 +284,7 @@
                   有&nbsp;&nbsp;&nbsp;
                   单张信用卡最高额度
                   <input name="credit_card_max" type="text" value="{$profile.credit_card_max}" size="25" class="inputBg" />
-                  万元
+                  万元&nbsp;&nbsp;<span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
@@ -269,7 +292,7 @@
               <td width="28%" align="right" bgcolor="#FFFFFF">个人年收入：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
                   <input name="sallary_one_year" type="text" value="{$profile.sallary_one_year}" size="25" class="inputBg" />
-                  万元
+                  万元&nbsp;&nbsp;<span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
@@ -297,12 +320,12 @@
               <td width="72%" align="left" bgcolor="#FFFFFF">
                   <input name="company_department" type="text" value="{$profile.company_department}" size="25" class="inputBg" />
                   &nbsp;&nbsp;&nbsp;担任职位
-                  <input name="company_department" type="text" value="{$profile.company_duty}" size="25" class="inputBg" />
+                  <input name="company_duty" type="text" value="{$profile.company_duty}" size="25" class="inputBg" />
               </td>
           </tr>
 
           <tr>
-              <td width="28%" align="right" bgcolor="#FFFFFF">月收入：</td>
+              <td width="28%" align="right" bgcolor="#FFFFFF">当前月收入：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
                   <input name="company_income_month" type="text" value="{$profile.company_income_month}" size="25" class="inputBg" />万元
               </td>
@@ -310,7 +333,7 @@
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">入职时间：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  {html_select_date field_order=YMD prefix=birthday start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.company_entry_time}
+                  {html_select_date field_order=YMD prefix=company_entry_time start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.company_entry_time}
               </td>
           </tr>
 
@@ -398,34 +421,42 @@
 		{/foreach}
                 <tr>
                   <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_profile" />
-                    <input name="submit" type="submit" value="{$lang.confirm_edit}" class="bnt_blue_1" style="border:none;" />
+                      {if $action eq 'profile'}
+                      <input name="submit" type="submit" value="{$lang.confirm_edit}" class="bnt_blue_1" style="border:none;" />
+                      {else}
+                      <input name="submit" type="submit" value="确定提交" class="bnt_blue_1" style="border:none;" />
+                      {/if}
                   </td>
                 </tr>
        </table>
     </form>
-     <form name="formPassword" action="user.php" method="post" onSubmit="return editPassword()" >
-     <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
-        <tr>
-          <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.old_password}：</td>
-          <td width="76%" align="left" bgcolor="#FFFFFF"><input name="old_password" type="password" size="25"  class="inputBg" /></td>
-        </tr>
-        <tr>
-          <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.new_password}：</td>
-          <td align="left" bgcolor="#FFFFFF"><input name="new_password" type="password" size="25"  class="inputBg" /></td>
-        </tr>
-        <tr>
-          <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.confirm_password}：</td>
-          <td align="left" bgcolor="#FFFFFF"><input name="comfirm_password" type="password" size="25"  class="inputBg" /></td>
-        </tr>
-        <tr>
-          <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_password" />
-            <input name="submit" type="submit" class="bnt_blue_1" style="border:none;" value="{$lang.confirm_edit}" />
-          </td>
-        </tr>
-      </table>
-    </form>
+
+          {if $action eq 'profile'}
+          <form name="formPassword" action="user.php" method="post" onSubmit="return editPassword()" >
+              <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+                  <tr>
+                      <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.old_password}：</td>
+                      <td width="76%" align="left" bgcolor="#FFFFFF"><input name="old_password" type="password" size="25"  class="inputBg" /></td>
+                  </tr>
+                  <tr>
+                      <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.new_password}：</td>
+                      <td align="left" bgcolor="#FFFFFF"><input name="new_password" type="password" size="25"  class="inputBg" /></td>
+                  </tr>
+                  <tr>
+                      <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.confirm_password}：</td>
+                      <td align="left" bgcolor="#FFFFFF"><input name="comfirm_password" type="password" size="25"  class="inputBg" /></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_password" />
+                          <input name="submit" type="submit" class="bnt_blue_1" style="border:none;" value="{$lang.confirm_edit}" />
+                      </td>
+                  </tr>
+              </table>
+          </form>
+          {/if}
+
      <!--{/if}-->
-     <!--#用户信息界面 end-->
+     <!--#用户信息和我要贷款界面 end-->
      <!-- 绑定手机界面 start-->
          <!--{if $action eq 'bindmobile'}-->
 	 <script>var ztime={$ztime};</script>
@@ -461,9 +492,6 @@
      <!--#绑定手机界面 end-->
      <!-- {if $action eq 'bonus'} 用户的红包列表 start-->
       <script type="text/javascript">
-        {foreach from=$lang.profile_js item=item key=key}
-          var {$key} = "{$item}";
-        {/foreach}
       </script>
       <h5><span>{$lang.label_bonus}</span></h5>
       <div class="blank"></div>
@@ -536,9 +564,6 @@
        <h5><span>{$lang.merge_order}</span></h5>
        <div class="blank"></div>
         <script type="text/javascript">
-        {foreach from=$lang.merge_order_js item=item key=key}
-          var {$key} = "{$item}";
-        {/foreach}
         </script>
         <form action="user.php" method="post" name="formOrder" onsubmit="return mergeOrder()">
           <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
