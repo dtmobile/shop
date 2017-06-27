@@ -27,11 +27,10 @@
                 <li>
                     <a class="{if $action eq 'profile'}on{/if}" href="user.php?act=profile">{$lang.label_profile}</a>
 
-                      <a class="{if $action eq 'profile'}on{/if}" href="user.php?act=daikuan">{$lang.label_daikuan}</a>
+                      <a class="{if $action eq 'daikuan'}on{/if}" href="user.php?act=daikuan">{$lang.label_daikuan}</a>
 
                      <a class="{if $action eq 'collection_list'}on{/if}" href="user.php?act=collection_list">{$lang.label_collection}</a>
 
-                     
                       <a class="{if $action eq 'message_list'}on{/if}" href="user.php?act=message_list">{$lang.label_message}</a>
                       
                        <a class="{if $action eq 'affiliate'}on{/if}" href="user.php?act=affiliate">{$lang.label_affiliate}</a>

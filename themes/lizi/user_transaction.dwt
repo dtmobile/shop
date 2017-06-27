@@ -28,58 +28,331 @@
          <!--{if $action eq 'profile'}-->
          {insert_scripts files='utils.js'}
         <script type="text/javascript">
-          {foreach from=$lang.profile_js item=item key=key}
-            var {$key} = "{$item}";
-          {/foreach}
         </script>
       <h5><span>{$lang.profile}</span></h5>
       <div class="blank"></div>
      <form name="formEdit" action="user.php" method="post" onSubmit="return userEdit()">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+
+          <tr style="background-color:cornflowerblue;">
+              <td width="100%" align="center"  colspan="2" ><strong>贷款申请</strong></td>
+          </tr>
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">申请金额： </td>
+              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="total_money" type="text" value="{$profile.total_money}" size="25" class="inputBg" /><span style="color:#FF0000"> *</span></td>
+          </tr>
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">资金用途： </td>
+              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="borrow_purpose" type="text" value="{$profile.borrow_purpose}" size="25" class="inputBg" /><span style="color:#FF0000"> *</span></td>
+          </tr>
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">借款申请周期： </td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="amortize_period" value="1" {if $profile.amortize_period==1}checked="checked"{/if} />
+                  1期&nbsp;&nbsp;
+                  <input type="radio" name="amortize_period" value="3" {if $profile.amortize_period==3}checked="checked"{/if} />
+                  3期&nbsp;&nbsp;
+                  <input type="radio" name="amortize_period" value="6" {if $profile.amortize_period==6}checked="checked"{/if} />
+                  6期&nbsp;&nbsp;
+                  <input type="radio" name="amortize_period" value="12" {if $profile.amortize_period==12}checked="checked"{/if} />
+                  12期&nbsp;&nbsp;
+                  <input type="radio" name="amortize_period" value="24" {if $profile.amortize_period==24}checked="checked"{/if} />
+                  24期&nbsp;&nbsp;
+                  <input type="radio" name="amortize_period" value="36" {if $profile.amortize_period==36}checked="checked"{/if} />
+                  36期&nbsp;&nbsp;
+                  <span style="color:#FF0000"> *</span>
+              </td>
+          </tr>
+
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">还款方式： </td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="amortize_type" value="1" {if $profile.amortize_type==1}checked="checked"{/if} />
+                  等额本息&nbsp;&nbsp;
+                  <input type="radio" name="amortize_type" value="2" {if $profile.amortize_type==2}checked="checked"{/if} />
+                  先息后本&nbsp;&nbsp;
+                  <span style="color:#FF0000"> *</span>
+              </td>
+          </tr>
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">银行卡号： </td>
+              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="user_bank_id" type="text" value="{$profile.user_bank_id}" size="25" class="inputBg" />
+                  &nbsp;&nbsp;开户行：
+                  <input name="user_opening_bank" type="text" value="{$profile.user_opening_bank}" size="25" class="inputBg" />
+                  <span style="color:#FF0000"> *</span>
+              </td>
+          </tr>
+
+
+          <tr style="background-color:cornflowerblue;">
+              <td width="100%" align="center"  colspan="2" ><strong>基本情况</strong></td>
+          </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">真实姓名： </td>
               <td width="72%" align="left" bgcolor="#FFFFFF"><input name="actual_name" type="text" value="{$profile.actual_name}" size="25" class="inputBg" /><span style="color:#FF0000"> *</span></td>
           </tr>
-                <tr>
-                  <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.birthday}： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF"> {html_select_date field_order=YMD prefix=birthday start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.birthday} </td>
-                </tr>
-                <tr>
-                  <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.sex}： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF"><input type="radio" name="sex" value="0" {if $profile.sex==0}checked="checked"{/if} />
-                    {$lang.secrecy}&nbsp;&nbsp;
-                    <input type="radio" name="sex" value="1" {if $profile.sex==1}checked="checked"{/if} />
-                    {$lang.male}&nbsp;&nbsp;
-                    <input type="radio" name="sex" value="2" {if $profile.sex==2}checked="checked"{/if} />
-                  {$lang.female}&nbsp;&nbsp; </td>
-                </tr>
-                <tr>
-                  <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.email}： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="email" type="text" value="{$profile.email}" size="25" class="inputBg" /><span style="color:#FF0000"> *</span></td>
-                </tr>
+            <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.birthday}： </td>
+              <td width="72%" align="left" bgcolor="#FFFFFF"> {html_select_date field_order=YMD prefix=birthday start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.birthday} </td>
+            </tr>
+            <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.sex}： </td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                <input type="radio" name="sex" value="1" {if $profile.sex==1}checked="checked"{/if} />
+                {$lang.male}&nbsp;&nbsp;
+                <input type="radio" name="sex" value="2" {if $profile.sex==2}checked="checked"{/if} />
+              {$lang.female}&nbsp;&nbsp;
+                  <span style="color:#FF0000"> *</span>
+              </td>
+            </tr>
+            <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">手机号码：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input name="mobile_phone" type="text" value="{$profile.mobile_phone}" size="25" class="inputBg" />
+                  &nbsp;&nbsp; {$lang.email} <input name="email" type="text" value="{$profile.email}" size="25" class="inputBg" />
+                  <span style="color:#FF0000"> *</span></td>
+            </tr>
 
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">身份证号：</td>
-              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="identity_card" type="text" value="{$profile.identity_card}" size="25" class="inputBg" /><span style="color:#FF0000"> *</span></td>
-          </tr>
-          <tr>
-              <td width="28%" align="right" bgcolor="#FFFFFF">证件有效期：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input name="identity_card" type="text" value="{$profile.identity_card}" size="25" class="inputBg" />
+                  &nbsp;&nbsp;证件有效期
                   <input name="id_begin_date" type="text" value="{$profile.id_begin_date}" size="25" class="inputBg" />
                   <span>到</span>
                   <input name="id_end_date" type="text" value="{$profile.id_end_date}" size="25" class="inputBg" />
                   <span style="color:#FF0000"> *</span>
               </td>
           </tr>
+
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">户籍所在地：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="identity_card" type="text" value="{$profile.domicile_address}" size="25" class="inputBg" />
+                  <input name="domicile_address" type="text" value="{$profile.domicile_address}" size="25" class="inputBg" />
                   <span style="color:#FF0000"> *</span></td>
+          </tr>
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">民族：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input name="nationality" type="text" value="{$profile.nationality}" size="25" class="inputBg" />
+                  <span style="color:#FF0000"> *</span>
+              </td>
+          </tr>
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">现在居住地址：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input name="home_address" type="text" value="{$profile.home_address}" size="25" class="inputBg" />
+                  <span >&nbsp;&nbsp;居住时间</span>
+                  <input name="home_live_month" type="text" value="{$profile.home_live_month}" size="25" class="inputBg" />
+                  <span >月</span>
+              </td>
+          </tr>
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">住房性质：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="home_type" value="1" {if $profile.home_type==1}checked="checked"{/if} />
+                  租房&nbsp;&nbsp;
+                  <input type="radio" name="home_type" value="2" {if $profile.home_type==2}checked="checked"{/if} />
+                  买房&nbsp;&nbsp;
+                  <input type="radio" name="home_type" value="2" {if $profile.home_type==3}checked="checked"{/if} />
+                  其他&nbsp;&nbsp;&nbsp;月租金
+                  <input name="home_rent_per_month" type="text" value="{$profile.home_rent_per_month}" size="25" class="inputBg" />
+                  元／月 &nbsp;&nbsp;购买金额
+                  <input name="home_buy_cost" type="text" value="{$profile.home_buy_cost}" size="25" class="inputBg" />万元
+              </td>
           </tr>
 
 
-		{foreach from=$extend_info_list item=field}
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">是否有房产：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="have_house" value="0" {if $profile.have_house==0}checked="checked"{/if} />
+                  无&nbsp;&nbsp;
+                  <input type="radio" name="have_house" value="1" {if $profile.have_house==1}checked="checked"{/if} />
+                  有&nbsp;&nbsp;
+                  <span >房屋地址</span>
+                  <input name="house_address" type="text" value="{$profile.house_address}" size="25" class="inputBg" />
+              </td>
+          </tr>
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">是否有汽车：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="have_car" value="0" {if $profile.have_car==0}checked="checked"{/if} />
+                  无&nbsp;&nbsp;
+                  <input type="radio" name="have_car" value="1" {if $profile.have_car==1}checked="checked"{/if} />
+                  有&nbsp;&nbsp;
+                  <span >汽车状况</span>
+                  <input name="car_description" type="text" value="{$profile.car_description}" size="25" class="inputBg" />
+              </td>
+          </tr>
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">是否有同居者：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="live_partner" value="0" {if $profile.live_partner==0}checked="checked"{/if} />
+                  无&nbsp;&nbsp;
+                  <input type="radio" name="live_partner" value="1" {if $profile.live_partner==1}checked="checked"{/if} />
+                  父母&nbsp;&nbsp;
+                  <input type="radio" name="live_partner" value="2" {if $profile.live_partner==2}checked="checked"{/if} />
+                  配偶及子女&nbsp;&nbsp;
+                  <input type="radio" name="live_partner" value="3" {if $profile.live_partner==3}checked="checked"{/if} />
+                  朋友&nbsp;&nbsp;
+                  <input type="radio" name="live_partner" value="4" {if $profile.live_partner==4}checked="checked"{/if} />
+                  其它&nbsp;&nbsp;
+              </td>
+          </tr>
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">身体状况：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="health" value="0" {if $profile.health==0}checked="checked"{/if} />
+                  良好&nbsp;&nbsp;
+                  <input type="radio" name="health" value="1" {if $profile.health==1}checked="checked"{/if} />
+                  一般&nbsp;&nbsp;
+                  <input type="radio" name="health" value="2" {if $profile.health==2}checked="checked"{/if} />
+                  较差&nbsp;&nbsp;
+                  疾病史&nbsp;&nbsp;
+                  <input name="sick_history" type="text" value="{$profile.sick_history}" size="25" class="inputBg" />
+              </td>
+          </tr>
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">最高学历：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="education" value="0" {if $profile.education==0}checked="checked"{/if} />
+                  研究生及以上&nbsp;&nbsp;
+                  <input type="radio" name="education" value="1" {if $profile.education==1}checked="checked"{/if} />
+                  大学&nbsp;&nbsp;
+                  <input type="radio" name="education" value="2" {if $profile.education==2}checked="checked"{/if} />
+                  大专&nbsp;&nbsp;
+                  <input type="radio" name="education" value="3" {if $profile.education==3}checked="checked"{/if} />
+                  高中／中专&nbsp;&nbsp;
+                  <input type="radio" name="education" value="3" {if $profile.education==3}checked="checked"{/if} />
+                  初中及以下&nbsp;&nbsp;
+              </td>
+          </tr>
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">婚姻状况：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="marital_status" value="0" {if $profile.marital_status==0}checked="checked"{/if} />
+                  已婚&nbsp;&nbsp;
+                  <input type="radio" name="marital_status" value="1" {if $profile.marital_status==1}checked="checked"{/if} />
+                  未婚&nbsp;&nbsp;
+                  <input type="radio" name="marital_status" value="2" {if $profile.marital_status==2}checked="checked"{/if} />
+                  离异&nbsp;&nbsp;
+                  <input type="radio" name="marital_status" value="3" {if $profile.marital_status==3}checked="checked"{/if} />
+                  丧偶&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  结婚日期
+                  {html_select_date field_order=YMD prefix=birthday start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.marry_date}
+              </td>
+          </tr>
+
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">是否有信用卡：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="have_credit_crad" value="0" {if $profile.have_credit_crad==0}checked="checked"{/if} />
+                  无&nbsp;&nbsp;
+                  <input type="radio" name="have_credit_crad" value="1" {if $profile.have_credit_crad==1}checked="checked"{/if} />
+                  有&nbsp;&nbsp;&nbsp;
+                  单张信用卡最高额度
+                  <input name="credit_card_max" type="text" value="{$profile.credit_card_max}" size="25" class="inputBg" />
+                  万元
+              </td>
+          </tr>
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">个人年收入：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input name="sallary_one_year" type="text" value="{$profile.sallary_one_year}" size="25" class="inputBg" />
+                  万元
+              </td>
+          </tr>
+
+          <tr style="background-color:cornflowerblue;">
+              <td width="100%" align="center"  colspan="2" ><strong>工作信息</strong></td>
+          </tr>
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">现工作单位全称：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input name="company_name" type="text" value="{$profile.company_name}" size="25" class="inputBg" />
+                  &nbsp;&nbsp;&nbsp;所属行业 <input name="company_industury" type="text" value="{$profile.company_industury}" size="25" class="inputBg" />
+              </td>
+          </tr>
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">单位地址：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input name="company_address" type="text" value="{$profile.company_address}" size="25" class="inputBg" />
+                  &nbsp;&nbsp;&nbsp;单位电话
+                  <input name="company_phone" type="text" value="{$profile.company_phone}" size="25" class="inputBg" />
+              </td>
+          </tr>
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">所在部门：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input name="company_department" type="text" value="{$profile.company_department}" size="25" class="inputBg" />
+                  &nbsp;&nbsp;&nbsp;担任职位
+                  <input name="company_department" type="text" value="{$profile.company_duty}" size="25" class="inputBg" />
+              </td>
+          </tr>
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">月收入：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input name="company_income_month" type="text" value="{$profile.company_income_month}" size="25" class="inputBg" />万元
+              </td>
+          </tr>
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">入职时间：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  {html_select_date field_order=YMD prefix=birthday start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.company_entry_time}
+              </td>
+          </tr>
+
+
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">单位性质：</td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">
+                  <input type="radio" name="company_type" value="0" {if $profile.company_type==0}checked="checked"{/if} />
+                  国有经济&nbsp;&nbsp;
+                  <input type="radio" name="company_type" value="1" {if $profile.company_type==1}checked="checked"{/if} />
+                  集体经济&nbsp;&nbsp;
+                  <input type="radio" name="company_type" value="2" {if $profile.company_type==2}checked="checked"{/if} />
+                  私营&nbsp;&nbsp;
+                  <input type="radio" name="company_type" value="3" {if $profile.company_type==3}checked="checked"{/if} />
+                  民营&nbsp;&nbsp;
+                  <input type="radio" name="company_type" value="4" {if $profile.company_type==4}checked="checked"{/if} />
+                  股份合作&nbsp;&nbsp;
+                  <input type="radio" name="company_type" value="5" {if $profile.company_type==5}checked="checked"{/if} />
+                  合资&nbsp;&nbsp;
+                  <input type="radio" name="company_type" value="6" {if $profile.company_type==6}checked="checked"{/if} />
+                  其它&nbsp;&nbsp;
+              </td>
+          </tr>
+
+          <tr style="background-color:cornflowerblue;">
+              <td width="100%" align="center"  colspan="2" ><strong>主要社会关系</strong></td>
+          </tr>
+          {foreach from=$profile.friends item=friend}
+          <tr>
+              <td width="28%" align="right" bgcolor="#FFFFFF">
+                  <input name="friend_phone" type="text" value="{$friend.friend_name}" size="25" class="inputBg" />
+                  </td>
+              <td width="72%" align="left" bgcolor="#FFFFFF">关系
+                  <input name="firend_type" type="text" value="{$friend.firend_type}" size="25" class="inputBg" />
+                  &nbsp;&nbsp;电话
+                  <input name="friend_phone" type="text" value="{$friend.friend_phone}" size="25" class="inputBg" />
+                  &nbsp;&nbsp;地址<input name="friend_address" type="text" value="{$friend.friend_address}" size="25" class="inputBg" />
+              </td>
+          </tr>
+          {/foreach}
+
+          {foreach from=$extend_info_list item=field}
 		<!-- {if $field.id eq 6} -->
 		<tr>
 		  <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.passwd_question}：</td>
