@@ -224,7 +224,7 @@ function userInfoValid(frm) {
     if (Utils.isEmpty(companyName)) {
         msg += '请输入现工作单位全称\n';
     }
-    var companyIndustury = frm.elements['companyIndustury'].value;
+    var companyIndustury = frm.elements['company_industury'].value;
     if (Utils.isEmpty(companyIndustury)) {
         msg += '请输入单位地址\n';
     }
@@ -232,12 +232,12 @@ function userInfoValid(frm) {
     if (Utils.isEmpty(companyAddress)) {
         msg += '请输入现工作单位全称\n';
     }
-    var companyPhone = frm.elements['companyPhone'].value;
+    var companyPhone = frm.elements['company_phone'].value;
     if (Utils.isEmpty(companyPhone)) {
         msg += '请输入单位电话\n';
     }
 
-    var companyDepartment = frm.elements['companyDepartment'].value;
+    var companyDepartment = frm.elements['company_department'].value;
     if (Utils.isEmpty(companyDepartment)) {
         msg += '请输入所在部门\n';
     }

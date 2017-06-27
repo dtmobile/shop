@@ -153,13 +153,13 @@
           <file leaf-file-name="user.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/user.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="461">
-                  <caret line="261" column="5" selection-start-line="261" selection-start-column="5" selection-end-line="261" selection-end-column="5" />
+                <state relative-caret-position="-89">
+                  <caret line="239" column="60" selection-start-line="239" selection-start-column="60" selection-end-line="239" selection-end-column="60" />
                   <folding>
                     <element signature="n#!!block;n#userInfoValidOld#0" expanded="false" />
                     <element signature="n#!!block;n#editPassword#0" expanded="false" />
                     <element signature="n#!!block;n#bindMobile#0" expanded="false" />
-                    <element signature="e#10222#10245#0" expanded="false" />
+                    <element signature="e#10225#10248#0" expanded="false" />
                     <element signature="n#!!block;n#submitMsg#0" expanded="false" />
                   </folding>
                 </state>
@@ -216,8 +216,8 @@
           <file leaf-file-name="user_transaction.dwt" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/themes/lizi/user_transaction.dwt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="227">
-                  <caret line="343" column="56" selection-start-line="343" selection-start-column="44" selection-end-line="343" selection-end-column="56" />
+                <state relative-caret-position="427">
+                  <caret line="320" column="49" selection-start-line="320" selection-start-column="31" selection-end-line="320" selection-end-column="49" />
                   <folding>
                     <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -523,8 +523,8 @@
         <option value="$PROJECT_DIR$/includes/lib_transaction.php" />
         <option value="$PROJECT_DIR$/themes/lizi/library/user_menu.lbi" />
         <option value="$PROJECT_DIR$/user.php" />
-        <option value="$PROJECT_DIR$/themes/lizi/user_transaction.dwt" />
         <option value="$PROJECT_DIR$/js/utils.js" />
+        <option value="$PROJECT_DIR$/themes/lizi/user_transaction.dwt" />
         <option value="$PROJECT_DIR$/js/user.js" />
       </list>
     </option>
@@ -668,12 +668,12 @@
       <updated>1498449294394</updated>
       <workItem from="1498449295636" duration="2696000" />
       <workItem from="1498458990758" duration="15211000" />
-      <workItem from="1498531556241" duration="28415000" />
+      <workItem from="1498531556241" duration="28894000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46322000" />
+    <option name="totallyTimeSpent" value="46801000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1364,10 +1364,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/themes/lizi/user_transaction.dwt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="343" column="56" selection-start-line="343" selection-start-column="44" selection-end-line="343" selection-end-column="56" />
+        <state relative-caret-position="427">
+          <caret line="320" column="49" selection-start-line="320" selection-start-column="31" selection-end-line="320" selection-end-column="49" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1575,23 +1583,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="261" column="5" selection-start-line="261" selection-start-column="5" selection-end-line="261" selection-end-column="5" />
+        <state relative-caret-position="-89">
+          <caret line="239" column="60" selection-start-line="239" selection-start-column="60" selection-end-line="239" selection-end-column="60" />
           <folding>
             <element signature="n#!!block;n#userInfoValidOld#0" expanded="false" />
             <element signature="n#!!block;n#editPassword#0" expanded="false" />
             <element signature="n#!!block;n#bindMobile#0" expanded="false" />
-            <element signature="e#10222#10245#0" expanded="false" />
+            <element signature="e#10225#10248#0" expanded="false" />
             <element signature="n#!!block;n#submitMsg#0" expanded="false" />
           </folding>
         </state>
