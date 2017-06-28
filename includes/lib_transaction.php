@@ -17,14 +17,13 @@ if (!defined('IN_ECS')) {
     die('Hacking attempt');
 }
 
-function ediUserFriends($userId, $firends)
+function editUserFriends($userId, $firends)
 {
     foreach ($firends as $key => $firend) {
         $friendPhone = isset($firend["friend_phone"]) ? htmlspecialchars(trim($firend["friend_phone"])) : '';
         $sql = "UPDATE " . $GLOBALS['ecs']->table('users_friend') . " SET friend_name='{$firend['friend_name']}',friend_phone='$friendPhone',
           firend_type='{$firend["firend_type"]}',friend_address='{$firend['friend_address']}' WHERE user_id=$userId AND friend_id={$firend['friend_id']}";
         $result = $GLOBALS['db']->query($sql);
-        echo $sql;
         if (!$result) {
             return $GLOBALS['db']->errorMsg();
         }
@@ -32,8 +31,121 @@ function ediUserFriends($userId, $firends)
     return "";
 }
 
+
+function saveBorrowAttach($borrowId,$userInfo)
+{
+    $newBorrowAttch = array();
+    $newBorrowAttch['borrow_id']=$borrowId;
+    $newBorrowAttch['user_id']=$userInfo['user_id'];
+    $newBorrowAttch['email']=$userInfo['email'];
+    $newBorrowAttch['user_name']=$userInfo['user_name'];
+    $newBorrowAttch['actual_name']=$userInfo['actual_name'];
+    $newBorrowAttch['sex']=$userInfo['sex'];
+    $newBorrowAttch['birthday']=$userInfo['birthday'];
+    $newBorrowAttch['mobile_phone']=$userInfo['mobile_phone'];
+    $newBorrowAttch['identity_card']=$userInfo['identity_card'];
+    $newBorrowAttch['id_begin_date']=$userInfo['id_begin_date'];
+    $newBorrowAttch['id_end_date']=$userInfo['id_end_date'];
+    $newBorrowAttch['domicile_address']=$userInfo['domicile_address'];
+    $newBorrowAttch['nationality']=$userInfo['nationality'];
+    $newBorrowAttch['home_address']=$userInfo['home_address'];
+    $newBorrowAttch['home_live_month']=$userInfo['home_live_month'];
+    $newBorrowAttch['home_type']=$userInfo['home_type'];
+    $newBorrowAttch['home_rent_per_month']=$userInfo['home_rent_per_month'];
+    $newBorrowAttch['home_buy_cost']=$userInfo['home_buy_cost'];
+    $newBorrowAttch['have_house']=$userInfo['have_house'];
+    $newBorrowAttch['house_address']=$userInfo['house_address'];
+    $newBorrowAttch['have_car']=$userInfo['have_car'];
+    $newBorrowAttch['car_description']=$userInfo['car_description'];
+    $newBorrowAttch['live_partner']=$userInfo['live_partner'];
+    $newBorrowAttch['health']=$userInfo['health'];
+    $newBorrowAttch['sick_history']=$userInfo['sick_history'];
+    $newBorrowAttch['education']=$userInfo['education'];
+    $newBorrowAttch['marital_status']=$userInfo['marital_status'];
+    $newBorrowAttch['marry_date']=$userInfo['marry_date'];
+    $newBorrowAttch['sallary_one_year']=$userInfo['sallary_one_year'];
+    $newBorrowAttch['have_credit_crad']=$userInfo['have_credit_crad'];
+    $newBorrowAttch['credit_card_max']=$userInfo['credit_card_max'];
+    $newBorrowAttch['company_name']=$userInfo['company_name'];
+    $newBorrowAttch['company_address']=$userInfo['company_address'];
+    $newBorrowAttch['company_phone']=$userInfo['company_phone'];
+    $newBorrowAttch['company_type']=$userInfo['company_type'];
+    $newBorrowAttch['company_industury']=$userInfo['company_industury'];
+    $newBorrowAttch['company_department']=$userInfo['company_department'];
+    $newBorrowAttch['company_duty']=$userInfo['company_duty'];
+    $newBorrowAttch['company_entry_time']=$userInfo['company_entry_time'];
+    $newBorrowAttch['company_income_month']=$userInfo['company_income_month'];
+    $newBorrowAttch['friends']=json_encode($userInfo['friends']);
+    $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow_attach'), $newBorrowAttch, 'INSERT');
+    $attachId = $GLOBALS['db']->insert_id();
+    return "";
+}
+
+function saveBorrowAmortize($borrowId,$borrowInfo)
+{
+    //    total_money
+//    amortize_type
+//    amortize_period
+//    amortize_type //1-等额本息 2-先息后本
+
+   $totalRMB = floatval($borrowInfo['total_money']) * 10000;
+    $periodCount = intval($borrowInfo['amortize_period']);
+    $needMoneyPerMonth = round($totalRMB / $periodCount,2) ;
+    $payIndex = 0;
+    while ($payIndex < $periodCount)
+    {
+        $payIndex++;
+        $newBorrowAmortize = array();
+        $newBorrowAmortize['borrow_id']=$borrowId;
+        $newBorrowAmortize['user_id']=$borrowInfo['user_id'];
+        $newBorrowAmortize['amortize_need_money'] = $needMoneyPerMonth;
+        $newBorrowAmortize['amortize_repay_money']=0.0;
+        $newBorrowAmortize['amortize_date']=date();
+        $newBorrowAmortize['repay_serial_code']='';
+        $newBorrowAmortize['comment']='';
+        $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow_amortize'), $newBorrowAmortize, 'INSERT');
+        $amortizeId = $GLOBALS['db']->insert_id();
+    }
+    return "";
+}
+
+/* 保存贷款请求信息 */
+function saveBorrowInfo($userInfo,$borrowInfo)
+{
+    $newBorrow = array();
+    $newBorrow['user_id'] = $borrowInfo['user_id'];
+    $newBorrow['total_money'] = $borrowInfo['total_money'];
+    $newBorrow['borrow_purpose'] = $borrowInfo['borrow_purpose'];
+    $newBorrow['user_bank_id'] = $borrowInfo['user_bank_id'];
+    $newBorrow['user_opening_bank'] = $borrowInfo['user_opening_bank'];
+    $newBorrow['amortize_period'] = $borrowInfo['amortize_period'];
+    $newBorrow['amortize_type'] = $borrowInfo['amortize_type'];
+    $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow'), $newBorrow, 'INSERT');
+    $borrowId = $GLOBALS['db']->insert_id();
+    if($borrowId<=0)
+    {
+        $GLOBALS['user']->error = ERR_BORROW_COMMIT_FAIL;
+        return "无法保存贷款申请";
+    }
+
+    $errInfo = saveBorrowAttach($borrowId,$userInfo);
+    if(!empty($errInfo))
+    {
+        $GLOBALS['user']->error = ERR_BORROW_COMMIT_ATTACH_FAIL;
+        return "无法保存贷款申请附带信息";
+    }
+
+    $errInfo = saveBorrowAmortize($borrowId,$borrowInfo);
+    if(!empty($errInfo))
+    {
+        $GLOBALS['user']->error = ERR_BORROW_COMMIT_AMORTIZE_FAIL;
+        return "无法保存贷款申请分期信息";
+    }
+    return "";
+}
+
 /* 编辑用户信息 */
-function editUserProfile($profile)
+function editUserInfo($profile)
 {
 //    var_dump($profile);
     $set_str = '';
@@ -52,13 +164,12 @@ function editUserProfile($profile)
     $set_str = substr($set_str, 0, -1);
     if (!empty($set_str)) {
         $sql = "UPDATE " . $GLOBALS['ecs']->table('users') . " SET $set_str  WHERE user_id = {$profile['user_id']}";
-        echo $sql;
         $result = $GLOBALS['db']->query($sql);
         if (!$result) {
             return $GLOBALS['db']->errorMsg();
         }
     }
-    $rlt = ediUserFriends($profile['user_id'], $profile['friends']);
+    $rlt = editUserFriends($profile['user_id'], $profile['friends']);
     return $rlt;
 }
 
@@ -116,7 +227,7 @@ function edit_profile($profile)
             return false;
         }
     }
-    $errMsg = editUserProfile($profile);
+    $errMsg = editUserInfo($profile);
     if (!empty($errMsg)) {
         $GLOBALS['user']->error = $errMsg;
     }
@@ -137,7 +248,12 @@ function edit_profile($profile)
     return true;
 }
 
-function SaveBorrerInfo($userInfo,$borrowInfo)
+/*** 提交贷款申请
+ * @param $userInfo
+ * @param $borrowInfo
+ * @return bool
+ */
+function commitBorrowRequest($userInfo, $borrowInfo)
 {
     if (empty($userInfo['user_id'])) {
         $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
@@ -153,24 +269,18 @@ function SaveBorrerInfo($userInfo,$borrowInfo)
             return false;
         }
     }
-    $errMsg = editUserProfile($userInfo);
+    $errMsg = editUserInfo($userInfo);
     if (!empty($errMsg)) {
         $GLOBALS['user']->error = $errMsg;
+        return false;
     }
-    /* 过滤非法的键值 */
-    $other_key_array = array('msn', 'qq', 'office_phone', 'home_phone');
-    foreach ($userInfo['other'] as $key => $val) {
-        //删除非法key值
-        if (!in_array($key, $other_key_array)) {
-            unset($userInfo['other'][$key]);
-        } else {
-            $userInfo['other'][$key] = htmlspecialchars(trim($val)); //防止用户输入javascript代码
-        }
+
+    $errMsg = saveBorrowInfo($userInfo,$borrowInfo);
+    if (!empty($errMsg)) {
+        $GLOBALS['user']->error = $errMsg;
+        return false;
     }
-    /* 修改其他资料 */
-    if (!empty($userInfo['other'])) {
-        $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('users'), $userInfo['other'], 'UPDATE', "user_id = '$userInfo[user_id]'");
-    }
+
     return true;
 }
 
@@ -231,46 +341,16 @@ function getBorrowInfoFromPost($_POST, $user_id)
 {
     $profile = array();
     $profile['user_id'] = $user_id;
-    $profile['actual_name'] = getFiledValueFromPost($_POST, 'actual_name');
-    $profile['birthday'] = getDateValueFromPost($_POST, 'birthday');
-    $profile['sex'] = getFiledValueFromPost($_POST, 'sex');
-    $profile['mobile_phone'] = getFiledValueFromPost($_POST, 'mobile_phone');
-    $profile['email'] = getFiledValueFromPost($_POST, 'email');
+    $profile['total_money'] = getFiledValueFromPost($_POST, 'total_money');
+    $profile['borrow_purpose'] = getFiledValueFromPost($_POST, 'borrow_purpose');
+    $profile['amortize_period'] = getFiledValueFromPost($_POST, 'amortize_period');
+    $profile['amortize_type'] = getFiledValueFromPost($_POST, 'amortize_type');
+    $profile['user_bank_id'] = getFiledValueFromPost($_POST, 'user_bank_id');
     $profile['identity_card'] = getFiledValueFromPost($_POST, 'identity_card');
-    $profile['id_begin_date'] = getDateValueFromPost($_POST, 'id_begin_date');
-    $profile['id_end_date'] = getDateValueFromPost($_POST, 'id_end_date');
-    $profile['domicile_address'] = getFiledValueFromPost($_POST, 'domicile_address');
-    $profile['nationality'] = getFiledValueFromPost($_POST, 'nationality');
-    $profile['home_address'] = getFiledValueFromPost($_POST, 'home_address');
-    $profile['home_live_month'] = getFiledValueFromPost($_POST, 'home_live_month');
-    $profile['home_type'] = getFiledValueFromPost($_POST, 'home_type');
-    $profile['home_rent_per_month'] = getFiledValueFromPost($_POST, 'home_rent_per_month');
-    $profile['home_buy_cost'] = getFiledValueFromPost($_POST, 'home_buy_cost');
-    $profile['have_house'] = getFiledValueFromPost($_POST, 'have_house');
-    $profile['house_address'] = getFiledValueFromPost($_POST, 'house_address');
-    $profile['have_car'] = getFiledValueFromPost($_POST, 'have_car');
-    $profile['car_description'] = getFiledValueFromPost($_POST, 'car_description');
-    $profile['live_partner'] = getFiledValueFromPost($_POST, 'live_partner');
-    $profile['health'] = getFiledValueFromPost($_POST, 'health');
-    $profile['sick_history'] = getFiledValueFromPost($_POST, 'sick_history');
-    $profile['education'] = getFiledValueFromPost($_POST, 'education');
-    $profile['marital_status'] = getFiledValueFromPost($_POST, 'marital_status');
-    $profile['marry_date'] = getDateValueFromPost($_POST, 'marry_date');
-    $profile['have_credit_crad'] = getFiledValueFromPost($_POST, 'have_credit_crad');
-    $profile['credit_card_max'] = getFiledValueFromPost($_POST, 'credit_card_max');
-    $profile['sallary_one_year'] = getFiledValueFromPost($_POST, 'sallary_one_year');
-    $profile['company_name'] = getFiledValueFromPost($_POST, 'company_name');
-    $profile['company_industury'] = getFiledValueFromPost($_POST, 'company_industury');
-    $profile['company_address'] = getFiledValueFromPost($_POST, 'company_address');
-    $profile['company_phone'] = getFiledValueFromPost($_POST, 'company_phone');
-    $profile['company_department'] = getFiledValueFromPost($_POST, 'company_department');
-    $profile['company_duty'] = getFiledValueFromPost($_POST, 'company_duty');
-    $profile['company_income_month'] = getFiledValueFromPost($_POST, 'company_income_month');
-    $profile['company_entry_time'] = getDateValueFromPost($_POST, 'company_entry_time');
-    $profile['company_type'] = getFiledValueFromPost($_POST, 'company_type');
-    $profile['friends'] = getFriendsFromPost($_POST);
+    $profile['user_opening_bank'] = getFiledValueFromPost($_POST, 'user_opening_bank');
     return $profile;
 }
+
 function getUserInfoFromPost($_POST, $user_id)
 {
     $profile = array();

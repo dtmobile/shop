@@ -761,10 +761,8 @@ elseif ($action == 'act_edit_profile') {
 elseif ($action == 'act_daikuan_request') {
     include_once(ROOT_PATH . 'includes/lib_transaction.php');
     $userInfo = getUserInfoFromPost($_POST,$user_id);
-    var_dump($userInfo);
     $borrowInfo = getBorrowInfoFromPost($_POST,$user_id);
-    var_dump($borrowInfo);
-    if (SaveBorrerInfo($userInfo,$borrowInfo)) {
+    if (commitBorrowRequest($userInfo,$borrowInfo)) {
 //        show_message($_LANG['edit_profile_success'], $_LANG['profile_lnk'], 'user.php?act=profile', 'info');
         echo "提交贷款申请成功";
     } else {
