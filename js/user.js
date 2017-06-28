@@ -266,6 +266,18 @@ function userInfoValid(frm) {
         msg += '请选择单位性质\n';
     }
 
+    var friends = frm.getElementsByClassName('friendPhone');
+    for(var i=0;i<friends.length;i++)
+    {
+        if (!Utils.isEmpty(friends[i].value)) {
+            if (!Utils.isInt(friends[i].value)) {
+                var friendIndex = i+1;
+                msg += '第'+friendIndex+'位朋友的电话格式不正确\n';
+            }
+        }
+    }
+
+
     if (msg.length > 0) {
         alert(msg);
         return false;
@@ -315,6 +327,7 @@ function userInfoValidOld(frm) {
 
 function userEdit() {
     var frm = document.forms['formEdit'];
+    // return true;
     return userInfoValid(frm);
 }
 

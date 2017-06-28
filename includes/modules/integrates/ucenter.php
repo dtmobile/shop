@@ -315,6 +315,7 @@ class ucenter extends integrate
     /* 编辑用户信息 */
     function edit_user($cfg, $forget_pwd = '0')
     {
+        echo $cfg;
         $real_username = $cfg['username'];
         $cfg['username'] = addslashes($cfg['username']);
         $set_str = '';

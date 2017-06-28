@@ -17,6 +17,81 @@ if (!defined('IN_ECS')) {
     die('Hacking attempt');
 }
 
+function ediUserFriends($userId, $firends)
+{
+    foreach ($firends as $key => $firend) {
+        $friendPhone = isset($firend["friend_phone"]) ? htmlspecialchars(trim($firend["friend_phone"])) : '';
+        $sql = "UPDATE " . $GLOBALS['ecs']->table('users_friend') . " SET friend_name='{$firend['friend_name']}',friend_phone='$friendPhone',
+          firend_type='{$firend["firend_type"]}',friend_address='{$firend['friend_address']}' WHERE user_id=$userId AND friend_id={$firend['friend_id']}";
+        $result = $GLOBALS['db']->query($sql);
+        echo $sql;
+        if (!$result) {
+            return $GLOBALS['db']->errorMsg();
+        }
+    }
+    return "";
+}
+
+/* 编辑用户信息 */
+function editUserProfile($profile)
+{
+//    var_dump($profile);
+    $set_str = '';
+    foreach ($profile as $key => $val) {
+        if ($key == 'username' || $key == 'password' || $key == 'old_password' || $key == 'friends' || $key == 'other') {
+            continue;
+        }
+        if ($key == 'email' && email_already_exist($profile['user_id'], $profile['email'])) {
+            continue;
+        }
+        if ($key == 'mobile_phone') {
+            $val = htmlspecialchars(trim($val));
+        }
+        $set_str .= $key . '=' . "'$val',";
+    }
+    $set_str = substr($set_str, 0, -1);
+    if (!empty($set_str)) {
+        $sql = "UPDATE " . $GLOBALS['ecs']->table('users') . " SET $set_str  WHERE user_id = {$profile['user_id']}";
+        echo $sql;
+        $result = $GLOBALS['db']->query($sql);
+        if (!$result) {
+            return $GLOBALS['db']->errorMsg();
+        }
+    }
+    $rlt = ediUserFriends($profile['user_id'], $profile['friends']);
+    return $rlt;
+}
+
+function email_exist($userId = 0, $email)
+{
+    if ($userId <= 0) {
+        return false;
+    }
+    if (!is_email($email)) {
+        return false;
+    }
+
+
+    $sql = "SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('users') .
+        " WHERE user_id = $userId AND email = '$email'";
+
+    return $GLOBALS['db']->getOne($sql) > 0;
+}
+
+function email_already_exist($userId = 0, $newEmail)
+{
+    if ($userId <= 0 || !is_email($newEmail)) {
+        return false;
+    }
+
+    $sql = "SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('users') .
+        " WHERE email = '$newEmail' AND user_id != $userId";
+
+    $count = $GLOBALS['db']->getOne($sql);
+//    echo 'email_is_same value is ' . $count;
+    return $count > 0 ? true : false;
+}
+
 /**
  * 修改个人资料（Email, 性别，生日)
  *
@@ -27,42 +102,31 @@ if (!defined('IN_ECS')) {
  */
 function edit_profile($profile)
 {
+
     if (empty($profile['user_id'])) {
         $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
-
         return false;
     }
 
-    $cfg = array();
-    $cfg['username'] = $GLOBALS['db']->getOne("SELECT user_name FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id='" . $profile['user_id'] . "'");
-    if (isset($profile['sex'])) {
-        $cfg['gender'] = intval($profile['sex']);
-    }
     if (!empty($profile['email'])) {
         if (!is_email($profile['email'])) {
-            $GLOBALS['err']->add(sprintf($GLOBALS['_LANG']['email_invalid'], $profile['email']));
-
+            $GLOBALS['user']->error = ERR_INVALID_EMAIL;
             return false;
         }
-        $cfg['email'] = $profile['email'];
-    }
-    if (!empty($profile['birthday'])) {
-        $cfg['bday'] = $profile['birthday'];
-    }
 
-
-    if (!$GLOBALS['user']->edit_user($cfg)) {
-        if ($GLOBALS['user']->error == ERR_EMAIL_EXISTS) {
-            $GLOBALS['err']->add(sprintf($GLOBALS['_LANG']['email_exist'], $profile['email']));
-        } else {
-            $GLOBALS['err']->add('DB ERROR!');
+        if (email_already_exist($profile['user_id'], $profile['email'])) {
+            $GLOBALS['user']->error = ERR_EMAIL_EXISTS;
+            return false;
         }
+    }
 
-        return false;
+    $errMsg = editUserProfile($profile);
+    if (!empty($errMsg)) {
+        $GLOBALS['user']->error = $errMsg;
     }
 
     /* 过滤非法的键值 */
-    $other_key_array = array('msn', 'qq', 'office_phone', 'home_phone', 'mobile_phone');
+    $other_key_array = array('msn', 'qq', 'office_phone', 'home_phone');
     foreach ($profile['other'] as $key => $val) {
         //删除非法key值
         if (!in_array($key, $other_key_array)) {
@@ -71,7 +135,7 @@ function edit_profile($profile)
             $profile['other'][$key] = htmlspecialchars(trim($val)); //防止用户输入javascript代码
         }
     }
-    /* 修改在其他资料 */
+    /* 修改其他资料 */
     if (!empty($profile['other'])) {
         $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('users'), $profile['other'], 'UPDATE', "user_id = '$profile[user_id]'");
     }
@@ -79,28 +143,103 @@ function edit_profile($profile)
     return true;
 }
 
+$maxFriendCount = 5;
 function getFriends($userId)
 {
-    $maxFriendCount = 5;
+    global $maxFriendCount;
     $sql = "SELECT friend_id, friend_name,firend_type, friend_phone, friend_address " .
         "FROM " . $GLOBALS['ecs']->table('users_friend') . " WHERE user_id = '$userId'";
     $friends = $GLOBALS['db']->getAll($sql);
     $friendCount = count($friends);
-    while ($friendCount<$maxFriendCount)
-    {
+    while ($friendCount < $maxFriendCount) {
         $friendCount += 1;
         $newFriend = array();
-        $newFriend['user_id']=$userId;
-        $newFriend['friend_name']="第{$friendCount}位亲属(好友)姓名";
-        $newFriend['firend_type']="第{$friendCount}位亲属(好友)关系";
-        $newFriend['friend_phone']="第{$friendCount}位亲属(好友)手机号";
-        $newFriend['friend_address']="第{$friendCount}位亲属(好友)地址";
-       $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('users_friend'), $newFriend, 'INSERT');
-        $friendId = $GLOBALS['db']->insert_id();
-        echo $friendId;
-
+        $newFriend['user_id'] = $userId;
+        $newFriend['friend_name'] = "第{$friendCount}位亲属(好友)姓名";
+        $newFriend['firend_type'] = "第{$friendCount}位亲属(好友)关系";
+        $newFriend['friend_phone'] = "第{$friendCount}位亲属(好友)手机号";
+        $newFriend['friend_address'] = "第{$friendCount}位亲属(好友)地址";
+        $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('users_friend'), $newFriend, 'INSERT');
+        $GLOBALS['db']->insert_id();
     }
     return $GLOBALS['db']->getAll($sql);
+}
+
+function getFiledValueFromPost($_POST, $fieldName)
+{
+    return isset($_POST[$fieldName]) ? trim($_POST[$fieldName]) : '';
+}
+
+function getDateValueFromPost($_POST, $prefix)
+{
+    $year = isset($_POST[$prefix . 'Year']) ? trim($_POST[$prefix . 'Year']) : '';
+    $month = isset($_POST[$prefix . 'Month']) ? trim($_POST[$prefix . 'Month']) : '';
+    $day = isset($_POST[$prefix . 'Day']) ? trim($_POST[$prefix . 'Day']) : '';
+    return $year . '-' . $month . '-' . $day;
+}
+
+function getFriendsFromPost($_POST)
+{
+    $friends = array();
+    global $maxFriendCount;
+    $friendIndex = 0;
+
+    while ($friendIndex < $maxFriendCount) {
+        $friendId = isset($_POST['friend_id_' . $friendIndex]) ? trim($_POST['friend_id_' . $friendIndex]) : '';
+        $friendName = isset($_POST['friend_name_' . $friendIndex]) ? trim($_POST['friend_name_' . $friendIndex]) : '';
+        $friendPhone = isset($_POST['friend_phone_' . $friendIndex]) ? trim($_POST['friend_phone_' . $friendIndex]) : '';
+        $friendType = isset($_POST['firend_type_' . $friendIndex]) ? trim($_POST['firend_type_' . $friendIndex]) : '';
+        $friendAddress = isset($_POST['friend_address_' . $friendIndex]) ? trim($_POST['friend_address_' . $friendIndex]) : '';
+        $friends[] = array("friend_id" => $friendId, "friend_name" => $friendName, "friend_phone" => $friendPhone, "firend_type" => $friendType, "friend_address" => $friendAddress);
+        $friendIndex += 1;
+    }
+    return $friends;
+}
+
+
+function getUserInfoFromPost($_POST, $user_id)
+{
+    $profile = array();
+    $profile['user_id'] = $user_id;
+    $profile['actual_name'] = getFiledValueFromPost($_POST, 'actual_name');
+    $profile['birthday'] = getDateValueFromPost($_POST, 'birthday');
+    $profile['sex'] = getFiledValueFromPost($_POST, 'sex');
+    $profile['mobile_phone'] = getFiledValueFromPost($_POST, 'mobile_phone');
+    $profile['email'] = getFiledValueFromPost($_POST, 'email');
+    $profile['identity_card'] = getFiledValueFromPost($_POST, 'identity_card');
+    $profile['id_begin_date'] = getDateValueFromPost($_POST, 'id_begin_date');
+    $profile['id_end_date'] = getDateValueFromPost($_POST, 'id_end_date');
+    $profile['domicile_address'] = getFiledValueFromPost($_POST, 'domicile_address');
+    $profile['nationality'] = getFiledValueFromPost($_POST, 'nationality');
+    $profile['home_address'] = getFiledValueFromPost($_POST, 'home_address');
+    $profile['home_live_month'] = getFiledValueFromPost($_POST, 'home_live_month');
+    $profile['home_type'] = getFiledValueFromPost($_POST, 'home_type');
+    $profile['home_rent_per_month'] = getFiledValueFromPost($_POST, 'home_rent_per_month');
+    $profile['home_buy_cost'] = getFiledValueFromPost($_POST, 'home_buy_cost');
+    $profile['have_house'] = getFiledValueFromPost($_POST, 'have_house');
+    $profile['house_address'] = getFiledValueFromPost($_POST, 'house_address');
+    $profile['have_car'] = getFiledValueFromPost($_POST, 'have_car');
+    $profile['car_description'] = getFiledValueFromPost($_POST, 'car_description');
+    $profile['live_partner'] = getFiledValueFromPost($_POST, 'live_partner');
+    $profile['health'] = getFiledValueFromPost($_POST, 'health');
+    $profile['sick_history'] = getFiledValueFromPost($_POST, 'sick_history');
+    $profile['education'] = getFiledValueFromPost($_POST, 'education');
+    $profile['marital_status'] = getFiledValueFromPost($_POST, 'marital_status');
+    $profile['marry_date'] = getDateValueFromPost($_POST, 'marry_date');
+    $profile['have_credit_crad'] = getFiledValueFromPost($_POST, 'have_credit_crad');
+    $profile['credit_card_max'] = getFiledValueFromPost($_POST, 'credit_card_max');
+    $profile['sallary_one_year'] = getFiledValueFromPost($_POST, 'sallary_one_year');
+    $profile['company_name'] = getFiledValueFromPost($_POST, 'company_name');
+    $profile['company_industury'] = getFiledValueFromPost($_POST, 'company_industury');
+    $profile['company_address'] = getFiledValueFromPost($_POST, 'company_address');
+    $profile['company_phone'] = getFiledValueFromPost($_POST, 'company_phone');
+    $profile['company_department'] = getFiledValueFromPost($_POST, 'company_department');
+    $profile['company_duty'] = getFiledValueFromPost($_POST, 'company_duty');
+    $profile['company_income_month'] = getFiledValueFromPost($_POST, 'company_income_month');
+    $profile['company_entry_time'] = getDateValueFromPost($_POST, 'company_entry_time');
+    $profile['company_type'] = getFiledValueFromPost($_POST, 'company_type');
+    $profile['friends'] = getFriendsFromPost($_POST);
+    return $profile;
 }
 
 /**
@@ -117,13 +256,7 @@ function get_profile($user_id)
     /* 会员帐号信息 */
     $info = array();
     $infos = array();
-    $sql = "SELECT user_name, birthday, sex, question, answer, actual_name, rank_points, pay_points,user_money, user_rank," .
-        " msn, qq, office_phone, home_phone, mobile_phone, passwd_question, passwd_answer 
-             ,identity_card,id_begin_date,id_end_date,domicile_address,nationality,home_address,home_live_month,home_type,home_rent_per_month,home_buy_cost,have_house,house_address,have_car
-             ,car_description,live_partner,health,education,marital_status,marry_date,sallary_one_year,have_credit_crad,credit_card_max
-             ,company_name,company_address,company_type,company_phone,company_industury,company_department,company_duty,company_entry_time,company_income_month
-             " .
-        "FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = '$user_id'";
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = '$user_id'";
     $infos = $GLOBALS['db']->getRow($sql);
     $infos['user_name'] = addslashes($infos['user_name']);
 
@@ -167,6 +300,7 @@ function get_profile($user_id)
     $info['rank_points'] = isset($infos['rank_points']) ? $infos['rank_points'] : '';
     $info['pay_points'] = isset($infos['pay_points']) ? $infos['pay_points'] : 0;
     $info['user_money'] = isset($infos['user_money']) ? $infos['user_money'] : 0;
+    $info['actual_name'] = isset($infos['actual_name']) ? $infos['actual_name'] : '';
     $info['sex'] = isset($infos['sex']) ? $infos['sex'] : 0;
     $info['birthday'] = isset($infos['birthday']) ? $infos['birthday'] : '';
     $info['question'] = isset($infos['question']) ? htmlspecialchars($infos['question']) : '';
@@ -177,12 +311,16 @@ function get_profile($user_id)
     $info['nationality'] = isset($infos['nationality']) ? $infos['nationality'] : '';
     $info['home_address'] = isset($infos['home_address']) ? $infos['home_address'] : '';
     $info['home_live_month'] = isset($infos['home_live_month']) ? $infos['home_live_month'] : '';
+    $info['home_type'] = isset($infos['home_type']) ? $infos['home_type'] : '';
+    $info['home_rent_per_month'] = isset($infos['home_rent_per_month']) ? $infos['home_rent_per_month'] : '';
+    $info['home_buy_cost'] = isset($infos['home_buy_cost']) ? $infos['home_buy_cost'] : '';
     $info['have_house'] = isset($infos['have_house']) ? $infos['have_house'] : '';
     $info['house_address'] = isset($infos['house_address']) ? $infos['house_address'] : '';
     $info['have_car'] = isset($infos['have_car']) ? $infos['have_car'] : '';
     $info['car_description'] = isset($infos['car_description']) ? $infos['car_description'] : '';
     $info['live_partner'] = isset($infos['live_partner']) ? $infos['live_partner'] : '';
     $info['health'] = isset($infos['health']) ? $infos['health'] : '';
+    $info['sick_history'] = isset($infos['sick_history']) ? $infos['sick_history'] : '';
     $info['education'] = isset($infos['education']) ? $infos['education'] : '';
     $info['marital_status'] = isset($infos['marital_status']) ? $infos['marital_status'] : '';
     $info['marry_date'] = isset($infos['marry_date']) ? $infos['marry_date'] : '';
@@ -191,6 +329,7 @@ function get_profile($user_id)
     $info['credit_card_max'] = isset($infos['credit_card_max']) ? $infos['credit_card_max'] : '';
     $info['company_name'] = isset($infos['company_name']) ? $infos['company_name'] : '';
     $info['company_address'] = isset($infos['company_address']) ? $infos['company_address'] : '';
+    $info['company_phone'] = isset($infos['company_phone']) ? $infos['company_phone'] : '';
     $info['company_type'] = isset($infos['company_type']) ? $infos['company_type'] : '';
     $info['company_industury'] = isset($infos['company_industury']) ? $infos['company_industury'] : '';
     $info['company_department'] = isset($infos['company_department']) ? $infos['company_department'] : '';

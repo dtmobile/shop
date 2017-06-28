@@ -126,9 +126,14 @@
               <td width="28%" align="right" bgcolor="#FFFFFF">手机号码：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
                   <input name="mobile_phone" type="text" value="{$profile.mobile_phone}" size="25" class="inputBg" />
-                  &nbsp;&nbsp; {$lang.email} <input name="email" type="text" value="{$profile.email}" size="25" class="inputBg" />
                   <span style="color:#FF0000"> *</span></td>
             </tr>
+             <tr>
+                 <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.email}：</td>
+                 <td width="72%" align="left" bgcolor="#FFFFFF">
+                    <input name="email" type="text" value="{$profile.email}" size="25" class="inputBg" />
+                     <span style="color:#FF0000"> *</span></td>
+             </tr>
 
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">身份证号：</td>
@@ -361,16 +366,17 @@
           <tr style="background-color:cornflowerblue;">
               <td width="100%" align="center"  colspan="2" ><strong>主要社会关系</strong></td>
           </tr>
-          {foreach from=$profile.friends item=friend}
+          {foreach from=$profile.friends item=friend key=key}
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">
-                  <input name="friend_phone" type="text" value="{$friend.friend_name}" size="25" class="inputBg" />
+                  <input name="friend_id_{$key}" type="hidden" value="{$friend.friend_id}"  />
+                  <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="inputBg" />
                   </td>
               <td width="72%" align="left" bgcolor="#FFFFFF">关系
-                  <input name="firend_type" type="text" value="{$friend.firend_type}" size="25" class="inputBg" />
+                  <input name="firend_type_{$key}" type="text" value="{$friend.firend_type}" size="25" class="inputBg" />
                   &nbsp;&nbsp;电话
-                  <input name="friend_phone" type="text" value="{$friend.friend_phone}" size="25" class="inputBg" />
-                  &nbsp;&nbsp;地址<input name="friend_address" type="text" value="{$friend.friend_address}" size="25" class="inputBg" />
+                  <input name="friend_phone_{$key}" type="text" value="{$friend.friend_phone}" size="25" class="friendPhone" />
+                  &nbsp;&nbsp;地址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="inputBg" />
               </td>
           </tr>
           {/foreach}
@@ -419,15 +425,17 @@
 		</tr>
 		<!-- {/if} -->
 		{/foreach}
-                <tr>
-                  <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_profile" />
-                      {if $action eq 'profile'}
-                      <input name="submit" type="submit" value="{$lang.confirm_edit}" class="bnt_blue_1" style="border:none;" />
-                      {else}
-                      <input name="submit" type="submit" value="确定提交" class="bnt_blue_1" style="border:none;" />
-                      {/if}
-                  </td>
-                </tr>
+             <tr>
+                 {if $action eq 'profile'}
+                 <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_profile" />
+                     <input name="submit" type="submit" value="{$lang.confirm_edit}" class="bnt_blue_1" style="border:none;" />
+                 </td>
+                 {else}
+                 <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_daikuan_request" />
+                     <input name="submit" type="submit" value="提交申请" class="bnt_blue_1" style="border:none;" />
+                 </td>
+                 {/if}
+             </tr>
        </table>
     </form>
 
