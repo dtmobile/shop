@@ -53,14 +53,14 @@
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">申请金额： </td>
-              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="total_money" type="text" value="{$profile.total_money}" size="25" class="inputBg" />万元<span style="color:#FF0000"> *</span></td>
+              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="total_money" type="text" value="{$profile.total_money}" size="25" class="inputBg" placeholder="请输入您想要申请的贷款金额"/>万元<span style="color:#FF0000"> *</span></td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">资金用途： </td>
-              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="borrow_purpose" type="text" value="{$profile.borrow_purpose}" size="25" class="inputBg" /><span style="color:#FF0000"> *</span></td>
+              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="borrow_purpose" type="text" value="{$profile.borrow_purpose}" size="25" class="inputBg" placeholder="请输入您贷款的资金用途"/><span style="color:#FF0000"> *</span></td>
           </tr>
           <tr>
-              <td width="28%" align="right" bgcolor="#FFFFFF">借款申请周期： </td>
+              <td width="28%" align="right" bgcolor="#FFFFFF">还款周期： </td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
                   <input type="radio" name="amortize_period" value="1" {if $profile.amortize_period==1}checked="checked"{/if} />
                   1期&nbsp;&nbsp;
@@ -90,21 +90,20 @@
 
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">银行卡号： </td>
-              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="user_bank_id" type="text" value="{$profile.user_bank_id}" size="25" class="inputBg" />
+              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="user_bank_id" type="text" value="{$profile.user_bank_id}" size="25" class="inputBg" placeholder="请输入您用于收款的银行卡号"/>
                   &nbsp;&nbsp;开户行名称：
-                  <input name="user_opening_bank" type="text" value="{$profile.user_opening_bank}" size="25" class="inputBg" />
+                  <input name="user_opening_bank" type="text" value="{$profile.user_opening_bank}" size="25" class="inputBg" placeholder="请输入该银行卡的开户行名称"/>
                   <span style="color:#FF0000"> *</span>
               </td>
           </tr>
           {/if}
-
 
           <tr style="background-color:cornflowerblue;">
               <td width="100%" align="center"  colspan="2" ><strong>基本情况</strong></td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">真实姓名： </td>
-              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="actual_name" type="text" value="{$profile.actual_name}" size="25" class="inputBg" /><span style="color:#FF0000"> *</span></td>
+              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="actual_name" type="text" value="{$profile.actual_name}" size="25" class="inputBg" placeholder="请输入您身份证的正式名称"/><span style="color:#FF0000"> *</span></td>
           </tr>
             <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.birthday}： </td>
@@ -125,20 +124,20 @@
             <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">手机号码：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="mobile_phone" type="text" value="{$profile.mobile_phone}" size="25" class="inputBg" />
+                  <input name="mobile_phone" type="text" value="{$profile.mobile_phone}" size="25" class="inputBg" placeholder="请输入"手机号码/>
                   <span style="color:#FF0000"> *</span></td>
             </tr>
              <tr>
                  <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.email}：</td>
                  <td width="72%" align="left" bgcolor="#FFFFFF">
-                    <input name="email" type="text" value="{$profile.email}" size="25" class="inputBg" />
+                    <input name="email" type="text" value="{$profile.email}" size="25" class="inputBg" placeholder="请输入邮箱地址"/>
                      <span style="color:#FF0000"> *</span></td>
              </tr>
 
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">身份证号：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="identity_card" type="text" value="{$profile.identity_card}" size="25" class="inputBg" />
+                  <input name="identity_card" type="text" value="{$profile.identity_card}" size="25" class="inputBg" placeholder="请输入身份证号"/>
                   <span style="color:#FF0000"> *</span>
               </td>
           </tr>
@@ -158,22 +157,22 @@
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">户籍所在地：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="domicile_address" type="text" value="{$profile.domicile_address}" size="25" class="inputBg" />
+                  <input name="domicile_address" type="text" value="{$profile.domicile_address}" size="25" class="inputBg" placeholder="请输入户籍所在地址"/>
                   <span style="color:#FF0000"> *</span></td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">民族：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="nationality" type="text" value="{$profile.nationality}" size="25" class="inputBg" />
+                  <input name="nationality" type="text" value="{$profile.nationality}" size="25" class="inputBg" placeholder="请输入民族"/>
                   <span style="color:#FF0000"> *</span>
               </td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">现在居住地址：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="home_address" type="text" value="{$profile.home_address}" size="25" class="inputBg" />
+                  <input name="home_address" type="text" value="{$profile.home_address}" size="25" class="inputBg" placeholder="请输入您现在的居住地址"/>
                   <span >&nbsp;&nbsp;居住时间</span>
-                  <input name="home_live_month" type="text" value="{$profile.home_live_month}" size="25" class="inputBg" />
+                  <input name="home_live_month" type="text" value="{$profile.home_live_month}" size="25" class="inputBg" placeholder="您在当前地址住了多少个月"/>
                   月&nbsp;&nbsp;<span style="color:#FF0000">*</span>
               </td>
           </tr>
@@ -186,9 +185,9 @@
                   买房&nbsp;&nbsp;
                   <input type="radio" name="home_type" value="3" {if $profile.home_type==3}checked="checked"{/if} />
                   其他&nbsp;&nbsp;&nbsp;月租金
-                  <input name="home_rent_per_month" type="text" value="{$profile.home_rent_per_month}" size="25" class="inputBg" />
+                  <input name="home_rent_per_month" type="text" value="{$profile.home_rent_per_month}" size="25" class="inputBg" placeholder="请输入您当前租住房屋的每月租金"/>
                   元／月 &nbsp;&nbsp;购买金额
-                  <input name="home_buy_cost" type="text" value="{$profile.home_buy_cost}" size="25" class="inputBg" />万元
+                  <input name="home_buy_cost" type="text" value="{$profile.home_buy_cost}" size="25" class="inputBg" placeholder="请输入您当前房租的购买价格"/>万元
               </td>
           </tr>
 
@@ -201,7 +200,7 @@
                   <input type="radio" name="have_house" value="1" {if $profile.have_house==1}checked="checked"{/if} />
                   有&nbsp;&nbsp;
                   <span >房产地址</span>
-                  <input name="house_address" type="text" value="{$profile.house_address}" size="25" class="inputBg" />
+                  <input name="house_address" type="text" value="{$profile.house_address}" size="25" class="inputBg" placeholder="请输入房产地址、购买年限等信息"/>
               </td>
           </tr>
 
@@ -213,7 +212,7 @@
                   <input type="radio" name="have_car" value="1" {if $profile.have_car==1}checked="checked"{/if} />
                   有&nbsp;&nbsp;
                   <span >汽车状况</span>
-                  <input name="car_description" type="text" value="{$profile.car_description}" size="25" class="inputBg" />
+                  <input name="car_description" type="text" value="{$profile.car_description}" size="25" class="inputBg" placeholder="请输入该汽车的购买价格、年限等信息"/>
               </td>
           </tr>
 
@@ -288,7 +287,7 @@
                   <input type="radio" name="have_credit_crad" value="1" {if $profile.have_credit_crad==1}checked="checked"{/if} />
                   有&nbsp;&nbsp;&nbsp;
                   单张信用卡最高额度
-                  <input name="credit_card_max" type="text" value="{$profile.credit_card_max}" size="25" class="inputBg" />
+                  <input name="credit_card_max" type="text" value="{$profile.credit_card_max}" size="25" class="inputBg" placeholder="请输入..."/>
                   万元&nbsp;&nbsp;<span style="color:#FF0000"> *</span>
               </td>
           </tr>
@@ -296,7 +295,7 @@
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">个人年收入：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="sallary_one_year" type="text" value="{$profile.sallary_one_year}" size="25" class="inputBg" />
+                  <input name="sallary_one_year" type="text" value="{$profile.sallary_one_year}" size="25" class="inputBg" placeholder="请输入..."/>
                   万元&nbsp;&nbsp;<span style="color:#FF0000"> *</span>
               </td>
           </tr>
@@ -307,32 +306,32 @@
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">现工作单位全称：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="company_name" type="text" value="{$profile.company_name}" size="25" class="inputBg" />
-                  &nbsp;&nbsp;&nbsp;所属行业 <input name="company_industury" type="text" value="{$profile.company_industury}" size="25" class="inputBg" />
+                  <input name="company_name" type="text" value="{$profile.company_name}" size="25" class="inputBg" placeholder="请输入..."/>
+                  &nbsp;&nbsp;&nbsp;所属行业 <input name="company_industury" type="text" value="{$profile.company_industury}" size="25" class="inputBg" placeholder="请输入..."/>
               </td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">单位地址：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="company_address" type="text" value="{$profile.company_address}" size="25" class="inputBg" />
+                  <input name="company_address" type="text" value="{$profile.company_address}" size="25" class="inputBg" placeholder="请输入..."/>
                   &nbsp;&nbsp;&nbsp;单位电话
-                  <input name="company_phone" type="text" value="{$profile.company_phone}" size="25" class="inputBg" />
+                  <input name="company_phone" type="text" value="{$profile.company_phone}" size="25" class="inputBg" placeholder="请输入..."/>
               </td>
           </tr>
 
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">所在部门：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="company_department" type="text" value="{$profile.company_department}" size="25" class="inputBg" />
+                  <input name="company_department" type="text" value="{$profile.company_department}" size="25" class="inputBg" placeholder="请输入..."/>
                   &nbsp;&nbsp;&nbsp;担任职位
-                  <input name="company_duty" type="text" value="{$profile.company_duty}" size="25" class="inputBg" />
+                  <input name="company_duty" type="text" value="{$profile.company_duty}" size="25" class="inputBg" placeholder="请输入..."/>
               </td>
           </tr>
 
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">当前月收入：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="company_income_month" type="text" value="{$profile.company_income_month}" size="25" class="inputBg" />万元
+                  <input name="company_income_month" type="text" value="{$profile.company_income_month}" size="25" class="inputBg" placeholder="请输入..."/>万元
               </td>
           </tr>
           <tr>
@@ -370,13 +369,13 @@
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">
                   <input name="friend_id_{$key}" type="hidden" value="{$friend.friend_id}"  />
-                  <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="inputBg" />
+                  <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="inputBg" placeholder="请输入亲属(好友)姓名"/>
                   </td>
               <td width="72%" align="left" bgcolor="#FFFFFF">关系
-                  <input name="firend_type_{$key}" type="text" value="{$friend.firend_type}" size="25" class="inputBg" />
+                  <input name="firend_type_{$key}" type="text" value="{$friend.firend_type}" size="25" class="inputBg" placeholder="请输入亲属(好友)与您的关系"/>
                   &nbsp;&nbsp;电话
-                  <input name="friend_phone_{$key}" type="text" value="{$friend.friend_phone}" size="25" class="friendPhone" />
-                  &nbsp;&nbsp;地址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="inputBg" />
+                  <input name="friend_phone_{$key}" type="text" value="{$friend.friend_phone}" size="25" class="friendPhone" placeholder="请输入亲属(好友)的手机号"/>
+                  &nbsp;&nbsp;住址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="inputBg" placeholder="请输入亲属(好友)的住址"/>
               </td>
           </tr>
           {/foreach}

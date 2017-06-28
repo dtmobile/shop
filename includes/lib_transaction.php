@@ -102,29 +102,24 @@ function email_already_exist($userId = 0, $newEmail)
  */
 function edit_profile($profile)
 {
-
     if (empty($profile['user_id'])) {
         $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
         return false;
     }
-
     if (!empty($profile['email'])) {
         if (!is_email($profile['email'])) {
             $GLOBALS['user']->error = ERR_INVALID_EMAIL;
             return false;
         }
-
         if (email_already_exist($profile['user_id'], $profile['email'])) {
             $GLOBALS['user']->error = ERR_EMAIL_EXISTS;
             return false;
         }
     }
-
     $errMsg = editUserProfile($profile);
     if (!empty($errMsg)) {
         $GLOBALS['user']->error = $errMsg;
     }
-
     /* 过滤非法的键值 */
     $other_key_array = array('msn', 'qq', 'office_phone', 'home_phone');
     foreach ($profile['other'] as $key => $val) {
@@ -139,7 +134,43 @@ function edit_profile($profile)
     if (!empty($profile['other'])) {
         $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('users'), $profile['other'], 'UPDATE', "user_id = '$profile[user_id]'");
     }
+    return true;
+}
 
+function SaveBorrerInfo($userInfo,$borrowInfo)
+{
+    if (empty($userInfo['user_id'])) {
+        $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
+        return false;
+    }
+    if (!empty($userInfo['email'])) {
+        if (!is_email($userInfo['email'])) {
+            $GLOBALS['user']->error = ERR_INVALID_EMAIL;
+            return false;
+        }
+        if (email_already_exist($userInfo['user_id'], $userInfo['email'])) {
+            $GLOBALS['user']->error = ERR_EMAIL_EXISTS;
+            return false;
+        }
+    }
+    $errMsg = editUserProfile($userInfo);
+    if (!empty($errMsg)) {
+        $GLOBALS['user']->error = $errMsg;
+    }
+    /* 过滤非法的键值 */
+    $other_key_array = array('msn', 'qq', 'office_phone', 'home_phone');
+    foreach ($userInfo['other'] as $key => $val) {
+        //删除非法key值
+        if (!in_array($key, $other_key_array)) {
+            unset($userInfo['other'][$key]);
+        } else {
+            $userInfo['other'][$key] = htmlspecialchars(trim($val)); //防止用户输入javascript代码
+        }
+    }
+    /* 修改其他资料 */
+    if (!empty($userInfo['other'])) {
+        $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('users'), $userInfo['other'], 'UPDATE', "user_id = '$userInfo[user_id]'");
+    }
     return true;
 }
 
@@ -155,10 +186,10 @@ function getFriends($userId)
         $friendCount += 1;
         $newFriend = array();
         $newFriend['user_id'] = $userId;
-        $newFriend['friend_name'] = "第{$friendCount}位亲属(好友)姓名";
-        $newFriend['firend_type'] = "第{$friendCount}位亲属(好友)关系";
-        $newFriend['friend_phone'] = "第{$friendCount}位亲属(好友)手机号";
-        $newFriend['friend_address'] = "第{$friendCount}位亲属(好友)地址";
+        $newFriend['friend_name'] = "";
+        $newFriend['firend_type'] = "";
+        $newFriend['friend_phone'] = "";
+        $newFriend['friend_address'] = "";
         $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('users_friend'), $newFriend, 'INSERT');
         $GLOBALS['db']->insert_id();
     }
@@ -196,7 +227,50 @@ function getFriendsFromPost($_POST)
     return $friends;
 }
 
-
+function getBorrowInfoFromPost($_POST, $user_id)
+{
+    $profile = array();
+    $profile['user_id'] = $user_id;
+    $profile['actual_name'] = getFiledValueFromPost($_POST, 'actual_name');
+    $profile['birthday'] = getDateValueFromPost($_POST, 'birthday');
+    $profile['sex'] = getFiledValueFromPost($_POST, 'sex');
+    $profile['mobile_phone'] = getFiledValueFromPost($_POST, 'mobile_phone');
+    $profile['email'] = getFiledValueFromPost($_POST, 'email');
+    $profile['identity_card'] = getFiledValueFromPost($_POST, 'identity_card');
+    $profile['id_begin_date'] = getDateValueFromPost($_POST, 'id_begin_date');
+    $profile['id_end_date'] = getDateValueFromPost($_POST, 'id_end_date');
+    $profile['domicile_address'] = getFiledValueFromPost($_POST, 'domicile_address');
+    $profile['nationality'] = getFiledValueFromPost($_POST, 'nationality');
+    $profile['home_address'] = getFiledValueFromPost($_POST, 'home_address');
+    $profile['home_live_month'] = getFiledValueFromPost($_POST, 'home_live_month');
+    $profile['home_type'] = getFiledValueFromPost($_POST, 'home_type');
+    $profile['home_rent_per_month'] = getFiledValueFromPost($_POST, 'home_rent_per_month');
+    $profile['home_buy_cost'] = getFiledValueFromPost($_POST, 'home_buy_cost');
+    $profile['have_house'] = getFiledValueFromPost($_POST, 'have_house');
+    $profile['house_address'] = getFiledValueFromPost($_POST, 'house_address');
+    $profile['have_car'] = getFiledValueFromPost($_POST, 'have_car');
+    $profile['car_description'] = getFiledValueFromPost($_POST, 'car_description');
+    $profile['live_partner'] = getFiledValueFromPost($_POST, 'live_partner');
+    $profile['health'] = getFiledValueFromPost($_POST, 'health');
+    $profile['sick_history'] = getFiledValueFromPost($_POST, 'sick_history');
+    $profile['education'] = getFiledValueFromPost($_POST, 'education');
+    $profile['marital_status'] = getFiledValueFromPost($_POST, 'marital_status');
+    $profile['marry_date'] = getDateValueFromPost($_POST, 'marry_date');
+    $profile['have_credit_crad'] = getFiledValueFromPost($_POST, 'have_credit_crad');
+    $profile['credit_card_max'] = getFiledValueFromPost($_POST, 'credit_card_max');
+    $profile['sallary_one_year'] = getFiledValueFromPost($_POST, 'sallary_one_year');
+    $profile['company_name'] = getFiledValueFromPost($_POST, 'company_name');
+    $profile['company_industury'] = getFiledValueFromPost($_POST, 'company_industury');
+    $profile['company_address'] = getFiledValueFromPost($_POST, 'company_address');
+    $profile['company_phone'] = getFiledValueFromPost($_POST, 'company_phone');
+    $profile['company_department'] = getFiledValueFromPost($_POST, 'company_department');
+    $profile['company_duty'] = getFiledValueFromPost($_POST, 'company_duty');
+    $profile['company_income_month'] = getFiledValueFromPost($_POST, 'company_income_month');
+    $profile['company_entry_time'] = getDateValueFromPost($_POST, 'company_entry_time');
+    $profile['company_type'] = getFiledValueFromPost($_POST, 'company_type');
+    $profile['friends'] = getFriendsFromPost($_POST);
+    return $profile;
+}
 function getUserInfoFromPost($_POST, $user_id)
 {
     $profile = array();

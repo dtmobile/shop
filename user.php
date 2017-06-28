@@ -748,8 +748,7 @@ elseif ($action == 'act_edit_profile') {
     $profile['other'] = isset($other) ? $other : array();
 //    var_dump($profile);return;
     if (edit_profile($profile)) {
-//        show_message($_LANG['edit_profile_success'], $_LANG['profile_lnk'], 'user.php?act=profile', 'info');
-        echo "edit success";
+        show_message($_LANG['edit_profile_success'], $_LANG['profile_lnk'], 'user.php?act=profile', 'info');
     } else {
         if ($user->error == ERR_EMAIL_EXISTS) {
             $msg = sprintf($_LANG['email_exist'], $profile['email']);
@@ -761,78 +760,13 @@ elseif ($action == 'act_edit_profile') {
 } /* 提交贷款申请的处理 */
 elseif ($action == 'act_daikuan_request') {
     include_once(ROOT_PATH . 'includes/lib_transaction.php');
-    echo "act_daikuan_request";
-    return;
-
-
-    $birthday = trim($_POST['birthdayYear']) . '-' . trim($_POST['birthdayMonth']) . '-' .
-        trim($_POST['birthdayDay']);
-    $email = trim($_POST['email']);
-    $other['msn'] = $msn = isset($_POST['extend_field1']) ? trim($_POST['extend_field1']) : '';
-    $other['qq'] = $qq = isset($_POST['extend_field2']) ? trim($_POST['extend_field2']) : '';
-    $other['office_phone'] = $office_phone = isset($_POST['extend_field3']) ? trim($_POST['extend_field3']) : '';
-    $other['home_phone'] = $home_phone = isset($_POST['extend_field4']) ? trim($_POST['extend_field4']) : '';
-    $other['mobile_phone'] = $mobile_phone = isset($_POST['extend_field5']) ? trim($_POST['extend_field5']) : '';
-    $sel_question = empty($_POST['sel_question']) ? '' : compile_str($_POST['sel_question']);
-    $passwd_answer = isset($_POST['passwd_answer']) ? compile_str(trim($_POST['passwd_answer'])) : '';
-
-    /* 更新用户扩展字段的数据 */
-    $sql = 'SELECT id FROM ' . $ecs->table('reg_fields') . ' WHERE type = 0 AND display = 1 ORDER BY dis_order, id';   //读出所有扩展字段的id
-    $fields_arr = $db->getAll($sql);
-
-    foreach ($fields_arr AS $val)       //循环更新扩展用户信息
-    {
-        $extend_field_index = 'extend_field' . $val['id'];
-        if (isset($_POST[$extend_field_index])) {
-            $temp_field_content = strlen($_POST[$extend_field_index]) > 100 ? mb_substr(htmlspecialchars($_POST[$extend_field_index]), 0, 99) : htmlspecialchars($_POST[$extend_field_index]);
-            $sql = 'SELECT * FROM ' . $ecs->table('reg_extend_info') . "  WHERE reg_field_id = '$val[id]' AND user_id = '$user_id'";
-            if ($db->getOne($sql))      //如果之前没有记录，则插入
-            {
-                $sql = 'UPDATE ' . $ecs->table('reg_extend_info') . " SET content = '$temp_field_content' WHERE reg_field_id = '$val[id]' AND user_id = '$user_id'";
-            } else {
-                $sql = 'INSERT INTO ' . $ecs->table('reg_extend_info') . " (`user_id`, `reg_field_id`, `content`) VALUES ('$user_id', '$val[id]', '$temp_field_content')";
-            }
-            $db->query($sql);
-        }
-    }
-
-    /* 写入密码提示问题和答案 */
-    if (!empty($passwd_answer) && !empty($sel_question)) {
-        $sql = 'UPDATE ' . $ecs->table('users') . " SET `passwd_question`='$sel_question', `passwd_answer`='$passwd_answer'  WHERE `user_id`='" . $_SESSION['user_id'] . "'";
-        $db->query($sql);
-    }
-
-    if (!empty($office_phone) && !preg_match('/^[\d|\_|\-|\s]+$/', $office_phone)) {
-        show_message($_LANG['passport_js']['office_phone_invalid']);
-    }
-    if (!empty($home_phone) && !preg_match('/^[\d|\_|\-|\s]+$/', $home_phone)) {
-        show_message($_LANG['passport_js']['home_phone_invalid']);
-    }
-    if (!is_email($email)) {
-        show_message($_LANG['msg_email_format']);
-    }
-    if (!empty($msn) && !is_email($msn)) {
-        show_message($_LANG['passport_js']['msn_invalid']);
-    }
-    if (!empty($qq) && !preg_match('/^\d+$/', $qq)) {
-        show_message($_LANG['passport_js']['qq_invalid']);
-    }
-    if (!empty($mobile_phone) && !preg_match('/^[\d-\s]+$/', $mobile_phone)) {
-        show_message($_LANG['passport_js']['mobile_phone_invalid']);
-    }
-
-
-    $profile = array(
-        'user_id' => $user_id,
-        'email' => isset($_POST['email']) ? trim($_POST['email']) : '',
-        'sex' => isset($_POST['sex']) ? intval($_POST['sex']) : 0,
-        'birthday' => $birthday,
-        'other' => isset($other) ? $other : array()
-    );
-
-
-    if (edit_profile($profile)) {
-        show_message($_LANG['edit_profile_success'], $_LANG['profile_lnk'], 'user.php?act=profile', 'info');
+    $userInfo = getUserInfoFromPost($_POST,$user_id);
+    var_dump($userInfo);
+    $borrowInfo = getBorrowInfoFromPost($_POST,$user_id);
+    var_dump($borrowInfo);
+    if (SaveBorrerInfo($userInfo,$borrowInfo)) {
+//        show_message($_LANG['edit_profile_success'], $_LANG['profile_lnk'], 'user.php?act=profile', 'info');
+        echo "提交贷款申请成功";
     } else {
         if ($user->error == ERR_EMAIL_EXISTS) {
             $msg = sprintf($_LANG['email_exist'], $profile['email']);
