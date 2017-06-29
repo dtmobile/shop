@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="user.css" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,borrow.js'}
+</head>
+<body class="user_center">
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem --> 
+<div id="wrapper" class="cle">
+	<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem --> 
+
+    <div class="my_nala_main">
+        <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem --> 
+			
+    <div class="my_nala_centre ilizi_centre">
+    <div class="ilizi cle">
+      	<div class="box">
+     <div class="box_1">
+      <div class="userCenterBox boxCenterList clearfix" style="_height:1%; font-size:14px;">
+         <!-- *查询贷款申请页面 start-->
+         <!-- {if $action eq 'borrow'} -->
+          <div>{$info.title}</div>
+          <!--{/if} -->
+           <!--{if $action eq 'repay'} -->
+          <div>{$info.title}</div>
+         <!-- #查询贷款申请页面 end-->
+          <!-- {/if}-->
+      </div>
+     </div>
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    </div>
+</div>
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --> <!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+</script>
+</html>

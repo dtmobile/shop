@@ -91,6 +91,7 @@ function saveBorrowAmortize($borrowId,$borrowInfo)
    $totalRMB = floatval($borrowInfo['total_money']) * 10000;
     $periodCount = intval($borrowInfo['amortize_period']);
     $needMoneyPerMonth = round($totalRMB / $periodCount,2) ;
+    $amortizeDate = date("Y-m-d",time());
     $payIndex = 0;
     while ($payIndex < $periodCount)
     {
@@ -100,9 +101,10 @@ function saveBorrowAmortize($borrowId,$borrowInfo)
         $newBorrowAmortize['user_id']=$borrowInfo['user_id'];
         $newBorrowAmortize['amortize_need_money'] = $needMoneyPerMonth;
         $newBorrowAmortize['amortize_repay_money']=0.0;
-        $newBorrowAmortize['amortize_date']=date();
+        $newBorrowAmortize['amortize_date']=$amortizeDate;
         $newBorrowAmortize['repay_serial_code']='';
         $newBorrowAmortize['comment']='';
+        $newBorrowAmortize['status']='未还款';
         $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow_amortize'), $newBorrowAmortize, 'INSERT');
         $amortizeId = $GLOBALS['db']->insert_id();
     }
@@ -115,11 +117,13 @@ function saveBorrowInfo($userInfo,$borrowInfo)
     $newBorrow = array();
     $newBorrow['user_id'] = $borrowInfo['user_id'];
     $newBorrow['total_money'] = $borrowInfo['total_money'];
+    $newBorrow['borrow_date'] =  date("Y-m-d",time());
     $newBorrow['borrow_purpose'] = $borrowInfo['borrow_purpose'];
     $newBorrow['user_bank_id'] = $borrowInfo['user_bank_id'];
     $newBorrow['user_opening_bank'] = $borrowInfo['user_opening_bank'];
     $newBorrow['amortize_period'] = $borrowInfo['amortize_period'];
     $newBorrow['amortize_type'] = $borrowInfo['amortize_type'];
+    $newBorrow['status'] = $borrowInfo['待审核'];
     $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow'), $newBorrow, 'INSERT');
     $borrowId = $GLOBALS['db']->insert_id();
     if($borrowId<=0)
