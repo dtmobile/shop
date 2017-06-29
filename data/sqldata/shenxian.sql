@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2017-06-28 22:47:18
+Date: 2017-06-29 19:55:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1047,25 +1047,6 @@ CREATE TABLE `ecs_agency` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `ecs_amortize`
--- ----------------------------
-DROP TABLE IF EXISTS `ecs_amortize`;
-CREATE TABLE `ecs_amortize` (
-  `amortize_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `borrow_id` int(8) unsigned NOT NULL COMMENT '用户编号',
-  `amortize_need_money` float(11,0) NOT NULL COMMENT '本分期应该偿还的金额',
-  `amortize_repay_money` float NOT NULL COMMENT '本分期实际偿还的金额',
-  `amortize_date` date NOT NULL COMMENT '本分期最晚偿还日期',
-  `repay_serial_code` varchar(200) NOT NULL COMMENT '偿还金额流水号',
-  `comment` varchar(1000) DEFAULT NULL COMMENT '其它说明',
-  PRIMARY KEY (`amortize_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of ecs_amortize
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `ecs_area_region`
 -- ----------------------------
 DROP TABLE IF EXISTS `ecs_area_region`;
@@ -1541,17 +1522,159 @@ CREATE TABLE `ecs_borrow` (
   `user_id` mediumint(8) unsigned NOT NULL COMMENT '用户编号',
   `total_money` float NOT NULL COMMENT '贷款总额',
   `borrow_purpose` varchar(500) NOT NULL COMMENT '贷款目的',
+  `borrow_date` date NOT NULL COMMENT '其它说明',
   `user_bank_id` varchar(30) NOT NULL COMMENT '用户银行卡号',
   `user_opening_bank` varchar(255) NOT NULL COMMENT '开户行',
   `amortize_period` int(11) NOT NULL,
-  `amortize_type` int(11) NOT NULL COMMENT '0-等额本息 1-等额本金',
-  `comment` varchar(1000) DEFAULT NULL COMMENT '其它说明',
+  `amortize_type` int(11) NOT NULL COMMENT '1-等额本息 2-先息后本',
+  `status` varchar(10) NOT NULL COMMENT '1-待审核 2-已打款 3-还款中 4-已还清 5-删除',
   PRIMARY KEY (`borrow_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ecs_borrow
 -- ----------------------------
+INSERT INTO `ecs_borrow` VALUES ('2', '12', '12.5', '买房', '0000-00-00', '112233', '北京海淀', '3', '1', '待审核');
+INSERT INTO `ecs_borrow` VALUES ('3', '12', '10', '买一辆汽车', '2017-06-29', '111222333', '似懂非懂', '3', '1', '待审核');
+INSERT INTO `ecs_borrow` VALUES ('4', '12', '58', 'ttt', '2017-06-29', '123424', '的各个地方', '36', '1', '待审核');
+INSERT INTO `ecs_borrow` VALUES ('5', '12', '100', '调度费', '2017-06-29', '11111', '发第三方士大夫', '3', '2', '待审核');
+INSERT INTO `ecs_borrow` VALUES ('6', '12', '100', '购买劳斯莱斯一辆', '2017-06-29', '123456789', '北京市商业银行', '3', '1', '待审核');
+INSERT INTO `ecs_borrow` VALUES ('7', '12', '200', '给解飞买套房子', '2017-06-29', '1111111111110000000000', '河南农行', '6', '2', '待审核');
+
+-- ----------------------------
+-- Table structure for `ecs_borrow_amortize`
+-- ----------------------------
+DROP TABLE IF EXISTS `ecs_borrow_amortize`;
+CREATE TABLE `ecs_borrow_amortize` (
+  `amortize_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` mediumint(8) unsigned NOT NULL COMMENT '用户编号',
+  `borrow_id` int(8) unsigned NOT NULL COMMENT '用户编号',
+  `amortize_need_money` float(11,0) NOT NULL COMMENT '本分期应该偿还的金额',
+  `amortize_repay_money` float NOT NULL COMMENT '本分期实际偿还的金额',
+  `amortize_repay_date` datetime NOT NULL,
+  `amortize_date` date NOT NULL COMMENT '本分期最晚偿还日期',
+  `repay_serial_code` varchar(200) NOT NULL COMMENT '偿还金额流水号',
+  `comment` varchar(1000) DEFAULT NULL COMMENT '其它说明',
+  `status` varchar(10) NOT NULL COMMENT '1-未还款 2-待审核 3-已还款 4-已删除',
+  PRIMARY KEY (`amortize_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ecs_borrow_amortize
+-- ----------------------------
+INSERT INTO `ecs_borrow_amortize` VALUES ('1', '12', '2', '41667', '0', '0000-00-00 00:00:00', '0000-00-00', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('2', '12', '2', '41667', '0', '0000-00-00 00:00:00', '0000-00-00', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('3', '12', '2', '41667', '0', '0000-00-00 00:00:00', '0000-00-00', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('4', '12', '3', '33333', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('5', '12', '3', '33333', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('6', '12', '3', '33333', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('7', '12', '4', '16111', '16111', '0000-00-00 00:00:00', '2017-06-29', '1111111111', '', '待审核');
+INSERT INTO `ecs_borrow_amortize` VALUES ('8', '12', '4', '16111', '16111', '0000-00-00 00:00:00', '2017-06-29', '222222', '', '待审核');
+INSERT INTO `ecs_borrow_amortize` VALUES ('9', '12', '4', '16111', '16111', '0000-00-00 00:00:00', '2017-06-29', '333333', '', '待审核');
+INSERT INTO `ecs_borrow_amortize` VALUES ('10', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('11', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('12', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('13', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('14', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('15', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('16', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('17', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('18', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('19', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('20', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('21', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('22', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('23', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('24', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('25', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('26', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('27', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('28', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('29', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('30', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('31', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('32', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('33', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('34', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('35', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('36', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('37', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('38', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('39', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('40', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('41', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('42', '12', '4', '16111', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '');
+INSERT INTO `ecs_borrow_amortize` VALUES ('43', '12', '5', '333333', '333333', '0000-00-00 00:00:00', '2017-06-29', '12134', '', '待审核');
+INSERT INTO `ecs_borrow_amortize` VALUES ('44', '12', '5', '333333', '333333', '0000-00-00 00:00:00', '2017-06-29', '1111111', '', '待审核');
+INSERT INTO `ecs_borrow_amortize` VALUES ('45', '12', '5', '333333', '333333', '0000-00-00 00:00:00', '2017-06-29', '4565', '', '待审核');
+INSERT INTO `ecs_borrow_amortize` VALUES ('46', '12', '6', '333333', '333333', '0000-00-00 00:00:00', '2017-06-29', '346图图图n', '', '待审核');
+INSERT INTO `ecs_borrow_amortize` VALUES ('47', '12', '6', '333333', '333333', '0000-00-00 00:00:00', '2017-06-29', '12345', '', '待审核');
+INSERT INTO `ecs_borrow_amortize` VALUES ('48', '12', '6', '333333', '333333', '0000-00-00 00:00:00', '2017-06-29', '法国恢复贵航股份', '', '待审核');
+INSERT INTO `ecs_borrow_amortize` VALUES ('49', '12', '7', '333333', '333333', '0000-00-00 00:00:00', '2017-06-29', '是方式方式', '', '待审核');
+INSERT INTO `ecs_borrow_amortize` VALUES ('50', '12', '7', '333333', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '未还款');
+INSERT INTO `ecs_borrow_amortize` VALUES ('51', '12', '7', '333333', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '未还款');
+INSERT INTO `ecs_borrow_amortize` VALUES ('52', '12', '7', '333333', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '未还款');
+INSERT INTO `ecs_borrow_amortize` VALUES ('53', '12', '7', '333333', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '未还款');
+INSERT INTO `ecs_borrow_amortize` VALUES ('54', '12', '7', '333333', '0', '0000-00-00 00:00:00', '2017-06-29', '', '', '未还款');
+
+-- ----------------------------
+-- Table structure for `ecs_borrow_attach`
+-- ----------------------------
+DROP TABLE IF EXISTS `ecs_borrow_attach`;
+CREATE TABLE `ecs_borrow_attach` (
+  `attach_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `borrow_id` int(10) unsigned NOT NULL,
+  `user_id` mediumint(8) unsigned NOT NULL,
+  `email` varchar(60) NOT NULL DEFAULT '',
+  `actual_name` varchar(50) NOT NULL,
+  `sex` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `birthday` date NOT NULL DEFAULT '0000-00-00',
+  `mobile_phone` varchar(20) NOT NULL,
+  `identity_card` varchar(18) DEFAULT NULL COMMENT '身份证编号',
+  `id_begin_date` date DEFAULT NULL,
+  `id_end_date` date DEFAULT NULL,
+  `domicile_address` varchar(2000) DEFAULT NULL COMMENT '户籍所在地',
+  `nationality` varchar(100) DEFAULT NULL COMMENT '民族',
+  `home_address` varchar(2000) DEFAULT NULL COMMENT '现在家庭住址',
+  `home_live_month` int(11) DEFAULT NULL COMMENT '居住时间',
+  `home_type` int(11) DEFAULT NULL COMMENT '现在住房类型',
+  `home_rent_per_month` float DEFAULT NULL,
+  `home_buy_cost` float DEFAULT NULL,
+  `have_house` tinyint(4) DEFAULT NULL COMMENT '是否有房产',
+  `house_address` varchar(2000) DEFAULT NULL COMMENT '房产地址',
+  `have_car` tinyint(4) DEFAULT NULL COMMENT '是否有车',
+  `car_description` varchar(2000) DEFAULT NULL,
+  `live_partner` int(11) DEFAULT NULL COMMENT '是否有共同居住者',
+  `health` varchar(100) DEFAULT NULL,
+  `sick_history` varchar(500) DEFAULT NULL,
+  `education` varchar(50) DEFAULT NULL COMMENT '教育程序',
+  `marital_status` varchar(10) DEFAULT NULL COMMENT '婚姻状况',
+  `marry_date` date DEFAULT NULL COMMENT '结婚日期',
+  `sallary_one_year` float DEFAULT NULL COMMENT '个人年薪',
+  `have_credit_crad` tinyint(4) DEFAULT NULL COMMENT '是否有信用卡',
+  `credit_card_max` float DEFAULT '0' COMMENT '单张信用卡最大额度',
+  `company_name` varchar(100) DEFAULT NULL,
+  `company_address` varchar(500) DEFAULT NULL,
+  `company_phone` varchar(20) DEFAULT NULL,
+  `company_type` varchar(100) DEFAULT NULL COMMENT '公司性质',
+  `company_industury` varchar(100) DEFAULT NULL COMMENT '所属行业',
+  `company_department` varchar(255) DEFAULT NULL COMMENT '所在部门',
+  `company_duty` varchar(50) DEFAULT NULL COMMENT '担任职务',
+  `company_entry_time` date DEFAULT NULL COMMENT '入职现单位时间',
+  `company_income_month` float DEFAULT NULL COMMENT '当前公司月收入',
+  `friends` varchar(5000) DEFAULT NULL,
+  PRIMARY KEY (`attach_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ecs_borrow_attach
+-- ----------------------------
+INSERT INTO `ecs_borrow_attach` VALUES ('14', '2', '12', 'wzj4858@163.com', '邬志君', '1', '1986-08-24', '13811571327', '152634198608240019', '2011-12-10', '2018-12-10', '北京市昌平区', '汉族', '沙河镇北街家园五区1-4-901', '28', '2', '0', '140', '1', '沙河镇北街家园五区', '1', '宝来12年款灰色', '2', '1', '', '4', '0', '2013-01-04', '78.5', '0', '50', '百度外卖', '彩虹大厦', '58832000', '2', '互联网', '基础架构部', '工程师', '2016-09-01', '6', '[{\"friend_id\":\"36\",\"friend_name\":\"1\",\"friend_phone\":\"111\",\"firend_type\":\"11\",\"friend_address\":\"1111\"},{\"friend_id\":\"37\",\"friend_name\":\"2\",\"friend_phone\":\"222\",\"firend_type\":\"22\",\"friend_address\":\"2222\"},{\"friend_id\":\"38\",\"friend_name\":\"3\",\"friend_phone\":\"333\",\"firend_type\":\"33\",\"friend_address\":\"3333\"},{\"friend_id\":\"39\",\"friend_name\":\"4\",\"friend_phone\":\"444\",\"firend_type\":\"44\",\"friend_address\":\"4444\"},{\"friend_id\":\"40\",\"friend_name\":\"5\",\"friend_phone\":\"555\",\"firend_type\":\"55\",\"friend_address\":\"5555\"}]');
+INSERT INTO `ecs_borrow_attach` VALUES ('15', '3', '12', 'wzj4858@163.com', '邬志君', '1', '1986-08-24', '13811571327', '152634198608240019', '2011-12-10', '2018-12-10', '北京市昌平区', '汉族', '沙河镇北街家园五区1-4-901', '28', '2', '0', '140', '1', '沙河镇北街家园五区', '1', '宝来12年款灰色', '2', '1', '', '4', '0', '2013-01-04', '78.5', '0', '50', '百度外卖', '彩虹大厦', '58832000', '2', '互联网', '基础架构部', '工程师', '2016-09-01', '6', '[{\"friend_id\":\"36\",\"friend_name\":\"1\",\"friend_phone\":\"111\",\"firend_type\":\"11\",\"friend_address\":\"1111\"},{\"friend_id\":\"37\",\"friend_name\":\"2\",\"friend_phone\":\"222\",\"firend_type\":\"22\",\"friend_address\":\"2222\"},{\"friend_id\":\"38\",\"friend_name\":\"3\",\"friend_phone\":\"333\",\"firend_type\":\"33\",\"friend_address\":\"3333\"},{\"friend_id\":\"39\",\"friend_name\":\"4\",\"friend_phone\":\"444\",\"firend_type\":\"44\",\"friend_address\":\"4444\"},{\"friend_id\":\"40\",\"friend_name\":\"5\",\"friend_phone\":\"555\",\"firend_type\":\"55\",\"friend_address\":\"5555\"}]');
+INSERT INTO `ecs_borrow_attach` VALUES ('16', '4', '12', 'wzj4858@163.com', '邬志君', '1', '1986-08-24', '13811571327', '152634198608240019', '2011-12-10', '2018-12-10', '北京市昌平区', '汉族', '沙河镇北街家园五区1-4-901', '28', '2', '0', '140', '1', '沙河镇北街家园五区', '1', '宝来12年款灰色', '2', '1', '', '4', '0', '2013-01-04', '78.5', '0', '50', '百度外卖', '彩虹大厦', '58832000', '2', '互联网', '基础架构部', '工程师', '2016-09-01', '6', '[{\"friend_id\":\"36\",\"friend_name\":\"1\",\"friend_phone\":\"111\",\"firend_type\":\"11\",\"friend_address\":\"1111\"},{\"friend_id\":\"37\",\"friend_name\":\"2\",\"friend_phone\":\"222\",\"firend_type\":\"22\",\"friend_address\":\"2222\"},{\"friend_id\":\"38\",\"friend_name\":\"3\",\"friend_phone\":\"333\",\"firend_type\":\"33\",\"friend_address\":\"3333\"},{\"friend_id\":\"39\",\"friend_name\":\"4\",\"friend_phone\":\"444\",\"firend_type\":\"44\",\"friend_address\":\"4444\"},{\"friend_id\":\"40\",\"friend_name\":\"5\",\"friend_phone\":\"555\",\"firend_type\":\"55\",\"friend_address\":\"5555\"}]');
+INSERT INTO `ecs_borrow_attach` VALUES ('17', '5', '12', 'wzj4858@163.com', '邬志君', '1', '1986-08-24', '13811571327', '152634198608240019', '2011-12-10', '2018-12-10', '北京市昌平区', '汉族', '沙河镇北街家园五区1-4-901', '28', '2', '0', '140', '1', '沙河镇北街家园五区', '1', '宝来12年款灰色', '2', '1', '', '4', '0', '2013-01-04', '78.5', '0', '50', '百度外卖', '彩虹大厦', '58832000', '2', '互联网', '基础架构部', '工程师', '2016-09-01', '6', '[{\"friend_id\":\"36\",\"friend_name\":\"1\",\"friend_phone\":\"111\",\"firend_type\":\"11\",\"friend_address\":\"1111\"},{\"friend_id\":\"37\",\"friend_name\":\"2\",\"friend_phone\":\"222\",\"firend_type\":\"22\",\"friend_address\":\"2222\"},{\"friend_id\":\"38\",\"friend_name\":\"3\",\"friend_phone\":\"333\",\"firend_type\":\"33\",\"friend_address\":\"3333\"},{\"friend_id\":\"39\",\"friend_name\":\"4\",\"friend_phone\":\"444\",\"firend_type\":\"44\",\"friend_address\":\"4444\"},{\"friend_id\":\"40\",\"friend_name\":\"5\",\"friend_phone\":\"555\",\"firend_type\":\"55\",\"friend_address\":\"5555\"}]');
+INSERT INTO `ecs_borrow_attach` VALUES ('18', '6', '12', 'wzj4858@163.com', '邬志君', '1', '1986-08-24', '13811571327', '152634198608240019', '2011-12-10', '2018-12-10', '北京市昌平区', '汉族', '沙河镇北街家园五区1-4-901', '28', '2', '0', '140', '1', '沙河镇北街家园五区', '1', '宝来12年款灰色', '2', '1', '', '4', '0', '2013-01-04', '78.5', '0', '50', '百度外卖', '彩虹大厦', '58832000', '2', '互联网', '基础架构部', '工程师', '2016-09-01', '6', '[{\"friend_id\":\"36\",\"friend_name\":\"1\",\"friend_phone\":\"111\",\"firend_type\":\"11\",\"friend_address\":\"1111\"},{\"friend_id\":\"37\",\"friend_name\":\"2\",\"friend_phone\":\"222\",\"firend_type\":\"22\",\"friend_address\":\"2222\"},{\"friend_id\":\"38\",\"friend_name\":\"3\",\"friend_phone\":\"333\",\"firend_type\":\"33\",\"friend_address\":\"3333\"},{\"friend_id\":\"39\",\"friend_name\":\"4\",\"friend_phone\":\"444\",\"firend_type\":\"44\",\"friend_address\":\"4444\"},{\"friend_id\":\"40\",\"friend_name\":\"5\",\"friend_phone\":\"555\",\"firend_type\":\"55\",\"friend_address\":\"5555\"}]');
+INSERT INTO `ecs_borrow_attach` VALUES ('19', '7', '12', 'wzj4858@163.com', '邬志君', '1', '1986-08-24', '13811571327', '152634198608240019', '2011-12-10', '2018-12-10', '北京市昌平区', '汉族', '沙河镇北街家园五区1-4-901', '28', '2', '0', '140', '1', '沙河镇北街家园五区', '1', '宝来12年款灰色', '2', '1', '', '4', '0', '2013-01-04', '78.5', '0', '50', '百度外卖', '彩虹大厦', '58832000', '2', '互联网', '基础架构部', '工程师', '2016-09-01', '6', '[{\"friend_id\":\"36\",\"friend_name\":\"1\",\"friend_phone\":\"111\",\"firend_type\":\"11\",\"friend_address\":\"1111\"},{\"friend_id\":\"37\",\"friend_name\":\"2\",\"friend_phone\":\"222\",\"firend_type\":\"22\",\"friend_address\":\"2222\"},{\"friend_id\":\"38\",\"friend_name\":\"3\",\"friend_phone\":\"333\",\"firend_type\":\"33\",\"friend_address\":\"3333\"},{\"friend_id\":\"39\",\"friend_name\":\"4\",\"friend_phone\":\"444\",\"firend_type\":\"44\",\"friend_address\":\"4444\"},{\"friend_id\":\"40\",\"friend_name\":\"5\",\"friend_phone\":\"555\",\"firend_type\":\"55\",\"friend_address\":\"5555\"}]');
 
 -- ----------------------------
 -- Table structure for `ecs_brand`
@@ -1630,7 +1753,7 @@ CREATE TABLE `ecs_cart` (
   `fencheng` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`rec_id`),
   KEY `session_id` (`session_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=200 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=202 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ecs_cart
@@ -1851,11 +1974,12 @@ CREATE TABLE `ecs_collect_goods` (
   KEY `user_id` (`user_id`),
   KEY `goods_id` (`goods_id`),
   KEY `is_attention` (`is_attention`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ecs_collect_goods
 -- ----------------------------
+INSERT INTO `ecs_collect_goods` VALUES ('2', '12', '8', '1498673712', '0');
 
 -- ----------------------------
 -- Table structure for `ecs_comment`
@@ -2225,14 +2349,14 @@ CREATE TABLE `ecs_goods` (
 -- ----------------------------
 -- Records of ecs_goods
 -- ----------------------------
-INSERT INTO `ecs_goods` VALUES ('1', '19', 'ECS000000', '新鲜水果甜蜜香脆单果约800克', '+', '339', '1', '', '65535', '0.000', '231.60', '193.00', '156.00', '1448265600', '1637740800', '1', '', '食用百香果可以增加胃部饱腹感，减少余热量的摄入，还可以吸附胆固醇和胆汁之类有机分子，抑制人体对脂肪的吸收。因此，长期食用有利于改善人体营养吸收结构，降低体内脂肪，塑造健康优美体态。', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/1_thumb_G_1449024889033.jpg', 'images/201512/goods_img/1_G_1449024889966.jpg', 'images/201512/source_img/1_G_1449024889141.jpg', '1', '', '1', '1', '1', '1', '1447707014', '100', '0', '0', '1', '0', '1', '0', '1449025340', '10', '', '-1', '-1', '0', '0', '0', '1', '', '', '0', '0', '', '1000');
+INSERT INTO `ecs_goods` VALUES ('1', '19', 'ECS000000', '新鲜水果甜蜜香脆单果约800克', '+', '340', '1', '', '65535', '0.000', '231.60', '193.00', '156.00', '1448265600', '1637740800', '1', '', '食用百香果可以增加胃部饱腹感，减少余热量的摄入，还可以吸附胆固醇和胆汁之类有机分子，抑制人体对脂肪的吸收。因此，长期食用有利于改善人体营养吸收结构，降低体内脂肪，塑造健康优美体态。', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/1_thumb_G_1449024889033.jpg', 'images/201512/goods_img/1_G_1449024889966.jpg', 'images/201512/source_img/1_G_1449024889141.jpg', '1', '', '1', '1', '1', '1', '1447707014', '100', '0', '0', '1', '0', '1', '0', '1449025340', '10', '', '-1', '-1', '0', '0', '0', '1', '', '', '0', '0', '', '1000');
 INSERT INTO `ecs_goods` VALUES ('2', '16', 'ECS000002', '田然牛肉大黄瓜条生鲜牛肉冷冻真空黄牛', '+', '14', '1', '', '9999', '0.000', '105.60', '88.00', '0.00', '0', '0', '1', '', '前腿+后腿+羊排共8斤，原生态大山放牧羊羔，曾经的皇室贡品，央视推荐，2005年北京招待全球财金首脑。五层专用包装箱+真空包装+冰袋+保鲜箱+顺丰冷链发货，路途保质期8天', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/2_thumb_G_1448945810147.jpg', 'images/201512/goods_img/2_G_1448945810428.jpg', 'images/201512/source_img/2_G_1448945810791.jpg', '1', '', '1', '1', '1', '0', '1447707293', '100', '0', '0', '1', '0', '0', '0', '1449007115', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '743');
 INSERT INTO `ecs_goods` VALUES ('3', '15', 'ECS000003', '澳洲进口牛尾巴300g 新鲜肥牛肉', '+', '5', '9', '', '9999', '0.000', '306.00', '255.00', '0.00', '0', '0', '1', '', '新鲜羊羔肉整只共15斤，原生态大山放牧羊羔，曾经的皇室贡品，央视推荐，2005年北京招待全球财金首脑。五层专用包装箱+真空包装+冰袋+保鲜箱+顺丰冷链发货，路途保质期8天', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/3_thumb_G_1448945490826.jpg', 'images/201512/goods_img/3_G_1448945490276.jpg', 'images/201512/source_img/3_G_1448945490868.jpg', '1', '', '1', '1', '1', '2', '1447707432', '100', '0', '0', '1', '0', '0', '0', '1449007114', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '63');
 INSERT INTO `ecs_goods` VALUES ('4', '20', 'ECS000004', '乌拉圭进口牛肉卷 特级肥牛卷', '+', '3', '8', '', '9999', '0.000', '90.00', '75.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/4_thumb_G_1448945381841.jpg', 'images/201512/goods_img/4_G_1448945381363.jpg', 'images/201512/source_img/4_G_1448945381768.jpg', '1', '', '1', '1', '0', '0', '1447707532', '100', '0', '0', '0', '1', '0', '0', '1449007111', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '256');
 INSERT INTO `ecs_goods` VALUES ('5', '17', 'ECS000005', '澳洲进口安格斯牛切片上脑牛排1000g', '+', '2', '7', '', '9999', '0.000', '144.00', '120.00', '0.00', '0', '0', '1', '', '澳大利亚是国际公认的没有疯牛病和口蹄疫的国家。为了保持澳大利亚产品的高标准，澳大利亚牛肉业和各级政府共同努力简历了严格的标准和体系，以保证生产的整体化和产品的可追溯性', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/5_thumb_G_1448945270486.jpg', 'images/201512/goods_img/5_G_1448945270257.jpg', 'images/201512/source_img/5_G_1448945270759.jpg', '1', '', '1', '1', '1', '1', '1447707696', '100', '0', '0', '1', '1', '0', '0', '1449009210', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '53');
 INSERT INTO `ecs_goods` VALUES ('6', '21', 'ECS000006', '潮香村澳洲进口牛排家庭团购套餐20片', '+', '2', '6', '', '9999', '0.000', '238.79', '199.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/6_thumb_G_1448945167914.jpg', 'images/201512/goods_img/6_G_1448945167681.jpg', 'images/201512/source_img/6_G_1448945167499.jpg', '1', '', '1', '1', '0', '1', '1447707771', '100', '0', '0', '0', '0', '0', '0', '1449000416', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '78');
 INSERT INTO `ecs_goods` VALUES ('7', '18', 'ECS000007', '酣畅家庭菲力牛排10片澳洲生鲜牛肉团购套餐', '+', '2', '5', '', '9999', '0.000', '285.59', '238.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/7_thumb_G_1448945104346.jpg', 'images/201512/goods_img/7_G_1448945104415.jpg', 'images/201512/source_img/7_G_1448945104192.jpg', '1', '', '1', '1', '0', '2', '1447707875', '100', '0', '0', '0', '0', '0', '0', '1449007124', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '743');
-INSERT INTO `ecs_goods` VALUES ('8', '22', 'ECS000008', '五星眼肉牛排套餐8片装原味原切生鲜牛肉', '+', '9', '4', '', '9999', '0.000', '150.00', '125.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/8_thumb_G_1448945032585.jpg', 'images/201512/goods_img/8_G_1448945032651.jpg', 'images/201512/source_img/8_G_1448945032409.jpg', '1', '', '1', '1', '0', '1', '1447707947', '100', '0', '0', '0', '0', '0', '0', '1449000409', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '84');
+INSERT INTO `ecs_goods` VALUES ('8', '22', 'ECS000008', '五星眼肉牛排套餐8片装原味原切生鲜牛肉', '+', '10', '4', '', '9999', '0.000', '150.00', '125.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/8_thumb_G_1448945032585.jpg', 'images/201512/goods_img/8_G_1448945032651.jpg', 'images/201512/source_img/8_G_1448945032409.jpg', '1', '', '1', '1', '0', '1', '1447707947', '100', '0', '0', '0', '0', '0', '0', '1449000409', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '84');
 INSERT INTO `ecs_goods` VALUES ('9', '19', 'ECS000009', '爱食派内蒙古呼伦贝尔冷冻生鲜牛腱子肉1000g', '+', '9', '3', '', '9999', '0.000', '201.60', '168.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/9_thumb_G_1448944791708.jpg', 'images/201512/goods_img/9_G_1448944791462.jpg', 'images/201512/source_img/9_G_1448944791630.jpg', '1', '', '1', '1', '0', '1', '1447708029', '100', '0', '0', '0', '0', '0', '0', '1449000406', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '1', '', '74');
 INSERT INTO `ecs_goods` VALUES ('10', '16', 'ECS000010', '内蒙新鲜牛肉1斤清真生鲜牛肉火锅食材', '+', '13', '2', '', '9999', '0.000', '105.60', '88.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/10_thumb_G_1448944572962.jpg', 'images/201512/goods_img/10_G_1448944572822.jpg', 'images/201512/source_img/10_G_1448944572182.jpg', '1', '', '1', '1', '0', '0', '1447708083', '100', '0', '0', '0', '0', '0', '0', '1449000404', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '346');
 INSERT INTO `ecs_goods` VALUES ('11', '16', 'ECS000011', '澳洲进口120天谷饲牛仔骨4份原味生鲜', '+', '5', '10', '', '9999', '0.000', '31.20', '26.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/11_thumb_G_1448944388914.jpg', 'images/201512/goods_img/11_G_1448944388701.jpg', 'images/201512/source_img/11_G_1448944388028.jpg', '1', '', '1', '1', '0', '0', '1447708513', '100', '0', '0', '0', '0', '0', '0', '1449000401', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '84');
@@ -2267,7 +2391,7 @@ INSERT INTO `ecs_goods` VALUES ('39', '48', 'ECS000039', '木糖醇红枣早餐�
 INSERT INTO `ecs_goods` VALUES ('40', '45', 'ECS000040', '德运全脂新鲜纯牛奶1L*10盒装整箱', '+', '0', '7', '', '9999', '0.000', '69.60', '58.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/40_thumb_G_1448949038949.jpg', 'images/201512/goods_img/40_G_1448949038206.jpg', 'images/201512/source_img/40_G_1448949038319.jpg', '1', '', '1', '1', '0', '0', '1447711529', '100', '0', '0', '0', '0', '0', '0', '1449000259', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '470');
 INSERT INTO `ecs_goods` VALUES ('41', '49', 'ECS000041', '高钙液体奶 200ml*24盒', '+', '0', '6', '', '9999', '0.000', '26.40', '22.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/41_thumb_G_1448948980554.jpg', 'images/201512/goods_img/41_G_1448948980027.jpg', 'images/201512/source_img/41_G_1448948980418.jpg', '1', '', '1', '1', '0', '0', '1447711623', '100', '0', '0', '0', '0', '0', '0', '1449000256', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '45');
 INSERT INTO `ecs_goods` VALUES ('42', '45', 'ECS000042', '伊利官方直营全脂营养舒化奶250ml*12盒*2提', '+', '1', '4', '', '9999', '0.000', '43.19', '36.00', '0.00', '0', '0', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/42_thumb_G_1448948895152.jpg', 'images/201512/goods_img/42_G_1448948895543.jpg', 'images/201512/source_img/42_G_1448948895219.jpg', '1', '', '1', '1', '0', '0', '1447711722', '100', '0', '1', '0', '0', '0', '0', '1449000254', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '23');
-INSERT INTO `ecs_goods` VALUES ('43', '9', 'ECS000043', '休闲零食膨化食品焦糖/奶油/椒麻味', '+', '13', '3', '', '9999', '0.000', '153.60', '128.00', '99.00', '1447660800', '1639641600', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/43_thumb_G_1448948762037.jpg', 'images/201512/goods_img/43_G_1448948762004.jpg', 'images/201512/source_img/43_G_1448948762013.jpg', '1', '', '1', '1', '1', '1', '1447729300', '100', '0', '0', '1', '1', '1', '0', '1449000252', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '789');
+INSERT INTO `ecs_goods` VALUES ('43', '9', 'ECS000043', '休闲零食膨化食品焦糖/奶油/椒麻味', '+', '17', '3', '', '9999', '0.000', '153.60', '128.00', '99.00', '1447660800', '1639641600', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/43_thumb_G_1448948762037.jpg', 'images/201512/goods_img/43_G_1448948762004.jpg', 'images/201512/source_img/43_G_1448948762013.jpg', '1', '', '1', '1', '1', '1', '1447729300', '100', '0', '0', '1', '1', '1', '0', '1449000252', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '789');
 INSERT INTO `ecs_goods` VALUES ('44', '45', 'ECS000044', '蒙牛特仑苏有机奶250ml×12盒', '+', '2', '2', '', '9999', '0.000', '69.60', '58.00', '32.00', '1447660800', '1671177600', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/44_thumb_G_1448948850734.jpg', 'images/201512/goods_img/44_G_1448948850226.jpg', 'images/201512/source_img/44_G_1448948850260.jpg', '1', '', '1', '1', '0', '0', '1447729652', '100', '0', '0', '0', '0', '1', '0', '1449000250', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '567');
 INSERT INTO `ecs_goods` VALUES ('45', '28', 'ECS000045', '深蓝伏特加巴维兰利口酒送预调酒', '+', '8', '10', '', '9999', '0.000', '31.20', '26.00', '18.00', '1447660800', '1639641600', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/45_thumb_G_1448946661697.jpg', 'images/201512/goods_img/45_G_1448946661665.jpg', 'images/201512/source_img/45_G_1448946661621.jpg', '1', '', '1', '1', '0', '0', '1447729876', '100', '0', '0', '0', '0', '1', '0', '1449000248', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '34');
 INSERT INTO `ecs_goods` VALUES ('46', '24', 'ECS000046', '双响炮洋酒JimBeam whiskey美国白占边', '+', '8', '1', '', '9999', '0.000', '38.40', '32.00', '28.00', '1447660800', '1605513600', '1', '', '', '<p><img width=\"790\" height=\"441\" src=\"/images/upload/Image/1(1).jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"595\" src=\"/images/upload/Image/2.jpg\" alt=\"\" /><br />\r\n<img width=\"790\" height=\"602\" src=\"/images/upload/Image/3.jpg\" alt=\"\" /></p>', 'images/201512/thumb_img/46_thumb_G_1448946598227.jpg', 'images/201512/goods_img/46_G_1448946598678.jpg', 'images/201512/source_img/46_G_1448946598243.jpg', '1', '', '1', '1', '0', '0', '1447730034', '100', '0', '0', '0', '0', '1', '0', '1449000245', '0', '', '-1', '-1', '0', '0', '0', '0', '', '', '0', '0', '', '567');
@@ -3486,7 +3610,7 @@ CREATE TABLE `ecs_nav` (
   PRIMARY KEY (`id`),
   KEY `type` (`type`),
   KEY `ifshow` (`ifshow`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ecs_nav
@@ -3502,6 +3626,8 @@ INSERT INTO `ecs_nav` VALUES ('8', '', '0', '联系我们', '1', '4', '0', 'arti
 INSERT INTO `ecs_nav` VALUES ('9', '', '0', '公司简介', '1', '5', '0', 'article.php?id=5', 'bottom');
 INSERT INTO `ecs_nav` VALUES ('10', '', '0', '批发方案', '1', '6', '0', 'wholesale.php', 'bottom');
 INSERT INTO `ecs_nav` VALUES ('11', '', '0', '配送方式', '1', '7', '0', 'myship.php', 'bottom');
+INSERT INTO `ecs_nav` VALUES ('12', null, '0', '循环易贷', '1', '4', '0', 'user.php?act=daikuan', 'middle');
+INSERT INTO `ecs_nav` VALUES ('13', null, '0', '我要还款', '1', '4', '0', 'borrow.php?act=repay', 'middle');
 
 -- ----------------------------
 -- Table structure for `ecs_order_action`
@@ -3634,7 +3760,7 @@ CREATE TABLE `ecs_order_goods` (
   PRIMARY KEY (`rec_id`),
   KEY `order_id` (`order_id`),
   KEY `goods_id` (`goods_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ecs_order_goods
@@ -3744,6 +3870,8 @@ INSERT INTO `ecs_order_goods` VALUES ('102', '102', '48', '奶糕贵宾幼犬狗
 INSERT INTO `ecs_order_goods` VALUES ('103', '103', '48', '新疆巴尔鲁克生鲜牛排眼肉牛扒1200g', 'ECS000048', '0', '1', '126.00', '88.00', '', '1', '1', '', '0', '0', '');
 INSERT INTO `ecs_order_goods` VALUES ('104', '104', '9', '爱食派内蒙古呼伦贝尔冷冻生鲜牛腱子肉1000g', 'ECS000009', '0', '1', '201.60', '168.00', '', '0', '1', '', '0', '0', '');
 INSERT INTO `ecs_order_goods` VALUES ('105', '105', '1', '新鲜水果甜蜜香脆单果约800克', 'ECS000000', '4', '1', '231.60', '156.00', '重量:500克 \n外观:红色 \n款式:时尚款 \n', '0', '1', '', '0', '0', '4,7,1');
+INSERT INTO `ecs_order_goods` VALUES ('106', '106', '43', '休闲零食膨化食品焦糖/奶油/椒麻味', 'ECS000043', '0', '4', '153.60', '99.00', '', '0', '1', '', '0', '0', '');
+INSERT INTO `ecs_order_goods` VALUES ('107', '106', '8', '五星眼肉牛排套餐8片装原味原切生鲜牛肉', 'ECS000008', '0', '2', '150.00', '125.00', '', '0', '1', '', '0', '0', '');
 
 -- ----------------------------
 -- Table structure for `ecs_order_info`
@@ -3823,7 +3951,7 @@ CREATE TABLE `ecs_order_info` (
   KEY `pay_id` (`pay_id`),
   KEY `extension_code` (`extension_code`,`extension_id`),
   KEY `agency_id` (`agency_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ecs_order_info
@@ -3933,6 +4061,7 @@ INSERT INTO `ecs_order_info` VALUES ('102', '2015113044808', '1', '0', '0', '0',
 INSERT INTO `ecs_order_info` VALUES ('103', '2015120242661', '1', '5', '2', '2', '张三', '1', '2', '52', '500', '详细地址详细地址', '', '010-12345678', '13981750562', 'asdf@asd.com', '', '', '', '4', '圆通速递', '8', '余额支付', '等待所有商品备齐后再发', '', '', '', '', '', '', '88.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '88.00', '0', '0.00', '0.00', '0.00', '0', 'wap站', '1449032504', '1449032504', '1449032504', '1449032601', '0', '0', '0', '880828394688493096', '', '0', '', '', '0', '', '0.00', '0', '0', '0.00', '88');
 INSERT INTO `ecs_order_info` VALUES ('104', '2015120643166', '9', '0', '0', '0', '开口', '1', '5', '65', '629', 'uiyuhuiuighjk', '', '1332552695', '', '', '', '', '', '3', '顺丰速运', '4', '支付宝', '等待所有商品备齐后再发', '', '', '', '', '', '', '168.00', '15.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0', '0.00', '0.00', '183.00', '0', 'wap站', '1449360175', '0', '0', '0', '0', '0', '0', '', '', '0', '', '', '0', '', '0.00', '0', '0', '0.00', '168');
 INSERT INTO `ecs_order_info` VALUES ('105', '2016031322167', '0', '0', '0', '0', '戴森', '1', '2', '52', '500', '法师法第三', '', '', '15832990644', '763191200@qq.com', '', '', '', '4', '圆通速递', '1', '支付宝', '等待所有商品备齐后再发', '', '', '', '', '', '', '156.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0', '0.00', '0.00', '156.00', '0', 'pc站', '1457802643', '0', '0', '0', '0', '0', '0', '', '', '0', '', '', '0', '', '0.00', '0', '0', '0.00', '156');
+INSERT INTO `ecs_order_info` VALUES ('106', '2017062968824', '12', '0', '0', '0', '邬志君', '1', '2', '52', '500', '方式来加进来设计分类', '', '58832000', '13811571327', 'wzj4858@163.com', '', '', '', '3', '顺丰速运', '1', '支付宝', '等待所有商品备齐后再发', '', '', '', '', '', '', '646.00', '15.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0', '0.00', '0.00', '561.00', '0', 'pc站', '1498708301', '0', '0', '0', '0', '0', '0', '', '', '0', '', '', '0', '', '0.00', '0', '0', '100.00', '646');
 
 -- ----------------------------
 -- Table structure for `ecs_pack`
@@ -4008,7 +4137,7 @@ CREATE TABLE `ecs_pay_log` (
   `is_paid` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `user_account_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ecs_pay_log
@@ -4118,6 +4247,7 @@ INSERT INTO `ecs_pay_log` VALUES ('102', '102', '88.00', '0', '0', '0');
 INSERT INTO `ecs_pay_log` VALUES ('103', '103', '0.00', '0', '0', '0');
 INSERT INTO `ecs_pay_log` VALUES ('104', '104', '183.00', '0', '0', '0');
 INSERT INTO `ecs_pay_log` VALUES ('105', '105', '156.00', '0', '0', '0');
+INSERT INTO `ecs_pay_log` VALUES ('106', '106', '561.00', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `ecs_plugins`
@@ -7702,7 +7832,7 @@ CREATE TABLE `ecs_sessions` (
 -- ----------------------------
 -- Records of ecs_sessions
 -- ----------------------------
-INSERT INTO `ecs_sessions` VALUES ('edc6b981b9de71f3b5b8836dc5bcffd7', '1498661192', '12', '0', '0.0.0.0', '111111', '1', '1.00', 'wzj4858@163.com', 'a:5:{s:7:\"from_ad\";i:0;s:7:\"referer\";s:5:\"pc站\";s:10:\"login_fail\";i:0;s:9:\"last_time\";s:10:\"1498632388\";s:7:\"last_ip\";s:7:\"0.0.0.0\";}');
+INSERT INTO `ecs_sessions` VALUES ('edc6b981b9de71f3b5b8836dc5bcffd7', '1498737172', '12', '0', '0.0.0.0', '111111', '1', '1.00', 'wzj4858@163.com', 'a:6:{s:7:\"from_ad\";i:0;s:7:\"referer\";s:5:\"pc站\";s:10:\"login_fail\";i:0;s:9:\"last_time\";s:10:\"1498708361\";s:7:\"last_ip\";s:7:\"0.0.0.0\";s:9:\"flow_type\";i:0;}');
 
 -- ----------------------------
 -- Table structure for `ecs_sessions_data`
@@ -7719,6 +7849,7 @@ CREATE TABLE `ecs_sessions_data` (
 -- ----------------------------
 -- Records of ecs_sessions_data
 -- ----------------------------
+INSERT INTO `ecs_sessions_data` VALUES ('edc6b981b9de71f3b5b8836dc5bcffd7', '4294967295', 'a:8:{s:7:\"from_ad\";i:0;s:7:\"referer\";s:5:\"pc站\";s:10:\"login_fail\";i:0;s:9:\"last_time\";s:10:\"1498708247\";s:7:\"last_ip\";s:7:\"0.0.0.0\";s:9:\"flow_type\";i:0;s:10:\"flow_order\";a:8:{s:14:\"extension_code\";s:0:\"\";s:11:\"shipping_id\";i:3;s:6:\"pay_id\";i:1;s:7:\"pack_id\";i:0;s:7:\"card_id\";i:0;s:5:\"bonus\";i:0;s:8:\"integral\";i:0;s:7:\"surplus\";i:0;}s:14:\"flow_consignee\";a:14:{s:10:\"address_id\";i:0;s:9:\"consignee\";s:9:\"邬志君\";s:7:\"country\";s:1:\"1\";s:8:\"province\";s:1:\"2\";s:4:\"city\";s:2:\"52\";s:8:\"district\";s:3:\"500\";s:5:\"email\";s:15:\"wzj4858@163.com\";s:7:\"address\";s:30:\"方式来加进来设计分类\";s:7:\"zipcode\";s:0:\"\";s:3:\"tel\";s:8:\"58832000\";s:6:\"mobile\";s:11:\"13811571327\";s:13:\"sign_building\";s:0:\"\";s:9:\"best_time\";s:0:\"\";s:7:\"user_id\";s:2:\"12\";}}');
 
 -- ----------------------------
 -- Table structure for `ecs_shipping`
@@ -8803,7 +8934,7 @@ INSERT INTO `ecs_users` VALUES ('8', '', '12354668@156.com', '546971327', '08ab2
 INSERT INTO `ecs_users` VALUES ('9', '', '', '123456788', '14920e4fd7326eef04639adb243d8b1b', '', '', '', '255', '0000-00-00', '0.00', '0.00', '0', '0', '7', '1449360036', '1449360129', '0000-00-00 00:00:00', '123.169.114.29', '2', '0', '0', '8519', '0', '0', '0', '', '', '', '', '', '', '0', '0.00', '', '', '', '', '', '', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null, null);
 INSERT INTO `ecs_users` VALUES ('10', '', '123123@qq.com', 'buyer', '3dc8d329819893cf0923a10920a7ac30', '', '', '', '0', '0000-00-00', '0.00', '0.00', '0', '0', '8', '1449386881', '1449388613', '0000-00-00 00:00:00', '118.186.147.17', '2', '0', '0', '5130', '0', '0', '0', '', '', '', '', '', '', '0', '0.00', '', '', '', '', '', '', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null, null);
 INSERT INTO `ecs_users` VALUES ('11', '', '', 'dithion', 'aeeb268ced776204222089a53ec10f9a', '', '', '', '0', '0000-00-00', '0.00', '0.00', '0', '0', '0', '1457813662', '1457813662', '0000-00-00 00:00:00', '124.156.73.88', '1', '0', '0', '', '0', '0', '0', '', '', '', '', '', '', '0', '0.00', '', '', '', '', '', '', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', null, null, null, null, null, null, null, null, null);
-INSERT INTO `ecs_users` VALUES ('12', '', 'wzj4858@163.com', '111111', '7829efb3f9a3a87f300984bb7ae0587a', '', '', '邬志君', '1', '1986-08-24', '0.00', '0.00', '0', '0', '0', '1498443370', '1498632391', '0000-00-00 00:00:00', '0.0.0.0', '782', '0', '0', '2644', '0', '0', '0', '', '', '', '', '', '13811571327', '0', '0.00', null, null, '', '', null, '', '152634198608240019', '2011-12-10', '2018-12-10', '北京市昌平区', '汉族', '沙河镇北街家园五区1-4-901', '28', '2', '0', '140', '1', '沙河镇北街家园五区', '1', '宝来12年款灰色', '2', '1', '', '4', '0', '2013-01-04', '78.5', '0', '50', '百度外卖', '彩虹大厦', '58832000', '2', '互联网', '基础架构部', '工程师', '2016-09-01', '6');
+INSERT INTO `ecs_users` VALUES ('12', '', 'wzj4858@163.com', '111111', '7829efb3f9a3a87f300984bb7ae0587a', '', '', '邬志君', '1', '1986-08-24', '0.00', '0.00', '0', '0', '9', '1498443370', '1498708372', '0000-00-00 00:00:00', '0.0.0.0', '1290', '0', '0', '2644', '0', '0', '0', '', '', '', '', '', '13811571327', '0', '0.00', null, null, '', '', null, '', '152634198608240019', '2011-12-10', '2018-12-10', '北京市昌平区', '汉族', '沙河镇北街家园五区1-4-901', '28', '2', '0', '140', '1', '沙河镇北街家园五区', '1', '宝来12年款灰色', '2', '1', '', '4', '0', '2013-01-04', '78.5', '0', '50', '百度外卖', '彩虹大厦', '58832000', '2', '互联网', '基础架构部', '工程师', '2016-09-01', '6');
 
 -- ----------------------------
 -- Table structure for `ecs_users_friend`
@@ -8875,7 +9006,7 @@ CREATE TABLE `ecs_user_address` (
   `best_time` varchar(120) NOT NULL DEFAULT '',
   PRIMARY KEY (`address_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ecs_user_address
@@ -8885,6 +9016,7 @@ INSERT INTO `ecs_user_address` VALUES ('5', '', '3', '张三', '75283535@qq.com'
 INSERT INTO `ecs_user_address` VALUES ('6', '', '5', '张三', '', '1', '2', '52', '500', '详细地址详细地址', '', '010-12345678', '', '', '');
 INSERT INTO `ecs_user_address` VALUES ('7', '', '9', '开口', '', '1', '5', '65', '629', 'uiyuhuiuighjk', '', '1332552695', '', '', '');
 INSERT INTO `ecs_user_address` VALUES ('8', '', '10', '杨彪', '123123@qq.com', '1', '3', '41', '435', '底商0212312', '', '', '18909876543', '', '');
+INSERT INTO `ecs_user_address` VALUES ('9', '', '12', '邬志君', 'wzj4858@163.com', '1', '2', '52', '500', '方式来加进来设计分类', '', '58832000', '13811571327', '', '');
 
 -- ----------------------------
 -- Table structure for `ecs_user_bonus`

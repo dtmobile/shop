@@ -36,9 +36,24 @@
 	padding:10px 45px 12px
 }
 
-.important_span{
+.newroman_size60{
 	font-family:'Times New Roman';
 	color: green;
 	font-size: 60px;
+}
+
+.font_16{
+	font-size: 16px;
+}
+
+.font_20{
+	font-size: 20px;
+}
+.font_60{
+	font-size: 60px;
+}
+
+.newroman{
+	font-family:'Times New Roman';
 }
 

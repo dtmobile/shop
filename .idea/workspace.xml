@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08ad5400-e2fe-4a3c-8131-07bde37fe6f6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/includes/lib_daikuan.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/static_caches/api_str.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/static_caches/cloud_remind.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/static_caches/menu_api.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/borrow.php" afterPath="$PROJECT_DIR$/borrow.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/borrow.js" afterPath="$PROJECT_DIR$/js/borrow.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/config.php" afterPath="$PROJECT_DIR$/data/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sqldata/shenxian.sql" afterPath="$PROJECT_DIR$/data/sqldata/shenxian.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/static_caches/cat_option_static.php" afterPath="$PROJECT_DIR$/temp/static_caches/cat_option_static.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/static_caches/cat_pid_releate.php" afterPath="$PROJECT_DIR$/temp/static_caches/cat_pid_releate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/static_caches/shop_config.php" afterPath="$PROJECT_DIR$/temp/static_caches/shop_config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/lizi/borrow.css" afterPath="$PROJECT_DIR$/themes/lizi/borrow.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/lizi/borrow.dwt" afterPath="$PROJECT_DIR$/themes/lizi/borrow.dwt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/lizi/js/utils.js" afterPath="$PROJECT_DIR$/themes/lizi/js/utils.js" />
     </list>
     <ignored path="shop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +38,7 @@
           <file leaf-file-name="lib_transaction.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/includes/lib_transaction.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="256">
+                <state relative-caret-position="206">
                   <caret line="93" column="41" selection-start-line="93" selection-start-column="20" selection-end-line="93" selection-end-column="41" />
                   <folding>
                     <marker date="1498697780830" expanded="true" signature="7575:7680" ph="SELECT COUNT... ${$GLOBALS['ecs']-&gt;table('order_goods')}" />
@@ -77,7 +82,7 @@
           <file leaf-file-name="lib_borrow.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/includes/lib_borrow.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="413">
+                <state relative-caret-position="288">
                   <caret line="82" column="16" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
                   <folding>
                     <marker date="1498730358425" expanded="true" signature="809:889" ph="SELECT * FRO... ${$GLOBALS['ecs']-&gt;table('borrow')}" />
@@ -93,7 +98,7 @@
           <file leaf-file-name="borrow.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/borrow.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="94">
+                <state relative-caret-position="-281">
                   <caret line="78" column="26" selection-start-line="78" selection-start-column="20" selection-end-line="78" selection-end-column="26" />
                   <folding>
                     <element signature="e#838#1159#0#PHP" expanded="false" />
@@ -103,21 +108,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="borrow.css" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/themes/lizi/borrow.css">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="253">
-                  <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="borrow.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/borrow.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="150">
-                  <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+                <state relative-caret-position="50">
+                  <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -125,11 +120,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="borrow.dwt.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/temp/compiled/borrow.dwt.php">
+          <file leaf-file-name="borrow.css" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/themes/lizi/borrow.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="287">
-                  <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+                <state relative-caret-position="412">
+                  <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -215,65 +210,67 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="borrow.dwt" pinned="false" current-in-tab="true">
+          <file leaf-file-name="borrow.dwt" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/themes/lizi/borrow.dwt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="181">
-                  <caret line="119" column="35" selection-start-line="119" selection-start-column="35" selection-end-line="119" selection-end-column="35" />
+                <state relative-caret-position="56">
+                  <caret line="137" column="63" selection-start-line="137" selection-start-column="63" selection-end-line="137" selection-end-column="63" />
                   <folding>
                     <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                    <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#span#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#span#0;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="e#5936#5942#0" expanded="true" />
-                    <element signature="e#5942#5948#0" expanded="true" />
-                    <element signature="e#5948#5954#0" expanded="true" />
-                    <element signature="e#5954#5960#0" expanded="true" />
-                    <element signature="e#5961#5967#0" expanded="true" />
-                    <element signature="e#5967#5973#0" expanded="true" />
-                    <element signature="e#5973#5979#0" expanded="true" />
-                    <element signature="e#5979#5985#0" expanded="true" />
-                    <element signature="e#5986#5992#0" expanded="true" />
-                    <element signature="e#5992#5998#0" expanded="true" />
-                    <element signature="e#5998#6004#0" expanded="true" />
-                    <element signature="e#6004#6010#0" expanded="true" />
-                    <element signature="e#6023#6029#0" expanded="true" />
-                    <element signature="e#6029#6035#0" expanded="true" />
-                    <element signature="e#6035#6041#0" expanded="true" />
-                    <element signature="e#6041#6047#0" expanded="true" />
-                    <element signature="e#6048#6054#0" expanded="true" />
-                    <element signature="e#6054#6060#0" expanded="true" />
-                    <element signature="e#6060#6066#0" expanded="true" />
-                    <element signature="e#6066#6072#0" expanded="true" />
-                    <element signature="e#6073#6079#0" expanded="true" />
-                    <element signature="e#6079#6085#0" expanded="true" />
-                    <element signature="e#6085#6091#0" expanded="true" />
-                    <element signature="e#6091#6097#0" expanded="true" />
-                    <element signature="e#6110#6116#0" expanded="true" />
-                    <element signature="e#6116#6122#0" expanded="true" />
-                    <element signature="e#6122#6128#0" expanded="true" />
-                    <element signature="e#6128#6134#0" expanded="true" />
-                    <element signature="e#6135#6141#0" expanded="true" />
-                    <element signature="e#6141#6147#0" expanded="true" />
-                    <element signature="e#6147#6153#0" expanded="true" />
-                    <element signature="e#6153#6159#0" expanded="true" />
-                    <element signature="e#6160#6166#0" expanded="true" />
-                    <element signature="e#6166#6172#0" expanded="true" />
-                    <element signature="e#6172#6178#0" expanded="true" />
-                    <element signature="e#6178#6184#0" expanded="true" />
-                    <element signature="e#6197#6203#0" expanded="true" />
-                    <element signature="e#6203#6209#0" expanded="true" />
-                    <element signature="e#6209#6215#0" expanded="true" />
-                    <element signature="e#6215#6221#0" expanded="true" />
-                    <element signature="e#6222#6228#0" expanded="true" />
-                    <element signature="e#6228#6234#0" expanded="true" />
-                    <element signature="e#6234#6240#0" expanded="true" />
-                    <element signature="e#6240#6246#0" expanded="true" />
-                    <element signature="e#6247#6253#0" expanded="true" />
-                    <element signature="e#6253#6259#0" expanded="true" />
-                    <element signature="e#6259#6265#0" expanded="true" />
-                    <element signature="e#6265#6271#0" expanded="true" />
+                    <element signature="e#5963#5969#0" expanded="true" />
+                    <element signature="e#5969#5975#0" expanded="true" />
+                    <element signature="e#5975#5981#0" expanded="true" />
+                    <element signature="e#5981#5987#0" expanded="true" />
+                    <element signature="e#5988#5994#0" expanded="true" />
+                    <element signature="e#5994#6000#0" expanded="true" />
+                    <element signature="e#6000#6006#0" expanded="true" />
+                    <element signature="e#6006#6012#0" expanded="true" />
+                    <element signature="e#6013#6019#0" expanded="true" />
+                    <element signature="e#6019#6025#0" expanded="true" />
+                    <element signature="e#6025#6031#0" expanded="true" />
+                    <element signature="e#6031#6037#0" expanded="true" />
+                    <element signature="e#6050#6056#0" expanded="true" />
+                    <element signature="e#6056#6062#0" expanded="true" />
+                    <element signature="e#6062#6068#0" expanded="true" />
+                    <element signature="e#6068#6074#0" expanded="true" />
+                    <element signature="e#6075#6081#0" expanded="true" />
+                    <element signature="e#6081#6087#0" expanded="true" />
+                    <element signature="e#6087#6093#0" expanded="true" />
+                    <element signature="e#6093#6099#0" expanded="true" />
+                    <element signature="e#6100#6106#0" expanded="true" />
+                    <element signature="e#6106#6112#0" expanded="true" />
+                    <element signature="e#6112#6118#0" expanded="true" />
+                    <element signature="e#6118#6124#0" expanded="true" />
+                    <element signature="e#6137#6143#0" expanded="true" />
+                    <element signature="e#6143#6149#0" expanded="true" />
+                    <element signature="e#6149#6155#0" expanded="true" />
+                    <element signature="e#6155#6161#0" expanded="true" />
+                    <element signature="e#6162#6168#0" expanded="true" />
+                    <element signature="e#6168#6174#0" expanded="true" />
+                    <element signature="e#6174#6180#0" expanded="true" />
+                    <element signature="e#6180#6186#0" expanded="true" />
+                    <element signature="e#6193#6199#0" expanded="true" />
+                    <element signature="e#6199#6205#0" expanded="true" />
+                    <element signature="e#6205#6211#0" expanded="true" />
+                    <element signature="e#6224#6230#0" expanded="true" />
+                    <element signature="e#6230#6236#0" expanded="true" />
+                    <element signature="e#6236#6242#0" expanded="true" />
+                    <element signature="e#6242#6248#0" expanded="true" />
+                    <element signature="e#6249#6255#0" expanded="true" />
+                    <element signature="e#6255#6261#0" expanded="true" />
+                    <element signature="e#6261#6267#0" expanded="true" />
+                    <element signature="e#6267#6273#0" expanded="true" />
+                    <element signature="e#6274#6280#0" expanded="true" />
+                    <element signature="e#6280#6286#0" expanded="true" />
+                    <element signature="e#6286#6292#0" expanded="true" />
+                    <element signature="e#6292#6298#0" expanded="true" />
                     <element signature="n#style#0;n#span#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#button#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -282,7 +279,7 @@
           <file leaf-file-name="eSetDb.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/diguo/lang/big5utf8/temp/eSetDb.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="224">
+                <state relative-caret-position="24">
                   <caret line="87" column="24" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="24" />
                   <folding>
                     <element signature="e#3062#3068#0#HTML" expanded="true" />
@@ -295,7 +292,7 @@
           <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/common.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="149">
+                <state relative-caret-position="-576">
                   <caret line="321" column="10" selection-start-line="321" selection-start-column="10" selection-end-line="321" selection-end-column="10" />
                   <folding>
                     <marker date="1439477942000" expanded="true" signature="2821:2852" ph="..." />
@@ -323,7 +320,7 @@
           <file leaf-file-name="goods.dwt" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/themes/lizi/goods.dwt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="146">
+                <state relative-caret-position="-1129">
                   <caret line="375" column="33" selection-start-line="375" selection-start-column="24" selection-end-line="375" selection-end-column="33" />
                   <folding />
                 </state>
@@ -333,7 +330,7 @@
           <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/themes/lizi/js/common.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="253">
+                <state relative-caret-position="-472">
                   <caret line="312" column="25" selection-start-line="312" selection-start-column="25" selection-end-line="312" selection-end-column="25" />
                   <folding>
                     <marker date="1460467230000" expanded="true" signature="2952:2983" ph="..." />
@@ -361,7 +358,7 @@
           <file leaf-file-name="user_clips.dwt" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/themes/lizi/user_clips.dwt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="396">
+                <state relative-caret-position="-254">
                   <caret line="217" column="170" selection-start-line="217" selection-start-column="10" selection-end-line="217" selection-end-column="170" />
                   <folding>
                     <element signature="n#table#0;n#form#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -373,6 +370,16 @@
                     <element signature="n#tr#5;n#table#0;n#form#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
                     <element signature="n#script#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="config.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/data/config.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="349">
+                  <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -401,7 +408,6 @@
         <option value="$PROJECT_DIR$/themes/lizi/library/user_menu.lbi" />
         <option value="$PROJECT_DIR$/js/utils.js" />
         <option value="$PROJECT_DIR$/includes/modules/integrates/ucenter.php" />
-        <option value="$PROJECT_DIR$/data/config.php" />
         <option value="$PROJECT_DIR$/js/user.js" />
         <option value="$PROJECT_DIR$/themes/lizi/user_transaction.dwt" />
         <option value="$PROJECT_DIR$/includes/inc_constant.php" />
@@ -415,8 +421,9 @@
         <option value="$PROJECT_DIR$/includes/lib_borrow.php" />
         <option value="$PROJECT_DIR$/js/borrow.js" />
         <option value="$PROJECT_DIR$/borrow.php" />
-        <option value="$PROJECT_DIR$/themes/lizi/borrow.dwt" />
         <option value="$PROJECT_DIR$/themes/lizi/borrow.css" />
+        <option value="$PROJECT_DIR$/themes/lizi/borrow.dwt" />
+        <option value="$PROJECT_DIR$/data/config.php" />
       </list>
     </option>
   </component>
@@ -512,10 +519,6 @@
               <option name="myItemId" value="themes" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lizi" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -527,15 +530,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lizi" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
+              <option name="myItemId" value="temp" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -619,19 +614,19 @@
       <workItem from="1498449295636" duration="2696000" />
       <workItem from="1498458990758" duration="15211000" />
       <workItem from="1498531556241" duration="31970000" />
-      <workItem from="1498615479047" duration="63008000" />
+      <workItem from="1498615479047" duration="64212000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112885000" />
+    <option name="totallyTimeSpent" value="114089000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20788912" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20788912" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -776,14 +771,6 @@
             <marker date="1425609010000" expanded="true" signature="1984:2116" ph="SELECT COUNT... ${$GLOBALS['ecs']-&gt;table('vote_log')}" />
             <marker date="1425609010000" expanded="true" signature="2402:2557" ph="INSERT INTO ${$GLOBALS['ecs']-&gt;table('vote_log')}... " />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1111,7 +1098,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
+        <state relative-caret-position="-576">
           <caret line="321" column="10" selection-start-line="321" selection-start-column="10" selection-end-line="321" selection-end-column="10" />
           <folding>
             <marker date="1439477942000" expanded="true" signature="2821:2852" ph="..." />
@@ -1137,7 +1124,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/lizi/goods.dwt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
+        <state relative-caret-position="-1129">
           <caret line="375" column="33" selection-start-line="375" selection-start-column="24" selection-end-line="375" selection-end-column="33" />
           <folding />
         </state>
@@ -1145,7 +1132,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/lizi/js/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
+        <state relative-caret-position="-472">
           <caret line="312" column="25" selection-start-line="312" selection-start-column="25" selection-end-line="312" selection-end-column="25" />
           <folding>
             <marker date="1460467230000" expanded="true" signature="2952:2983" ph="..." />
@@ -1188,7 +1175,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/lizi/user_clips.dwt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
+        <state relative-caret-position="-254">
           <caret line="217" column="170" selection-start-line="217" selection-start-column="10" selection-end-line="217" selection-end-column="170" />
           <folding>
             <element signature="n#table#0;n#form#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -1253,7 +1240,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/lib_transaction.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
+        <state relative-caret-position="206">
           <caret line="93" column="41" selection-start-line="93" selection-start-column="20" selection-end-line="93" selection-end-column="41" />
           <folding>
             <marker date="1498697780830" expanded="true" signature="7575:7680" ph="SELECT COUNT... ${$GLOBALS['ecs']-&gt;table('order_goods')}" />
@@ -1285,7 +1272,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/lib_borrow.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
+        <state relative-caret-position="288">
           <caret line="82" column="16" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
           <folding>
             <marker date="1498730358425" expanded="true" signature="809:889" ph="SELECT * FRO... ${$GLOBALS['ecs']-&gt;table('borrow')}" />
@@ -1293,16 +1280,6 @@
             <marker date="1498730358425" expanded="true" signature="1000:1121" ph="SELECT * FRO... ${$GLOBALS['ecs']-&gt;table('borrow_amortize')}" />
             <marker date="1498730358425" expanded="true" signature="1450:1537" ph="SELECT * FRO... ${$GLOBALS['ecs']-&gt;table('borrow')}" />
             <marker date="1498730358425" expanded="true" signature="1450:1552" ph="SELECT * FRO... ${$GLOBALS['ecs']-&gt;table('borrow_amortize')}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/borrow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1315,20 +1292,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/borrow.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="78" column="26" selection-start-line="78" selection-start-column="20" selection-end-line="78" selection-end-column="26" />
-          <folding>
-            <element signature="e#838#1159#0#PHP" expanded="false" />
-            <marker date="1498733501126" expanded="true" signature="1366:1433" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/diguo/lang/big5utf8/temp/eSetDb.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
+        <state relative-caret-position="24">
           <caret line="87" column="24" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="24" />
           <folding>
             <element signature="e#3062#3068#0#HTML" expanded="true" />
@@ -1342,72 +1308,103 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/lizi/borrow.dwt">
+    <entry file="file://$PROJECT_DIR$/borrow.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="119" column="35" selection-start-line="119" selection-start-column="35" selection-end-line="119" selection-end-column="35" />
+        <state relative-caret-position="-281">
+          <caret line="78" column="26" selection-start-line="78" selection-start-column="20" selection-end-line="78" selection-end-column="26" />
           <folding>
-            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#5936#5942#0" expanded="true" />
-            <element signature="e#5942#5948#0" expanded="true" />
-            <element signature="e#5948#5954#0" expanded="true" />
-            <element signature="e#5954#5960#0" expanded="true" />
-            <element signature="e#5961#5967#0" expanded="true" />
-            <element signature="e#5967#5973#0" expanded="true" />
-            <element signature="e#5973#5979#0" expanded="true" />
-            <element signature="e#5979#5985#0" expanded="true" />
-            <element signature="e#5986#5992#0" expanded="true" />
-            <element signature="e#5992#5998#0" expanded="true" />
-            <element signature="e#5998#6004#0" expanded="true" />
-            <element signature="e#6004#6010#0" expanded="true" />
-            <element signature="e#6023#6029#0" expanded="true" />
-            <element signature="e#6029#6035#0" expanded="true" />
-            <element signature="e#6035#6041#0" expanded="true" />
-            <element signature="e#6041#6047#0" expanded="true" />
-            <element signature="e#6048#6054#0" expanded="true" />
-            <element signature="e#6054#6060#0" expanded="true" />
-            <element signature="e#6060#6066#0" expanded="true" />
-            <element signature="e#6066#6072#0" expanded="true" />
-            <element signature="e#6073#6079#0" expanded="true" />
-            <element signature="e#6079#6085#0" expanded="true" />
-            <element signature="e#6085#6091#0" expanded="true" />
-            <element signature="e#6091#6097#0" expanded="true" />
-            <element signature="e#6110#6116#0" expanded="true" />
-            <element signature="e#6116#6122#0" expanded="true" />
-            <element signature="e#6122#6128#0" expanded="true" />
-            <element signature="e#6128#6134#0" expanded="true" />
-            <element signature="e#6135#6141#0" expanded="true" />
-            <element signature="e#6141#6147#0" expanded="true" />
-            <element signature="e#6147#6153#0" expanded="true" />
-            <element signature="e#6153#6159#0" expanded="true" />
-            <element signature="e#6160#6166#0" expanded="true" />
-            <element signature="e#6166#6172#0" expanded="true" />
-            <element signature="e#6172#6178#0" expanded="true" />
-            <element signature="e#6178#6184#0" expanded="true" />
-            <element signature="e#6197#6203#0" expanded="true" />
-            <element signature="e#6203#6209#0" expanded="true" />
-            <element signature="e#6209#6215#0" expanded="true" />
-            <element signature="e#6215#6221#0" expanded="true" />
-            <element signature="e#6222#6228#0" expanded="true" />
-            <element signature="e#6228#6234#0" expanded="true" />
-            <element signature="e#6234#6240#0" expanded="true" />
-            <element signature="e#6240#6246#0" expanded="true" />
-            <element signature="e#6247#6253#0" expanded="true" />
-            <element signature="e#6253#6259#0" expanded="true" />
-            <element signature="e#6259#6265#0" expanded="true" />
-            <element signature="e#6265#6271#0" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#838#1159#0#PHP" expanded="false" />
+            <marker date="1498733501126" expanded="true" signature="1366:1433" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/borrow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/lizi/borrow.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
+        <state relative-caret-position="412">
+          <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/lizi/borrow.dwt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="137" column="63" selection-start-line="137" selection-start-column="63" selection-end-line="137" selection-end-column="63" />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#5963#5969#0" expanded="true" />
+            <element signature="e#5969#5975#0" expanded="true" />
+            <element signature="e#5975#5981#0" expanded="true" />
+            <element signature="e#5981#5987#0" expanded="true" />
+            <element signature="e#5988#5994#0" expanded="true" />
+            <element signature="e#5994#6000#0" expanded="true" />
+            <element signature="e#6000#6006#0" expanded="true" />
+            <element signature="e#6006#6012#0" expanded="true" />
+            <element signature="e#6013#6019#0" expanded="true" />
+            <element signature="e#6019#6025#0" expanded="true" />
+            <element signature="e#6025#6031#0" expanded="true" />
+            <element signature="e#6031#6037#0" expanded="true" />
+            <element signature="e#6050#6056#0" expanded="true" />
+            <element signature="e#6056#6062#0" expanded="true" />
+            <element signature="e#6062#6068#0" expanded="true" />
+            <element signature="e#6068#6074#0" expanded="true" />
+            <element signature="e#6075#6081#0" expanded="true" />
+            <element signature="e#6081#6087#0" expanded="true" />
+            <element signature="e#6087#6093#0" expanded="true" />
+            <element signature="e#6093#6099#0" expanded="true" />
+            <element signature="e#6100#6106#0" expanded="true" />
+            <element signature="e#6106#6112#0" expanded="true" />
+            <element signature="e#6112#6118#0" expanded="true" />
+            <element signature="e#6118#6124#0" expanded="true" />
+            <element signature="e#6137#6143#0" expanded="true" />
+            <element signature="e#6143#6149#0" expanded="true" />
+            <element signature="e#6149#6155#0" expanded="true" />
+            <element signature="e#6155#6161#0" expanded="true" />
+            <element signature="e#6162#6168#0" expanded="true" />
+            <element signature="e#6168#6174#0" expanded="true" />
+            <element signature="e#6174#6180#0" expanded="true" />
+            <element signature="e#6180#6186#0" expanded="true" />
+            <element signature="e#6193#6199#0" expanded="true" />
+            <element signature="e#6199#6205#0" expanded="true" />
+            <element signature="e#6205#6211#0" expanded="true" />
+            <element signature="e#6224#6230#0" expanded="true" />
+            <element signature="e#6230#6236#0" expanded="true" />
+            <element signature="e#6236#6242#0" expanded="true" />
+            <element signature="e#6242#6248#0" expanded="true" />
+            <element signature="e#6249#6255#0" expanded="true" />
+            <element signature="e#6255#6261#0" expanded="true" />
+            <element signature="e#6261#6267#0" expanded="true" />
+            <element signature="e#6267#6273#0" expanded="true" />
+            <element signature="e#6274#6280#0" expanded="true" />
+            <element signature="e#6280#6286#0" expanded="true" />
+            <element signature="e#6286#6292#0" expanded="true" />
+            <element signature="e#6292#6298#0" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
           <folding />
         </state>
       </provider>

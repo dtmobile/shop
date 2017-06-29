@@ -117,7 +117,7 @@
 <div class="add_ok" name="repay_borrow_dialog" id="repay_borrow_dialog">
     <div class="tip">
         <i class="iconfont"></i>请使用手机扫描二维码来支付
-        <span class="important_span" name="amortize_need_money_label"></span>
+        <span class="newroman font_60" style="color: darkgreen" name="amortize_need_money_label"></span>
         元
     </div>
     <div class="go">
@@ -140,15 +140,15 @@
             <span style="font-size: 20px">微信</span>
         </div>
         <div >
-            <strong>请输入实际支付金额</strong>
+            <span class="newroman font_16">请输入实际支付金额</span>
             <input name="amortize_repay_money" type="text" size="25" class="inputBg" placeholder="请填写实际支付金额"/>元
         </div>
         <div>
-            <strong>请输入支付流水号</strong>
+            <span class="newroman font_16">请输入支付流水号</span>
             <input name="repay_serial_code" type="text" size="25" class="inputBg" placeholder="请填写支付流水号"/>
         </div>
-        <button class="repay-success" onclick="repaySuccess()">支付成功</button>
-        <button type="button"  onclick="repayCancel()">取消支付</button>
+        <button class="font_20" style="background-color: #008CBA;" onclick="repaySuccess()">支付成功</button>
+        <button class="font_20" style="background-color: #555555;" onclick="repayCancel()">取消支付</button>
         <!--<a href="javascript:if (confirm('{$lang.del_attention}')) location.href='user.php?act=del_attention&rec_id={$goods.rec_id}'" class="f6">{$lang.no_attention}</a>-->
 
     </div>

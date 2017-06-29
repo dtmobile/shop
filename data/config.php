@@ -32,7 +32,7 @@ define('OLD_AUTH_KEY', '');
 
 define('API_TIME', '2017-06-25 10:08:02');
 
-define('DEBUG_MODE', 8);
+define('DEBUG_MODE', 3);
 //0 //禁用调试模式
 //1 //显示所有错误
 //2 //禁用Smarty缓存
