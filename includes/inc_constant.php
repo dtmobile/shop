@@ -48,6 +48,11 @@ define('ERR_INVALID_EMAIL',         6); // email错误
 define('ERR_USERNAME_NOT_ALLOW',    7); // 用户名不允许注册
 define('ERR_EMAIL_NOT_ALLOW',       8); // EMAIL不允许注册
 
+//贷款相关函数
+define('ERR_BORROW_COMMIT_FAIL',       1); // 无法保存贷款申请
+define('ERR_BORROW_COMMIT_ATTACH_FAIL',       2); // 无法保存贷款申请附带信息
+define('ERR_BORROW_COMMIT_AMORTIZE_FAIL',       3); // 无法保存贷款申请分期信息
+
 /* 加入购物车失败的错误代码 */
 define('ERR_NOT_EXISTS',            1); // 商品不存在
 define('ERR_OUT_OF_STOCK',          2); // 商品缺货

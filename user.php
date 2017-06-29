@@ -761,17 +761,14 @@ elseif ($action == 'act_edit_profile') {
 elseif ($action == 'act_daikuan_request') {
     include_once(ROOT_PATH . 'includes/lib_transaction.php');
     $userInfo = getUserInfoFromPost($_POST,$user_id);
-    var_dump($userInfo);
     $borrowInfo = getBorrowInfoFromPost($_POST,$user_id);
-    var_dump($borrowInfo);
-    if (SaveBorrerInfo($userInfo,$borrowInfo)) {
-//        show_message($_LANG['edit_profile_success'], $_LANG['profile_lnk'], 'user.php?act=profile', 'info');
-        echo "提交贷款申请成功";
+    if (commitBorrowRequest($userInfo,$borrowInfo)) {
+        show_message("您的贷款申请已经成功提交，稍后3个工作日会有工作人员与您取得联系", "查看我的贷款信息", 'borrow.php?act=repay', 'info');
     } else {
         if ($user->error == ERR_EMAIL_EXISTS) {
             $msg = sprintf($_LANG['email_exist'], $profile['email']);
         } else {
-            $msg = $_LANG['edit_profile_failed'];
+            $msg = '贷款申请提交失败';
         }
         show_message($msg, '', '', 'info');
     }
