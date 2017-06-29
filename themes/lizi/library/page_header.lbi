@@ -33,7 +33,6 @@
             <div class="list"> <a href="user.php?act=order_list">我的订单</a> <a href="user.php?act=comment_list">我的评价</a> <a href="user.php?act=account_log">我的余额</a> <a href="user.php?act=bonus">我的红包</a> <a href="user.php?act=collection_list">我的收藏</a> <a href="user.php?act=address_list" class="last">修改收货地址</a> </div>
           </div>
         </li>
-        <li><a href="mobile/"><i class="iconfont vipico"></i>手机版</a></li>
       </ul>
     </div>
   </div>

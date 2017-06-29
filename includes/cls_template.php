@@ -193,7 +193,7 @@ class cls_template
                         $hash_dir = $this->cache_dir . '/' . substr(md5($cachename), 0, 1);
                         if (!is_dir($hash_dir))
                         {
-                            mkdir($hash_dir);
+                            mkdir($hash_dir,0777, true);
                         }
                         $this->template = array();
                     }
