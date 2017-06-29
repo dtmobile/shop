@@ -16,13 +16,10 @@
 {insert_scripts files='common.js,borrow.js'}
 </head>
 <body class="user_center">
-<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem --> 
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
 <div id="wrapper" class="cle">
-	<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem --> 
-
     <div class="my_nala_main">
-        <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem --> 
-			
+
     <div class="my_nala_centre ilizi_centre">
     <div class="ilizi cle">
       	<div class="box">

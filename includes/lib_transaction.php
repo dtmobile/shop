@@ -123,7 +123,7 @@ function saveBorrowInfo($userInfo,$borrowInfo)
     $newBorrow['user_opening_bank'] = $borrowInfo['user_opening_bank'];
     $newBorrow['amortize_period'] = $borrowInfo['amortize_period'];
     $newBorrow['amortize_type'] = $borrowInfo['amortize_type'];
-    $newBorrow['status'] = $borrowInfo['待审核'];
+    $newBorrow['status'] = '待审核';
     $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow'), $newBorrow, 'INSERT');
     $borrowId = $GLOBALS['db']->insert_id();
     if($borrowId<=0)

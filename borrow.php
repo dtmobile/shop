@@ -47,8 +47,6 @@ if (empty($_SESSION['user_id'])) {
     }
 }
 
-var_dump($action);
-
 /* 如果是显示页面，对页面进行相应赋值 */
 if (in_array($action, $ui_arr)) {
     assign_template();
@@ -68,36 +66,18 @@ if (in_array($action, $ui_arr)) {
     $smarty->assign('lang', $_LANG);
 }
 
-//用户中心欢迎页
-if ($action == 'default') {
-    include_once(ROOT_PATH . 'includes/lib_clips.php');
-    if ($rank = get_rank_info()) {
-        $smarty->assign('rank_name', sprintf($_LANG['your_level'], $rank['rank_name']));
-        if (!empty($rank['next_rank_name'])) {
-            $smarty->assign('next_rank_name', sprintf($_LANG['next_level'], $rank['next_rank'], $rank['next_rank_name']));
-        }
-    }
-    $smarty->assign('info', get_user_default($user_id));
-    $smarty->assign('user_notice', $_CFG['user_notice']);
-    $smarty->assign('prompt', get_user_prompt($user_id));
-    $smarty->display('user_clips.dwt');
-}
-
-/* 显示会员注册界面 */
+/* 显示我要还款界面 */
 if ($action == 'repay') {
-
     $smarty->assign('page_title', '我要还款'); // 页面标题
-    echo "我要还款-开发中";
     $info = array();
-    $info['title']="我要还款";
+    $info['title']="我要还款-开发中...";
     $smarty->assign('info', $info);
     $smarty->display('borrow.dwt');
-} /* 注册会员的处理 */
+} /* 显示查询贷款申请界面 */
 elseif ($action == 'borrow') {
     $smarty->assign('page_title', '查询贷款申请'); // 页面标题
-    echo "查看贷款申-开发中";
-    $info['title']="查询贷款申请";
+    $info['title']="查询贷款申请-开发中...";
     $smarty->assign('info', $info);
     $smarty->display('borrow.dwt');
-} //  处理第三方登录接口
+}
 ?>
