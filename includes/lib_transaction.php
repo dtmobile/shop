@@ -38,7 +38,6 @@ function saveBorrowAttach($borrowId,$userInfo)
     $newBorrowAttch['borrow_id']=$borrowId;
     $newBorrowAttch['user_id']=$userInfo['user_id'];
     $newBorrowAttch['email']=$userInfo['email'];
-    $newBorrowAttch['user_name']=$userInfo['user_name'];
     $newBorrowAttch['actual_name']=$userInfo['actual_name'];
     $newBorrowAttch['sex']=$userInfo['sex'];
     $newBorrowAttch['birthday']=$userInfo['birthday'];
