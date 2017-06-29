@@ -1,0 +1,44 @@
+/**
+ * ��Ʒ����: Ecshop�����߲��̳�ģ�� 
+ * ʹ�ð汾��Ecshop v2.7.3��
+ * ��Ʒ��λ: O���������ҳ�Ʒ
+ * ����ģ�壺http://www.ocailong.com/
+ * �����QQ��763191200��o������
+*/
+.add_ok {
+	display:none;
+	background:#fff;
+	padding:40px 0;
+	text-align:center;
+	width:480px;
+	border:3px solid #09c762;
+	border-radius:10px;
+	-moz-border-radius:10px
+}
+.add_ok .tip {
+	font-size:30px;
+	margin-bottom:20px
+}
+.add_ok .tip i {
+	font-size:60px;
+	color:#6dc415;
+	vertical-align:-4px;
+	margin-right:15px
+}
+.add_ok .go a {
+	font-size:18px
+}
+.add_ok .go a.back {
+	color:#09c762;
+	margin-right:90px
+}
+.add_ok .go a.btn {
+	padding:10px 45px 12px
+}
+
+.important_span{
+	font-family:'Times New Roman';
+	color: green;
+	font-size: 60px;
+}
+

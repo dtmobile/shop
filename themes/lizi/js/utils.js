@@ -70,6 +70,19 @@ Utils.isInt = function(val)
   return !reg.test(val);
 }
 
+Utils.isFloat = function(val)
+{
+  var strP=/^\d+(\.\d+)?$/;
+  if(!strP.test(val)) return false;
+  try{
+    if(parseFloat(val)!=val) return false;
+  }catch(ex){
+    return false;
+  }
+  return true;
+}
+
+
 Utils.isEmail = function( email )
 {
   var reg1 = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;

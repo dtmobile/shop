@@ -12,6 +12,8 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="user.css" rel="stylesheet" type="text/css" />
+<link href="borrow.css" rel="stylesheet" type="text/css" />
+
 {* 包含脚本文件 *}
 {insert_scripts files='common.js,borrow.js'}
 </head>
@@ -27,10 +29,79 @@
       <div class="userCenterBox boxCenterList clearfix" style="_height:1%; font-size:14px;">
          <!-- *查询贷款申请页面 start-->
          <!-- {if $action eq 'borrow'} -->
-          <div>{$info.title}</div>
+          <h5><span>{$info.title}</span></h5>
           <!--{/if} -->
            <!--{if $action eq 'repay'} -->
-          <div>{$info.title}</div>
+          <h5><span>{$info.title}</span></h5>
+          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+              <tr align="center">
+                  <th width="10%" bgcolor="#ffffff">贷款编号</th>
+                  <th width="10%" bgcolor="#ffffff">贷款总额</th>
+                  <th width="10%" bgcolor="#ffffff">贷款目的</th>
+                  <th width="10%" bgcolor="#ffffff">申请日期</th>
+                  <th width="10%" bgcolor="#ffffff">收款银行卡</th>
+                  <th width="20%" bgcolor="#ffffff">开户行</th>
+                  <th width="10%" bgcolor="#ffffff">分期数</th>
+                  <th width="10%" bgcolor="#ffffff">分期类型</th>
+                  <th width="10%" bgcolor="#ffffff">订单状态</th>
+                  <th width="10%" bgcolor="#ffffff">操作</th>
+              </tr>
+              <!--{foreach from=$borrow_list item=borrow}-->
+              <tr>
+                  <td bgcolor="#ffffff">{$borrow.borrow_id}</td>
+                  <td bgcolor="#ffffff">{$borrow.total_money}</td>
+                  <td bgcolor="#ffffff">{$borrow.borrow_purpose}</td>
+                  <td bgcolor="#ffffff">{$borrow.borrow_date}</td>
+                  <td bgcolor="#ffffff">{$borrow.user_bank_id}</td>
+                  <td bgcolor="#ffffff">{$borrow.user_opening_bank}</td>
+                  <td bgcolor="#ffffff">{$borrow.amortize_period}</td>
+                  <td bgcolor="#ffffff">
+                      {if $borrow.amortize_type eq '1'}
+                      等额本息
+                      {else}
+                      先息后本
+                      {/if}
+                  </td>
+                  <td bgcolor="#ffffff">{$borrow.status}</td>
+                  <td bgcolor="#ffffff">
+                      <!--<a href="javascript:viewDetail({$borrow.borrow_id})" class="f6">详情</a>-->
+                      <a href='borrow.php?act=repay&select_borrow_id={$borrow.borrow_id}'" class="f6">详情</a>
+                  </td>
+              </tr>
+              <!--{/foreach} -->
+          </table>
+
+          <br/>
+          <br/>
+
+          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+              <tr align="center">
+                  <th width="10%" bgcolor="#ffffff">分期编号</th>
+                  <th width="10%" bgcolor="#ffffff">贷款编号</th>
+                  <th width="10%" bgcolor="#ffffff">应还金额</th>
+                  <th width="10%" bgcolor="#ffffff">已还金额</th>
+                  <th width="10%" bgcolor="#ffffff">最晚还款期</th>
+                  <th width="20%" bgcolor="#ffffff">还款流水号</th>
+                  <th width="10%" bgcolor="#ffffff">还款备注</th>
+                  <th width="10%" bgcolor="#ffffff">分期状态</th>
+                  <th width="10%" bgcolor="#ffffff">操作</th>
+              </tr>
+              <!--{foreach from=$amortize_list item=amortize}-->
+              <tr>
+                  <td bgcolor="#ffffff">{$amortize.amortize_id}</td>
+                  <td bgcolor="#ffffff">{$amortize.borrow_id}</td>
+                  <td bgcolor="#ffffff">{$amortize.amortize_need_money}</td>
+                  <td bgcolor="#ffffff">{$amortize.amortize_repay_money}</td>
+                  <td bgcolor="#ffffff">{$amortize.amortize_date}</td>
+                  <td bgcolor="#ffffff">{$amortize.repay_serial_code}</td>
+                  <td bgcolor="#ffffff">{$amortize.comment}</td>
+                  <td bgcolor="#ffffff">{$amortize.status}</td>
+                  <td bgcolor="#ffffff">
+                      <a href="javascript:amortizeRepay({$amortize.user_id},{$amortize.borrow_id},{$amortize.amortize_id},{$amortize.amortize_need_money})" class="f6">还款</a>
+                  </td>
+              </tr>
+              <!--{/foreach} -->
+          </table>
          <!-- #查询贷款申请页面 end-->
           <!-- {/if}-->
       </div>
@@ -43,8 +114,49 @@
     </div>
 </div>
 
+<div class="add_ok" name="repay_borrow_dialog" id="repay_borrow_dialog">
+    <div class="tip">
+        <i class="iconfont"></i>请使用手机扫描二维码来支付
+        <span class="important_span" name="amortize_need_money_label"></span>
+        元
+    </div>
+    <div class="go">
+        <div >
+            <span style="margin-right: 30px">
+            <img src="/shop/themes/lizi/images/zhifubao_code.png" width="200" height="200">
+            </span>
+
+            <span style="margin-left: 30px">
+            <img src="/shop/themes/lizi/images/weixin_code.png" width="200" height="200">
+            </span>
+
+        </div>
+        <div >
+            <span style="font-size: 20px">支付宝</span>
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="font-size: 20px">微信</span>
+        </div>
+        <div >
+            <strong>请输入实际支付金额</strong>
+            <input name="amortize_repay_money" type="text" size="25" class="inputBg" placeholder="请填写实际支付金额"/>元
+        </div>
+        <div>
+            <strong>请输入支付流水号</strong>
+            <input name="repay_serial_code" type="text" size="25" class="inputBg" placeholder="请填写支付流水号"/>
+        </div>
+        <button class="repay-success" onclick="repaySuccess()">支付成功</button>
+        <button type="button"  onclick="repayCancel()">取消支付</button>
+        <!--<a href="javascript:if (confirm('{$lang.del_attention}')) location.href='user.php?act=del_attention&rec_id={$goods.rec_id}'" class="f6">{$lang.no_attention}</a>-->
+
+    </div>
+</div>
+
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --> <!-- #EndLibraryItem -->
 </body>
+<script type="text/javascript" src="js/easydialog.min.js"></script>
 <script type="text/javascript">
 </script>
 </html>
