@@ -158,6 +158,8 @@ listTable.loadList = function()
 {
   var args = "act="+this.query+"" + this.compileFilter();
 
+  console.log(this.url);
+  console.log(args);
   Ajax.call(this.url, args, this.listCallback, "POST", "JSON");
 }
 

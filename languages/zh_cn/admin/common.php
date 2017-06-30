@@ -198,6 +198,7 @@ $_LANG['14_package_list'] = '超值礼包';
 $_LANG['package_add'] = '添加超值礼包';
 
 /* 订单管理 */
+$_LANG['01_borrow_list'] = '贷款列表';
 $_LANG['02_order_list'] = '订单列表';
 $_LANG['03_order_query'] = '订单查询';
 $_LANG['04_merge_order'] = '合并订单';

@@ -18,11 +18,11 @@ define('IN_ECS', true);
 require(dirname(__FILE__) . '/includes/init.php');
 
 $user_id = $_SESSION['user_id'];
-$action = isset($_REQUEST['act']) ? trim($_REQUEST['act']) : 'borrow';
+$action = isset($_REQUEST['act']) ? trim($_REQUEST['act']) : 'repay';
 // 不需要登录的操作或自己验证是否登录（如ajax处理）的act
 $not_login_arr = array();
 /* 显示页面的action列表 */
-$ui_arr = array('borrow', 'repay', 'repay_info_commit', 'get_amortize_list');
+$ui_arr = array('repay', 'repay_info_commit', 'get_amortize_list');
 
 
 /* 未登录处理 */
@@ -64,7 +64,8 @@ include_once(ROOT_PATH . 'includes/lib_borrow.php');
 if ($action == 'repay') {
     $smarty->assign('page_title', '我要还款'); // 页面标题
     $info = array();
-    $info['title'] = "我要还款";
+
+    $info['title'] = "我的贷款";
     $smarty->assign('info', $info);
     $borrowList = getBorrowByUserId($user_id);
 
@@ -74,12 +75,6 @@ if ($action == 'repay') {
     }
 
     $smarty->assign('borrow_list', $borrowList);
-    $smarty->display('borrow.dwt');
-} /* 显示查询贷款申请界面 */
-elseif ($action == 'borrow') {
-    $smarty->assign('page_title', '查询贷款申请'); // 页面标题
-    $info['title'] = "查询贷款申请-开发中...";
-    $smarty->assign('info', $info);
     $smarty->display('borrow.dwt');
 } /* 分期账单支付结果提交 */
 elseif ($action == 'repay_info_commit') {

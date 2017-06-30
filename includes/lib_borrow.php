@@ -16,12 +16,7 @@
 if (!defined('IN_ECS')) {
     die('Hacking attempt');
 }
-include_once('includes/cls_json.php');
-
-function getAllBorrowsByStatus($status)
-{
-
-}
+//include_once('includes/cls_json.php');
 
 function getBorrowByUserId($userId)
 {
@@ -33,14 +28,7 @@ function getBorrowByUserId($userId)
     return $GLOBALS['db']->getAll($sql);
 }
 
-function getAmortizeList($userId,$selectBorrowId)
-{
-    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('borrow_amortize') . " WHERE borrow_id = '$selectBorrowId' AND user_id='$userId'";
-    return $GLOBALS['db']->getAll($sql);
-}
-
-
-function getAmortizeByBorrowId($userId, $borrowId)
+function getAmortizeList($userId,$borrowId)
 {
     if (empty($userId)) {
         $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
@@ -50,7 +38,8 @@ function getAmortizeByBorrowId($userId, $borrowId)
         $GLOBALS['err']->add("无法获取贷款申请编号");
         return false;
     }
-    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('borrow_amortize') . " WHERE user_id = $userId AND borrow_id=$borrowId";
+
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('borrow_amortize') . " WHERE borrow_id = '$borrowId' AND user_id='$userId'";
     return $GLOBALS['db']->getAll($sql);
 }
 

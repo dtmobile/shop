@@ -1,0 +1,135 @@
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js,borrow_list.js"}
+<!-- 订单搜索 -->
+<div class="form-div">
+  <form action="javascript:searchOrder()" name="searchForm">
+    <div>
+      <span>用户姓名<input name="actual_name" type="text" id="actual_name" size="15"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>手机号码<input name="mobile_phone" type="text" id="mobile_phone" size="15"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>身份证号<input name="identity_card" type="text" id="identity_card" size="15" style="width: 300px"></span>
+    </div>
+    <div>
+      <span>贷款编号<input name="borrow_id" type="text" id="borrow_id" size="15"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>贷款金额<input name="total_money" type="text" id="total_money" size="15"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>银行卡号<input name="user_bank_id" type="text" id="user_bank_id" size="15" style="width: 300px"></span>
+    </div>
+    <div>
+       <span>贷款状态
+         <select name="status" id="status">
+        <option value="-1">请选择</option>
+        {html_options options=$status_list}
+        </select>
+        </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span><input type="submit" value="{$lang.button_search}" class="button" style="width: 200px" /></span>
+    </div>
+
+  </form>
+</div>
+
+<!-- 贷款列表 -->
+<form method="post" action="order.php?act=operate" name="listForm" onsubmit="return check()">
+  <div class="list-div" id="listDiv">
+{/if}
+
+<table cellpadding="3" cellspacing="1">
+  <tr>
+    <th>贷款编号</th>
+    <th>用户名称</th>
+    <th>贷款总额</th>
+    <th>贷款目的</th>
+    <th>贷款日期</th>
+    <th>银行卡号</th>
+    <th>开户行</th>
+    <th>分期数</th>
+    <th>还款类型</th>
+    <th>状态</th>
+    <th>操作</th>
+  <tr>
+  {foreach from=$borrow_list item=borrow key=okey}
+  <tr>
+  <td valign="top" nowrap="nowrap">{$borrow.borrow_id}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.actual_name}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.total_money}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.borrow_purpose}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.borrow_date}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.user_bank_id}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.user_opening_bank}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.amortize_period}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.amortize_type}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.status}</td>
+  <td align="center" valign="top"  nowrap="nowrap">
+     <a href="borrow.php?act=info&borrow_id={$borrow.borrow_id}">查看</a>
+    </td>
+  </tr>
+  {/foreach}
+</table>
+
+<!-- 分页 -->
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="right" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+
+{if $full_page}
+  </div>
+
+</form>
+<script language="JavaScript">
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+{literal}
+
+/**
+ * 搜索贷款
+ */
+function searchOrder()
+{
+  listTable.filter['actual_name'] = Utils.trim(document.forms['searchForm'].elements['actual_name'].value);
+  listTable.filter['mobile_phone'] = Utils.trim(document.forms['searchForm'].elements['mobile_phone'].value);
+  listTable.filter['identity_card'] = Utils.trim(document.forms['searchForm'].elements['identity_card'].value);
+  listTable.filter['borrow_id'] = Utils.trim(document.forms['searchForm'].elements['borrow_id'].value);
+  listTable.filter['total_money'] = Utils.trim(document.forms['searchForm'].elements['total_money'].value);
+  listTable.filter['user_bank_id'] = Utils.trim(document.forms['searchForm'].elements['user_bank_id'].value);
+  listTable.filter['status'] = document.forms['searchForm'].elements['status'].value;
+
+  listTable.filter['page'] = 1;
+  listTable.loadList();
+}
+
+    listTable.listCallback = function(result, txt) 
+    {
+        if (result.error > 0) 
+        {
+            alert(result.message);
+        }
+        else 
+        {
+            try 
+            {
+                document.getElementById('listDiv').innerHTML = result.content;
+                if (typeof result.filter == "object")
+                {
+                    listTable.filter = result.filter;
+                }
+                listTable.pageCount = result.page_count;
+            }
+            catch(e)
+            {
+                alert(e.message);
+            }
+        }
+    }
+
+</script>
+{/literal}
+
+{include file="pagefooter.htm"}
+{/if}

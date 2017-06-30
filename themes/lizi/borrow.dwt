@@ -27,10 +27,7 @@
       	<div class="box">
      <div class="box_1">
       <div class="userCenterBox boxCenterList clearfix" style="_height:1%; font-size:14px;">
-         <!-- *查询贷款申请页面 start-->
-         <!-- {if $action eq 'borrow'} -->
-          <h5><span>{$info.title}</span></h5>
-          <!--{/if} -->
+         <!-- *查询贷款记录页面 start-->
            <!--{if $action eq 'repay'} -->
           <h5><span>{$info.title}</span></h5>
           <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
@@ -40,8 +37,8 @@
                   <th width="10%" bgcolor="#ffffff">贷款目的</th>
                   <th width="10%" bgcolor="#ffffff">申请日期</th>
                   <th width="10%" bgcolor="#ffffff">收款银行卡</th>
-                  <th width="20%" bgcolor="#ffffff">开户行</th>
-                  <th width="10%" bgcolor="#ffffff">分期数</th>
+                  <th width="15%" bgcolor="#ffffff">开户行</th>
+                  <th width="5%" bgcolor="#ffffff">分期数</th>
                   <th width="10%" bgcolor="#ffffff">分期类型</th>
                   <th width="10%" bgcolor="#ffffff">订单状态</th>
                   <th width="10%" bgcolor="#ffffff">操作</th>
@@ -64,8 +61,10 @@
                   </td>
                   <td bgcolor="#ffffff">{$borrow.status}</td>
                   <td bgcolor="#ffffff">
-                      <!--<a href="javascript:viewDetail({$borrow.borrow_id})" class="f6">详情</a>-->
-                      <a href='borrow.php?act=repay&select_borrow_id={$borrow.borrow_id}'" class="f6">详情</a>
+                      {if $borrow.status eq '待审核'}
+                      {else}
+                      <a style="color: blue" href='borrow.php?act=repay&select_borrow_id={$borrow.borrow_id}'" class="f6" >查看分期</a>
+                      {/if}
                   </td>
               </tr>
               <!--{/foreach} -->
@@ -97,7 +96,9 @@
                   <td bgcolor="#ffffff">{$amortize.comment}</td>
                   <td bgcolor="#ffffff">{$amortize.status}</td>
                   <td bgcolor="#ffffff">
-                      <a href="javascript:amortizeRepay({$amortize.user_id},{$amortize.borrow_id},{$amortize.amortize_id},{$amortize.amortize_need_money})" class="f6">还款</a>
+                      {if $amortize.status eq '未还款'}
+                      <a style="color: blue" href="javascript:amortizeRepay({$amortize.user_id},{$amortize.borrow_id},{$amortize.amortize_id},{$amortize.amortize_need_money})" class="f6">还款</a>
+                      {/if}
                   </td>
               </tr>
               <!--{/foreach} -->

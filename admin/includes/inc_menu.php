@@ -51,6 +51,7 @@ $modules['03_promotion']['14_package_list']         = 'package.php?act=list';
 $modules['03_promotion']['15_exchange_goods']       = 'exchange_goods.php?act=list';
 
 
+$modules['04_order']['01_borrow_list']               = 'borrow.php?act=borrow_list';
 $modules['04_order']['02_order_list']               = 'order.php?act=list';
 $modules['04_order']['03_order_query']              = 'order.php?act=order_query';
 $modules['04_order']['04_merge_order']              = 'order.php?act=merge';
