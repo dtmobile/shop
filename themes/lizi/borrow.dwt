@@ -61,7 +61,7 @@
                   </td>
                   <td bgcolor="#ffffff">{$borrow.status}</td>
                   <td bgcolor="#ffffff">
-                      {if $borrow.status eq '待审核'}
+                      {if $borrow.status eq '待审核' or  $borrow.status eq '未通过'}
                       {else}
                       <a style="color: blue" href='borrow.php?act=repay&select_borrow_id={$borrow.borrow_id}'" class="f6" >查看分期</a>
                       {/if}
