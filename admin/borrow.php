@@ -145,7 +145,7 @@ if ($_REQUEST['act'] == 'borrow_list') {
     $smarty->assign('record_count', $borrow_list['record_count']);
     $smarty->assign('page_count', $borrow_list['page_count']);
 
-    $smarty->assign('status_list', array('待审核', '已打款','未通过')); //'还款中','已还清','删除'
+    $smarty->assign('status_list', array("待审核"=>"待审核","已打款"=>"已打款","未通过"=>"未通过")); //'还款中','已还清','删除'
 
     /* 显示模板 */
     assign_query_info();
@@ -153,15 +153,10 @@ if ($_REQUEST['act'] == 'borrow_list') {
 } else if ($_REQUEST['act'] == 'info') {
     /* 根据订单id或订单号查询订单信息 */
     if (isset($_REQUEST['borrow_id'])) {
-
-
-        $smarty->assign('borrow_status_list', array("待审核","已打款",'未通过'));
-
         $borrowerId = intval($_REQUEST['user_id']);
         $borrowId = intval($_REQUEST['borrow_id']);
 
         $borrow = getBorrowById($borrowerId,$borrowId);
-//        $borrow['status']="待审核";
         $attach = getBorrowAttach($borrowerId,$borrowId);
         $attach['friends']=  friendConvert($attach['friends']);
         $amortizeList = getAmortizeList($borrowerId,$borrowId);

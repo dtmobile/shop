@@ -1,7 +1,7 @@
 {if $full_page}
 {include file="pageheader.htm"}
-{insert_scripts files="../js/utils.js,listtable.js,borrow_list.js"}
-<!-- 订单搜索 -->
+{insert_scripts files="../js/utils.js,listtable.js"}
+<!-- 贷款申请搜索 -->
 <div class="form-div">
   <form action="javascript:searchOrder()" name="searchForm">
     <div>
@@ -15,9 +15,9 @@
       <span>银行卡号<input name="user_bank_id" type="text" id="user_bank_id" size="15" style="width: 300px"></span>
     </div>
     <div>
-       <span>贷款状态
+       <span>申请状态
          <select name="status" id="status">
-        <option value="-1">请选择</option>
+        <option value="">全部</option>
         {html_options options=$status_list}
         </select>
         </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -1,7 +1,7 @@
 /* $Id : common.js 4824 2007-01-31 08:23:56Z paulgao $ */
 
 function changeBorrowStatusResponse(result) {
-    console.log(result);
+    // console.log(result);
     if (result.message.length > 0) {
         alert("修改状态错误" + result.message);
     }
@@ -31,14 +31,14 @@ function changeBorrowStatus() {
     params.user_id = userId;
     params.borrow_id = borrowId;
     params.borrowStatus = borrowStatus;
-    console.log(params);
+    // console.log(params);
     var requestUrl = 'borrow.php?act=change_borrow_status&borrower_id=' + userId + '&borrow_id=' + borrowId + '&borrow_status=' + borrowStatus;
     Ajax.call(requestUrl, '', changeBorrowStatusResponse, 'GET', 'JSON');
 
 }
 
 function changeAmortizeStatusResponse(result) {
-    console.log(result);
+    // console.log(result);
     if (result.message.length > 0) {
         alert("修改分期状态错误" + result.message);
     }
@@ -63,7 +63,7 @@ function changeAmortizeStatus(amortizeId) {
     var userId = document.getElementsByName('user_id')[0].innerText;
     var borrowId = document.getElementsByName('borrow_id')[0].innerText;
     var requestUrl = 'borrow.php?act=change_amortize_status&amortize_id=' + amortizeId + '&borrow_id=' + borrowId + '&user_id=' + userId + '&amortize_status=' + amortizeStatus;
-    console.log(requestUrl);
+    // console.log(requestUrl);
     Ajax.call(requestUrl, '', changeAmortizeStatusResponse, 'GET', 'JSON');
 
 }
