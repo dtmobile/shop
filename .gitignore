@@ -1,4 +1,4 @@
 .idea
 temp/static_caches
-temp/compiled
+temp/compiled/*
 
