@@ -32,7 +32,7 @@ function changeKucun()
 var frm=document.forms['ECS_FORMBUY'];
 spec_arr = getSelectedAttributes(frm);
     if(spec_arr==''){
-         document.getElementById('shows_number').innerHTML = '{$goods.goods_number}{if $goods.measure_unit}{$goods.measure_unit}{else}件{/if}';
+         document.getElementById('shows_number').innerHTML =  '有库存';//'{$goods.goods_number}{if $goods.measure_unit}{$goods.measure_unit}{else}件{/if}';
     }else{
          Ajax.call('goods.php?act=get_products_info', 'id=' + spec_arr+ '&goods_id=' + goods_id, shows_number, 'GET', 'JSON');
     }
