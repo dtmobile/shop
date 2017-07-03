@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- {if $best_goods} -->
 <div class="tj-wrap w-max ct mb30 clearfix">
-<h2>今天推荐了哪些精品？</h2>
+<h2>精品推荐</h2>
  <ul>
  <!--{foreach from=$best_goods item=goods}-->
    <li>

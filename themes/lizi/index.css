@@ -605,9 +605,11 @@ img.zom:hover {
 	padding:0 20px 20px;
 	overflow:hidden
 }
+.brand_temai h2 { line-height: 36px; padding-bottom: 8px; font-size: 16px;}
 .brand_temai ul {
 	margin-right:-50px
 }
+
 .brand_temai ul li {
 	float:left;
 	width:580px;
