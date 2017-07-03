@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08ad5400-e2fe-4a3c-8131-07bde37fe6f6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/borrow.php" afterPath="$PROJECT_DIR$/admin/borrow.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/js/listtable.js" afterPath="$PROJECT_DIR$/admin/js/listtable.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/borrow_list.htm" afterPath="$PROJECT_DIR$/admin/templates/borrow_list.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/borrow.php" afterPath="$PROJECT_DIR$/borrow.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/config.php" afterPath="$PROJECT_DIR$/data/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/lib_borrow.php" afterPath="$PROJECT_DIR$/includes/lib_borrow.php" />
     </list>
     <ignored path="shop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,7 +42,7 @@
           <file leaf-file-name="lib_borrow.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/includes/lib_borrow.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="526">
+                <state relative-caret-position="451">
                   <caret line="117" column="26" selection-start-line="117" selection-start-column="26" selection-end-line="117" selection-end-column="26" />
                   <folding>
                     <element signature="n#getBorrowAttach#0;n#!!top" expanded="false" />
@@ -81,7 +76,7 @@
           <file leaf-file-name="borrow.dwt" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/themes/lizi/borrow.dwt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="276">
+                <state relative-caret-position="251">
                   <caret line="137" column="86" selection-start-line="137" selection-start-column="12" selection-end-line="137" selection-end-column="86" />
                   <folding>
                     <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -207,11 +202,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="borrow_info.htm" pinned="false" current-in-tab="true">
+          <file leaf-file-name="borrow_info.htm" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/admin/templates/borrow_info.htm">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="264">
-                  <caret line="370" column="26" selection-start-line="370" selection-start-column="26" selection-end-line="370" selection-end-column="26" />
+                <state relative-caret-position="50">
+                  <caret line="2" column="29" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="29" />
                   <folding>
                     <element signature="n#style#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
                     <element signature="n#tr#0;n#table#0;n#div#0;n#!!top" expanded="false" />
@@ -275,6 +270,126 @@
                     <element signature="n#style#0;n#button#0;n#span#1;n#td#7;n#tr#1;n#table#0;n#div#1;n#!!top" expanded="true" />
                     <marker date="1499070358592" expanded="false" signature="13152:13916" ph="..." />
                     <marker date="1499070358592" expanded="false" signature="14203:15128" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="pageheader.htm" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/admin/templates/pageheader.htm">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-150">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/languages/zh_cn/admin/index.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="125">
+                  <caret line="16" column="21" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="21" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="top.htm" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/admin/templates/top.htm">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="229">
+                  <caret line="403" column="27" selection-start-line="403" selection-start-column="19" selection-end-line="403" selection-end-column="27" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="privilege.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/admin/privilege.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-299">
+                  <caret line="356" column="21" selection-start-line="356" selection-start-column="21" selection-end-line="356" selection-end-column="21" />
+                  <folding>
+                    <marker date="1418354068000" expanded="true" signature="2373:2470" ph="SELECT `ec_s... ${$ecs-&gt;table('admin_user')}" />
+                    <marker date="1418354068000" expanded="true" signature="7387:7482" ph="SELECT actio... ${$ecs-&gt;table('role')}" />
+                    <marker date="1418354068000" expanded="true" signature="7628:7708" ph="SELECT nav_l... ${$ecs-&gt;table('admin_user')}" />
+                    <marker date="1418354068000" expanded="true" signature="7759:8028" ph="INSERT INTO ${$ecs-&gt;table('admin_user')}... " />
+                    <marker date="1418354068000" expanded="true" signature="9178:9326" ph="SELECT user_... ${$ecs-&gt;table('admin_user')}" />
+                    <marker date="1418354068000" expanded="true" signature="9451:9546" ph="SELECT agenc... ${$ecs-&gt;table('agency')}" />
+                    <marker date="1418354068000" expanded="true" signature="9891:9974" ph="SELECT actio... ${$ecs-&gt;table('admin_user')}" />
+                    <marker date="1418354068000" expanded="true" signature="12148:12226" ph="SELECT passw... ${$ecs-&gt;table('admin_user')}" />
+                    <marker date="1418354068000" expanded="true" signature="12281:12358" ph="SELECT ec_sa... ${$ecs-&gt;table('admin_user')}" />
+                    <marker date="1418354068000" expanded="true" signature="13243:13338" ph="SELECT actio... ${$ecs-&gt;table('role')}" />
+                    <marker date="1418354068000" expanded="true" signature="15380:15397" ph="SELECT code ${$ecs-&gt;table('plugins')}" />
+                    <marker date="1418354068000" expanded="true" signature="18257:18340" ph="SELECT actio... ${$ecs-&gt;table('admin_user')}" />
+                    <marker date="1418354068000" expanded="true" signature="18614:18740" ph="SELECT actio... ${$ecs-&gt;table('admin_action')}" />
+                    <marker date="1418354068000" expanded="true" signature="18914:19031" ph="SELECT actio... ${$ecs-&gt;table('admin_action')}" />
+                    <marker date="1418354068000" expanded="true" signature="20497:20579" ph="SELECT user_... ${$ecs-&gt;table('admin_user')}" />
+                    <marker date="1418354068000" expanded="true" signature="21535:21606" ph="SELECT user_... ${$ecs-&gt;table('admin_user')}" />
+                    <marker date="1418354068000" expanded="true" signature="23217:23301" ph="DELETE FROM " />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/admin/index.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="170">
+                  <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#1893#1978#0#PHP" expanded="false" />
+                    <marker date="1498793599740" expanded="true" signature="1179:1281" ph="SELECT nav_l... ${$ecs-&gt;table('admin_user')}" />
+                    <marker date="1498793599740" expanded="true" signature="9161:9227" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
+                    <marker date="1498793599740" expanded="true" signature="9807:9872" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
+                    <marker date="1498793599740" expanded="true" signature="10023:10103" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
+                    <marker date="1498793599740" expanded="true" signature="10526:10635" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="10681:10824" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="10866:10968" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="11016:11152" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="11194:11297" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="11345:11482" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="11524:11626" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="11674:11810" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="11886:12068" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="12116:12330" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="12404:12519" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="12582:12731" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="13032:13104" ph="SELECT COUNT... ${$ecs-&gt;table('stats')}" />
+                    <marker date="1498793599740" expanded="true" signature="13739:13829" ph="SELECT COUNT... ${$ecs-&gt;table('comment')}" />
+                    <marker date="1498793599740" expanded="true" signature="15611:15689" ph="SELECT COUNT... ${$ecs-&gt;table('booking_goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="15758:15874" ph="SELECT COUNT... ${$ecs-&gt;table('user_account')}" />
+                    <marker date="1498793599740" expanded="true" signature="16978:17087" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="17206:17227" ph="SELECT COUNT... ${$ecs-&gt;table('users')}" />
+                    <marker date="1498793599740" expanded="true" signature="17291:17369" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
+                    <marker date="1498793599740" expanded="true" signature="17403:17482" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
+                    <marker date="1498793599740" expanded="true" signature="18839:18914" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
+                    <marker date="1498793599740" expanded="true" signature="19013:19089" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
+                    <marker date="1498793599740" expanded="true" signature="23547:23634" ph="SELECT shipp... ${$ecs-&gt;table('shipping')}" />
+                    <marker date="1498793599740" expanded="true" signature="23820:24206" ph="INSERT INTO ${$ecs-&gt;table('shipping')}... " />
+                    <marker date="1498793599740" expanded="true" signature="24452:24596" ph="SELECT shipp... ${$ecs-&gt;table(&quot;shipping_area&quot;)}" />
+                    <marker date="1498793599740" expanded="true" signature="25414:25612" ph="INSERT INTO ${$ecs-&gt;table('shipping_area')}... " />
+                    <marker date="1498793599740" expanded="true" signature="27112:27191" ph="SELECT COUNT... ${$ecs-&gt;table('payment')}" />
+                    <marker date="1498793599740" expanded="true" signature="27869:28129" ph="INSERT INTO ${$ecs-&gt;table('payment')}... " />
+                    <marker date="1498793599740" expanded="true" signature="29917:30027" ph="INSERT INTO ${$ecs-&gt;table('brand')}... " />
+                    <marker date="1498793599740" expanded="true" signature="30155:30285" ph="INSERT INTO ${$ecs-&gt;table('category')}... " />
+                    <marker date="1498793599740" expanded="true" signature="30475:30505" ph="SELECT MAX(g... ${$ecs-&gt;table('goods')}" />
+                    <marker date="1498793599740" expanded="true" signature="37020:37544" ph="INSERT INTO ${$ecs-&gt;table('goods')}... " />
+                    <marker date="1498793599740" expanded="true" signature="37772:37969" ph="INSERT INTO ${$ecs-&gt;table('goods_gallery')}... " />
+                    <marker date="1498793599740" expanded="true" signature="39012:39111" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
+                    <marker date="1498793599740" expanded="true" signature="39191:39265" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
+                    <marker date="1498793599740" expanded="true" signature="40036:40116" ph="SELECT todol... ${$GLOBALS['ecs']-&gt;table('admin_user')}" />
+                    <marker date="1498793599740" expanded="true" signature="40403:40495" ph="SELECT * FRO... ${$ecs-&gt;table('email_sendlist')}" />
+                    <marker date="1498793599740" expanded="true" signature="40746:40817" ph="DELETE FROM " />
+                    <marker date="1498793599740" expanded="true" signature="40876:40897" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
+                    <marker date="1498793599740" expanded="true" signature="41062:41153" ph="SELECT * FRO... ${$ecs-&gt;table('mail_templates')}" />
+                    <marker date="1498793599740" expanded="true" signature="41635:41706" ph="DELETE FROM " />
+                    <marker date="1498793599740" expanded="true" signature="41796:41817" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
+                    <marker date="1498793599740" expanded="true" signature="42555:42626" ph="DELETE FROM " />
+                    <marker date="1498793599740" expanded="true" signature="42708:42729" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
+                    <marker date="1498793599740" expanded="true" signature="42941:43012" ph="DELETE FROM " />
+                    <marker date="1498793599740" expanded="true" signature="43071:43092" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
                   </folding>
                 </state>
               </provider>
@@ -556,23 +671,23 @@
       <workItem from="1498531556241" duration="31970000" />
       <workItem from="1498615479047" duration="64909000" />
       <workItem from="1498793212390" duration="21000" />
-      <workItem from="1498793287483" duration="36523000" />
+      <workItem from="1498793287483" duration="36836000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="151330000" />
+    <option name="totallyTimeSpent" value="151643000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33901918" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14232409" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1332611" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.219935" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -605,28 +720,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/easydialog.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="9" column="127" selection-start-line="9" selection-start-column="127" selection-end-line="9" selection-end-column="127" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/lizi/js/easydialog.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="23" column="329" selection-start-line="23" selection-start-column="329" selection-end-line="23" selection-end-column="329" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/compiled/comments_list.lbi.php" />
-    <entry file="file://$PROJECT_DIR$/themes/lizi/library/comments_list.lbi">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="228" column="12" selection-start-line="228" selection-start-column="12" selection-end-line="228" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/lizi/flow.dwt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-423">
@@ -782,67 +875,6 @@
             <element signature="n#tr#4;n#table#0;n#form#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#tr#5;n#table#0;n#form#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#script#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="1123" column="27" selection-start-line="1123" selection-start-column="25" selection-end-line="1123" selection-end-column="27" />
-          <folding>
-            <element signature="e#1075#1760#0#PHP" expanded="false" />
-            <element signature="e#1893#1978#0#PHP" expanded="false" />
-            <marker date="1498793599740" expanded="true" signature="1179:1281" ph="SELECT nav_l... ${$ecs-&gt;table('admin_user')}" />
-            <marker date="1498793599740" expanded="true" signature="9161:9227" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
-            <marker date="1498793599740" expanded="true" signature="9807:9872" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
-            <marker date="1498793599740" expanded="true" signature="10023:10103" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
-            <marker date="1498793599740" expanded="true" signature="10526:10635" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="10681:10824" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="10866:10968" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="11016:11152" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="11194:11297" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="11345:11482" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="11524:11626" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="11674:11810" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="11886:12068" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="12116:12330" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="12404:12519" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="12582:12731" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="13032:13104" ph="SELECT COUNT... ${$ecs-&gt;table('stats')}" />
-            <marker date="1498793599740" expanded="true" signature="13739:13829" ph="SELECT COUNT... ${$ecs-&gt;table('comment')}" />
-            <marker date="1498793599740" expanded="true" signature="15611:15689" ph="SELECT COUNT... ${$ecs-&gt;table('booking_goods')}" />
-            <marker date="1498793599740" expanded="true" signature="15758:15874" ph="SELECT COUNT... ${$ecs-&gt;table('user_account')}" />
-            <marker date="1498793599740" expanded="true" signature="16978:17087" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="17206:17227" ph="SELECT COUNT... ${$ecs-&gt;table('users')}" />
-            <marker date="1498793599740" expanded="true" signature="17291:17369" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
-            <marker date="1498793599740" expanded="true" signature="17403:17482" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
-            <marker date="1498793599740" expanded="true" signature="18839:18914" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
-            <marker date="1498793599740" expanded="true" signature="19013:19089" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
-            <marker date="1498793599740" expanded="true" signature="23547:23634" ph="SELECT shipp... ${$ecs-&gt;table('shipping')}" />
-            <marker date="1498793599740" expanded="true" signature="23820:24206" ph="INSERT INTO ${$ecs-&gt;table('shipping')}... " />
-            <marker date="1498793599740" expanded="true" signature="24452:24596" ph="SELECT shipp... ${$ecs-&gt;table(&quot;shipping_area&quot;)}" />
-            <marker date="1498793599740" expanded="true" signature="25414:25612" ph="INSERT INTO ${$ecs-&gt;table('shipping_area')}... " />
-            <marker date="1498793599740" expanded="true" signature="27112:27191" ph="SELECT COUNT... ${$ecs-&gt;table('payment')}" />
-            <marker date="1498793599740" expanded="true" signature="27869:28129" ph="INSERT INTO ${$ecs-&gt;table('payment')}... " />
-            <marker date="1498793599740" expanded="true" signature="29917:30027" ph="INSERT INTO ${$ecs-&gt;table('brand')}... " />
-            <marker date="1498793599740" expanded="true" signature="30155:30285" ph="INSERT INTO ${$ecs-&gt;table('category')}... " />
-            <marker date="1498793599740" expanded="true" signature="30475:30505" ph="SELECT MAX(g... ${$ecs-&gt;table('goods')}" />
-            <marker date="1498793599740" expanded="true" signature="37020:37544" ph="INSERT INTO ${$ecs-&gt;table('goods')}... " />
-            <marker date="1498793599740" expanded="true" signature="37772:37969" ph="INSERT INTO ${$ecs-&gt;table('goods_gallery')}... " />
-            <marker date="1498793599740" expanded="true" signature="39012:39111" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
-            <marker date="1498793599740" expanded="true" signature="39191:39265" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
-            <marker date="1498793599740" expanded="true" signature="40036:40116" ph="SELECT todol... ${$GLOBALS['ecs']-&gt;table('admin_user')}" />
-            <marker date="1498793599740" expanded="true" signature="40403:40495" ph="SELECT * FRO... ${$ecs-&gt;table('email_sendlist')}" />
-            <marker date="1498793599740" expanded="true" signature="40746:40817" ph="DELETE FROM " />
-            <marker date="1498793599740" expanded="true" signature="40876:40897" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
-            <marker date="1498793599740" expanded="true" signature="41062:41153" ph="SELECT * FRO... ${$ecs-&gt;table('mail_templates')}" />
-            <marker date="1498793599740" expanded="true" signature="41635:41706" ph="DELETE FROM " />
-            <marker date="1498793599740" expanded="true" signature="41796:41817" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
-            <marker date="1498793599740" expanded="true" signature="42555:42626" ph="DELETE FROM " />
-            <marker date="1498793599740" expanded="true" signature="42708:42729" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
-            <marker date="1498793599740" expanded="true" signature="42941:43012" ph="DELETE FROM " />
-            <marker date="1498793599740" expanded="true" signature="43071:43092" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
           </folding>
         </state>
       </provider>
@@ -1333,32 +1365,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/lizi/borrow.dwt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="137" column="86" selection-start-line="137" selection-start-column="12" selection-end-line="137" selection-end-column="86" />
-          <folding>
-            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#table#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="e#5981#5987#0" expanded="true" />
-            <element signature="e#6068#6074#0" expanded="true" />
-            <element signature="e#6074#6080#0" expanded="true" />
-            <element signature="e#6080#6086#0" expanded="true" />
-            <element signature="e#6086#6092#0" expanded="true" />
-            <element signature="e#6093#6099#0" expanded="true" />
-            <element signature="e#6099#6105#0" expanded="true" />
-            <element signature="e#6105#6111#0" expanded="true" />
-            <element signature="e#6111#6117#0" expanded="true" />
-            <element signature="e#6118#6124#0" expanded="true" />
-            <element signature="e#6124#6130#0" expanded="true" />
-            <element signature="e#6130#6136#0" expanded="true" />
-            <element signature="e#6136#6142#0" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/borrow.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -1373,7 +1379,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/lib_borrow.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
+        <state relative-caret-position="451">
           <caret line="117" column="26" selection-start-line="117" selection-start-column="26" selection-end-line="117" selection-end-column="26" />
           <folding>
             <element signature="n#getBorrowAttach#0;n#!!top" expanded="false" />
@@ -1397,10 +1403,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/themes/lizi/borrow.dwt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="137" column="86" selection-start-line="137" selection-start-column="12" selection-end-line="137" selection-end-column="86" />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#table#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#5981#5987#0" expanded="true" />
+            <element signature="e#6068#6074#0" expanded="true" />
+            <element signature="e#6074#6080#0" expanded="true" />
+            <element signature="e#6080#6086#0" expanded="true" />
+            <element signature="e#6086#6092#0" expanded="true" />
+            <element signature="e#6093#6099#0" expanded="true" />
+            <element signature="e#6099#6105#0" expanded="true" />
+            <element signature="e#6105#6111#0" expanded="true" />
+            <element signature="e#6111#6117#0" expanded="true" />
+            <element signature="e#6118#6124#0" expanded="true" />
+            <element signature="e#6124#6130#0" expanded="true" />
+            <element signature="e#6130#6136#0" expanded="true" />
+            <element signature="e#6136#6142#0" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/templates/borrow_info.htm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="370" column="26" selection-start-line="370" selection-start-column="26" selection-end-line="370" selection-end-column="26" />
+        <state relative-caret-position="50">
+          <caret line="2" column="29" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="29" />
           <folding>
             <element signature="n#style#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#tr#0;n#table#0;n#div#0;n#!!top" expanded="false" />
@@ -1464,6 +1496,116 @@
             <element signature="n#style#0;n#button#0;n#span#1;n#td#7;n#tr#1;n#table#0;n#div#1;n#!!top" expanded="true" />
             <marker date="1499070358592" expanded="false" signature="13152:13916" ph="..." />
             <marker date="1499070358592" expanded="false" signature="14203:15128" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/pageheader.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-150">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/languages/zh_cn/admin/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/top.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="403" column="27" selection-start-line="403" selection-start-column="19" selection-end-line="403" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/privilege.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-299">
+          <caret line="356" column="21" selection-start-line="356" selection-start-column="21" selection-end-line="356" selection-end-column="21" />
+          <folding>
+            <marker date="1418354068000" expanded="true" signature="2373:2470" ph="SELECT `ec_s... ${$ecs-&gt;table('admin_user')}" />
+            <marker date="1418354068000" expanded="true" signature="7387:7482" ph="SELECT actio... ${$ecs-&gt;table('role')}" />
+            <marker date="1418354068000" expanded="true" signature="7628:7708" ph="SELECT nav_l... ${$ecs-&gt;table('admin_user')}" />
+            <marker date="1418354068000" expanded="true" signature="7759:8028" ph="INSERT INTO ${$ecs-&gt;table('admin_user')}... " />
+            <marker date="1418354068000" expanded="true" signature="9178:9326" ph="SELECT user_... ${$ecs-&gt;table('admin_user')}" />
+            <marker date="1418354068000" expanded="true" signature="9451:9546" ph="SELECT agenc... ${$ecs-&gt;table('agency')}" />
+            <marker date="1418354068000" expanded="true" signature="9891:9974" ph="SELECT actio... ${$ecs-&gt;table('admin_user')}" />
+            <marker date="1418354068000" expanded="true" signature="12148:12226" ph="SELECT passw... ${$ecs-&gt;table('admin_user')}" />
+            <marker date="1418354068000" expanded="true" signature="12281:12358" ph="SELECT ec_sa... ${$ecs-&gt;table('admin_user')}" />
+            <marker date="1418354068000" expanded="true" signature="13243:13338" ph="SELECT actio... ${$ecs-&gt;table('role')}" />
+            <marker date="1418354068000" expanded="true" signature="15380:15397" ph="SELECT code ${$ecs-&gt;table('plugins')}" />
+            <marker date="1418354068000" expanded="true" signature="18257:18340" ph="SELECT actio... ${$ecs-&gt;table('admin_user')}" />
+            <marker date="1418354068000" expanded="true" signature="18614:18740" ph="SELECT actio... ${$ecs-&gt;table('admin_action')}" />
+            <marker date="1418354068000" expanded="true" signature="18914:19031" ph="SELECT actio... ${$ecs-&gt;table('admin_action')}" />
+            <marker date="1418354068000" expanded="true" signature="20497:20579" ph="SELECT user_... ${$ecs-&gt;table('admin_user')}" />
+            <marker date="1418354068000" expanded="true" signature="21535:21606" ph="SELECT user_... ${$ecs-&gt;table('admin_user')}" />
+            <marker date="1418354068000" expanded="true" signature="23217:23301" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding>
+            <element signature="e#1893#1978#0#PHP" expanded="false" />
+            <marker date="1498793599740" expanded="true" signature="1179:1281" ph="SELECT nav_l... ${$ecs-&gt;table('admin_user')}" />
+            <marker date="1498793599740" expanded="true" signature="9161:9227" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
+            <marker date="1498793599740" expanded="true" signature="9807:9872" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
+            <marker date="1498793599740" expanded="true" signature="10023:10103" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
+            <marker date="1498793599740" expanded="true" signature="10526:10635" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="10681:10824" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="10866:10968" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="11016:11152" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="11194:11297" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="11345:11482" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="11524:11626" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="11674:11810" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="11886:12068" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="12116:12330" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="12404:12519" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="12582:12731" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="13032:13104" ph="SELECT COUNT... ${$ecs-&gt;table('stats')}" />
+            <marker date="1498793599740" expanded="true" signature="13739:13829" ph="SELECT COUNT... ${$ecs-&gt;table('comment')}" />
+            <marker date="1498793599740" expanded="true" signature="15611:15689" ph="SELECT COUNT... ${$ecs-&gt;table('booking_goods')}" />
+            <marker date="1498793599740" expanded="true" signature="15758:15874" ph="SELECT COUNT... ${$ecs-&gt;table('user_account')}" />
+            <marker date="1498793599740" expanded="true" signature="16978:17087" ph="SELECT COUNT... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="17206:17227" ph="SELECT COUNT... ${$ecs-&gt;table('users')}" />
+            <marker date="1498793599740" expanded="true" signature="17291:17369" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
+            <marker date="1498793599740" expanded="true" signature="17403:17482" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
+            <marker date="1498793599740" expanded="true" signature="18839:18914" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
+            <marker date="1498793599740" expanded="true" signature="19013:19089" ph="SELECT value... ${$ecs-&gt;table('shop_config')}" />
+            <marker date="1498793599740" expanded="true" signature="23547:23634" ph="SELECT shipp... ${$ecs-&gt;table('shipping')}" />
+            <marker date="1498793599740" expanded="true" signature="23820:24206" ph="INSERT INTO ${$ecs-&gt;table('shipping')}... " />
+            <marker date="1498793599740" expanded="true" signature="24452:24596" ph="SELECT shipp... ${$ecs-&gt;table(&quot;shipping_area&quot;)}" />
+            <marker date="1498793599740" expanded="true" signature="25414:25612" ph="INSERT INTO ${$ecs-&gt;table('shipping_area')}... " />
+            <marker date="1498793599740" expanded="true" signature="27112:27191" ph="SELECT COUNT... ${$ecs-&gt;table('payment')}" />
+            <marker date="1498793599740" expanded="true" signature="27869:28129" ph="INSERT INTO ${$ecs-&gt;table('payment')}... " />
+            <marker date="1498793599740" expanded="true" signature="29917:30027" ph="INSERT INTO ${$ecs-&gt;table('brand')}... " />
+            <marker date="1498793599740" expanded="true" signature="30155:30285" ph="INSERT INTO ${$ecs-&gt;table('category')}... " />
+            <marker date="1498793599740" expanded="true" signature="30475:30505" ph="SELECT MAX(g... ${$ecs-&gt;table('goods')}" />
+            <marker date="1498793599740" expanded="true" signature="37020:37544" ph="INSERT INTO ${$ecs-&gt;table('goods')}... " />
+            <marker date="1498793599740" expanded="true" signature="37772:37969" ph="INSERT INTO ${$ecs-&gt;table('goods_gallery')}... " />
+            <marker date="1498793599740" expanded="true" signature="39012:39111" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
+            <marker date="1498793599740" expanded="true" signature="39191:39265" ph="SELECT COUNT... ${$ecs-&gt;table('order_info')}" />
+            <marker date="1498793599740" expanded="true" signature="40036:40116" ph="SELECT todol... ${$GLOBALS['ecs']-&gt;table('admin_user')}" />
+            <marker date="1498793599740" expanded="true" signature="40403:40495" ph="SELECT * FRO... ${$ecs-&gt;table('email_sendlist')}" />
+            <marker date="1498793599740" expanded="true" signature="40746:40817" ph="DELETE FROM " />
+            <marker date="1498793599740" expanded="true" signature="40876:40897" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
+            <marker date="1498793599740" expanded="true" signature="41062:41153" ph="SELECT * FRO... ${$ecs-&gt;table('mail_templates')}" />
+            <marker date="1498793599740" expanded="true" signature="41635:41706" ph="DELETE FROM " />
+            <marker date="1498793599740" expanded="true" signature="41796:41817" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
+            <marker date="1498793599740" expanded="true" signature="42555:42626" ph="DELETE FROM " />
+            <marker date="1498793599740" expanded="true" signature="42708:42729" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
+            <marker date="1498793599740" expanded="true" signature="42941:43012" ph="DELETE FROM " />
+            <marker date="1498793599740" expanded="true" signature="43071:43092" ph="SELECT COUNT... ${$ecs-&gt;table('email_sendlist')}" />
           </folding>
         </state>
       </provider>
