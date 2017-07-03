@@ -83,7 +83,7 @@ elseif ($action == 'repay_info_commit') {
     $result = array('error' => 0, 'message' => '');
     $params = $json->decode($_POST['parmas']);
     //save params to db
-    $errMsg = amortizeRepayCommit($params, $json);
+    $errMsg = amortizeRepayCommit($params);
 
     $content = array();
     if (!empty($errMsg)) {

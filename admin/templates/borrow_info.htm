@@ -1,0 +1,413 @@
+<!-- $Id: order_info.htm 17060 2010-03-25 03:44:42Z liuhui $ -->
+
+{include file="pageheader.htm"}
+<!--<script src="js/transport.js"></script> -->
+
+
+{insert_scripts files="topbar.js,../js/utils.js,listtable.js,selectzone.js,../js/common.js,../js/borrow_info.js"}
+
+
+<!--<form action="borrow.php?act=change_borrow_status" method="post" name="theForm">-->
+    <div class="list-div" style="margin-bottom: 5px">
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr style="background-color:cornflowerblue;">
+                <td width="100%" align="center" colspan="2"><strong>贷款申请</strong></td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">当前申请状态</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+              <span>
+                  <select name="borrow_status" >
+                      <option value="待审核" {if $borrow.status eq '待审核'}selected="selected"{/if}>待审核</option>
+                      <option value="已打款" {if $borrow.status eq '已打款'}selected="selected"{/if}>已打款</option>
+                  </select>
+              </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    <span>
+                    <button class="font_20" style="background-color: #008CBA;" onclick="changeBorrowStatus()">确认修改申请状态</button>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">申请人编号：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF"><span name="user_id">{$borrow.user_id}</span></td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">贷款编号：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF"><span name="borrow_id">{$borrow.borrow_id}</span></td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">申请金额：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow.total_money}万元</td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">资金用途：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow.borrow_purpose}</td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">还款周期：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow.amortize_period}期
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">还款方式：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {if $borrow.amortize_type==1}
+                    等额本息
+                    {else}
+                    先息后本
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">银行卡号：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow.user_bank_id}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">开户行：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow.user_opening_bank}
+                </td>
+            </tr>
+            <tr style="background-color:cornflowerblue;">
+                <td width="100%" align="center" colspan="2"><strong>基本情况</strong></td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">真实姓名：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow_attach.actual_name}</td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">出生日期：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF"> {$borrow_attach.birthday}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">性别：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {if $borrow_attach.sex==1}
+                    男
+                    {else}
+                    女
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">手机号码：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow_attach.mobile_phone}</td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">电子邮件：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {$borrow_attach.email}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">身份证号：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {$borrow_attach.identity_card}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">身份证有效期：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {$borrow_attach.id_begin_date}&nbsp;&nbsp;
+                    <span>到</span>
+                    {$borrow_attach.id_end_date}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">户籍所在地：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {$borrow_attach.domicile_address}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">民族：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {$borrow_attach.nationality}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">现在居住地址：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {$borrow_attach.home_address}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>居住时长：</strong>
+                    {$borrow_attach.home_live_month}月
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">住房性质：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {if $borrow_attach.home_type==1}
+                    租房 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>月租金</strong>
+                    {$borrow_attach.home_rent_per_month}元／月
+                    {/if}
+                    {if $borrow_attach.home_type==2}
+                    买房
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>买房价格：</strong>
+                    {$borrow_attach.home_buy_cost}万元
+                    {/if}
+                    {if $borrow_attach.home_type==3}
+                    其他
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">是否有房产：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {if $borrow_attach.have_house==0}
+                    无
+                    {else}
+                    有 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>房产地址：</strong>
+                    {$borrow_attach.house_address}
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">是否有汽车：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {if $borrow_attach.have_car==0}
+                    无
+                    {else}
+                    有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>汽车状态：</strong>
+                    {$borrow_attach.car_description}
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">是否有同居者：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+
+                    {if $borrow_attach.live_partner==0}
+                    无&nbsp;
+                    月租金 {$borrow_attach.home_rent_per_month}元／月
+                    {/if}
+                    {if $borrow_attach.live_partner==1}
+                    父母
+                    {/if}
+                    {if $borrow_attach.live_partner==2}
+                    配偶及子女
+                    {/if}
+                    {if $borrow_attach.live_partner==3}
+                    朋友
+                    {/if}
+                    {if $borrow_attach.live_partner==4}
+                    其它
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">身体状况：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+
+                    {if $borrow_attach.health==1}
+                    良好
+                    {/if}
+                    {if $borrow_attach.health==2}
+                    一般
+                    {/if}
+                    {if $borrow_attach.home_type==3}
+                    较差
+                    {/if}
+                    {if $borrow_attach.sick_history neq ''}
+                    疾病史:{$borrow_attach.sick_history}
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">最高学历：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {if $borrow_attach.education==0}
+                    研究生及以上
+                    {/if}
+                    {if $borrow_attach.education==1}
+                    大学
+                    {/if}
+                    {if $borrow_attach.education==2}
+                    大专
+                    {/if}
+                    {if $borrow_attach.education==3}
+                    高中／中专
+                    {/if}
+                    {if $borrow_attach.education==4}
+                    初中及以下
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">婚姻状况：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {if $borrow_attach.marital_status==0}
+                    已婚
+                    {/if}
+                    {if $borrow_attach.marital_status==1}
+                    未婚
+                    {/if}
+                    {if $borrow_attach.marital_status==2}
+                    离异
+                    {/if}
+                    {if $borrow_attach.marital_status==3}
+                    丧偶
+                    {/if}
+                    {if $borrow_attach.marital_status==4}
+                    初中及以下
+                    {/if}
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>结婚日期：</strong>
+                    {$borrow_attach.marry_date}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">是否有信用卡：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {if $borrow_attach.have_credit_crad==0}
+                    无
+                    {else}
+                    有
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>单张信用卡最高额度：</strong>
+                    {$borrow_attach.credit_card_max}万元
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">个人年收入：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {$borrow_attach.sallary_one_year}万元
+                </td>
+            </tr>
+            <tr style="background-color:cornflowerblue;">
+                <td width="100%" align="center" colspan="2"><strong>工作信息</strong></td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">现工作单位全称：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow_attach.company_name}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">单位地址：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow_attach.company_address}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">所在部门：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow_attach.company_department}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">当前月收入：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow_attach.company_income_month}万元
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">入职时间：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow_attach.company_entry_time}
+                </td>
+            </tr>
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">单位性质：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+
+                    {if $borrow_attach.company_type==0}
+                    国有经济
+                    {/if}
+                    {if $borrow_attach.company_type==1}
+                    集体经济
+                    {/if}
+                    {if $borrow_attach.company_type==2}
+                    私营
+                    {/if}
+                    {if $borrow_attach.company_type==3}
+                    民营
+                    {/if}
+                    {if $borrow_attach.company_type==4}
+                    股份合作
+                    {/if}
+                    {if $borrow_attach.company_type==5}
+                    合资
+                    {/if}
+                    {if $borrow_attach.company_type==6}
+                    其它
+                    {/if}
+                </td>
+            </tr>
+
+            <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">主要社会关系</td>
+                <td width="72%" align="right" bgcolor="#FFFFFF">
+                    <table style="width: 100%;" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+                        <tr>
+                            <td align="center">名称</td>
+                            <td align="center">关系</td>
+                            <td align="center">号码</td>
+                            <td align="center">住址</td>
+                        </tr>
+                        {foreach from=$borrow_attach.friends item=friend key=key}
+                        <tr>
+                            <td style="width: 20%" align="right" bgcolor="#FFFFFF">{$friend.friend_name}</td>
+                            <td style="width: 20%" align="left" bgcolor="#FFFFFF">{$friend.firend_type}</td>
+                            <td style="width: 20%" align="left" bgcolor="#FFFFFF">{$friend.friend_phone}</td>
+                            <td style="width: 40%" align="left" bgcolor="#FFFFFF">{$friend.friend_address}</td>
+                        </tr>
+                        {/foreach}
+                    </table>
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+<!--</form>-->
+
+<h6 align="center">分期信息表</h6>
+<!--<form action="borrow.php?act=change_amortize_status" method="post" name="theForm">-->
+    <div class="list-div" style="margin-bottom: 5px">
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr align="center">
+                <th width="10%" bgcolor="#ffffff">分期编号</th>
+                <th width="10%" bgcolor="#ffffff">贷款编号</th>
+                <th width="10%" bgcolor="#ffffff">应还金额</th>
+                <th width="10%" bgcolor="#ffffff">已还金额</th>
+                <th width="10%" bgcolor="#ffffff">最晚还款期</th>
+                <th width="20%" bgcolor="#ffffff">还款流水号</th>
+                <th width="10%" bgcolor="#ffffff">还款备注</th>
+                <th width="20%" bgcolor="#ffffff">分期状态</th>
+            </tr>
+            <!--{foreach from=$amortize_list item=amortize}-->
+            <tr>
+                <td bgcolor="#ffffff">{$amortize.amortize_id}</td>
+                <td bgcolor="#ffffff">{$amortize.borrow_id}</td>
+                <td bgcolor="#ffffff">{$amortize.amortize_need_money}</td>
+                <td bgcolor="#ffffff">{$amortize.amortize_repay_money}</td>
+                <td bgcolor="#ffffff">{$amortize.amortize_date}</td>
+                <td bgcolor="#ffffff">{$amortize.repay_serial_code}</td>
+                <td bgcolor="#ffffff">{$amortize.comment}</td>
+                <td bgcolor="#ffffff">
+                  <span>
+                      <select name="amortize_status_{$amortize.amortize_id}" >
+                          <option value="待审核" {if $amortize.status eq '待审核'}selected="selected"{/if}>待审核</option>
+                          <option value="未还款" {if $amortize.status eq '未还款'}selected="selected"{/if}>未还款</option>
+                          <option value="已还款" {if $amortize.status eq '已还款'}selected="selected"{/if}>已还款</option>
+                      </select>
+                 </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    <span>
+                    <button class="font_20" style="background-color: #008CBA;" onclick="changeAmortizeStatus({$amortize.amortize_id})">确认修改分期状态</button>
+                    </span>
+                </td>
+            </tr>
+            <!--{/foreach} -->
+        </table>
+    </div>
+<!--</form>-->
+<script language="javascript">
+</script>
+
+
+{include file="pagefooter.htm"}

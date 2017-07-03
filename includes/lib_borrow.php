@@ -28,6 +28,16 @@ function getBorrowByUserId($userId)
     return $GLOBALS['db']->getAll($sql);
 }
 
+function getBorrowById($userId,$borrowId)
+{
+    if (empty($userId)) {
+        $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
+        return false;
+    }
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('borrow') . " WHERE user_id = '$userId' AND borrow_id='$borrowId'";
+    return $GLOBALS['db']->getRow($sql);
+}
+
 function getAmortizeList($userId,$borrowId)
 {
     if (empty($userId)) {
@@ -75,8 +85,56 @@ function amortizeRepayCommit($params)
     } else {
         return $GLOBALS['db']->errorMsg();
     }
-
-    return "";
 }
+
+function getBorrowAttach($userId,$borrowId)
+{
+    if (empty($userId)) {
+        $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
+        return false;
+    }
+    if (empty($borrowId)) {
+        $GLOBALS['err']->add("无法获取贷款申请编号");
+        return false;
+    }
+
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('borrow_attach') . " WHERE borrow_id = '$borrowId' AND user_id='$userId'";
+    return $GLOBALS['db']->getRow($sql);
+}
+
+function changeBorrwoStatus($borrowerId,$borrowId,$borrowStatus)
+{
+    if (empty($borrowerId) || empty($borrowId) || empty($borrowStatus))
+    {
+        return "参数不可以为空";
+    }
+
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow') . " SET status = '$borrowStatus' "." WHERE user_id='$borrowerId' AND borrow_id='$borrowId'";
+    $result = $GLOBALS['db']->query($sql);
+    if ($result) {
+        return "";
+    } else {
+//        return $GLOBALS['db']->errorMsg();
+        return "修改贷款申请状态失败";
+    }
+}
+
+function changeAmortizeStatus($userId,$amortizeId,$borrowId,$borrowStatus)
+{
+    if (empty($userId) || empty($amortizeId) || empty($borrowId) || empty($borrowStatus))
+    {
+        return "参数不可以为空";
+    }
+
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow_amortize') . " SET status = '$borrowStatus' "." WHERE amortize_id='$amortizeId' AND borrow_id='$borrowId' AND user_id='$userId'";
+    $result = $GLOBALS['db']->query($sql);
+    if ($result) {
+        return "";
+    } else {
+//        return $GLOBALS['db']->errorMsg();
+        return "修改分期状态失败";
+    }
+}
+
 
 ?>

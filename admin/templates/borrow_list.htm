@@ -59,7 +59,7 @@
   <td valign="top" nowrap="nowrap">{$borrow.amortize_type}</td>
   <td valign="top" nowrap="nowrap">{$borrow.status}</td>
   <td align="center" valign="top"  nowrap="nowrap">
-     <a href="borrow.php?act=info&borrow_id={$borrow.borrow_id}">查看</a>
+     <a href="borrow.php?act=info&borrow_id={$borrow.borrow_id}&user_id={$borrow.user_id}">查看</a>
     </td>
   </tr>
   {/foreach}
@@ -99,7 +99,6 @@ function searchOrder()
   listTable.filter['total_money'] = Utils.trim(document.forms['searchForm'].elements['total_money'].value);
   listTable.filter['user_bank_id'] = Utils.trim(document.forms['searchForm'].elements['user_bank_id'].value);
   listTable.filter['status'] = document.forms['searchForm'].elements['status'].value;
-
   listTable.filter['page'] = 1;
   listTable.loadList();
 }
