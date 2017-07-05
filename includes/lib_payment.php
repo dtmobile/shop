@@ -137,7 +137,7 @@ function check_money($log_id, $money)
  * @param   string  $note       备注
  * @return  void
  */
-function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
+function order_paid($log_id, $pay_status = PS_PAYED, $note = '', $repay_serial_code = '', $amortize_repay_money = -1)
 {
     /* 取得支付编号 */
     $log_id = intval($log_id);
@@ -151,7 +151,7 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
         {
             /* 修改此次支付操作的状态为已付款 */
             $sql = 'UPDATE ' . $GLOBALS['ecs']->table('pay_log') .
-                    " SET is_paid = '1' WHERE log_id = '$log_id'";
+                    " SET is_paid = '1',repay_serial_code='$repay_serial_code',amortize_repay_money='$amortize_repay_money' WHERE log_id = '$log_id'";
             $GLOBALS['db']->query($sql);
 
             /* 根据记录类型做相应处理 */

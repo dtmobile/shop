@@ -67,6 +67,10 @@ function amortizeRepayCommit($params)
     {
         return '分期编号不可以为空';
     }
+    if (empty($params->repay_source))
+    {
+        return '实际支付方式没有指定';
+    }
     if (empty($params->amortize_repay_money))
     {
         return '实际支付金额格式不正确';
@@ -77,7 +81,7 @@ function amortizeRepayCommit($params)
     }
 
     $repayDateTime = time();//date("Y-m-d",time());;
-    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow_amortize') . " SET amortize_repay_money = '$params->amortize_repay_money', repay_serial_code='$params->repay_serial_code',amortize_repay_date=$repayDateTime,status='待审核' "." WHERE amortize_id='$params->amortize_id' AND borrow_id='$params->borrow_id' AND user_id = '$params->user_id'";
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow_amortize') . " SET amortize_repay_money = '$params->amortize_repay_money',repay_source='$params->repay_source', repay_serial_code='$params->repay_serial_code',amortize_repay_date=$repayDateTime,status='待审核' "." WHERE amortize_id='$params->amortize_id' AND borrow_id='$params->borrow_id' AND user_id = '$params->user_id'";
 //    echo $sql;
     $result = $GLOBALS['db']->query($sql);
     if ($result) {

@@ -52,6 +52,14 @@ function repaySuccess() {
         return;
     }
 
+
+    var repaySource =  document.getElementsByName('repay_source')[0].value;
+    if(Utils.isEmpty(repaySource))
+    {
+        alert("请选中支付方式");
+        return;
+    }
+
     var repaySerialCode =  document.getElementsByName('repay_serial_code')[0].value;
     if(Utils.isEmpty(repaySerialCode))
     {
@@ -72,11 +80,11 @@ function repaySuccess() {
     params.borrow_id = repayDialog.borrow_id;
     params.amortize_id = repayDialog.amortize_id;
     params.amortize_repay_money = amortizeRepayMoney;
+    params.repay_source = repaySource;
     params.repay_serial_code = repaySerialCode;
     params.comment = '';
     console.log("还款信息如下");
     console.log(params);
-
     Ajax.call('borrow.php?act=repay_info_commit', 'parmas=' + $.toJSON(params),repayInfoCommitResponse, 'POST', 'JSON');
 
 

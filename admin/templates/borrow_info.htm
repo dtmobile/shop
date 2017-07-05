@@ -25,7 +25,7 @@
               </span>
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                     <span>
-                    <button class="font_20" style="background-color: #008CBA;" onclick="changeBorrowStatus()">确认修改申请状态</button>
+                    <button class="font_20"  onclick="changeBorrowStatus()">确认修改</button>
                     </span>
                 </td>
             </tr>
@@ -376,7 +376,8 @@
                 <th width="10%" bgcolor="#ffffff">应还金额</th>
                 <th width="10%" bgcolor="#ffffff">已还金额</th>
                 <th width="10%" bgcolor="#ffffff">最晚还款期</th>
-                <th width="20%" bgcolor="#ffffff">还款流水号</th>
+                <th width="10%" bgcolor="#ffffff">还款方式</th>
+                <th width="10%" bgcolor="#ffffff">还款流水号</th>
                 <th width="10%" bgcolor="#ffffff">还款备注</th>
                 <th width="20%" bgcolor="#ffffff">分期状态</th>
             </tr>
@@ -387,6 +388,7 @@
                 <td bgcolor="#ffffff">{$amortize.amortize_need_money}</td>
                 <td bgcolor="#ffffff">{$amortize.amortize_repay_money}</td>
                 <td bgcolor="#ffffff">{$amortize.amortize_date}</td>
+                <td bgcolor="#ffffff">{$amortize.repay_source}</td>
                 <td bgcolor="#ffffff">{$amortize.repay_serial_code}</td>
                 <td bgcolor="#ffffff">{$amortize.comment}</td>
                 <td bgcolor="#ffffff">
@@ -399,7 +401,7 @@
                  </span>
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                     <span>
-                    <button class="font_20" style="background-color: #008CBA;" onclick="changeAmortizeStatus({$amortize.amortize_id})">确认修改分期状态</button>
+                    <button class="font_20"  onclick="changeAmortizeStatus({$amortize.amortize_id})">确认修改</button>
                     </span>
                 </td>
             </tr>

@@ -134,6 +134,7 @@ class wxpay
      */
     function get_code($order, $payment)
     {
+        var_dump($order);
         if (!defined('EC_CHARSET'))
         {
             $charset = 'utf-8';
@@ -153,7 +154,7 @@ class wxpay
 <span class="newroman font_16">请输入支付流水号</span>
 <input name="repay_serial_code" type="text" size="25" class="inputBg" placeholder="请填写支付流水号"/>
 </div>
-<button class="font_20" style="background-color: #008CBA;" onclick="repaySuccess({$order['order_sn']},{$order['order_amount']},'wxpay')">支付成功</button>
+<button class="font_20" style="background-color: #008CBA;" onclick="repaySuccess({$order['log_id']},{$order['order_amount']},'wxpay')">支付成功</button>
 <button class="font_20" style="background-color: #555555;" onclick="repayCancel()">取消支付</button>
 EOT;
         

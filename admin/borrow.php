@@ -56,7 +56,7 @@ function borrowList()
 //    $result = get_filter();
 //    if ($result === false) {
 //        echo "没有找到filter";
-    $fileds = array('actual_name', 'identity_card', 'mobile_phone', 'borrow_id', 'total_money', 'user_bank_id', 'status');
+    $fileds = array('actual_name', 'identity_card', 'mobile_phone', 'borrow_id', 'total_money', 'user_bank_id', 'borrow_status');
     /* 过滤信息 */
     foreach ($fileds as $filed) {
         $filter[$filed] = empty($_REQUEST[$filed]) ? '' : trim($_REQUEST[$filed]);
@@ -72,8 +72,8 @@ function borrowList()
     if ($filter['user_bank_id']) {
         $where .= " AND b.user_bank_id = '" . $filter['user_bank_id'] . "'";
     }
-    if ($filter['status']) {
-        $where .= " AND b.status = '" . $filter['status'] . "'";
+    if ($filter['borrow_status']) {
+        $where .= " AND b.status = '" . $filter['borrow_status'] . "'";
     }
 
     if ($filter['actual_name']) {
@@ -145,7 +145,8 @@ if ($_REQUEST['act'] == 'borrow_list') {
     $smarty->assign('record_count', $borrow_list['record_count']);
     $smarty->assign('page_count', $borrow_list['page_count']);
 
-    $smarty->assign('status_list', array("待审核"=>"待审核","已打款"=>"已打款","未通过"=>"未通过")); //'还款中','已还清','删除'
+    $smarty->assign('borrow_status_list', array("待审核"=>"待审核","已打款"=>"已打款","未通过"=>"未通过")); //'还款中','已还清','删除'
+    $smarty->assign('amortize_status_list', array("待审核"=>"待审核","未还款"=>"未还款","已还款"=>"已还款")); //'还款中','已还清','删除'
 
     /* 显示模板 */
     assign_query_info();

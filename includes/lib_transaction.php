@@ -80,34 +80,105 @@ function saveBorrowAttach($borrowId,$userInfo)
     return "";
 }
 
+function dengebenxi()
+{
+
+}
+
+//本金额度（totalRMB）（单位是元）
+//分期数（periodCount）（1个月表示1期）
+//利息(rate)=0.006
+//每月利息（MI）= totalRMB * rate
+//应还总利息（TI）= MI * periodCount
+//应还总金额（ALL）= totalRMB + TI
+//
+//如果分期数等于1期，该期还款金额等于应还总金额
+//如果分期数大于1期，等额本息和先息后本方式会有区别
+//等额本息还款方式：每期应还金额= ALL/periodCount
+//先息后本还款方式：前D-1期应还金额=MI  ，第D期应还金额=totalRMB + MI
+//
+//下面举个例子：小张借款50万，三期还清
+//totalRMB=500000
+//periodCount=3
+//rate=0.006
+//每月利息（MI）= 500000 * 0.006 = 3000
+//应还总利息（TI）= 3000 * 3 = 9000
+//应还总金额（ALL）= 500000 + 9000 = 509000
+//
+//等额本息还款计算方式，每月应还金额=509000/3 = 169667
+//先息后本还款方，前（3-1）个月中每月应还金额=3000，第3个月每月应还金额=500000+3000=503000
 function saveBorrowAmortize($borrowId,$borrowInfo)
 {
-    //    total_money
-//    amortize_type
-//    amortize_period
-//    amortize_type //1-等额本息 2-先息后本
-
    $totalRMB = floatval($borrowInfo['total_money']) * 10000;
     $periodCount = intval($borrowInfo['amortize_period']);
-    $needMoneyPerMonth = round($totalRMB / $periodCount,2) ;
-    $amortizeDate = date("Y-m-d",time());
-    $payIndex = 0;
-    while ($payIndex < $periodCount)
+    $rate = 0.006;
+    $MI = $totalRMB*$rate;
+    $TI = $MI * $periodCount;
+    $ALL = $totalRMB + $TI;
+    $today = date("Y-m-d",time());
+    if($periodCount==1)
     {
-        $payIndex++;
+        //如果分期数等于1期，该期还款金额等于应还总金额
         $newBorrowAmortize = array();
         $newBorrowAmortize['borrow_id']=$borrowId;
         $newBorrowAmortize['user_id']=$borrowInfo['user_id'];
-        $newBorrowAmortize['amortize_need_money'] = $needMoneyPerMonth;
+        $newBorrowAmortize['amortize_need_money'] = $ALL;
         $newBorrowAmortize['amortize_repay_money']=0.0;
-        $newBorrowAmortize['amortize_date']=$amortizeDate;
+        $newBorrowAmortize['amortize_date']=date('Y-m-d',strtotime("$today +1 month"));
         $newBorrowAmortize['repay_serial_code']='';
         $newBorrowAmortize['comment']='';
         $newBorrowAmortize['status']='未还款';
         $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow_amortize'), $newBorrowAmortize, 'INSERT');
-        $amortizeId = $GLOBALS['db']->insert_id();
+        return "";
     }
-    return "";
+
+    $amortizeDate = $today;
+    if($borrowInfo['amortize_type'] == 1)
+    {
+        //等额本息还款方式：每期应还金额= ALL/periodCount
+        $needMoneyPerMonth = round($ALL / $periodCount,2) ;
+        $payIndex = 0;
+        while ($payIndex < $periodCount)
+        {
+            $payIndex++;
+            $amortizeDate = date('Y-m-d',strtotime("$amortizeDate +1 month"));
+            $newBorrowAmortize = array();
+            $newBorrowAmortize['borrow_id']=$borrowId;
+            $newBorrowAmortize['user_id']=$borrowInfo['user_id'];
+            $newBorrowAmortize['amortize_need_money'] = $needMoneyPerMonth;
+            $newBorrowAmortize['amortize_repay_money']=0.0;
+            $newBorrowAmortize['amortize_date']=$amortizeDate;
+            $newBorrowAmortize['repay_serial_code']='';
+            $newBorrowAmortize['comment']='';
+            $newBorrowAmortize['status']='未还款';
+            $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow_amortize'), $newBorrowAmortize, 'INSERT');
+        }
+        return "";
+    }else if($borrowInfo['amortize_type'] == 2)
+    {
+        //先息后本还款方式：前D-1期应还金额=MI  ，第D期应还金额=totalRMB + MI
+        for ($payIndex=0;$payIndex<$periodCount;$payIndex++)
+        {
+            $needMoneyPerMonth = $MI ;
+            if($payIndex==$periodCount-1)
+            {
+                $needMoneyPerMonth = $totalRMB + $MI; //最后一期
+            }
+            $amortizeDate = date('Y-m-d',strtotime("$amortizeDate +1 month"));
+            $newBorrowAmortize = array();
+            $newBorrowAmortize['borrow_id']=$borrowId;
+            $newBorrowAmortize['user_id']=$borrowInfo['user_id'];
+            $newBorrowAmortize['amortize_need_money'] = $needMoneyPerMonth;
+            $newBorrowAmortize['amortize_repay_money']=0.0;
+            $newBorrowAmortize['amortize_date']=$amortizeDate;
+            $newBorrowAmortize['repay_serial_code']='';
+            $newBorrowAmortize['comment']='';
+            $newBorrowAmortize['status']='未还款';
+            $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow_amortize'), $newBorrowAmortize, 'INSERT');
+        }
+        return "";
+    }
+    return "还款方式没有指定";
 }
 
 /* 保存贷款请求信息 */
