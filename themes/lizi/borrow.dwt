@@ -144,6 +144,16 @@
             <span class="newroman font_16">请输入实际支付金额</span>
             <input name="amortize_repay_money" type="text" size="25" class="inputBg" placeholder="请填写实际支付金额"/>元
         </div>
+
+        <div>
+            <span class="newroman font_16">请选择实际支付方式</span>
+            <select name='repay_source'>
+                <option value=''>请选择</option>
+                <option value='支付宝'>支付宝</option>
+                <option value='微信'>微信</option>
+            </select>
+        </div>
+
         <div>
             <span class="newroman font_16">请输入支付流水号</span>
             <input name="repay_serial_code" type="text" size="25" class="inputBg" placeholder="请填写支付流水号"/>

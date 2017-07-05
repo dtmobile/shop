@@ -16,11 +16,19 @@
     </div>
     <div>
        <span>申请状态
-         <select name="status" id="status">
+         <select name="borrow_status" id="borrow_status">
         <option value="">全部</option>
-        {html_options options=$status_list}
+        {html_options options=$borrow_status_list}
         </select>
         </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <span>分期状态
+         <select name="amortize_status" id="amortize_status">
+        <option value="">全部</option>
+        {html_options options=$amortize_status_list}
+        </select>
+        </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
       <span><input type="submit" value="{$lang.button_search}" class="button" style="width: 200px" /></span>
     </div>
 
@@ -98,7 +106,9 @@ function searchOrder()
   listTable.filter['borrow_id'] = Utils.trim(document.forms['searchForm'].elements['borrow_id'].value);
   listTable.filter['total_money'] = Utils.trim(document.forms['searchForm'].elements['total_money'].value);
   listTable.filter['user_bank_id'] = Utils.trim(document.forms['searchForm'].elements['user_bank_id'].value);
-  listTable.filter['status'] = document.forms['searchForm'].elements['status'].value;
+  listTable.filter['borrow_status'] = document.forms['searchForm'].elements['borrow_status'].value;
+  listTable.filter['amortize_status'] = document.forms['searchForm'].elements['amortize_status'].value;
+
   listTable.filter['page'] = 1;
   listTable.loadList();
 }
