@@ -18,6 +18,9 @@ define('IN_ECS', true);
 require(dirname(__FILE__) . '/includes/init.php');
 require(ROOT_PATH . 'includes/lib_payment.php');
 require(ROOT_PATH . 'includes/lib_order.php');
+
+$supported_pay = array('wxpay','alipay');
+var_dump($_REQUEST);
 /* 支付方式代码 */
 $pay_code = !empty($_REQUEST['code']) ? trim($_REQUEST['code']) : '';
 
@@ -32,6 +35,13 @@ if(isset($_POST['MerRemark'])  && $_POST['MerRemark']=='epay')
     $pay_code ='epay';
 }
 
+
+if (!empty($pay_code) && in_array($pay_code, $supported_pay)) {
+    include_once('includes/cls_json.php');
+    $json = new JSON;
+    $params = $json->decode($_REQUEST['params']);
+    var_dump($params);
+}
 //获取快钱神州行支付方式
 if (empty($pay_code) && ($_REQUEST['ext1'] == 'shenzhou') && ($_REQUEST['ext2'] == 'ecshop'))
 {

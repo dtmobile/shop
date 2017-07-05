@@ -652,6 +652,7 @@ padding: 10px 20px 12px; height:auto; cursor:pointer; border:none;" value="加�
 				{$pay_online}
 				<br><br>
 			</div>
+
 			<div class="wcwxts">
 				<p class="wxts1">温馨提示</p>
 				<div class="wxtsny">

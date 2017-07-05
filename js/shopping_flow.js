@@ -616,3 +616,47 @@ function checkConsignee(frm)
   }
   return ! err;
 }
+
+function repayCancel() {
+    var r=confirm("如果您扫码支付了本期账单，请务必填写交易流水号后点击‘支付成功’按钮。\n\n\n继续退出请按'确认'按钮")
+    if (r==true)
+    {
+        window.location.href="index.php"; //关闭弹出层
+    }
+}
+
+function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
+    var amortizeRepayMoney =  document.getElementsByName('amortize_repay_money')[0].value;
+    if(Utils.isEmpty(amortizeRepayMoney))
+    {
+        alert("请输入实际支付金额");
+        return;
+    }
+    if(!Utils.isFloat(amortizeRepayMoney))
+    {
+        alert("实际支付金额格式不正确");
+        return;
+    }
+
+    var repaySerialCode =  document.getElementsByName('repay_serial_code')[0].value;
+    if(Utils.isEmpty(repaySerialCode))
+    {
+        alert("请输入支付流水号");
+        return;
+    }
+
+    if(amortizeRepayMoney != amortizeNeedMoney)
+    {
+        alert("实际支付金额与期望还款金额不符");
+        return;
+    }
+
+
+    var params = new Object();
+    params.order_sn = order_sn;
+    params.code = pay_code;
+    params.amortize_repay_money = amortizeRepayMoney;
+    params.repay_serial_code = repaySerialCode;
+    window.location.href="respond.php?code=" + pay_code + "&params="+ $.toJSON(params);
+
+}
