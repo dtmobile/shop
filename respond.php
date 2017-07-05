@@ -36,12 +36,6 @@ if(isset($_POST['MerRemark'])  && $_POST['MerRemark']=='epay')
 }
 
 
-if (!empty($pay_code) && in_array($pay_code, $supported_pay)) {
-    include_once('includes/cls_json.php');
-    $json = new JSON;
-    $params = $json->decode($_REQUEST['params']);
-    var_dump($params);
-}
 //获取快钱神州行支付方式
 if (empty($pay_code) && ($_REQUEST['ext1'] == 'shenzhou') && ($_REQUEST['ext2'] == 'ecshop'))
 {
@@ -74,7 +68,18 @@ else
     {
         $msg = $_LANG['pay_disabled'];
     }
-    else
+    else if (in_array($pay_code, $supported_pay))
+    {
+        include_once('includes/cls_json.php');
+        $json = new JSON;
+        $params = $json->decode($_REQUEST['params'], 1);
+        $order_sn = $params['order_sn'];
+        $amortize_repay_money = $params['amortize_repay_money'];
+        $repay_serial_code = $params['repay_serial_code'];
+
+        order_paid($order_sn, 2, '', $amortize_repay_money, $repay_serial_code);
+        $msg     = $_LANG['pay_success'] ;
+    } else
     {
         $plugin_file = 'includes/modules/payment/' . $pay_code . '.php';
 
