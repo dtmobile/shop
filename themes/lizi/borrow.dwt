@@ -33,7 +33,7 @@
           <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
               <tr align="center">
                   <th width="10%" bgcolor="#ffffff">贷款编号</th>
-                  <th width="10%" bgcolor="#ffffff">贷款总额</th>
+                  <th width="10%" bgcolor="#ffffff">贷款总额(万)</th>
                   <th width="10%" bgcolor="#ffffff">贷款目的</th>
                   <th width="10%" bgcolor="#ffffff">申请日期</th>
                   <th width="10%" bgcolor="#ffffff">收款银行卡</th>
