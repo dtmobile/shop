@@ -93,6 +93,7 @@ class amortization
         }
 
         $button = <<<EOT
+
 <img src="images/wetchatpay/wetchat.jpg"/>
 <div >
 <span class="newroman font_16">请输入实际支付金额</span>

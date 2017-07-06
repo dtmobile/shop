@@ -644,6 +644,39 @@ padding: 10px 20px 12px; height:auto; cursor:pointer; border:none;" value="加�
 		<div class="xian">
 			<p class="xian1"><span>{$lang.remember_order_number}: {$order.order_sn}</span></p>
 			<p class="xian2">{$lang.select_shipping}: <font style="padding-right:30px;">{$order.shipping_name}</font>{$lang.select_payment}: <font  style="padding-right:30px;">{$order.pay_name}</font>{$lang.order_amount}: <font><b>{$total.amount_formated}</b></font></p>
+			<!-- {if $order.amorization_money} -->
+             <p class="xian2">由于选择支付方式为分期支付，所以您只需要支付: <font style="padding-right:30px;">{$order.down_payment_formated}</font>剩余款项请选择分期方式，分期总额为: <font  style="padding-right:30px;">{$order.amorization_money_formated}</font></p>
+                     <table width="100%" border="0" cellpadding="5" cellspacing="1" >
+                        <tr>
+                           <td width="28%" align="right" bgcolor="#FFFFFF">还款周期： </td>
+                           <td width="72%" align="left" bgcolor="#FFFFFF">
+                               <input type="radio" name="amortize_period" value="1" {if $profile.amortize_period==1}checked="checked"{/if} />
+                               1期&nbsp;&nbsp;
+                               <input type="radio" name="amortize_period" value="3" {if $profile.amortize_period==3}checked="checked"{/if} />
+                               3期&nbsp;&nbsp;
+                               <input type="radio" name="amortize_period" value="6" {if $profile.amortize_period==6}checked="checked"{/if} />
+                               6期&nbsp;&nbsp;
+                               <input type="radio" name="amortize_period" value="12" {if $profile.amortize_period==12}checked="checked"{/if} />
+                               12期&nbsp;&nbsp;
+                               <input type="radio" name="amortize_period" value="24" {if $profile.amortize_period==24}checked="checked"{/if} />
+                               24期&nbsp;&nbsp;
+                               <input type="radio" name="amortize_period" value="36" {if $profile.amortize_period==36}checked="checked"{/if} />
+                               36期&nbsp;&nbsp;
+                               <span style="color:#FF0000"> *</span>
+                           </td>
+                       </tr>
+                         <tr>
+                           <td width="28%" align="right" bgcolor="#FFFFFF">还款方式： </td>
+                           <td width="72%" align="left" bgcolor="#FFFFFF">
+                               <input type="radio" name="amortize_type" value="1" {if $profile.amortize_type==1}checked="checked"{/if} />
+                               等额本息&nbsp;&nbsp;
+                               <input type="radio" name="amortize_type" value="2" {if $profile.amortize_type==2}checked="checked"{/if} />
+                               先息后本&nbsp;&nbsp;
+                               <span style="color:#FF0000"> *</span>
+                           </td>
+                       </tr>
+                        </table>
+             <!-- {/if} -->
 			<!-- {if $pay_online} --> 
       		<!-- 判断是否是在线支付 -->
 			<div class="online1">
