@@ -53,10 +53,7 @@ function friendConvert($friendStr)
 
 function borrowList()
 {
-//    $result = get_filter();
-//    if ($result === false) {
-//        echo "没有找到filter";
-    $fileds = array('actual_name', 'identity_card', 'mobile_phone', 'borrow_id', 'total_money', 'user_bank_id', 'borrow_status');
+    $fileds = array('actual_name', 'identity_card', 'mobile_phone', 'borrow_id', 'total_money', 'user_bank_id', 'borrow_status','amortize_status');
     /* 过滤信息 */
     foreach ($fileds as $filed) {
         $filter[$filed] = empty($_REQUEST[$filed]) ? '' : trim($_REQUEST[$filed]);
@@ -99,25 +96,42 @@ function borrowList()
         $filter['page_size'] = 15;
     }
 
+    foreach ($fileds as $filed) {
+        $filter[$filed] = stripslashes($filter[$filed]);
+    }
+
+
+    $condition = $GLOBALS['ecs']->table('borrow') . " AS b " .
+        " JOIN " . $GLOBALS['ecs']->table('borrow_attach') . " AS a ON b.borrow_id=a.borrow_id AND b.user_id=a.user_id ";
+    if($filter['amortize_status'])
+    {
+        $inBorrowArray = array();
+        $sql = "SELECT DISTINCT borrow_id FROM " . $GLOBALS['ecs']->table('borrow_amortize') . " WHERE  `status`='{$filter['amortize_status']}'";
+        $result = $GLOBALS['db']->getAll($sql);
+        foreach ($result as $borrow)
+        {
+            $inBorrowArray[]=$borrow['borrow_id'];
+        }
+        if(empty($inBorrowArray))
+        {
+            $inBorrowArray[]=-1;
+        }
+        $condition= $condition .'AND b.borrow_id in ('. implode(",", $inBorrowArray).')';
+    };
+
+    $condition .= $where;
+
     /* 记录总数 */
-    $sql = "SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('borrow') . " AS b " .
-        " JOIN " . $GLOBALS['ecs']->table('borrow_attach') . " AS a ON b.borrow_id=a.borrow_id AND b.user_id=a.user_id " . $where;
+    $sql = "SELECT COUNT(*) FROM " . $condition ;
     $filter['record_count'] = $GLOBALS['db']->getOne($sql);
     $filter['page_count'] = $filter['record_count'] > 0 ? ceil($filter['record_count'] / $filter['page_size']) : 1;
 
     /* 查询 */
-    $sql = "SELECT b.borrow_id,b.user_id, b.total_money, b.borrow_purpose, b.borrow_date, b.user_bank_id, b.user_opening_bank, b.amortize_period, b.amortize_type, b.status, a.actual_name FROM " . $GLOBALS['ecs']->table('borrow') . " AS b " .
-        " JOIN " . $GLOBALS['ecs']->table('borrow_attach') . " AS a ON b.borrow_id=a.borrow_id AND b.user_id=a.user_id " . $where . " LIMIT " . ($filter['page'] - 1) * $filter['page_size'] . ",$filter[page_size]";
+    $sql = "SELECT b.borrow_id,b.user_id, b.total_money, b.borrow_purpose, b.borrow_date, b.user_bank_id, b.user_opening_bank, b.amortize_period, b.amortize_type, b.status, a.actual_name FROM " . $condition . " LIMIT " . ($filter['page'] - 1) * $filter['page_size'] . ",$filter[page_size]";
 
     foreach ($fileds as $filed) {
         $filter[$filed] = stripslashes($filter[$filed]);
     }
-//        set_filter($filter, $sql);
-//    }
-//    else {
-//        $sql = $result['sql'];
-//        $filter = $result['filter'];
-//    }
 
 //    echo $sql;
     $row = $GLOBALS['db']->getAll($sql);
