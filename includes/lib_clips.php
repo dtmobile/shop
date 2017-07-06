@@ -401,7 +401,6 @@ function insert_pay_log($id, $amount, $type = PAY_SURPLUS, $is_paid = 0, $down_p
 {
     $sql = 'INSERT INTO ' .$GLOBALS['ecs']->table('pay_log')." (order_id, order_amount, order_type, is_paid, down_payment, amorization_money)".
             " VALUES  ('$id', '$amount', '$type', '$is_paid', '$down_payment', '$amorization_money')";
-    var_dump($sql);
     $GLOBALS['db']->query($sql);
 
      return $GLOBALS['db']->insert_id();

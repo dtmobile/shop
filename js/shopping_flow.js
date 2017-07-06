@@ -624,8 +624,31 @@ function repayCancel() {
         window.location.href="index.php"; //关闭弹出层
     }
 }
-
+function getValue(radio_name){
+    // method 1
+    var radio = document.getElementsByName(radio_name);
+    for (i=0; i<radio.length; i++) {
+        if (radio[i].checked) {
+            return radio[i].value;
+        }
+    }
+}
 function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
+
+  console.log(pay_code);
+
+    if (pay_code == "alipayamortization" || pay_code == "amortization") {
+        amortizePeriod = getValue('amortize_period');
+        if (amortizePeriod == null) {
+            alert( '请选择分期周期\n');
+            return false;
+        }
+        amortizeType = getValue('amortize_type');
+        if (amortizeType == null ) {
+            alert( '请选择还款方式\n');
+            return false;
+        }
+    }
     var amortizeRepayMoney =  document.getElementsByName('amortize_repay_money')[0].value;
     if(Utils.isEmpty(amortizeRepayMoney))
     {
@@ -657,6 +680,8 @@ function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
     params.code = pay_code;
     params.amortize_repay_money = amortizeRepayMoney;
     params.repay_serial_code = repaySerialCode;
+    params.amortizePeriod = amortizePeriod;
+    params.amortizeType = amortizeType;
     window.location.href="respond.php?code=" + pay_code + "&params="+ $.toJSON(params);
 
 }

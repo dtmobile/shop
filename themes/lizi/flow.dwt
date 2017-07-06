@@ -646,10 +646,10 @@ padding: 10px 20px 12px; height:auto; cursor:pointer; border:none;" value="加�
 			<p class="xian2">{$lang.select_shipping}: <font style="padding-right:30px;">{$order.shipping_name}</font>{$lang.select_payment}: <font  style="padding-right:30px;">{$order.pay_name}</font>{$lang.order_amount}: <font><b>{$total.amount_formated}</b></font></p>
 			<!-- {if $order.amorization_money} -->
              <p class="xian2">由于选择支付方式为分期支付，所以您只需要支付: <font style="padding-right:30px;">{$order.down_payment_formated}</font>剩余款项请选择分期方式，分期总额为: <font  style="padding-right:30px;">{$order.amorization_money_formated}</font></p>
-                     <table width="100%" border="0" cellpadding="5" cellspacing="1" >
+                     <table width="80%" border="0" cellpadding="5" cellspacing="1" >
                         <tr>
-                           <td width="28%" align="right" bgcolor="#FFFFFF">还款周期： </td>
-                           <td width="72%" align="left" bgcolor="#FFFFFF">
+                           <td width="28%" align="right" >还款周期： </td>
+                           <td width="72%" align="left" >
                                <input type="radio" name="amortize_period" value="1" {if $profile.amortize_period==1}checked="checked"{/if} />
                                1期&nbsp;&nbsp;
                                <input type="radio" name="amortize_period" value="3" {if $profile.amortize_period==3}checked="checked"{/if} />
@@ -666,8 +666,8 @@ padding: 10px 20px 12px; height:auto; cursor:pointer; border:none;" value="加�
                            </td>
                        </tr>
                          <tr>
-                           <td width="28%" align="right" bgcolor="#FFFFFF">还款方式： </td>
-                           <td width="72%" align="left" bgcolor="#FFFFFF">
+                           <td width="28%" align="right">还款方式： </td>
+                           <td width="72%" align="left" >
                                <input type="radio" name="amortize_type" value="1" {if $profile.amortize_type==1}checked="checked"{/if} />
                                等额本息&nbsp;&nbsp;
                                <input type="radio" name="amortize_type" value="2" {if $profile.amortize_type==2}checked="checked"{/if} />
