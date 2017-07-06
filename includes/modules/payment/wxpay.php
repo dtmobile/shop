@@ -134,7 +134,6 @@ class wxpay
      */
     function get_code($order, $payment)
     {
-        var_dump($order);
         if (!defined('EC_CHARSET'))
         {
             $charset = 'utf-8';
