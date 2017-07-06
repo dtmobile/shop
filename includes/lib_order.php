@@ -555,6 +555,10 @@ function order_fee($order, $goods, $consignee)
         $group_buy = group_buy_info($order['extension_id']);
     }
 
+    $amortization_pay = array(
+        'alipayamortization',
+        'amortization',
+    );
     $total  = array('real_goods_count' => 0,
                     'gift_amount'      => 0,
                     'goods_price'      => 0,
@@ -569,7 +573,10 @@ function order_fee($order, $goods, $consignee)
                     'surplus'          => 0,
                     'cod_fee'          => 0,
                     'pay_fee'          => 0,
-                    'tax'              => 0);
+                    'tax'              => 0,
+                    'total_money'   => 0,
+                    'amoritization_money' => 0
+);
     $weight = 0;
 
     /* 商品总价 */
@@ -722,13 +729,23 @@ function order_fee($order, $goods, $consignee)
     /* 计算订单总额 */
     if ($order['extension_code'] == 'group_buy' && $group_buy['deposit'] > 0)
     {
-        $total['amount'] = $total['goods_price'];
+        $total['total_money'] = $total['amount'] = $total['goods_price'];
+
+        if (in_array($order['pay_code'], $amortization_pay)) {
+            $total['amount'] = $total['total_money'] * 0.3;
+            $total['amoritization_money'] = $total['total_money'] - $total['amount'];
+        }
     }
     else
     {
         $total['amount'] = $total['goods_price'] - $total['discount'] + $total['tax'] + $total['pack_fee'] + $total['card_fee'] +
             $total['shipping_fee'] + $total['shipping_insure'] + $total['cod_fee'];
 
+        if (in_array($order['pay_code'], $amortization_pay)) {
+            $total['total_money'] = $total['amount'];
+            $total['amount'] = $total['total_money'] * 0.3;
+            $total['amoritization_money'] = $total['total_money'] - $total['amount'];
+        }
         // 减去红包金额
         $use_bonus        = min($total['bonus'], $max_amount); // 实际减去的红包金额
         if(isset($total['bonus_kill']))

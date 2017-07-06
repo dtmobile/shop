@@ -18,7 +18,7 @@ if (!defined('IN_ECS'))
     die('Hacking attempt');
 }
 
-$payment_lang = ROOT_PATH . 'languages/' .$GLOBALS['_CFG']['lang']. '/payment/amortization.php';
+$payment_lang = ROOT_PATH . 'languages/' .$GLOBALS['_CFG']['lang']. '/payment/alipayamortization.php';
 
 if (file_exists($payment_lang))
 {
@@ -36,7 +36,7 @@ if (isset($set_modules) && $set_modules == TRUE)
     $modules[$i]['code']    = basename(__FILE__, '.php');
 
     /* 描述对应的语言项 */
-    $modules[$i]['desc']    = 'amortization_desc';
+    $modules[$i]['desc']    = 'alipayamortization_desc';
 
     /* 是否支持货到付款 */
     $modules[$i]['is_cod']  = '0';
@@ -62,7 +62,7 @@ if (isset($set_modules) && $set_modules == TRUE)
 /**
  * 类
  */
-class amortization
+class alipayamortization
 {
     /**
      * 构造函数
@@ -81,33 +81,14 @@ class amortization
         $this->bank();
     }
 
-    function get_code($order, $payment)
+    /**
+     * 提交函数
+     */
+    function get_code()
     {
-        if (!defined('EC_CHARSET'))
-        {
-            $charset = 'utf-8';
-        }
-        else
-        {
-            $charset = EC_CHARSET;
-        }
-
-        $button = <<<EOT
-<img src="images/wetchatpay/wetchat.jpg"/>
-<div >
-<span class="newroman font_16">请输入实际支付金额</span>
-<input name="amortize_repay_money" type="text" size="25" class="inputBg" placeholder="请填写实际支付金额"/>元
-</div>
-<div>
-<span class="newroman font_16">请输入支付流水号</span>
-<input name="repay_serial_code" type="text" size="25" class="inputBg" placeholder="请填写支付流水号"/>
-</div>
-<button class="font_20" style="background-color: #008CBA;" onclick="repaySuccess({$order['log_id']},{$order['order_amount']},'wxpay')">支付成功</button>
-<button class="font_20" style="background-color: #555555;" onclick="repayCancel()">取消支付</button>
-EOT;
-
-        return  $button;
+        return '';
     }
+
     /**
      * 处理函数
      */

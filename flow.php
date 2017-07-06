@@ -1753,14 +1753,28 @@ elseif ($_REQUEST['step'] == 'done')
            show_message($_LANG['flow_no_shipping']);
         }
     }
+    /* 支付方式 */
+    if ($order['pay_id'] > 0)
+    {
+        $payment = payment_info($order['pay_id']);
+        $order['pay_name'] = addslashes($payment['pay_name']);
+        $order['pay_code'] = $payment['pay_code'];
+    }
+    $order['pay_fee'] = $total['pay_fee'];
+    $order['cod_fee'] = $total['cod_fee'];
+
     /* 订单中的总额 */
+    var_dump($order);
     $total = order_fee($order, $cart_goods, $consignee);
+    var_dump($total);
     $order['bonus']        = $total['bonus'];
     $order['goods_amount'] = $total['goods_price'];
 	$order['fencheng']     = $total['fencheng'];
     $order['discount']     = $total['discount'];
     $order['surplus']      = $total['surplus'];
     $order['tax']          = $total['tax'];
+    $order['total_money'] = $total['total_money'];
+    $order['amortization_money'] = $total['amortization_money'];
 
     // 购物车中的商品能享受红包支付的总额
     $discount_amout = compute_discount_amount();
@@ -1780,14 +1794,6 @@ elseif ($_REQUEST['step'] == 'done')
     $order['shipping_fee'] = $total['shipping_fee'];
     $order['insure_fee']   = $total['shipping_insure'];
 
-    /* 支付方式 */
-    if ($order['pay_id'] > 0)
-    {
-        $payment = payment_info($order['pay_id']);
-        $order['pay_name'] = addslashes($payment['pay_name']);
-    }
-    $order['pay_fee'] = $total['pay_fee'];
-    $order['cod_fee'] = $total['cod_fee'];
 
     /* 商品包装 */
     if ($order['pack_id'] > 0)
