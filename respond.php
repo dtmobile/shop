@@ -73,19 +73,15 @@ else
     {
 
         $user_id = $_SESSION['user_id'];
-
-        include_once('includes/cls_json.php');
-        $json = new JSON;
-        $params = $json->decode($_REQUEST['params'], 1);
-        $order_sn = $params['order_sn'];
-        $amortize_repay_money = $params['amortize_repay_money'];
-        $repay_serial_code = $params['repay_serial_code'];
+        $order_sn = $_POST['order_sn'];
+        $amortize_repay_money = $_POST['amortize_repay_money'];
+        $repay_serial_code = $_POST['repay_serial_code'];
 
         if (in_array($pay_code, $amortization_pay)) {
             include_once(ROOT_PATH . 'includes/lib_transaction.php');
 
-            $amortize_period = $params['amortizePeriod'];
-            $amortize_type = $params['amortizeType'];
+            $amortize_period = $_POST['amortizePeriod'];
+            $amortize_type = $_POST['amortizeType'];
             $user_info = get_profile($user_id);
             $user_info['user_id'] = $user_id;
             $amortization_money = get_amorization_money($order_sn);

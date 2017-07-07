@@ -633,6 +633,23 @@ function getValue(radio_name){
         }
     }
 }
+function post(URL, PARAMS) {
+  var temp = document.createElement("form");
+  temp.action = URL;
+  temp.method = "post";
+  temp.style.display = "none";
+  for (var x in PARAMS) {
+    var opt = document.createElement("textarea");
+    opt.name = x;
+    opt.value = PARAMS[x];
+    // alert(opt.name)
+    temp.appendChild(opt);
+  }
+  document.body.appendChild(temp);
+  temp.submit();
+  return temp;
+}
+
 function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
 
   console.log(pay_code);
@@ -682,6 +699,7 @@ function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
     params.repay_serial_code = repaySerialCode;
     params.amortizePeriod = amortizePeriod;
     params.amortizeType = amortizeType;
-    window.location.href="respond.php?code=" + pay_code + "&params="+ $.toJSON(params);
+
+     post("respond.php?code=" + pay_code , params);
 
 }
