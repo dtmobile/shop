@@ -79,22 +79,28 @@ else
 
         if (in_array($pay_code, $amortization_pay)) {
             include_once(ROOT_PATH . 'includes/lib_transaction.php');
+            include_once(ROOT_PATH . 'includes/lib_borrow.php');
 
-            $amortize_period = $_POST['amortizePeriod'];
-            $amortize_type = $_POST['amortizeType'];
-            $user_info = get_profile($user_id);
-            $user_info['user_id'] = $user_id;
-            $amortization_money = get_amorization_money($order_sn);
-            $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $order_sn,$amortize_period, $amortize_type);
-            $commit_res = saveBorrowInfo($user_info,$borrowInfo);
-        }
-
-        if (empty($commit_res)) {
-            order_paid($order_sn, 2, '', $amortize_repay_money, $repay_serial_code);
-
-            $msg = $_LANG['pay_success'];
+            if (userIsVIP($user_id)) {
+                $amortize_period = $_POST['amortizePeriod'];
+                $amortize_type = $_POST['amortizeType'];
+                $user_info = get_profile($user_id);
+                $user_info['user_id'] = $user_id;
+                $amortization_money = get_amorization_money($order_sn);
+                $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $order_sn, $amortize_period, $amortize_type);
+                $commit_res = saveBorrowInfo($user_info, $borrowInfo);
+                if (empty($commit_res)) {
+                    order_paid($order_sn, 2, '', $amortize_repay_money, $repay_serial_code);
+                    $msg = $_LANG['pay_success'];
+                } else {
+                    $msg = $commit_res;
+                }
+            }else {
+                $msg = '非 VIP 会员不可以使用分期';
+            }
         }else {
-            $msg = $commit_res;
+            order_paid($order_sn, 2, '', $amortize_repay_money, $repay_serial_code);
+            $msg = $_LANG['pay_success'];
         }
     } else
     {

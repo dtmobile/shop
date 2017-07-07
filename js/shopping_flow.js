@@ -480,6 +480,13 @@ function checkOrderForm(frm)
     if (frm.elements[i].name == 'payment' && frm.elements[i].checked)
     {
       paymentSelected = true;
+      var error   = Utils.trim(Ajax.call('flow.php?step=check_userisvip', 'pay_id=' + frm.elements[i].value, null, 'GET', 'TEXT', false));
+
+      if (error) {
+        alert(error);
+        return false;
+      }
+
     }
   }
 

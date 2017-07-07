@@ -1536,6 +1536,22 @@ elseif ($_REQUEST['step'] == 'check_surplus')
     }
 
     exit;
+}elseif ($_REQUEST['step'] == 'check_userisvip')
+{
+    /*------------------------------------------------------ */
+    //-- 检查用户是否是VIP
+    /*------------------------------------------------------ */
+    $amortization_pay = array('alipayamortization','amortization');
+    $user_id = $_SESSION['user_id'];
+    $pay_id   = $_GET['pay_id'];
+    $payment = payment_info($pay_id);
+    include_once(ROOT_PATH . 'includes/lib_borrow.php');
+    if (!userIsVIP($user_id) && in_array($payment['pay_code'], $amortization_pay))
+    {
+        die('非 VIP 用户不可以使用分期，请申请为VIP 后再使用分期功能');
+    }
+
+    exit;
 }
 elseif ($_REQUEST['step'] == 'check_integral')
 {
