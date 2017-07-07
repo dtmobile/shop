@@ -19,8 +19,9 @@ require(dirname(__FILE__) . '/includes/init.php');
 require(ROOT_PATH . 'includes/lib_payment.php');
 require(ROOT_PATH . 'includes/lib_order.php');
 
-$supported_pay = array('wxpay','alipay');
-var_dump($_REQUEST);
+$supported_pay = array('wxpay','alipay','alipayamortization', 'amortization');
+$amortization_pay = array('alipayamortization','amortization');
+
 /* 支付方式代码 */
 $pay_code = !empty($_REQUEST['code']) ? trim($_REQUEST['code']) : '';
 
@@ -70,6 +71,9 @@ else
     }
     else if (in_array($pay_code, $supported_pay))
     {
+
+        $user_id = $_SESSION['user_id'];
+
         include_once('includes/cls_json.php');
         $json = new JSON;
         $params = $json->decode($_REQUEST['params'], 1);
@@ -77,8 +81,25 @@ else
         $amortize_repay_money = $params['amortize_repay_money'];
         $repay_serial_code = $params['repay_serial_code'];
 
-        order_paid($order_sn, 2, '', $amortize_repay_money, $repay_serial_code);
-        $msg     = $_LANG['pay_success'] ;
+        if (in_array($pay_code, $amortization_pay)) {
+            include_once(ROOT_PATH . 'includes/lib_transaction.php');
+
+            $amortize_period = $params['amortizePeriod'];
+            $amortize_type = $params['amortizeType'];
+            $user_info = get_profile($user_id);
+            $user_info['user_id'] = $user_id;
+            $amortization_money = get_amorization_money($order_sn);
+            $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $order_sn,$amortize_period, $amortize_type);
+            $commit_res = saveBorrowInfo($user_info,$borrowInfo);
+        }
+
+        if (empty($commit_res)) {
+            order_paid($order_sn, 2, '', $amortize_repay_money, $repay_serial_code);
+
+            $msg = $_LANG['pay_success'];
+        }else {
+            $msg = $commit_res;
+        }
     } else
     {
         $plugin_file = 'includes/modules/payment/' . $pay_code . '.php';

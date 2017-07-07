@@ -397,10 +397,10 @@ function update_user_account($surplus)
  *
  * @return  int
  */
-function insert_pay_log($id, $amount, $type = PAY_SURPLUS, $is_paid = 0)
+function insert_pay_log($id, $amount, $type = PAY_SURPLUS, $is_paid = 0, $down_payment=0, $amorization_money= 0)
 {
-    $sql = 'INSERT INTO ' .$GLOBALS['ecs']->table('pay_log')." (order_id, order_amount, order_type, is_paid)".
-            " VALUES  ('$id', '$amount', '$type', '$is_paid')";
+    $sql = 'INSERT INTO ' .$GLOBALS['ecs']->table('pay_log')." (order_id, order_amount, order_type, is_paid, down_payment, amorization_money)".
+            " VALUES  ('$id', '$amount', '$type', '$is_paid', '$down_payment', '$amorization_money')";
     $GLOBALS['db']->query($sql);
 
      return $GLOBALS['db']->insert_id();

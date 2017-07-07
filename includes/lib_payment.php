@@ -127,7 +127,28 @@ function check_money($log_id, $money)
         return false;
     }
 }
-
+/**
+ * 获取分期信息
+ *
+ * @access  public
+ * @param   string   $log_id      支付编号
+ * @param   float    $money       支付接口返回的金额
+ * @return  true
+ */
+function get_amorization_money($log_id)
+{
+    if(is_numeric($log_id))
+    {
+        $sql = 'SELECT amorization_money FROM ' . $GLOBALS['ecs']->table('pay_log') .
+            " WHERE log_id = '$log_id'";
+        $amorization_money = $GLOBALS['db']->getOne($sql);
+        return $amorization_money;
+    }
+    else
+    {
+        return false;
+    }
+}
 /**
  * 修改订单的支付状态
  *

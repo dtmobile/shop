@@ -1764,17 +1764,15 @@ elseif ($_REQUEST['step'] == 'done')
     $order['cod_fee'] = $total['cod_fee'];
 
     /* 订单中的总额 */
-    var_dump($order);
     $total = order_fee($order, $cart_goods, $consignee);
-    var_dump($total);
+
     $order['bonus']        = $total['bonus'];
     $order['goods_amount'] = $total['goods_price'];
 	$order['fencheng']     = $total['fencheng'];
     $order['discount']     = $total['discount'];
     $order['surplus']      = $total['surplus'];
     $order['tax']          = $total['tax'];
-    $order['total_money'] = $total['total_money'];
-    $order['amortization_money'] = $total['amortization_money'];
+
 
     // 购物车中的商品能享受红包支付的总额
     $discount_amout = compute_discount_amount();
@@ -2081,8 +2079,20 @@ elseif ($_REQUEST['step'] == 'done')
     /* 清除缓存，否则买了商品，但是前台页面读取缓存，商品数量不减少 */
     clear_all_files();
 
+    $amortization_pay = array(
+        'alipayamortization',
+        'amortization',
+    );
+
+    /* 分期支付*/
+    if ($order['order_amount'] > 0 && in_array($order['pay_code'], $amortization_pay)) {
+            $order['down_payment'] = $order['order_amount'] * 0.3;
+            $order['down_payment_formated']  =  price_format($order['down_payment'] , false);
+            $order['amorization_money'] = $order['order_amount'] -  $order['down_payment'];
+            $order['amorization_money_formated']  =  price_format($order['amorization_money'] , false);
+    }
     /* 插入支付日志 */
-    $order['log_id'] = insert_pay_log($new_order_id, $order['order_amount'], PAY_ORDER);
+    $order['log_id'] = insert_pay_log($new_order_id, $order['order_amount'], PAY_ORDER, 0, $order['down_payment'], $order['amorization_money']);
 
     /* 取得支付信息，生成支付代码 */
     if ($order['order_amount'] > 0)
