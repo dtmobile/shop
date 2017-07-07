@@ -109,7 +109,7 @@ function dengebenxi()
 //先息后本还款方，前（3-1）个月中每月应还金额=3000，第3个月每月应还金额=500000+3000=503000
 function saveBorrowAmortize($borrowId,$borrowInfo)
 {
-   $totalRMB = floatval($borrowInfo['total_money']) * 10000;
+   $totalRMB = floatval($borrowInfo['total_money']) ;
     $periodCount = intval($borrowInfo['amortize_period']);
     $rate = 0.006;
     $MI = $totalRMB*$rate;

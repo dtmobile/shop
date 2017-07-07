@@ -39,7 +39,7 @@
             </tr>
             <tr>
                 <td width="28%" align="right" bgcolor="#FFFFFF">申请金额：</td>
-                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow.total_money}万元</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow.total_money}元</td>
             </tr>
             <tr>
                 <td width="28%" align="right" bgcolor="#FFFFFF">资金用途：</td>
@@ -366,7 +366,7 @@
     </div>
 <!--</form>-->
 
-<h6 align="center">分期信息表</h6>
+<h6 align="center">还款分期表</h6>
 <!--<form action="borrow.php?act=change_amortize_status" method="post" name="theForm">-->
     <div class="list-div" style="margin-bottom: 5px">
         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
@@ -378,7 +378,7 @@
                 <th width="10%" bgcolor="#ffffff">最晚还款期</th>
                 <th width="10%" bgcolor="#ffffff">还款方式</th>
                 <th width="10%" bgcolor="#ffffff">还款流水号</th>
-                <th width="10%" bgcolor="#ffffff">还款备注</th>
+                <th width="10%" bgcolor="#ffffff">还款日期</th>
                 <th width="20%" bgcolor="#ffffff">分期状态</th>
             </tr>
             <!--{foreach from=$amortize_list item=amortize}-->
@@ -390,7 +390,7 @@
                 <td bgcolor="#ffffff">{$amortize.amortize_date}</td>
                 <td bgcolor="#ffffff">{$amortize.repay_source}</td>
                 <td bgcolor="#ffffff">{$amortize.repay_serial_code}</td>
-                <td bgcolor="#ffffff">{$amortize.comment}</td>
+                <td bgcolor="#ffffff">{$amortize.repay_date}</td>
                 <td bgcolor="#ffffff">
                   <span>
                       <select name="amortize_status_{$amortize.amortize_id}" >

@@ -48,12 +48,17 @@
          <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
 
           {if $action eq 'daikuan'}
+
+             {if $profile.rank_name neq 'VIP'}
+             <h1 style="color: red" align="center">请联系工作人员，成为VIP后再来申请贷款</h1>
+             {/if}
+
           <tr style="background-color:cornflowerblue;">
               <td width="100%" align="center"  colspan="2" ><strong>贷款申请</strong></td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">申请金额： </td>
-              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="total_money" type="text" value="{$profile.total_money}" size="25" class="inputBg" placeholder="请输入您想要申请的贷款金额"/>万元<span style="color:#FF0000"> *</span></td>
+              <td width="72%" align="left" bgcolor="#FFFFFF"><input name="total_money" type="text" value="{$profile.total_money}" size="25" class="inputBg" placeholder="请输入您想要申请的贷款金额"/>元<span style="color:#FF0000"> *</span></td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">资金用途： </td>
@@ -85,6 +90,7 @@
                   <input type="radio" name="amortize_type" value="2" {if $profile.amortize_type==2}checked="checked"{/if} />
                   先息后本&nbsp;&nbsp;
                   <span style="color:#FF0000"> *</span>
+                  <span style="color:#FF0000">(贷款利率0.006)</span>
               </td>
           </tr>
 
@@ -145,11 +151,11 @@
              <tr>
                  <td width="28%" align="right" bgcolor="#FFFFFF">身份证有效期：</td>
                  <td width="72%" align="left" bgcolor="#FFFFFF">
-                     {html_select_date field_order=YMD prefix=id_begin_date start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.id_begin_date}
+                     {html_select_date field_order=YMD prefix=id_begin_date start_year=-60 end_year=+0 display_days=true month_format=%m day_value_format=%02d time=$profile.id_begin_date}
                      &nbsp;&nbsp;
                      <span>到</span>
                      &nbsp;&nbsp;
-                     {html_select_date field_order=YMD prefix=id_end_date start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.id_end_date}
+                     {html_select_date field_order=YMD prefix=id_end_date start_year=-60 end_year=+30 display_days=true month_format=%m day_value_format=%02d time=$profile.id_end_date}
                      <span style="color:#FF0000"> *</span>
                  </td>
              </tr>
@@ -431,7 +437,9 @@
                  </td>
                  {else}
                  <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_daikuan_request" />
-                     <input name="submit" type="submit" value="提交申请" class="bnt_blue_1" style="border:none;" />
+                     {if $profile.rank_name eq 'VIP'}
+                     <input name="submit" type="submit" value="提交申请" class="bnt_blue_1" style="font-size: 20px;width: 150px" />
+                     {/if}
                  </td>
                  {/if}
              </tr>

@@ -28,6 +28,15 @@ function getBorrowByUserId($userId)
     return $GLOBALS['db']->getAll($sql);
 }
 
+function userIsVIP($userId)
+{
+//    SELECT COUNT(*) FROM `ecs_users` as u JOIN ecs_user_rank as r ON r.rank_name='VIP' AND r.rank_id=u.user_rank AND u.user_id=12;
+    $sql = "SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('user_rank') . " as r JOIN ".$GLOBALS['ecs']->table('users') ." as u ON user_id = '$userId' AND r.rank_name='VIP' AND r.rank_id=u.user_rank";
+    $count = $GLOBALS['db']->getOne($sql);
+//    echo 'email_is_same value is ' . $count;
+    return $count > 0 ? true : false;
+}
+
 function getBorrowById($userId,$borrowId)
 {
     if (empty($userId)) {
@@ -80,8 +89,8 @@ function amortizeRepayCommit($params)
         return '支付流水号不可以为空';
     }
 
-    $repayDateTime = time();//date("Y-m-d",time());;
-    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow_amortize') . " SET amortize_repay_money = '$params->amortize_repay_money',repay_source='$params->repay_source', repay_serial_code='$params->repay_serial_code',amortize_repay_date=$repayDateTime,status='待审核' "." WHERE amortize_id='$params->amortize_id' AND borrow_id='$params->borrow_id' AND user_id = '$params->user_id'";
+    $repayDate =  date("Y-m-d",time());
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow_amortize') . " SET amortize_repay_money = '$params->amortize_repay_money',repay_source='$params->repay_source', repay_serial_code='$params->repay_serial_code',repay_date='$repayDate',status='待审核' "." WHERE amortize_id='$params->amortize_id' AND borrow_id='$params->borrow_id' AND user_id = '$params->user_id'";
 //    echo $sql;
     $result = $GLOBALS['db']->query($sql);
     if ($result) {

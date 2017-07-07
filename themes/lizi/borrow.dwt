@@ -80,8 +80,9 @@
                   <th width="10%" bgcolor="#ffffff">应还金额</th>
                   <th width="10%" bgcolor="#ffffff">已还金额</th>
                   <th width="10%" bgcolor="#ffffff">最晚还款期</th>
-                  <th width="20%" bgcolor="#ffffff">还款流水号</th>
-                  <th width="10%" bgcolor="#ffffff">还款备注</th>
+                  <th width="10%" bgcolor="#ffffff">还款渠道</th>
+                  <th width="10%" bgcolor="#ffffff">还款流水号</th>
+                  <th width="10%" bgcolor="#ffffff">还款日期</th>
                   <th width="10%" bgcolor="#ffffff">分期状态</th>
                   <th width="10%" bgcolor="#ffffff">操作</th>
               </tr>
@@ -92,8 +93,9 @@
                   <td bgcolor="#ffffff">{$amortize.amortize_need_money}</td>
                   <td bgcolor="#ffffff">{$amortize.amortize_repay_money}</td>
                   <td bgcolor="#ffffff">{$amortize.amortize_date}</td>
+                  <td bgcolor="#ffffff">{$amortize.repay_source}</td>
                   <td bgcolor="#ffffff">{$amortize.repay_serial_code}</td>
-                  <td bgcolor="#ffffff">{$amortize.comment}</td>
+                  <td bgcolor="#ffffff">{$amortize.repay_date}</td>
                   <td bgcolor="#ffffff">{$amortize.status}</td>
                   <td bgcolor="#ffffff">
                       {if $amortize.status eq '未还款'}
@@ -140,25 +142,40 @@
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
             <span style="font-size: 20px">微信</span>
         </div>
-        <div >
-            <span class="newroman font_16">请输入实际支付金额</span>
-            <input name="amortize_repay_money" type="text" size="25" class="inputBg" placeholder="请填写实际支付金额"/>元
-        </div>
 
-        <div>
-            <span class="newroman font_16">请选择实际支付方式</span>
-            <select name='repay_source'>
-                <option value=''>请选择</option>
-                <option value='支付宝'>支付宝</option>
-                <option value='微信'>微信</option>
-            </select>
-        </div>
 
-        <div>
-            <span class="newroman font_16">请输入支付流水号</span>
-            <input name="repay_serial_code" type="text" size="25" class="inputBg" placeholder="请填写支付流水号"/>
-        </div>
-        <button class="font_20" style="background-color: #008CBA;" onclick="repaySuccess()">支付成功</button>
+        <table>
+            <tr>
+                <td>
+                    <span class="newroman font_16" >请输入实际支付金额</span>
+                </td>
+                <td>
+                    <input name="amortize_repay_money" type="text" size="25" class="inputBg" placeholder="请填写实际支付金额" style="width: 100%"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="newroman font_16" >请选择实际支付渠道</span>
+                </td>
+                <td>
+                    <select name='repay_source' style="width: 100%">
+                        <option value=''>请选择</option>
+                        <option value='支付宝'>支付宝</option>
+                        <option value='微信'>微信</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="newroman font_16">请输入支付流水号</span>
+                </td>
+                <td>
+                    <input name="repay_serial_code" type="text" size="25" class="inputBg" placeholder="请填写支付流水号" style="width: 100%"/>
+                </td>
+            </tr>
+        </table>
+
+        <button class="font_20" onclick="repaySuccess()">支付成功</button>
         <button class="font_20" style="background-color: #555555;" onclick="repayCancel()">取消支付</button>
         <!--<a href="javascript:if (confirm('{$lang.del_attention}')) location.href='user.php?act=del_attention&rec_id={$goods.rec_id}'" class="f6">{$lang.no_attention}</a>-->
 
