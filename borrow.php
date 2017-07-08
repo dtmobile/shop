@@ -65,7 +65,7 @@ if ($action == 'repay') {
     $smarty->assign('page_title', '还款专区'); // 页面标题
     $info = array();
 
-    $info['title'] = "我的贷款";
+    $info['title'] = "我的贷款/分期";
     $smarty->assign('info', $info);
     $borrowList = getBorrowByUserId($user_id);
 
