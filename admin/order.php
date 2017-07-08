@@ -5072,7 +5072,7 @@ function order_list()
 
         /* 查询 */
         $sql = "SELECT o.order_id, o.order_sn, o.add_time, o.order_status, o.shipping_status, o.order_amount, o.money_paid," .
-                    "o.pay_status, o.consignee, o.address, o.email, o.tel, o.extension_code, o.extension_id, " .
+                    "o.pay_status, o.consignee, o.address, o.amortization_money,o.repay_serial_code,o.amortize_period,o.amortize_type,o.email, o.tel, o.extension_code, o.extension_id, " .
                     "(" . order_amount_field('o.') . ") AS total_fee, " .
                     "IFNULL(u.user_name, '" .$GLOBALS['_LANG']['anonymous']. "') AS buyer ".
                 " FROM " . $GLOBALS['ecs']->table('order_info') . " AS o " .
@@ -5100,6 +5100,7 @@ function order_list()
         $row[$key]['formated_order_amount'] = price_format($value['order_amount']);
         $row[$key]['formated_money_paid'] = price_format($value['money_paid']);
         $row[$key]['formated_total_fee'] = price_format($value['total_fee']);
+        $row[$key]['formated_amortization_money'] = price_format($value['amortization_money']);
         $row[$key]['short_order_time'] = local_date('m-d H:i', $value['add_time']);
         if ($value['order_status'] == OS_INVALID || $value['order_status'] == OS_CANCELED)
         {

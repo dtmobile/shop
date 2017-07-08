@@ -88,12 +88,19 @@
     <td><div align="right"><strong>{$lang.label_order_time}</strong></div></td>
     <td>{$order.formated_add_time}</td>
   </tr>
+
   <tr>
     <td><div align="right"><strong>{$lang.label_payment}</strong></div></td>
     <td>{if $order.pay_id > 0}{$order.pay_name}{else}{$lang.require_field}{/if}<a href="order.php?act=edit&order_id={$order.order_id}&step=payment" class="special">{$lang.edit}</a>
     ({$lang.action_note}: <span onclick="listTable.edit(this, 'edit_pay_note', {$order.order_id})">{if $order.pay_note}{$order.pay_note}{else}N/A{/if}</span>)</td>
     <td><div align="right"><strong>{$lang.label_pay_time}</strong></div></td>
     <td>{$order.pay_time}</td>
+  </tr>
+  <tr>
+    <td><div align="right"><strong>支付流水号:</strong></div></td>
+    <td>{$order.repay_serial_code}</td>
+    <td><div align="right"><strong>-</strong></div></td>
+    <td>-</td>
   </tr>
   <tr>
     <td><div align="right"><strong>{$lang.label_shipping}</strong></div></td>

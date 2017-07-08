@@ -87,10 +87,11 @@ else
                 $user_info = get_profile($user_id);
                 $user_info['user_id'] = $user_id;
                 $amortization_money = get_amorization_money($order_sn);
-                $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $order_sn, $amortize_period, $amortize_type);
+                $real_order_sn = get_order_sn($order_sn);
+                $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $real_order_sn, $amortize_period, $amortize_type);
                 $commit_res = saveBorrowInfo($user_info, $borrowInfo);
                 if (empty($commit_res)) {
-                    order_paid($order_sn, 2, '', $amortize_repay_money, $repay_serial_code);
+                    order_paid($order_sn, 2, '',$repay_serial_code, $amortize_repay_money, $amortization_money, $amortize_period, $amortize_type);
                     $msg = $_LANG['pay_success'];
                 } else {
                     $msg = $commit_res;

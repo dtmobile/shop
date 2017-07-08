@@ -149,6 +149,24 @@ function get_amorization_money($log_id)
         return false;
     }
 }
+
+function get_order_sn($log_id)
+{
+    /*select ecs_order_info.order_sn from ecs_order_info left join ecs_pay_log
+    on ecs_order_info.order_id = ecs_pay_log.order_id where ecs_pay_log.log_id=134
+     * */
+    if(is_numeric($log_id))
+    {
+        $sql = 'SELECT '.$GLOBALS['ecs']->table('order_info').'.oder_sn FROM ' .$GLOBALS['ecs']->table('order_info').' left join '. $GLOBALS['ecs']->table('pay_log') .
+            " on ".$GLOBALS['ecs']->table('order_info').".order_id = ".$GLOBALS['ecs']->table('order_info').".order_id WHERE ".$GLOBALS['ecs']->table('pay_log').".log_id = '$log_id'";
+        $order_sn = $GLOBALS['db']->getOne($sql);
+        return $order_sn;
+    }
+    else
+    {
+        return false;
+    }
+}
 /**
  * 修改订单的支付状态
  *
@@ -158,7 +176,7 @@ function get_amorization_money($log_id)
  * @param   string  $note       备注
  * @return  void
  */
-function order_paid($log_id, $pay_status = PS_PAYED, $note = '', $repay_serial_code = '', $amortize_repay_money = -1)
+function order_paid($log_id, $pay_status = PS_PAYED, $note = '', $repay_serial_code = '', $amortize_repay_money = -1, $amortization_money = 0, $amortize_period = 0, $amortize_type = 0)
 {
     /* 取得支付编号 */
     $log_id = intval($log_id);
@@ -193,6 +211,10 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '', $repay_serial_c
                                 " pay_status = '$pay_status', " .
                                 " pay_time = '".gmtime()."', " .
                                 " money_paid = order_amount," .
+                                " repay_serial_code = '$repay_serial_code'," .
+                                "amortization_money = '$amortization_money', " .
+                                 "amortize_period = '$amortize_period', " .
+                                "amortize_type = '$amortize_type', " .
                                 " order_amount = 0 ".
                        "WHERE order_id = '$order_id'";
                 $GLOBALS['db']->query($sql);
