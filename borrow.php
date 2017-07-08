@@ -62,7 +62,7 @@ include_once(ROOT_PATH . 'includes/lib_borrow.php');
 
 /* 显示我要还款界面 */
 if ($action == 'repay') {
-    $smarty->assign('page_title', '我要还款'); // 页面标题
+    $smarty->assign('page_title', '还款专区'); // 页面标题
     $info = array();
 
     $info['title'] = "我的贷款";
