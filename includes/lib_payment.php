@@ -150,14 +150,14 @@ function get_amorization_money($log_id)
     }
 }
 
-function get_order_sn($log_id)
+function get_order_sn_for_paid($log_id)
 {
     /*select ecs_order_info.order_sn from ecs_order_info left join ecs_pay_log
     on ecs_order_info.order_id = ecs_pay_log.order_id where ecs_pay_log.log_id=134
      * */
     if(is_numeric($log_id))
     {
-        $sql = 'SELECT '.$GLOBALS['ecs']->table('order_info').'.oder_sn FROM ' .$GLOBALS['ecs']->table('order_info').' left join '. $GLOBALS['ecs']->table('pay_log') .
+        $sql = 'SELECT '.$GLOBALS['ecs']->table('order_info').'.order_sn FROM ' .$GLOBALS['ecs']->table('order_info').' left join '. $GLOBALS['ecs']->table('pay_log') .
             " on ".$GLOBALS['ecs']->table('order_info').".order_id = ".$GLOBALS['ecs']->table('order_info').".order_id WHERE ".$GLOBALS['ecs']->table('pay_log').".log_id = '$log_id'";
         $order_sn = $GLOBALS['db']->getOne($sql);
         return $order_sn;

@@ -80,6 +80,7 @@ else
         if (in_array($pay_code, $amortization_pay)) {
             include_once(ROOT_PATH . 'includes/lib_transaction.php');
             include_once(ROOT_PATH . 'includes/lib_borrow.php');
+            include_once(ROOT_PATH . 'includes/lib_payment.php');
 
             if (userIsVIP($user_id)) {
                 $amortize_period = $_POST['amortizePeriod'];
@@ -87,7 +88,7 @@ else
                 $user_info = get_profile($user_id);
                 $user_info['user_id'] = $user_id;
                 $amortization_money = get_amorization_money($order_sn);
-                $real_order_sn = get_order_sn($order_sn);
+                $real_order_sn = get_order_sn_for_paid($order_sn);
                 $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $real_order_sn, $amortize_period, $amortize_type);
                 $commit_res = saveBorrowInfo($user_info, $borrowInfo);
                 if (empty($commit_res)) {
