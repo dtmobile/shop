@@ -59,6 +59,7 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'price')
     include('includes/cls_json.php');
 
     $json   = new JSON;
+    unset($res);
     $res    = array('err_msg' => '', 'result' => '', 'qty' => 1);
 
     $attr_id    = isset($_REQUEST['attr']) ? explode(',', $_REQUEST['attr']) : array();
@@ -83,6 +84,7 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'price')
         $shop_price  = get_final_price($goods_id, $number, true, $attr_id);
         $res['result'] = price_format($shop_price * $number);
     }
+
 
     die($json->encode($res));
 }

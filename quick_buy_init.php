@@ -19,6 +19,7 @@ $_LANG1['flow_no_payment'] = '您必须选定一个支付方式。';
 $_LANG1['plus'] = '加';
 $_LANG1['minus'] = '减';
 $smarty->assign('lang1',             $_LANG1);
+$cod_fee = isset($cod_fee) ? $cod_fee : 0;
 require_once (ROOT_PATH . 'includes/lib_order.php');
 $consignee = get_consignee($_SESSION['user_id']);
 
@@ -47,7 +48,10 @@ $smarty->assign('payment_list', $payment_list);
 $smarty->assign('consignee', $consignee);
 
 /* 取得配送列表 */
-$region            = array(1, $consignee['province'], $consignee['city'], $consignee['district']);
+$province = isset($consignee['province']) ? $consignee['province'] : '';
+$city = isset($consignee['city']) ?$consignee['city']  : '';
+$district = isset($consignee['district']) ? $consignee['district'] : '';
+$region            = array(1, $province, $city, $district);
 $shipping_list     = available_shipping_list($region);
 $insure_disabled   = true;
 $cod_disabled      = true;
