@@ -658,8 +658,8 @@ function post(URL, PARAMS) {
 }
 
 function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
-
-  console.log(pay_code);
+    var  amortizePeriod = 0;
+    var  amortizeType = 0;
 
     if (pay_code == "alipayamortization" || pay_code == "amortization") {
         amortizePeriod = getValue('amortize_period');

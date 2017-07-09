@@ -84,7 +84,7 @@ class alipayamortization
     /**
      * 提交函数
      */
-    function get_code()
+    function get_code($order, $payment)
     {
         if (!defined('EC_CHARSET'))
         {
