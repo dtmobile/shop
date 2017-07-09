@@ -20,8 +20,8 @@
 <script language="javascript">
 function shows_number(result)
 {
-     if(result.product_number !=undefined){
-         document.getElementById('shows_number').innerHTML = result.product_number+'{if $goods.measure_unit}{$goods.measure_unit}{else}件{/if}';
+     if(result.product_number !=undefined && result.product_number != 0){
+         document.getElementById('shows_number').innerHTML ='有库存' ;result.product_number+'{if $goods.measure_unit}{$goods.measure_unit}{else}件{/if}';
      }else{
          document.getElementById('shows_number').innerHTML = '无库存';
      }
@@ -32,7 +32,7 @@ function changeKucun()
 var frm=document.forms['ECS_FORMBUY'];
 spec_arr = getSelectedAttributes(frm);
     if(spec_arr==''){
-         document.getElementById('shows_number').innerHTML =  '有库存';//'{$goods.goods_number}{if $goods.measure_unit}{$goods.measure_unit}{else}件{/if}';
+         document.getElementById('shows_number').innerHTML = '{if $goods.goods_number == 0} 无库存 {else} 有库存{/if} '; //'{$goods.goods_number}{if $goods.measure_unit}{$goods.measure_unit}{else}件{/if}';
     }else{
          Ajax.call('goods.php?act=get_products_info', 'id=' + spec_arr+ '&goods_id=' + goods_id, shows_number, 'GET', 'JSON');
     }
