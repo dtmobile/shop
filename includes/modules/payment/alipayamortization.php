@@ -84,9 +84,33 @@ class alipayamortization
     /**
      * 提交函数
      */
-    function get_code()
+    function get_code($order, $payment)
     {
-        return '';
+        if (!defined('EC_CHARSET'))
+        {
+            $charset = 'utf-8';
+        }
+        else
+        {
+            $charset = EC_CHARSET;
+        }
+
+        $button = <<<EOT
+
+<img src="images/alipay/wetchat.jpg"/>
+<div >
+<span class="newroman font_16">请输入实际支付金额</span>
+<input name="amortize_repay_money" type="text" size="25" class="inputBg" placeholder="请填写实际支付金额"/>元
+</div>
+<div>
+<span class="newroman font_16">请输入支付流水号</span>
+<input name="repay_serial_code" type="text" size="25" class="inputBg" placeholder="请填写支付流水号"/>
+</div>
+<button class="font_20" style="background-color: #008CBA;" onclick="repaySuccess({$order['log_id']},{$order['down_payment']},'amortization')">支付成功</button>
+<button class="font_20" style="background-color: #555555;" onclick="repayCancel()">取消支付</button>
+EOT;
+
+        return  $button;
     }
 
     /**

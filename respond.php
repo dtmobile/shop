@@ -73,32 +73,36 @@ else
     {
 
         $user_id = $_SESSION['user_id'];
-
-        include_once('includes/cls_json.php');
-        $json = new JSON;
-        $params = $json->decode($_REQUEST['params'], 1);
-        $order_sn = $params['order_sn'];
-        $amortize_repay_money = $params['amortize_repay_money'];
-        $repay_serial_code = $params['repay_serial_code'];
+        $order_sn = $_POST['order_sn'];
+        $amortize_repay_money = $_POST['amortize_repay_money'];
+        $repay_serial_code = $_POST['repay_serial_code'];
 
         if (in_array($pay_code, $amortization_pay)) {
             include_once(ROOT_PATH . 'includes/lib_transaction.php');
+            include_once(ROOT_PATH . 'includes/lib_borrow.php');
+            include_once(ROOT_PATH . 'includes/lib_payment.php');
 
-            $amortize_period = $params['amortizePeriod'];
-            $amortize_type = $params['amortizeType'];
-            $user_info = get_profile($user_id);
-            $user_info['user_id'] = $user_id;
-            $amortization_money = get_amorization_money($order_sn);
-            $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $order_sn,$amortize_period, $amortize_type);
-            $commit_res = saveBorrowInfo($user_info,$borrowInfo);
-        }
-
-        if (empty($commit_res)) {
-            order_paid($order_sn, 2, '', $amortize_repay_money, $repay_serial_code);
-
-            $msg = $_LANG['pay_success'];
+            if (userIsVIP($user_id)) {
+                $amortize_period = $_POST['amortizePeriod'];
+                $amortize_type = $_POST['amortizeType'];
+                $user_info = get_profile($user_id);
+                $user_info['user_id'] = $user_id;
+                $amortization_money = get_amorization_money($order_sn);
+                $real_order_sn = get_order_sn_for_paid($order_sn);
+                $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $real_order_sn, $amortize_period, $amortize_type);
+                $commit_res = saveBorrowInfo($user_info, $borrowInfo);
+                if (empty($commit_res)) {
+                    order_paid($order_sn, 2, '',$repay_serial_code, $amortize_repay_money, $amortization_money, $amortize_period, $amortize_type);
+                    $msg = $_LANG['pay_success'];
+                } else {
+                    $msg = $commit_res;
+                }
+            }else {
+                $msg = '非 VIP 会员不可以使用分期';
+            }
         }else {
-            $msg = $commit_res;
+            order_paid($order_sn, 2, '', $amortize_repay_money, $repay_serial_code);
+            $msg = $_LANG['pay_success'];
         }
     } else
     {

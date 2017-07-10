@@ -480,6 +480,13 @@ function checkOrderForm(frm)
     if (frm.elements[i].name == 'payment' && frm.elements[i].checked)
     {
       paymentSelected = true;
+      var error   = Utils.trim(Ajax.call('flow.php?step=check_userisvip', 'pay_id=' + frm.elements[i].value, null, 'GET', 'TEXT', false));
+
+      if (error) {
+        alert(error);
+        return false;
+      }
+
     }
   }
 
@@ -633,9 +640,26 @@ function getValue(radio_name){
         }
     }
 }
-function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
+function post(URL, PARAMS) {
+  var temp = document.createElement("form");
+  temp.action = URL;
+  temp.method = "post";
+  temp.style.display = "none";
+  for (var x in PARAMS) {
+    var opt = document.createElement("textarea");
+    opt.name = x;
+    opt.value = PARAMS[x];
+    // alert(opt.name)
+    temp.appendChild(opt);
+  }
+  document.body.appendChild(temp);
+  temp.submit();
+  return temp;
+}
 
-  console.log(pay_code);
+function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
+    var  amortizePeriod = 0;
+    var  amortizeType = 0;
 
     if (pay_code == "alipayamortization" || pay_code == "amortization") {
         amortizePeriod = getValue('amortize_period');
@@ -682,6 +706,7 @@ function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
     params.repay_serial_code = repaySerialCode;
     params.amortizePeriod = amortizePeriod;
     params.amortizeType = amortizeType;
-    window.location.href="respond.php?code=" + pay_code + "&params="+ $.toJSON(params);
+
+     post("respond.php?code=" + pay_code , params);
 
 }
