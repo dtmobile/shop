@@ -30,16 +30,25 @@
                 </td>
             </tr>
             <tr>
+                <td width="28%" align="right" bgcolor="#FFFFFF">申请金额：</td>
+                <td width="72%" align="left" bgcolor="#FFFFFF">
+                    {if $borrow.status eq '待审核'}
+                    <span>
+                    <input name="total_money" type="text" value="{$borrow.total_money}" size="25"  placeholder="请输入审批过得金额..."/>元
+                    </span>
+                    <button class="font_20"  onclick="changeTotalMoney()">确认修改</button>
+                    {else}
+                    {$borrow.total_money}
+                    {/if}
+                </td>
+            </tr>
+            <tr>
                 <td width="28%" align="right" bgcolor="#FFFFFF">申请人编号：</td>
                 <td width="72%" align="left" bgcolor="#FFFFFF"><span name="user_id">{$borrow.user_id}</span></td>
             </tr>
             <tr>
                 <td width="28%" align="right" bgcolor="#FFFFFF">贷款编号：</td>
                 <td width="72%" align="left" bgcolor="#FFFFFF"><span name="borrow_id">{$borrow.borrow_id}</span></td>
-            </tr>
-            <tr>
-                <td width="28%" align="right" bgcolor="#FFFFFF">申请金额：</td>
-                <td width="72%" align="left" bgcolor="#FFFFFF">{$borrow.total_money}元</td>
             </tr>
             <tr>
                 <td width="28%" align="right" bgcolor="#FFFFFF">资金用途：</td>

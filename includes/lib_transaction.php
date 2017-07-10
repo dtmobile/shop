@@ -193,7 +193,18 @@ function saveBorrowInfo($userInfo,$borrowInfo)
     $newBorrow['user_opening_bank'] = $borrowInfo['user_opening_bank'];
     $newBorrow['amortize_period'] = $borrowInfo['amortize_period'];
     $newBorrow['amortize_type'] = $borrowInfo['amortize_type'];
-    $newBorrow['status'] = '已审核';
+    $newBorrow['removed'] = 0;
+    $newBorrow['borrow_type'] = $borrowInfo['borrow_type'];
+    if($newBorrow['borrow_type'] == "购物贷")
+    {
+        $newBorrow['status'] = '已打款';
+    }else if($newBorrow['borrow_type'] == "商享贷")
+    {
+        $newBorrow['status'] = '待审核';
+    }else{
+        $newBorrow['status'] = '异常订单';
+    }
+
     $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow'), $newBorrow, 'INSERT');
     $borrowId = $GLOBALS['db']->insert_id();
     if($borrowId<=0)
@@ -209,7 +220,32 @@ function saveBorrowInfo($userInfo,$borrowInfo)
         return "无法保存贷款申请附带信息";
     }
 
-    $errInfo = saveBorrowAmortize($borrowId,$borrowInfo);
+
+    if($newBorrow['borrow_type'] == "购物贷")
+    {
+        $errInfo = saveBorrowAmortize($borrowId,$borrowInfo);
+        if(!empty($errInfo))
+        {
+            $GLOBALS['user']->error = ERR_BORROW_COMMIT_AMORTIZE_FAIL;
+            return "无法保存贷款申请分期信息";
+        }
+    }
+    return "";
+}
+
+function createAmortizeByManual($borrowId)
+{
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('borrow') .
+        " WHERE borrow_id='$borrowId'";
+//    return $sql;
+    $borrowInfo = $GLOBALS['db']->getAll($sql);
+//    return json_encode($borrowInfo);
+    if(count($borrowInfo)==0)
+    {
+        $GLOBALS['user']->error = ERR_BORROW_COMMIT_AMORTIZE_FAIL;
+        return "无法保存贷款申请分期信息";
+    }
+    $errInfo = saveBorrowAmortize($borrowId,$borrowInfo[0]);
     if(!empty($errInfo))
     {
         $GLOBALS['user']->error = ERR_BORROW_COMMIT_AMORTIZE_FAIL;
@@ -349,6 +385,7 @@ function commitBorrowRequest($userInfo, $borrowInfo)
         return false;
     }
 
+    $borrowInfo['borrow_type']="商享贷";
     $errMsg = saveBorrowInfo($userInfo,$borrowInfo);
     if (!empty($errMsg)) {
         $GLOBALS['user']->error = $errMsg;

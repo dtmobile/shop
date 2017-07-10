@@ -83,8 +83,8 @@ function repaySuccess() {
     params.repay_source = repaySource;
     params.repay_serial_code = repaySerialCode;
     params.comment = '';
-    console.log("还款信息如下");
-    console.log(params);
+    // console.log("还款信息如下");
+    // console.log(params);
     Ajax.call('borrow.php?act=repay_info_commit', 'parmas=' + $.toJSON(params),repayInfoCommitResponse, 'POST', 'JSON');
 
 
