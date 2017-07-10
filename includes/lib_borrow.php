@@ -17,6 +17,7 @@ if (!defined('IN_ECS')) {
     die('Hacking attempt');
 }
 //include_once('includes/cls_json.php');
+include_once(ROOT_PATH . 'includes/lib_transaction.php');
 
 function getBorrowByUserId($userId)
 {
@@ -46,6 +47,17 @@ function getBorrowById($userId,$borrowId)
     return $GLOBALS['db']->getRow($sql);
 }
 
+function removeBorrowById($userId, $borrowId)
+{
+    if (empty($userId)) {
+        $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
+        return false;
+    }
+
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow') . " SET removed = 1 "." WHERE user_id='$userId' AND borrow_id='$borrowId'";
+    $result = $GLOBALS['db']->query($sql);
+}
+
 function getAmortizeList($userId,$borrowId)
 {
     if (empty($userId)) {
@@ -58,6 +70,7 @@ function getAmortizeList($userId,$borrowId)
     }
 
     $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('borrow_amortize') . " WHERE borrow_id = '$borrowId' AND user_id='$userId'";
+//    var_dump($sql);
     return $GLOBALS['db']->getAll($sql);
 }
 
@@ -121,7 +134,40 @@ function changeBorrwoStatus($borrowerId,$borrowId,$borrowStatus)
         return "参数不可以为空";
     }
 
+    $borrowId = trim($borrowId);
+
     $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow') . " SET status = '$borrowStatus' "." WHERE user_id='$borrowerId' AND borrow_id='$borrowId'";
+    $result = $GLOBALS['db']->query($sql);
+    if ($result) {
+        if($borrowStatus=='已打款')
+        {
+            $result = createAmortizeByManual($borrowId);
+        }
+        if(empty($result))
+        {
+            return "";
+        }else{
+            return $result;
+        }
+    } else {
+//        return $GLOBALS['db']->errorMsg();
+        return "修改贷款申请状态失败";
+    }
+
+
+
+}
+
+function changeTotalBorrow($borrowerId,$borrowId,$totalMoney)
+{
+    if (empty($borrowerId) || empty($borrowId) || empty($totalMoney))
+    {
+        return "参数不可以为空";
+    }
+
+    $totalMoney = intval($totalMoney);
+
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow') . " SET total_money = '$totalMoney' "." WHERE user_id='$borrowerId' AND borrow_id='$borrowId'";
     $result = $GLOBALS['db']->query($sql);
     if ($result) {
         return "";

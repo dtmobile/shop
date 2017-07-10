@@ -44,8 +44,6 @@ function friendConvert($friendStr)
     foreach ($friendTemp as $key => $friend)
     {
         $firends[] = object_array($friend);
-//        $firends[]=array("friend_id"=>$friend->friend_id, 'friend_name' =>$friend->friend_name,
-//            'friend_phone' =>$friend->friend_phone ,'firend_type'=>$friend->firend_type,'friend_address'=>$friend->friend_address);
     }
     return $firends;
 
@@ -102,7 +100,7 @@ function borrowList()
 
 
     $condition = $GLOBALS['ecs']->table('borrow') . " AS b " .
-        " JOIN " . $GLOBALS['ecs']->table('borrow_attach') . " AS a ON b.borrow_id=a.borrow_id AND b.user_id=a.user_id ";
+        " JOIN " . $GLOBALS['ecs']->table('borrow_attach') . " AS a ON b.borrow_id=a.borrow_id AND b.user_id=a.user_id AND b.removed=0 ";
     if($filter['amortize_status'])
     {
         $inBorrowArray = array();
@@ -127,7 +125,7 @@ function borrowList()
     $filter['page_count'] = $filter['record_count'] > 0 ? ceil($filter['record_count'] / $filter['page_size']) : 1;
 
     /* 查询 */
-    $sql = "SELECT b.borrow_id,b.user_id, b.total_money, b.borrow_purpose, b.borrow_date, b.user_bank_id, b.user_opening_bank, b.amortize_period, b.amortize_type, b.status, a.actual_name FROM " . $condition . " LIMIT " . ($filter['page'] - 1) * $filter['page_size'] . ",$filter[page_size]";
+    $sql = "SELECT b.borrow_id,b.user_id, b.total_money,b.borrow_type, b.borrow_purpose, b.borrow_date, b.user_bank_id, b.user_opening_bank, b.amortize_period, b.amortize_type, b.status, a.actual_name FROM " . $condition . " LIMIT " . ($filter['page'] - 1) * $filter['page_size'] . ",$filter[page_size]";
 
     foreach ($fileds as $filed) {
         $filter[$filed] = stripslashes($filter[$filed]);
@@ -154,6 +152,8 @@ if ($_REQUEST['act'] == 'borrow_list') {
     $borrow_list = borrowList();
 //    var_dump($borrow_list);
 //    return;
+
+    $smarty->assign('admin_name', $_SESSION['admin_name']);
     $smarty->assign('borrow_list', $borrow_list['borrow_list']);
     $smarty->assign('filter', $borrow_list['filter']);
     $smarty->assign('record_count', $borrow_list['record_count']);
@@ -200,6 +200,28 @@ if ($_REQUEST['act'] == 'borrow_list') {
     $smarty->assign('page_count', $borrow_list['page_count']);
 //    $sort_flag  = sort_flag($borrow_list['filter']);
     make_json_result($smarty->fetch('borrow_list.htm'), '', array('filter' => $borrow_list['filter'], 'page_count' => $borrow_list['page_count']));
+} else if ($_REQUEST['act'] == 'remove_borrow') {
+    include_once('../includes/cls_json.php');
+    $json = new JSON;
+
+    /* 根据订单id或订单号查询订单信息 */
+    if (isset($_REQUEST['borrow_id'])) {
+        $borrowerId = intval($_REQUEST['user_id']);
+        $borrowId = intval($_REQUEST['borrow_id']);
+        removeBorrowById($borrowerId,$borrowId);
+
+        $content = array();
+        $result['error'] = 0;
+        $result['message'] = "";
+        die($json->encode($result));
+    } else {
+        /* 如果参数不存在，退出 */
+        die('invalid parameter');
+    }
+
+    /* 显示模板 */
+    assign_query_info();
+    $smarty->display('borror_info.htm');
 }elseif ($_REQUEST['act'] == 'change_borrow_status')
 {
     include_once('../includes/cls_json.php');
@@ -207,13 +229,13 @@ if ($_REQUEST['act'] == 'borrow_list') {
 
     $borrowerId = $_REQUEST['borrower_id'];
     $borrowId = $_REQUEST['borrow_id'];
-    $borrowStatus = $_REQUEST['borrow_status'];
+    $totalMoney = $_REQUEST['borrow_status'];
 
 
     $result = array('error' => 0, 'message' => '');
 //    $params = $json->decode($_POST['parmas']);
     //save params to db
-    $errMsg = changeBorrwoStatus($borrowerId,$borrowId,$borrowStatus);
+    $errMsg = changeBorrwoStatus($borrowerId,$borrowId,$totalMoney);
 
     $content = array();
     if (!empty($errMsg)) {
@@ -227,6 +249,33 @@ if ($_REQUEST['act'] == 'borrow_list') {
     $result['content'] = json_encode($content);
     die($json->encode($result));
     
+}elseif ($_REQUEST['act'] == 'change_total_money')
+{
+    include_once('../includes/cls_json.php');
+    $json = new JSON;
+
+    $borrowerId = $_REQUEST['borrower_id'];
+    $borrowId = $_REQUEST['borrow_id'];
+    $totalMoney = $_REQUEST['total_money'];
+
+
+    $result = array('error' => 0, 'message' => '');
+//    $params = $json->decode($_POST['parmas']);
+    //save params to db
+    $errMsg = changeTotalBorrow($borrowerId,$borrowId,$totalMoney);
+
+    $content = array();
+    if (!empty($errMsg)) {
+        $result['error'] = 1;
+        $result['message'] = $errMsg;
+        $content['change_result'] = false;
+    } else {
+        $content['change_result'] = true;
+//        $content['borrower_id'] = $borrowerId;
+    }
+    $result['content'] = json_encode($content);
+    die($json->encode($result));
+
 }elseif ($_REQUEST['act'] == 'change_amortize_status')
 {
  include_once('../includes/cls_json.php');

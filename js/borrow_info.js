@@ -7,7 +7,6 @@ function changeBorrowStatusResponse(result) {
     }
     if (result.error == 0) {
         alert("修改订单状态成功");
-        location.reload();
     }
     location.reload();
 }
@@ -16,7 +15,6 @@ function changeBorrowStatus() {
     if (r == false) {
         return false;
     }
-
 
     var borrowStatus = document.getElementsByName('borrow_status')[0].value;
     if (Utils.isEmpty(borrowStatus)) {
@@ -27,13 +25,39 @@ function changeBorrowStatus() {
     var userId = document.getElementsByName('user_id')[0].innerText;
     var borrowId = document.getElementsByName('borrow_id')[0].innerText;
 
-    var params = new Object();
-    params.user_id = userId;
-    params.borrow_id = borrowId;
-    params.borrowStatus = borrowStatus;
-    // console.log(params);
     var requestUrl = 'borrow.php?act=change_borrow_status&borrower_id=' + userId + '&borrow_id=' + borrowId + '&borrow_status=' + borrowStatus;
     Ajax.call(requestUrl, '', changeBorrowStatusResponse, 'GET', 'JSON');
+
+}
+
+function changeTotalMoneyResponse(result) {
+    // console.log(result);
+    if (result.message.length > 0) {
+        alert("修改状态错误" + result.message);
+    }
+    if (result.error == 0) {
+        alert("修改贷款总金额成功");
+    }
+    location.reload();
+}
+
+function changeTotalMoney() {
+    var r = confirm("您确认要修改该贷款的总金额？")
+    if (r == false) {
+        return false;
+    }
+
+
+    var total_money = document.getElementsByName('total_money')[0].value;
+    if (Utils.isEmpty(total_money)) {
+        alert("贷款总金额不可以为空");
+        return;
+    }
+
+    var userId = document.getElementsByName('user_id')[0].innerText;
+    var borrowId = document.getElementsByName('borrow_id')[0].innerText;
+    var requestUrl = 'borrow.php?act=change_total_money&borrower_id=' + userId + '&borrow_id=' + borrowId + '&total_money=' + total_money;
+    Ajax.call(requestUrl, '', changeTotalMoneyResponse, 'GET', 'JSON');
 
 }
 

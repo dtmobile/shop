@@ -1,6 +1,6 @@
 {if $full_page}
 {include file="pageheader.htm"}
-{insert_scripts files="../js/utils.js,listtable.js"}
+{insert_scripts files="../js/utils.js,listtable.js,borrow.js"}
 <!-- 贷款申请搜索 -->
 <div class="form-div">
   <form action="javascript:searchOrder()" name="searchForm">
@@ -44,6 +44,7 @@
   <tr>
     <th>贷款编号</th>
     <th>用户名称</th>
+    <th>贷款类型</th>
     <th>贷款总额</th>
     <th>贷款目的</th>
     <th>贷款日期</th>
@@ -58,6 +59,7 @@
   <tr>
   <td valign="top" nowrap="nowrap">{$borrow.borrow_id}</td>
   <td valign="top" nowrap="nowrap">{$borrow.actual_name}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.borrow_type}</td>
   <td valign="top" nowrap="nowrap">{$borrow.total_money}</td>
   <td valign="top" nowrap="nowrap">{$borrow.borrow_purpose}</td>
   <td valign="top" nowrap="nowrap">{$borrow.borrow_date}</td>
@@ -68,6 +70,12 @@
   <td valign="top" nowrap="nowrap">{$borrow.status}</td>
   <td align="center" valign="top"  nowrap="nowrap">
      <a href="borrow.php?act=info&borrow_id={$borrow.borrow_id}&user_id={$borrow.user_id}">查看</a>
+
+    {if $admin_name eq 'superadmin'}
+    <!--<a href="borrow.php?act=remove_borrow&borrow_id={$borrow.borrow_id}&user_id={$borrow.user_id}">删除</a>-->
+    <a onclick="removeBorrow({$borrow.borrow_id},{$borrow.user_id})">删除</a>
+
+    {/if}
     </td>
   </tr>
   {/foreach}
@@ -113,7 +121,7 @@ function searchOrder()
   listTable.loadList();
 }
 
-    listTable.listCallback = function(result, txt) 
+    listTable.listCallback = function(result, txt)
     {
         if (result.error > 0) 
         {
