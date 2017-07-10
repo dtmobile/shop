@@ -193,7 +193,7 @@ function saveBorrowInfo($userInfo,$borrowInfo)
     $newBorrow['user_opening_bank'] = $borrowInfo['user_opening_bank'];
     $newBorrow['amortize_period'] = $borrowInfo['amortize_period'];
     $newBorrow['amortize_type'] = $borrowInfo['amortize_type'];
-    $newBorrow['status'] = '待审核';
+    $newBorrow['status'] = '已审核';
     $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('borrow'), $newBorrow, 'INSERT');
     $borrowId = $GLOBALS['db']->insert_id();
     if($borrowId<=0)
@@ -435,6 +435,7 @@ function getBorrowInfoForAmortizaton($user_id, $total_money, $order_sn ,$amortiz
     $profile['user_bank_id'] = 0;
     $profile['identity_card'] = 0;
     $profile['user_opening_bank'] = 0;
+    $profile['borrow_type'] = '购物贷';
     return $profile;
 }
 function getUserInfoFromPost($_POST, $user_id)

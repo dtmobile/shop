@@ -149,6 +149,7 @@ $_LANG['not_fount_consignee'] = '对不起，您选定的收货地址不存在�
 
 $_LANG['goods_amount_not_enough'] = '您购买的商品没有达到本店的最低限购金额 %s ，不能提交订单。';
 $_LANG['balance_not_enough'] = '您的余额不足以支付整个订单，请选择其他支付方式';
+$_LANG['vip_balance_not_enough'] = '尊敬的VIP用户，您的信用额度已经不足此订单的70%，无法进行分期，请选择其他支付方式';
 $_LANG['select_shipping'] = "配送方式";
 $_LANG['select_payment'] = "支付方式";
 $_LANG['order_amount'] = "应付总额";
