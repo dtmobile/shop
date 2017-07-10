@@ -266,17 +266,44 @@ function userInfoValid(frm) {
         msg += '请选择单位性质\n';
     }
 
-    var friends = frm.getElementsByClassName('friendPhone');
-    for(var i=0;i<friends.length;i++)
+
+    var firendPropert = new Array( {
+        "key":"friendName",
+        "cn":"姓名"
+    }, {
+        "key":"friendPhone",
+        "cn":"手机号"
+    }, {
+        "key":"friendRelation",
+        "cn":"关系"
+    }, {
+        "key":"friendAddress",
+        "cn":"住址"
+    });
+    for(var i=0;i<firendPropert.length;i++)
     {
-        if (!Utils.isEmpty(friends[i].value)) {
-            if (!Utils.isInt(friends[i].value)) {
-                var friendIndex = i+1;
-                msg += '第'+friendIndex+'位朋友的电话格式不正确\n';
+        var property = frm.getElementsByClassName(firendPropert[i].key);
+        var friendIndex = 0;
+        for(var j=0;j<property.length;j++)
+        {
+            if (Utils.isEmpty(property[j].value)) {
+                friendIndex = j+1;
+                msg += '第'+friendIndex+'位好友的'+firendPropert[i].cn+'信息不完整\n';
             }
         }
     }
 
+
+    // var friends = frm.getElementsByClassName('friendPhone');
+    // for(var i=0;i<friends.length;i++)
+    // {
+    //     if (!Utils.isEmpty(friends[i].value)) {
+    //         if (!Utils.isInt(friends[i].value)) {
+    //             var friendIndex = i+1;
+    //             msg += '第'+friendIndex+'位朋友的电话格式不正确\n';
+    //         }
+    //     }
+    // }
 
     if (msg.length > 0) {
         alert(msg);

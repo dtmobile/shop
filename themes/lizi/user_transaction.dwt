@@ -374,14 +374,14 @@
           {foreach from=$profile.friends item=friend key=key}
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">
-                  <input name="friend_id_{$key}" type="hidden" value="{$friend.friend_id}"  />
-                  <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="inputBg" placeholder="请输入亲属(好友)姓名"/>
+                  姓名<input name="friend_id_{$key}" type="hidden" value="{$friend.friend_id}"  />
+                  <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="friendName" placeholder="请输入亲属(好友)姓名"/>
                   </td>
               <td width="72%" align="left" bgcolor="#FFFFFF">关系
-                  <input name="firend_type_{$key}" type="text" value="{$friend.firend_type}" size="25" class="inputBg" placeholder="请输入亲属(好友)与您的关系"/>
+                  <input name="firend_type_{$key}" type="text" value="{$friend.firend_type}" size="25" class="friendRelation" placeholder="请输入亲属(好友)与您的关系"/>
                   &nbsp;&nbsp;电话
                   <input name="friend_phone_{$key}" type="text" value="{$friend.friend_phone}" size="25" class="friendPhone" placeholder="请输入亲属(好友)的手机号"/>
-                  &nbsp;&nbsp;住址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="inputBg" placeholder="请输入亲属(好友)的住址"/>
+                  &nbsp;&nbsp;住址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="friendAddress" placeholder="请输入亲属(好友)的住址"/>
               </td>
           </tr>
           {/foreach}
