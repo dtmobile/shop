@@ -30,7 +30,6 @@ function getBorrowByUserId($userId)
 
 function userIsVIP($userId)
 {
-//    SELECT COUNT(*) FROM `ecs_users` as u JOIN ecs_user_rank as r ON r.rank_name='VIP' AND r.rank_id=u.user_rank AND u.user_id=12;
     $sql = "SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('user_rank') . " as r JOIN ".$GLOBALS['ecs']->table('users') ." as u ON user_id = '$userId' AND r.rank_name='VIP' AND r.rank_id=u.user_rank";
     $count = $GLOBALS['db']->getOne($sql);
 //    echo 'email_is_same value is ' . $count;

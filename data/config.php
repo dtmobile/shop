@@ -30,7 +30,7 @@ define('AUTH_KEY', 'this is a key');
 
 define('OLD_AUTH_KEY', '');
 
-define('API_TIME', '2017-07-07 15:47:42');
+define('API_TIME', '2017-07-10 10:59:12');
 
 define('DEBUG_MODE', 3);
 //0 //禁用调试模式
