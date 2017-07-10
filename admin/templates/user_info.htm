@@ -2,7 +2,7 @@
 {include file="pageheader.htm"}
 <div class="main-div">
 <form method="post" action="users.php" name="theForm" onsubmit="return validate()">
-<table width="100%" >
+<table id='userinfo' width="100%" >
   <tr>
     <td class="label">{$lang.username}:</td>
     <td>{if $form_action eq "update"}{$user.user_name}<input type="hidden" name="username" value="{$user.user_name}" />{else}<input type="text" name="username" maxlength="60" value="{$user.user_name}" />{$lang.require_field}{/if}</td>
@@ -51,11 +51,17 @@
   {/if}
   <tr>
     <td class="label">{$lang.user_rank}:</td>
-    <td><select name="user_rank">
-      <option value="0">{$lang.not_special_rank}</option>
+    <td><select name="user_rank" onchange="checkvip(this)">
+      <option value="0">{$lang.not_special_rank} </option>
       {html_options options=$special_ranks selected=$user.user_rank}
     </select></td>
   </tr>
+  {if $user.rank_name eq "VIP"}
+    <tr id="vipCardId">
+      <td class="label">{$lang.user_vip_card}:</td>
+      <td> <input name="vipcard" type="text" id="vipcard" value="{$user.vip_card}" size="40" /></td>
+    </tr>
+  {/if}
   <tr>
     <td class="label">{$lang.gender}:</td>
     <td>{html_radios name="sex" options=$lang.sex checked=$user.sex }</td>
@@ -138,6 +144,31 @@ onload = function()
     startCheckOrder();
 }
 
+function onAddTR(trIndex)
+{
+    var tb = document.getElementById("userinfo");
+    var vipCardTr = tb.insertRow(trIndex);//添加新行，trIndex就是要添加的位置
+    vipCardTr.setAttribute('id', 'vipCardId');
+    var newTd1 = vipCardTr.insertCell();
+    newTd1.innerHTML = '{$lang.user_vip_card}:';
+    newTd1.setAttribute('class', 'label');
+    var newTd2 = vipCardTr.insertCell();
+    newTd2.innerHTML = '<input name="vipcard" type="text" id="vipcard" value="{$user.vip_card}" size="40" />';
+}
+
+function checkvip(obj)
+{
+    var txt=obj.options[obj.options.selectedIndex].text;
+    if (txt == 'VIP') {
+      onAddTR(obj.parentNode.parentNode.rowIndex + 1);
+    } else {
+        var vipcard = document.getElementById("vipCardId");
+        if (vipcard) {
+            var tb = document.getElementById("userinfo");
+            vipcard.parentNode.removeChild(vipcard);
+        }
+    }
+}
 /**
  * 检查表单输入的数据
  */
@@ -177,6 +208,14 @@ function validate()
           {
             validator.addErrorMsg(password_len_err);
           }
+        }
+    }
+    var user_rank_obj = document.forms['theForm'].elements['user_rank'];
+    var rank_name = user_rank_obj.options[user_rank_obj.options.selectedIndex].text;
+    if (rank_name == "VIP") {
+        var vip_card = document.forms['theForm'].elements['vipcard'];
+        if (vip_card.value.length == 0) {
+            validator.addErrorMsg(vip_card_empty);
         }
     }
 

@@ -289,6 +289,11 @@ elseif ($_REQUEST['act'] == 'edit')
         }
     }
 
+    // 去除rank_name
+    $sql = "SELECT  rank_name  FROM ".$ecs->table('user_rank')."  where rank_id=". $user['user_rank'];
+    $row = $db->GetRow($sql);
+    $user['rank_name'] = $row['rank_name'];
+
     $smarty->assign('extend_info_list', $extend_info_list);
 
     /* 当前会员推荐信息 */

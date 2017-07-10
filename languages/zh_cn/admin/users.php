@@ -47,6 +47,7 @@ $_LANG['user_money'] = '可用资金';
 $_LANG['frozen_money'] = '冻结资金';
 $_LANG['credit_line'] = '信用额度';
 $_LANG['user_rank'] = '会员等级';
+$_LANG['user_vip_card'] = '会员卡号';
 $_LANG['not_special_rank'] = '非特殊等级';
 $_LANG['view_detail_account'] = '查看明细';
 $_LANG['parent_user'] = '推荐人';
@@ -116,4 +117,5 @@ $_LANG['js_languages']['password_not_same'] = '输入的密码和确认密码不
 $_LANG['js_languages']['invalid_pay_points'] = '消费积分数不是一个整数。';
 $_LANG['js_languages']['invalid_rank_points'] = '等级积分数不是一个整数。';
 $_LANG['js_languages']['password_len_err'] = '新密码和确认密码的长度不能小于6';
+$_LANG['js_languages']['vip_card_empty'] = '升级会员需要绑定会员卡';
 ?>
