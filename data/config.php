@@ -30,9 +30,9 @@ define('AUTH_KEY', 'this is a key');
 
 define('OLD_AUTH_KEY', '');
 
-define('API_TIME', '2017-07-10 18:57:14');
+define('API_TIME', '2017-07-11 19:53:37');
 
-define('DEBUG_MODE', 3);
+define('DEBUG_MODE', 2);
 //0 //禁用调试模式
 //1 //显示所有错误
 //2 //禁用Smarty缓存
