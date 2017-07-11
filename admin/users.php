@@ -289,7 +289,7 @@ elseif ($_REQUEST['act'] == 'edit')
         }
     }
 
-    // 去除rank_name
+    // 取出rank_name
     $sql = "SELECT  rank_name  FROM ".$ecs->table('user_rank')."  where rank_id=". $user['user_rank'];
     $row = $db->GetRow($sql);
     $user['rank_name'] = $row['rank_name'];
@@ -356,6 +356,7 @@ elseif ($_REQUEST['act'] == 'update')
     $birthday = $_POST['birthdayYear'] . '-' .  $_POST['birthdayMonth'] . '-' . $_POST['birthdayDay'];
     $rank = empty($_POST['user_rank']) ? 0 : intval($_POST['user_rank']);
     $credit_line = empty($_POST['credit_line']) ? 0 : floatval($_POST['credit_line']);
+    $vipcard = empty($_POST['vipcard']) ? 0 : intval($_POST['vipcard']);
 
     $users  =& init_users();
 
@@ -407,6 +408,7 @@ elseif ($_REQUEST['act'] == 'update')
     $other =  array();
     $other['credit_line'] = $credit_line;
     $other['user_rank'] = $rank;
+    $other['vipcard'] = $vipcard;
 
     $other['msn'] = isset($_POST['extend_field1']) ? htmlspecialchars(trim($_POST['extend_field1'])) : '';
     $other['qq'] = isset($_POST['extend_field2']) ? htmlspecialchars(trim($_POST['extend_field2'])) : '';
