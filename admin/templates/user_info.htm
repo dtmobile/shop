@@ -59,7 +59,7 @@
   {if $user.rank_name eq "VIP"}
     <tr id="vipCardId">
       <td class="label">{$lang.user_vip_card}:</td>
-      <td> <input name="vipcard" type="text" id="vipcard" value="{$user.vip_card}" size="40" /></td>
+      <td> <input name="vipcard" type="text" id="vipcard" value="{$user.vipcard}" size="40" /></td>
     </tr>
   {/if}
   <tr>
@@ -469,7 +469,7 @@ function onAddTR(trIndex)
     newTd1.innerHTML = '{$lang.user_vip_card}:';
     newTd1.setAttribute('class', 'label');
     var newTd2 = vipCardTr.insertCell();
-    newTd2.innerHTML = '<input name="vipcard" type="text" id="vipcard" value="{$user.vip_card}" size="40" />';
+    newTd2.innerHTML = '<input name="vipcard" type="text" id="vipcard" value="{$user.vipcard}" size="40" />';
 }
 
 function checkvip(obj)
