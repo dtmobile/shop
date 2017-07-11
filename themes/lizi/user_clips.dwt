@@ -46,10 +46,7 @@
           <div class="f_l" style="width:350px;">
           <h5><span>{$lang.your_account}</span></h5>
           <div class="blank"></div>
-          {$lang.your_surplus}:<a href="user.php?act=account_log" style="color:#f70;">{$info.surplus}</a><br />
-          <!-- {if $info.credit_line gt 0} 如果有信用额度 -->
-          {$lang.credit_line}:{$info.formated_credit_line}<br />
-          <!-- {/if} -->
+          {$lang.credit_line}:{$info.formated_show_credit_line}<br />
           {$lang.your_bonus}:<a href="user.php?act=bonus" style="color:#f70;">{$info.bonus}</a><br />
           {$lang.your_integral}:{$info.integral}<br />
           </div>

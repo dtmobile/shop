@@ -479,6 +479,7 @@ function getBorrowInfoForAmortizaton($user_id, $total_money, $order_sn ,$amortiz
     $profile['user_bank_id'] = 0;
     $profile['identity_card'] = 0;
     $profile['user_opening_bank'] = 0;
+    $profile['borrow_type'] = '购物贷';
     return $profile;
 }
 function getUserInfoFromPost($_POST, $user_id)

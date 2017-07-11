@@ -1583,6 +1583,12 @@ elseif ($_REQUEST['step'] == 'done')
     include_once('includes/lib_clips.php');
     include_once('includes/lib_payment.php');
 
+    /* 分期支付类型*/
+    $amortization_pay = array(
+        'alipayamortization',
+        'amortization',
+    );
+
     /* 取得购物类型 */
     $flow_type = isset($_SESSION['flow_type']) ? intval($_SESSION['flow_type']) : CART_GENERAL_GOODS;
 
@@ -1846,6 +1852,21 @@ elseif ($_REQUEST['step'] == 'done')
             $order['surplus'] = $order['order_amount'];
             $order['order_amount'] = 0;
         }
+    } else if ($order['order_amount'] > 0 && in_array($order['pay_code'], $amortization_pay)) {
+        $order['down_payment'] = $order['order_amount'] * 0.3;
+        $order['down_payment_formated']  =  price_format($order['down_payment'] , false);
+        $order['amorization_money'] = $order['order_amount'] -  $order['down_payment'];
+        $order['amorization_money_formated']  =  price_format($order['amorization_money'] , false);
+
+
+        if($order['surplus'] >0) { //余额支付里如果输入了一个金额
+           if ( ($order['amorization_money'] + $order['surplus']) > ($user_info['user_money'] + $user_info['credit_line'])) {
+               show_message($_LANG['vip_balance_not_enough']);
+           }
+        } else if ( $order['amorization_money'] > ($user_info['user_money'] + $user_info['credit_line'])) {
+            show_message($_LANG['vip_balance_not_enough']);
+        }
+        $order['surplus'] = $order['surplus'] + $order['amorization_money'];
     }
 
     /* 如果订单金额为0（使用余额或积分或红包支付），修改订单状态为已确认、已付款 */
@@ -2095,18 +2116,9 @@ elseif ($_REQUEST['step'] == 'done')
     /* 清除缓存，否则买了商品，但是前台页面读取缓存，商品数量不减少 */
     clear_all_files();
 
-    $amortization_pay = array(
-        'alipayamortization',
-        'amortization',
-    );
 
-    /* 分期支付*/
-    if ($order['order_amount'] > 0 && in_array($order['pay_code'], $amortization_pay)) {
-            $order['down_payment'] = $order['order_amount'] * 0.3;
-            $order['down_payment_formated']  =  price_format($order['down_payment'] , false);
-            $order['amorization_money'] = $order['order_amount'] -  $order['down_payment'];
-            $order['amorization_money_formated']  =  price_format($order['amorization_money'] , false);
-    }
+
+
     /* 插入支付日志 */
     $order['log_id'] = insert_pay_log($new_order_id, $order['order_amount'], PAY_ORDER, 0, $order['down_payment'], $order['amorization_money']);
 
