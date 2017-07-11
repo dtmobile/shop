@@ -109,7 +109,7 @@ function dengebenxi()
 //先息后本还款方，前（3-1）个月中每月应还金额=3000，第3个月每月应还金额=500000+3000=503000
 function saveBorrowAmortize($borrowId,$borrowInfo)
 {
-   $totalRMB = floatval($borrowInfo['total_money']) ;
+    $totalRMB = floatval($borrowInfo['total_money']) ;
     $periodCount = intval($borrowInfo['amortize_period']);
     $rate = 0.006;
     $MI = $totalRMB*$rate;
@@ -122,6 +122,7 @@ function saveBorrowAmortize($borrowId,$borrowInfo)
         $newBorrowAmortize = array();
         $newBorrowAmortize['borrow_id']=$borrowId;
         $newBorrowAmortize['user_id']=$borrowInfo['user_id'];
+        $newBorrowAmortize['principal_money']=$totalRMB;
         $newBorrowAmortize['amortize_need_money'] = $ALL;
         $newBorrowAmortize['amortize_repay_money']=0.0;
         $newBorrowAmortize['amortize_date']=date('Y-m-d',strtotime("$today +1 month"));
@@ -145,6 +146,8 @@ function saveBorrowAmortize($borrowId,$borrowInfo)
             $newBorrowAmortize = array();
             $newBorrowAmortize['borrow_id']=$borrowId;
             $newBorrowAmortize['user_id']=$borrowInfo['user_id'];
+            $newBorrowAmortize['principal_money']= round($totalRMB / $periodCount,2) ;
+
             $newBorrowAmortize['amortize_need_money'] = $needMoneyPerMonth;
             $newBorrowAmortize['amortize_repay_money']=0.0;
             $newBorrowAmortize['amortize_date']=$amortizeDate;
@@ -160,14 +163,18 @@ function saveBorrowAmortize($borrowId,$borrowInfo)
         for ($payIndex=0;$payIndex<$periodCount;$payIndex++)
         {
             $needMoneyPerMonth = $MI ;
+            $principalMoney = 0;
+//            var_dump($needMoneyPerMonth);
             if($payIndex==$periodCount-1)
             {
                 $needMoneyPerMonth = $totalRMB + $MI; //最后一期
+                $principalMoney = $totalRMB;
             }
             $amortizeDate = date('Y-m-d',strtotime("$amortizeDate +1 month"));
             $newBorrowAmortize = array();
             $newBorrowAmortize['borrow_id']=$borrowId;
             $newBorrowAmortize['user_id']=$borrowInfo['user_id'];
+            $newBorrowAmortize['principal_money']=$principalMoney;
             $newBorrowAmortize['amortize_need_money'] = $needMoneyPerMonth;
             $newBorrowAmortize['amortize_repay_money']=0.0;
             $newBorrowAmortize['amortize_date']=$amortizeDate;

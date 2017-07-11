@@ -49,6 +49,12 @@ function friendConvert($friendStr)
 
 }
 
+function AmoratizeRepayTimeOut()
+{
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow_amortize') . "SET `status`='逾期未还' WHERE  TO_DAYS(NOW()) - TO_DAYS(amortize_date) > 0 AND amortize_repay_money=0";
+    $GLOBALS['db']->query($sql);
+}
+
 function borrowList()
 {
     $fileds = array('actual_name', 'identity_card', 'mobile_phone', 'borrow_id', 'total_money', 'user_bank_id', 'borrow_status','amortize_status');
@@ -104,8 +110,18 @@ function borrowList()
     if($filter['amortize_status'])
     {
         $inBorrowArray = array();
-        $sql = "SELECT DISTINCT borrow_id FROM " . $GLOBALS['ecs']->table('borrow_amortize') . " WHERE  `status`='{$filter['amortize_status']}'";
+
+        if ($filter['amortize_status']=='逾期未还')
+        {
+            AmoratizeRepayTimeOut();
+            $sql = "SELECT DISTINCT borrow_id FROM " . $GLOBALS['ecs']->table('borrow_amortize') . " WHERE  TO_DAYS(NOW()) - TO_DAYS(amortize_date) > 0 AND amortize_repay_money=0";
+
+        }else{
+            $sql = "SELECT DISTINCT borrow_id FROM " . $GLOBALS['ecs']->table('borrow_amortize') . " WHERE  `status`='{$filter['amortize_status']}'";
+        }
+
         $result = $GLOBALS['db']->getAll($sql);
+
         foreach ($result as $borrow)
         {
             $inBorrowArray[]=$borrow['borrow_id'];
@@ -160,7 +176,7 @@ if ($_REQUEST['act'] == 'borrow_list') {
     $smarty->assign('page_count', $borrow_list['page_count']);
 
     $smarty->assign('borrow_status_list', array("待审核"=>"待审核","已打款"=>"已打款","未通过"=>"未通过")); //'还款中','已还清','删除'
-    $smarty->assign('amortize_status_list', array("待审核"=>"待审核","未还款"=>"未还款","已还款"=>"已还款")); //'还款中','已还清','删除'
+    $smarty->assign('amortize_status_list', array("待审核"=>"待审核","未还款"=>"未还款","已还款"=>"已还款","逾期未还"=>"逾期未还"));
 
     /* 显示模板 */
     assign_query_info();
