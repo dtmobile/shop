@@ -90,15 +90,16 @@ function changeCreditLine($user_id, $borrow_id, $amortize_id)
         return false;
     }
 
-    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('ecs_borrow_amortize') . " WHERE amortize_id = '$amortize_id' AND borrow_id = '$borrow_id' AND user_id='$user_id'";
-    $row = $GLOBALS['db']->getRow($sql);
 
-    if ($row && $row['borrow_type'] == '购物贷' ) {
+    $b_sql = "SELECT borrow_type,borrow_purpose FROM " . $GLOBALS['ecs']->table('borrow') . " WHERE  borrow_id = '$borrow_id' AND user_id='$user_id'";
+    $b_row = $GLOBALS['db']->getRow($b_sql);
+
+    if ($b_row && isset($b_row['borrow_type']) && $b_row['borrow_type'] == '购物贷' ) {
         require_once(ROOT_PATH . 'includes/lib_common.php');
+        $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('borrow_amortize') . " WHERE amortize_id = '$amortize_id' AND borrow_id = '$borrow_id' AND user_id='$user_id'";
+        $row = $GLOBALS['db']->getRow($sql);
         if ($row['principal_money'] > 0) {
-            $b_sql = "SELECT borrow_purpose FROM " . $GLOBALS['ecs']->table('ecs_borrow') . " WHERE  borrow_id = '$borrow_id' AND user_id='$user_id'";
-            $b_row = $GLOBALS['db']->getRow($b_sql);
-            log_account_change($user_id, $row['principal_money'], 0, 0, 0, sprintf($GLOBALS['_LANG']['return_order_credit_line'], $b_row['borrow_purpose']));
+            log_account_change($user_id, $row['principal_money'], 0, 0, 0, sprintf("由于还款成功（ %s ），增加信用额度", $b_row['borrow_purpose']));
         }
     }
     return true;
@@ -138,10 +139,7 @@ function amortizeRepayCommit($params)
     if (!$result) {
          return $GLOBALS['db']->errorMsg();
     }
-     $ret = changeCreditLine($params->user_id,$params->borrow_id , $params->amortize_id);
-    if (!$ret) {
-        return $GLOBALS['db']->errorMsg();
-    }
+
     return "";
 }
 
