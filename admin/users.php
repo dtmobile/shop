@@ -383,7 +383,7 @@ elseif ($_REQUEST['act'] == 'update') {
     $other = array();
     $other['credit_line'] = $credit_line;
     $other['user_rank'] = $rank;
-
+   $other['vipdcard'] = $vipcard;
     $other['msn'] = isset($_POST['extend_field1']) ? htmlspecialchars(trim($_POST['extend_field1'])) : '';
     $other['qq'] = isset($_POST['extend_field2']) ? htmlspecialchars(trim($_POST['extend_field2'])) : '';
     $other['office_phone'] = isset($_POST['extend_field3']) ? htmlspecialchars(trim($_POST['extend_field3'])) : '';
