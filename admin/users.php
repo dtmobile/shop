@@ -198,8 +198,10 @@ elseif ($_REQUEST['act'] == 'edit') {
     $user = $users->get_user_info($row['user_name']);
 
     $sql = "SELECT u.user_id, u.sex, u.birthday, u.pay_points, u.rank_points, u.user_rank , u.user_money, u.frozen_money, u.credit_line, u.parent_id, u2.user_name as parent_username, u.qq, u.msn,
-    u.office_phone, u.home_phone, u.mobile_phone" .
-        " FROM " . $ecs->table('users') . " u LEFT JOIN " . $ecs->table('users') . " u2 ON u.parent_id = u2.user_id WHERE u.user_id='$_GET[id]'";
+    u.office_phone, u.home_phone, u.mobile_phone,u.vipcard".
+        " FROM " .$ecs->table('users'). " u LEFT JOIN " . $ecs->table('users') . " u2 ON u.parent_id = u2.user_id WHERE u.user_id='$_GET[id]'";
+
+
 
     $row = $db->GetRow($sql);
 
@@ -215,16 +217,19 @@ elseif ($_REQUEST['act'] == 'edit') {
         $user['credit_line'] = $row['credit_line'];
         $user['formated_user_money'] = price_format($row['user_money']);
         $user['formated_frozen_money'] = price_format($row['frozen_money']);
-        $user['parent_id'] = $row['parent_id'];
-        $user['parent_username'] = $row['parent_username'];
-        $user['qq'] = $row['qq'];
-        $user['msn'] = $row['msn'];
-        $user['office_phone'] = $row['office_phone'];
-        $user['home_phone'] = $row['home_phone'];
-        $user['mobile_phone'] = $row['mobile_phone'];
-    } else {
-        $link[] = array('text' => $_LANG['go_back'], 'href' => 'users.php?act=list');
-        sys_msg($_LANG['username_invalid'], 0, $links);
+        $user['parent_id']      = $row['parent_id'];
+        $user['parent_username']= $row['parent_username'];
+        $user['qq']             = $row['qq'];
+        $user['msn']            = $row['msn'];
+        $user['office_phone']   = $row['office_phone'];
+        $user['home_phone']     = $row['home_phone'];
+        $user['mobile_phone']   = $row['mobile_phone'];
+        $user['vipcard']   = $row['vipcard'];
+    }
+    else
+    {
+          $link[] = array('text' => $_LANG['go_back'], 'href'=>'users.php?act=list');
+          sys_msg($_LANG['username_invalid'], 0, $links);
 //        $user['sex']            = 0;
 //        $user['pay_points']     = 0;
 //        $user['rank_points']    = 0;
@@ -333,6 +338,8 @@ elseif ($_REQUEST['act'] == 'update') {
     $birthday = $_POST['birthdayYear'] . '-' . $_POST['birthdayMonth'] . '-' . $_POST['birthdayDay'];
     $rank = empty($_POST['user_rank']) ? 0 : intval($_POST['user_rank']);
     $credit_line = empty($_POST['credit_line']) ? 0 : floatval($_POST['credit_line']);
+    $vipcard = empty($_POST['vipcard']) ? 0 : $_POST['vipcard'];
+
 
     $users =& init_users();
 

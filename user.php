@@ -92,6 +92,7 @@ if ($action == 'default') {
     include_once(ROOT_PATH . 'includes/lib_clips.php');
     if ($rank = get_rank_info()) {
         $smarty->assign('rank_name', sprintf($_LANG['your_level'], $rank['rank_name']));
+        $smarty->assign('real_rank_name',  $rank['rank_name']);
         if (!empty($rank['next_rank_name'])) {
             $smarty->assign('next_rank_name', sprintf($_LANG['next_level'], $rank['next_rank'], $rank['next_rank_name']));
         }
@@ -1584,6 +1585,13 @@ elseif ($action == 'account_detail') {
     if (empty($surplus_amount)) {
         $surplus_amount = 0;
     }
+    //获取剩余余额
+    $credit_line = get_user_credit_line($user_id);
+    if (empty($credit_line)) {
+        $credit_line = 0;
+    }
+
+    $show_credit_line = $credit_line + $surplus_amount;
 
     //获取余额记录
     $account_log = array();
@@ -1606,6 +1614,7 @@ elseif ($action == 'account_detail') {
 
     //模板赋值
     $smarty->assign('surplus_amount', price_format($surplus_amount, false));
+    $smarty->assign('show_credit_line', price_format($show_credit_line, false));
     $smarty->assign('account_log', $account_log);
     $smarty->assign('pager', $pager);
     $smarty->display('user_transaction.dwt');

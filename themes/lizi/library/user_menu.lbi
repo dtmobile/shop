@@ -49,8 +49,8 @@
                     <a class="{if $action eq 'bonus'|| $action eq 'order_detail'}on{/if}" href="user.php?act=bonus">{$lang.label_bonus}</a>
                     
                      <a class="{if $action eq 'track_packages'}on{/if}" href="user.php?act=track_packages">{$lang.label_track_packages}</a>
-                     
-                     <a class="{if $action eq 'account_log'}on{/if}" href="user.php?act=account_log">{$lang.label_user_surplus}</a>
+
+                     <a class="{if $action eq 'account_log'}on{/if}" href="user.php?act=account_detail">{$lang.label_user_surplus}</a>
              
                 </li>
                
