@@ -114,6 +114,17 @@
   </tr>
   {/if}
 
+
+  <tr>
+    <td colspan="2" align="center">
+      <input type="submit" value="{$lang.button_submit}" class="button" />
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+      <input type="hidden" name="act" value="{$form_action}" />
+      <input type="hidden" name="id" value="{$user.user_id}" />    </td>
+  </tr>
+
+
+
   <tr style="background-color:#09c762;">
     <td width="100%" align="center" colspan="2"><strong>基本情况</strong></td>
   </tr>
@@ -122,29 +133,29 @@
     <td width="72%" align="left" bgcolor="#FFFFFF">{$profile.actual_name}</td>
   </tr>
   <!--<tr>-->
-    <!--<td width="28%" align="right" bgcolor="#FFFFFF">出生日期：</td>-->
-    <!--<td width="72%" align="left" bgcolor="#FFFFFF"> {$profile.birthday}-->
-    <!--</td>-->
+  <!--<td width="28%" align="right" bgcolor="#FFFFFF">出生日期：</td>-->
+  <!--<td width="72%" align="left" bgcolor="#FFFFFF"> {$profile.birthday}-->
+  <!--</td>-->
   <!--</tr>-->
   <!--<tr>-->
-    <!--<td width="28%" align="right" bgcolor="#FFFFFF">性别：</td>-->
-    <!--<td width="72%" align="left" bgcolor="#FFFFFF">-->
-      <!--{if $profile.sex==1}-->
-      <!--男-->
-      <!--{else}-->
-      <!--女-->
-      <!--{/if}-->
-    <!--</td>-->
+  <!--<td width="28%" align="right" bgcolor="#FFFFFF">性别：</td>-->
+  <!--<td width="72%" align="left" bgcolor="#FFFFFF">-->
+  <!--{if $profile.sex==1}-->
+  <!--男-->
+  <!--{else}-->
+  <!--女-->
+  <!--{/if}-->
+  <!--</td>-->
   <!--</tr>-->
   <tr>
     <td width="28%" align="right" bgcolor="#FFFFFF">手机号码：</td>
     <td width="72%" align="left" bgcolor="#FFFFFF">{$profile.mobile_phone}</td>
   </tr>
   <!--<tr>-->
-    <!--<td width="28%" align="right" bgcolor="#FFFFFF">电子邮件：</td>-->
-    <!--<td width="72%" align="left" bgcolor="#FFFFFF">-->
-      <!--{$profile.email}-->
-    <!--</td>-->
+  <!--<td width="28%" align="right" bgcolor="#FFFFFF">电子邮件：</td>-->
+  <!--<td width="72%" align="left" bgcolor="#FFFFFF">-->
+  <!--{$profile.email}-->
+  <!--</td>-->
   <!--</tr>-->
   <tr>
     <td width="28%" align="right" bgcolor="#FFFFFF">身份证号：</td>
@@ -409,33 +420,6 @@
   </tr>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <tr>
-    <td colspan="2" align="center">
-      <input type="submit" value="{$lang.button_submit}" class="button" />
-      <input type="reset" value="{$lang.button_reset}" class="button" />
-      <input type="hidden" name="act" value="{$form_action}" />
-      <input type="hidden" name="id" value="{$user.user_id}" />    </td>
-  </tr>
 </table>
 
 </form>

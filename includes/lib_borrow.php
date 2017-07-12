@@ -273,12 +273,17 @@ function amortizeRepayCommit($params)
         return '支付流水号不可以为空';
     }
 
-    $repayDate =  date("Y-m-d",time());
+    $repayDate =  date("Y-m-d H:i:s",time());
     $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow_amortize') . " SET amortize_repay_money = '$params->amortize_repay_money',repay_source='$params->repay_source', repay_serial_code='$params->repay_serial_code',repay_date='$repayDate',status='待审核' "." WHERE amortize_id='$params->amortize_id' AND borrow_id='$params->borrow_id' AND user_id = '$params->user_id'";
 //    echo $sql;
     $result = $GLOBALS['db']->query($sql);
     if (!$result) {
          return $GLOBALS['db']->errorMsg();
+    }
+    $result = changeCreditLine($params->user_id,$params->borrow_id,$params->amortize_id);
+    if (!$result)
+    {
+        return "恢复信用额度失败";
     }
 
     return "";
