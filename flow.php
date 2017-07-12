@@ -1546,9 +1546,16 @@ elseif ($_REQUEST['step'] == 'check_surplus')
     $pay_id   = $_GET['pay_id'];
     $payment = payment_info($pay_id);
     include_once(ROOT_PATH . 'includes/lib_borrow.php');
+
+
     if (!userIsVIP($user_id) && in_array($payment['pay_code'], $amortization_pay))
     {
         die('非 VIP 用户不可以使用分期，请申请为VIP 后再使用分期功能');
+    }
+    if (userIsVIP($user_id)  && !userinfoComplete($user_id)) {
+
+        /* 用户信息不完整，转向到用户信息填写页面*/
+        die('尊贵的VIP用户，您的个人信息还不完整，暂时无法使用分期功能，请前往个人中心完善个人信息');
     }
 
     exit;

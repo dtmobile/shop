@@ -37,6 +37,147 @@ function userIsVIP($userId)
     return $count > 0 ? true : false;
 }
 
+function userinfoComplete($userId) {
+
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = '$userId'";
+    $row = $GLOBALS['db']->getRow($sql);
+    if (empty($row)) {
+        return false;
+    }
+    if (empty($row['actual_name'])){
+        return false;
+    }
+
+    if (empty($row['birthday'])){
+        return false;
+    }
+
+    if (empty($row['sex'])){
+        return false;
+    }
+
+    if (empty($row['mobile_phone'])){
+        return false;
+    }
+
+    if (empty($row['email'])){
+        return false;
+    }
+
+    if (empty($row['identity_card'])){
+        return false;
+    }
+
+    if (empty($row['id_begin_date'])){
+        return false;
+    }
+
+    if (empty($row['id_end_date'])){
+        return false;
+    }
+
+    if (empty($row['domicile_address'])){
+        return false;
+    }
+
+    if (empty($row['home_address'])){
+        return false;
+    }
+
+    if (empty($row['home_live_month'])){
+        return false;
+    }
+
+    if (empty($row['home_type'])){
+        return false;
+    }
+
+    if (intval($row['home_type']) == 1){
+        if (empty($row['home_rent_per_month'])){
+            return false;
+        }
+    } else if ( intval($row['home_type']) == 2) {
+        if (empty($row['home_buy_cost'])){
+            return false;
+        }
+    }
+
+    if (empty($row['have_house'])){
+        return false;
+    }
+    if (intval($row['have_house']) == 1){
+        if (empty($row['house_address'])){
+            return false;
+        }
+    }
+
+    if (empty($row['have_car'])){
+        return false;
+    }
+    if (intval($row['have_car']) == 1){
+        if (empty($row['car_description'])){
+            return false;
+        }
+    }
+    if (empty($row['live_partner'])){
+        return false;
+    }
+    if (empty($row['health'])){
+        return false;
+    }
+    if (intval($row['health']) == 3){
+        if (empty($row['sick_history'])){
+            return false;
+        }
+    }
+    if (empty($row['education'])){
+        return false;
+    }
+    if (empty($row['marital_status'])){
+        return false;
+    }
+    if (empty($row['have_credit_crad'])){
+        return false;
+    }
+    if (intval($row['have_credit_crad']) == 1){
+        if (empty($row['credit_card_max'])){
+            return false;
+        }
+    }
+    if (empty($row['sallary_one_year'])){
+        return false;
+    }
+    if (empty($row['company_name'])){
+        return false;
+    }
+    if (empty($row['company_industury'])){
+        return false;
+    }
+    if (empty($row['company_address'])){
+        return false;
+    }
+    if (empty($row['company_phone'])){
+        return false;
+    }
+    if (empty($row['company_department'])){
+        return false;
+    }
+    if (empty($row['company_duty'])){
+        return false;
+    }
+    if (empty($row['company_income_month'])){
+        return false;
+    }
+    if (empty($row['company_entry_time'])){
+        return false;
+    }
+    if (empty($row['company_type'])){
+        return false;
+    }
+
+    return true;
+}
+
 function getBorrowById($userId,$borrowId)
 {
     if (empty($userId)) {
