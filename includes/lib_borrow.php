@@ -41,54 +41,56 @@ function userinfoComplete($userId) {
 
     $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = '$userId'";
     $row = $GLOBALS['db']->getRow($sql);
-    if (empty($row)) {
+
+
+    if (is_null($row)) {
         return false;
     }
-    if (empty($row['actual_name'])){
+    if (is_null($row['actual_name'])){
         return false;
     }
 
-    if (empty($row['birthday'])){
+    if (is_null($row['birthday'])){
         return false;
     }
 
-    if (empty($row['sex'])){
+    if (is_null($row['sex'])){
         return false;
     }
 
-    if (empty($row['mobile_phone'])){
+    if (is_null($row['mobile_phone'])){
         return false;
     }
 
-    if (empty($row['email'])){
+    if (is_null($row['email'])){
         return false;
     }
 
-    if (empty($row['identity_card'])){
+    if (is_null($row['identity_card'])){
         return false;
     }
 
-    if (empty($row['id_begin_date'])){
+    if (is_null($row['id_begin_date'])){
         return false;
     }
 
-    if (empty($row['id_end_date'])){
+    if (is_null($row['id_end_date'])){
         return false;
     }
 
-    if (empty($row['domicile_address'])){
+    if (is_null($row['domicile_address'])){
         return false;
     }
 
-    if (empty($row['home_address'])){
+    if (is_null($row['home_address'])){
         return false;
     }
 
-    if (empty($row['home_live_month'])){
+    if (is_null($row['home_live_month'])){
         return false;
     }
 
-    if (empty($row['home_type'])){
+    if (is_null($row['home_type'])){
         return false;
     }
 
@@ -102,76 +104,76 @@ function userinfoComplete($userId) {
         }
     }
 
-    if (empty($row['have_house'])){
+    if (is_null($row['have_house'])){
         return false;
     }
     if (intval($row['have_house']) == 1){
-        if (empty($row['house_address'])){
+        if (is_null($row['house_address'])){
             return false;
         }
     }
 
-    if (empty($row['have_car'])){
+    if (is_null($row['have_car'])){
         return false;
     }
     if (intval($row['have_car']) == 1){
-        if (empty($row['car_description'])){
+        if (is_null($row['car_description'])){
             return false;
         }
     }
-    if (empty($row['live_partner'])){
+    if (is_null($row['live_partner'])){
         return false;
     }
-    if (empty($row['health'])){
+    if (is_null($row['health'])){
         return false;
     }
     if (intval($row['health']) == 3){
-        if (empty($row['sick_history'])){
+        if (is_null($row['sick_history'])){
             return false;
         }
     }
-    if (empty($row['education'])){
+    if (is_null($row['education'])){
         return false;
     }
-    if (empty($row['marital_status'])){
+    if (is_null($row['marital_status'])){
         return false;
     }
-    if (empty($row['have_credit_crad'])){
+    if (is_null($row['have_credit_crad'])){
         return false;
     }
     if (intval($row['have_credit_crad']) == 1){
-        if (empty($row['credit_card_max'])){
+        if (is_null($row['credit_card_max'])){
             return false;
         }
     }
-    if (empty($row['sallary_one_year'])){
+    if (is_null($row['sallary_one_year'])){
         return false;
     }
-    if (empty($row['company_name'])){
+    if (is_null($row['company_name'])){
         return false;
     }
-    if (empty($row['company_industury'])){
+    if (is_null($row['company_industury'])){
         return false;
     }
-    if (empty($row['company_address'])){
+    if (is_null($row['company_address'])){
         return false;
     }
-    if (empty($row['company_phone'])){
+    if (is_null($row['company_phone'])){
         return false;
     }
-    if (empty($row['company_department'])){
+    if (is_null($row['company_department'])){
         return false;
     }
-    if (empty($row['company_duty'])){
+    if (is_null($row['company_duty'])){
         return false;
     }
-    if (empty($row['company_income_month'])){
+    if (is_null($row['company_income_month'])){
         return false;
     }
-    if (empty($row['company_entry_time'])){
+    if (is_null($row['company_entry_time'])){
         return false;
     }
-    if (empty($row['company_type'])){
+    if (is_null($row['company_type'])){
         return false;
     }
 
