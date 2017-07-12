@@ -9,7 +9,7 @@
 
 <!--<form action="borrow.php?act=change_borrow_status" method="post" name="theForm">-->
     <div class="list-div" style="margin-bottom: 5px">
-        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+        <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#dddddd">
             <tr style="background-color:cornflowerblue;">
                 <td width="100%" align="center" colspan="2"><strong>贷款申请</strong></td>
             </tr>
@@ -17,15 +17,15 @@
                 <td width="28%" align="right" bgcolor="#FFFFFF">当前申请状态</td>
                 <td width="72%" align="left" bgcolor="#FFFFFF">
               <span>
-                  <select name="borrow_status" >
+                  <select name="borrow_status" style="width: 100px;" >
                       <option value="待审核" {if $borrow.status eq '待审核'}selected="selected"{/if}>待审核</option>
                       <option value="已打款" {if $borrow.status eq '已打款'}selected="selected"{/if}>已打款</option>
                       <option value="未通过" {if $borrow.status eq '未通过'}selected="selected"{/if}>未通过</option>
                   </select>
               </span>
-                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <span>
-                    <button class="font_20"  onclick="changeBorrowStatus()">确认修改</button>
+                    <button class="font_20"  onclick="changeBorrowStatus()" style="height: 20px;">确认修改</button>
                     </span>
                 </td>
             </tr>
@@ -33,10 +33,8 @@
                 <td width="28%" align="right" bgcolor="#FFFFFF">申请金额：</td>
                 <td width="72%" align="left" bgcolor="#FFFFFF">
                     {if $borrow.status eq '待审核'}
-                    <span>
-                    <input name="total_money" type="text" value="{$borrow.total_money}" size="25"  placeholder="请输入审批过得金额..."/>元
-                    </span>
-                    <button class="font_20"  onclick="changeTotalMoney()">确认修改</button>
+                    <input name="total_money" type="text" value="{$borrow.total_money}" size="25"  placeholder="请输入审批过得金额..." style="width: 100px;"/>元
+                    <button class="font_20"  onclick="changeTotalMoney()" style="height: 20px;">确认修改</button>
                     {else}
                     {$borrow.total_money}
                     {/if}
@@ -348,9 +346,12 @@
                 </td>
             </tr>
 
+            <tr style="background-color:#09c762;">
+                <td width="100%" align="center" colspan="2"><strong>主要社会关系</strong></td>
+            </tr>
+
             <tr>
-                <td width="28%" align="right" bgcolor="#FFFFFF">主要社会关系</td>
-                <td width="72%" align="right" bgcolor="#FFFFFF">
+                <td width="100%" colspan="2" align="right" bgcolor="#FFFFFF">
                     <table style="width: 100%;" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
                         <tr>
                             <td align="center">名称</td>
