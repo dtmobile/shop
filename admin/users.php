@@ -340,7 +340,6 @@ elseif ($_REQUEST['act'] == 'update') {
     $credit_line = empty($_POST['credit_line']) ? 0 : floatval($_POST['credit_line']);
     $vipcard = empty($_POST['vipcard']) ? 0 : $_POST['vipcard'];
 
-
     $users =& init_users();
 
     if (!$users->edit_user(array('username' => $username, 'password' => $password, 'email' => $email, 'gender' => $sex, 'bday' => $birthday), 1)) {
@@ -383,7 +382,7 @@ elseif ($_REQUEST['act'] == 'update') {
     $other = array();
     $other['credit_line'] = $credit_line;
     $other['user_rank'] = $rank;
-   $other['vipdcard'] = $vipcard;
+    $other['vipcard'] = $vipcard;
     $other['msn'] = isset($_POST['extend_field1']) ? htmlspecialchars(trim($_POST['extend_field1'])) : '';
     $other['qq'] = isset($_POST['extend_field2']) ? htmlspecialchars(trim($_POST['extend_field2'])) : '';
     $other['office_phone'] = isset($_POST['extend_field3']) ? htmlspecialchars(trim($_POST['extend_field3'])) : '';

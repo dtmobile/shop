@@ -90,7 +90,7 @@ function changeCreditLine($user_id, $borrow_id, $amortize_id)
         return false;
     }
 
-    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('ecs_borrow_amortize') . " WHERE amortize_id = '$amortize_id' borrow_id = '$borrow_id' AND user_id='$user_id'";
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('ecs_borrow_amortize') . " WHERE amortize_id = '$amortize_id' AND borrow_id = '$borrow_id' AND user_id='$user_id'";
     $row = $GLOBALS['db']->getRow($sql);
 
     if ($row && $row['borrow_type'] == '购物贷' ) {
