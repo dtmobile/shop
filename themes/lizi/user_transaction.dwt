@@ -998,13 +998,8 @@
             var {$key} = "{$item}";
           {/foreach}
         </script>
-        <h5><span>{$lang.user_balance}</span></h5>
+        <h5><span>{$lang.user_credit_detail}</span></h5>
         <div class="blank"></div>
-         <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
-          <tr>
-            <td align="right" bgcolor="#ffffff"><a href="user.php?act=account_deposit" class="f6">{$lang.surplus_type_0}</a> | <a href="user.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | <a href="user.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | <a href="user.php?act=account_log" class="f6">{$lang.view_application}</a> </td>
-          </tr>
-        </table>
         <!-- {/if} -->
         <!-- {if $action eq "account_raply"} -->
         <form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
@@ -1110,7 +1105,7 @@
           </tr>
           <!--{/foreach}-->
           <tr>
-            <td colspan="4" align="center" bgcolor="#ffffff"><div align="right">{$lang.current_surplus}{$surplus_amount}</div></td>
+            <td colspan="4" align="center" bgcolor="#ffffff"><div align="right">{$lang.current_credit_line}{$show_credit_line}</div></td>
           </tr>
         </table>
         <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
@@ -1142,7 +1137,7 @@
           </tr>
           <!--{/foreach}-->
           <tr>
-            <td colspan="7" align="right" bgcolor="#ffffff">{$lang.current_surplus}{$surplus_amount}</td>
+            <td colspan="7" align="right" bgcolor="#ffffff">{$lang.current_credit_line}{$show_credit_line}</td>
           </tr>
         </table>
         <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->

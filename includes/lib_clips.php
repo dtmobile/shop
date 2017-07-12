@@ -554,6 +554,20 @@ function get_user_surplus($user_id)
 }
 
 /**
+ * 查询会员信用额度
+ * @access  public
+ * @param   int     $user_id        会员ID
+ * @return  int
+ */
+function get_user_credit_line($user_id)
+{
+    $sql = "SELECT credit_line  FROM " .$GLOBALS['ecs']->table('users').
+        " WHERE user_id = '$user_id'";
+
+    return $GLOBALS['db']->getOne($sql);
+}
+
+/**
  * 获取用户中心默认页面所需的数据
  *
  * @access  public
@@ -565,7 +579,7 @@ function get_user_default($user_id)
 {
     $user_bonus = get_user_bonus();
 
-    $sql = "SELECT pay_points, user_money, credit_line, last_login, is_validated FROM " .$GLOBALS['ecs']->table('users'). " WHERE user_id = '$user_id'";
+    $sql = "SELECT pay_points, user_money, credit_line, last_login, is_validated,vipcard  FROM " .$GLOBALS['ecs']->table('users'). " WHERE user_id = '$user_id'";
     $row = $GLOBALS['db']->getRow($sql);
     $info = array();
     $info['username']  = stripslashes($_SESSION['user_name']);
@@ -575,6 +589,7 @@ function get_user_default($user_id)
     $info['is_validate'] = ($GLOBALS['_CFG']['member_email_validate'] && !$row['is_validated'])?0:1;
     $info['credit_line'] = $row['credit_line'];
     $info['formated_credit_line'] = price_format($info['credit_line'], false);
+    $info['vipcard'] = $row['vipcard'];
 
     //如果$_SESSION中时间无效说明用户是第一次登录。取当前登录时间。
     $last_time = !isset($_SESSION['last_time']) ? $row['last_login'] : $_SESSION['last_time'];
@@ -588,7 +603,7 @@ function get_user_default($user_id)
     $info['surplus']   = price_format($row['user_money'], false);
     $info['bonus']     = sprintf($GLOBALS['_LANG']['user_bonus_info'], $user_bonus['bonus_count'], price_format($user_bonus['bonus_value'], false));
 
-    $info['show_credit_line'] = $row['credit_line'] - $row['user_money'];
+    $info['show_credit_line'] = $row['credit_line'] + $row['user_money'];
     $info['formated_show_credit_line'] = price_format($info['show_credit_line'], false);
 
     $sql = "SELECT COUNT(*) FROM " .$GLOBALS['ecs']->table('order_info').

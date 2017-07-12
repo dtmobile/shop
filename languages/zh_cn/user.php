@@ -66,6 +66,7 @@ $_LANG['payment_name'] = '您选择的支付方式为：';
 $_LANG['payment_fee'] = '支付手续费用为：';
 $_LANG['payment_desc'] = '支付方式描述：';
 $_LANG['current_surplus'] = '您当前的可用资金为：';
+$_LANG['current_credit_line'] = '您当前的信用额度为：';
 $_LANG['unit_yuan'] = '元';
 $_LANG['for_free'] = '赠品免费';
 $_LANG['surplus_amount_error'] = '您要申请提现的金额超过了您现有的余额，此操作将不可进行！';

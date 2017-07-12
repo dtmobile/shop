@@ -34,7 +34,11 @@
           <div class="blank"></div>
           {$lang.last_time}: {$info.last_time}<br />
           <div class="blank5"></div>
-          {$rank_name} {$next_rank_name}<br />
+          {$rank_name}
+           <!--{ if $real_rank_name eq "VIP"} -->
+          ,   VIP卡号是 : <span style="color:#f70">{$info.vipcard}</span>
+          <!--{/if} -->
+          <br />
           <div class="blank5"></div>
            <!--{if $info.is_validate eq 0} -->
           {$lang.not_validated} <a href="javascript:sendHashMail()" style="color:#f70;">{$lang.resend_hash_mail}</a><br />

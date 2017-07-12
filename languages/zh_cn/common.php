@@ -685,6 +685,7 @@ $_LANG['get_password'] = '找回密码';
 $_LANG['fee_total'] = '费用总计';
 $_LANG['other_info'] = '其它信息';
 $_LANG['user_balance'] = '会员余额';
+$_LANG['user_credit_detail'] = '会员信用额度明细';
 $_LANG['wholesale_goods_cart'] = '批发商品购物车';
 $_LANG['wholesale_goods_list'] = '批发商品列表';
 $_LANG['bid_record'] = "出价记录";
