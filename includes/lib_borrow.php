@@ -139,6 +139,11 @@ function amortizeRepayCommit($params)
     if (!$result) {
          return $GLOBALS['db']->errorMsg();
     }
+    $result = changeCreditLine($params->user_id,$params->borrow_id,$params->amortize_id);
+    if (!$result)
+    {
+        return "恢复信用额度失败";
+    }
 
     return "";
 }
