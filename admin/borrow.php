@@ -304,9 +304,18 @@ if ($_REQUEST['act'] == 'borrow_list') {
         $result['error'] = 1;
         $result['message'] = $errMsg;
         $content['change_result'] = false;
+    } else if($_REQUEST['amortize_status'] == '已还款') {
+        $result = changeCreditLine($_REQUEST['user_id'],$_REQUEST['borrow_id'],$_REQUEST['amortize_id']);
+        if (!$result)
+        {
+            $result['error'] = 1;
+            $result['message'] = "恢复分期失败";
+            $content['change_result'] = false;
+        } else{
+            $content['change_result'] = true;
+        }
     } else {
         $content['change_result'] = true;
-//        $content['borrower_id'] = $borrowerId;
     }
     $result['content'] = json_encode($content);
     die($json->encode($result));
