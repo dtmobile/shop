@@ -680,7 +680,7 @@ padding: 10px 20px 12px; height:auto; cursor:pointer; border:none;" value="加�
 			<!-- {if $pay_online} --> 
       		<!-- 判断是否是在线支付 -->
 			<div class="online1">
-				<b>还差一步,请立即支付,(支付成功后,我们将在<span style="color:#cc0001;padding:0px 5px; font-size:16px;">24小时</span>内为您发货）</b>
+				<b>还差一步,请立即支付,(支付成功后,我们会在<span style="color:#cc0001;padding:0px 5px; font-size:16px;">7个工作日</span>内为您发货）</b>
 				<br><br>
 				{$pay_online}
 				<br><br>

@@ -76,6 +76,7 @@ else
         $order_sn = $_POST['order_sn'];
         $amortize_repay_money = $_POST['amortize_repay_money'];
         $repay_serial_code = $_POST['repay_serial_code'];
+        $repay_name = $_POST['repay_name'];
 
         if (in_array($pay_code, $amortization_pay)) {
             include_once(ROOT_PATH . 'includes/lib_transaction.php');
@@ -93,7 +94,7 @@ else
                 $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $real_order_sn, $amortize_period, $amortize_type, $down_payment);
                 $commit_res = saveBorrowInfo($user_info, $borrowInfo);
                 if (empty($commit_res)) {
-                    order_paid($order_sn, 2, '',$repay_serial_code, $amortize_repay_money, $amortization_money, $amortize_period, $amortize_type);
+                    order_paid($order_sn, 2, '',$repay_serial_code, $amortize_repay_money, $amortization_money, $amortize_period, $amortize_type, $repay_name);
                     $msg = $_LANG['pay_success'];
                 } else {
                     $msg = $commit_res;
@@ -102,7 +103,7 @@ else
                 $msg = '非 VIP 会员不可以使用分期';
             }
         }else {
-            order_paid($order_sn, 2, '', $amortize_repay_money, $repay_serial_code);
+            order_paid($order_sn, 2, '', $repay_serial_code, $amortize_repay_money,  0, 0, 0, $repay_name);
             $msg = $_LANG['pay_success'];
         }
     } else

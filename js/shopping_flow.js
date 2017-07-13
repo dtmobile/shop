@@ -688,7 +688,7 @@ function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
     var repaySerialCode =  document.getElementsByName('repay_serial_code')[0].value;
     if(Utils.isEmpty(repaySerialCode))
     {
-        alert("请输入支付流水号");
+        alert("请输入商享贷卡号");
         return;
     }
 
@@ -698,6 +698,12 @@ function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
         return;
     }
 
+  var repayName =  document.getElementsByName('repay_name')[0].value;
+  if(Utils.isEmpty(repayName))
+  {
+    alert("请输入您的姓名");
+    return;
+  }
 
     var params = new Object();
     params.order_sn = order_sn;
@@ -706,6 +712,7 @@ function repaySuccess(order_sn, amortizeNeedMoney, pay_code) {
     params.repay_serial_code = repaySerialCode;
     params.amortizePeriod = amortizePeriod;
     params.amortizeType = amortizeType;
+    params.repay_name = repayName;
 
      post("respond.php?code=" + pay_code , params);
 

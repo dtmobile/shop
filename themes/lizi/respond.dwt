@@ -29,7 +29,7 @@ p a{color:#006acd; text-decoration:underline;}
     <div class="boxCenterList RelaArticle" align="center">
       <div style="margin:20px auto;background-color: #ff9;border: #D4D4D4 1px solid;width: 946px; padding:25px;">
       <p style="font-size: 14px; font-weight:bold; color: #cc0001; line-height:36px; text-align:left; padding-left:250px;">{$message}</p>
-	  <p style="text-align:left; padding-left:250px; line-height:24px;">{$shop_name}会在支付成功后<font style="font-size:14px; font-weight:bold; margin:auto 5px; color:#cc0001;">24</font>小时内发货，请近期保持电话畅通。</p>
+	  <p style="text-align:left; padding-left:250px; line-height:24px;">支付成功,{$shop_name}会在<font style="font-size:14px; font-weight:bold; margin:auto 5px; color:#cc0001;">7个工作日</font>内发货，请近期保持电话畅通。</p>
 	  <p style="text-align:left; padding-left:250px; line-height:24px;">如果遇到问题？请拨打：<font style="font-size:14px; font-weight:bold; margin:auto 5px; color:#cc0001;">{$service_phone}</font>，由我们的客服人员协助解决。</p>
         <div class="blank"></div>
         <!--{if $virtual_card}-->

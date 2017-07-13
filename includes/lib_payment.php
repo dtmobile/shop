@@ -190,7 +190,7 @@ function get_order_sn_for_paid($log_id)
  * @param   string  $note       备注
  * @return  void
  */
-function order_paid($log_id, $pay_status = PS_PAYED, $note = '', $repay_serial_code = '', $amortize_repay_money = -1, $amortization_money = 0, $amortize_period = 0, $amortize_type = 0)
+function order_paid($log_id, $pay_status = PS_PAYED, $note = '', $repay_serial_code = '', $amortize_repay_money = -1, $amortization_money = 0, $amortize_period = 0, $amortize_type = 0, $repay_name = '')
 {
     /* 取得支付编号 */
     $log_id = intval($log_id);
@@ -229,8 +229,10 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '', $repay_serial_c
                                 "amortization_money = '$amortization_money', " .
                                  "amortize_period = '$amortize_period', " .
                                 "amortize_type = '$amortize_type', " .
+                                "repay_name = '$repay_name', " .
                                 " order_amount = 0 ".
                        "WHERE order_id = '$order_id'";
+
                 $GLOBALS['db']->query($sql);
 
                 /* 记录订单操作记录 */
