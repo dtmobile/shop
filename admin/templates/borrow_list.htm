@@ -66,7 +66,13 @@
   <td valign="top" nowrap="nowrap">{$borrow.user_bank_id}</td>
   <td valign="top" nowrap="nowrap">{$borrow.user_opening_bank}</td>
   <td valign="top" nowrap="nowrap">{$borrow.amortize_period}</td>
-  <td valign="top" nowrap="nowrap">{$borrow.amortize_type}</td>
+  <td valign="top" nowrap="nowrap">
+    {if $borrow.amortize_type eq '1'}
+    等额本息
+    {else if $borrow.amortize_type eq '2'}
+    先息后本
+    {/if}
+  </td>
   <td valign="top" nowrap="nowrap">{$borrow.status}</td>
   <td align="center" valign="top"  nowrap="nowrap">
      <a href="borrow.php?act=info&borrow_id={$borrow.borrow_id}&user_id={$borrow.user_id}">查看</a>
