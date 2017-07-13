@@ -641,6 +641,19 @@ elseif ($action == 'profile') {
 } /* 我要贷款页面 */
 elseif ($action == 'daikuan') {
     include_once(ROOT_PATH . 'includes/lib_transaction.php');
+
+    if(haveOldBorrow($user_id))
+    {
+        show_message("很抱歉，您的贷款申请还在审批中，暂时无法申请新的贷款，如有疑问请联系管理员", "前往还款专区查看", 'borrow.php?act=repay', 'info');
+        return;
+    }
+
+    if(haveOldAmortize($user_id))
+    {
+        show_message("很抱歉，您还有贷款分期没有还清或者还款结果在确认中，暂时无法申请新的贷款,如有疑问请联系管理员", "前往还款专区查看", 'borrow.php?act=repay', 'info');
+        return;
+    }
+
     $user_info = get_profile($user_id);
 //    var_dump($user_info);
     /* 取出注册扩展字段 */

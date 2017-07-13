@@ -94,6 +94,11 @@
               </td>
           </tr>
 
+             <tr>
+                 <td width="28%" align="right" bgcolor="#FFFFFF">贷款产品： </td>
+                 <td width="72%" align="left" bgcolor="#FFFFFF">商享贷</td>
+             </tr>
+
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">银行卡号： </td>
               <td width="72%" align="left" bgcolor="#FFFFFF"><input name="user_bank_id" type="text" value="{$profile.user_bank_id}" size="25" class="inputBg" placeholder="请输入您用于收款的银行卡号"/>
