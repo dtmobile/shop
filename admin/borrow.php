@@ -321,7 +321,7 @@ if ($_REQUEST['act'] == 'borrow_list') {
             $content['change_result'] = false;
         }
     }
-    
+
     $result['content'] = json_encode($content);
     die($json->encode($result));
 
