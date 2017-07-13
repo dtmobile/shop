@@ -487,7 +487,7 @@ function getBorrowInfoFromPost($_POST, $user_id)
     $profile['user_opening_bank'] = getFiledValueFromPost($_POST, 'user_opening_bank');
     return $profile;
 }
-function getBorrowInfoForAmortizaton($user_id, $total_money, $order_sn ,$amortize_period ,$amortize_type)
+function getBorrowInfoForAmortizaton($user_id, $total_money, $order_sn ,$amortize_period ,$amortize_type, $down_payment)
 {
     $profile = array();
     $profile['user_id'] = $user_id;
@@ -497,6 +497,7 @@ function getBorrowInfoForAmortizaton($user_id, $total_money, $order_sn ,$amortiz
     $profile['amortize_type'] = $amortize_type;
     $profile['user_bank_id'] = 0;
     $profile['identity_card'] = 0;
+    $profile['init_repay'] = $down_payment;
     $profile['user_opening_bank'] = 0;
     $profile['borrow_type'] = '购物贷';
     return $profile;

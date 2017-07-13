@@ -150,6 +150,20 @@ function get_amorization_money($log_id)
     }
 }
 
+function get_down_payment_money($log_id)
+{
+    if(is_numeric($log_id))
+    {
+        $sql = 'SELECT down_payment FROM ' . $GLOBALS['ecs']->table('pay_log') .
+            " WHERE log_id = '$log_id'";
+        $amorization_money = $GLOBALS['db']->getOne($sql);
+        return $amorization_money;
+    }
+    else
+    {
+        return false;
+    }
+}
 function get_order_sn_for_paid($log_id)
 {
     /*select ecs_order_info.order_sn from ecs_order_info left join ecs_pay_log

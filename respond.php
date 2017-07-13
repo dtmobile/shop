@@ -88,8 +88,9 @@ else
                 $user_info = get_profile($user_id);
                 $user_info['user_id'] = $user_id;
                 $amortization_money = get_amorization_money($order_sn);
+                $down_payment = get_down_payment_money($order_sn);
                 $real_order_sn = get_order_sn_for_paid($order_sn);
-                $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $real_order_sn, $amortize_period, $amortize_type);
+                $borrowInfo = getBorrowInfoForAmortizaton($user_id, $amortization_money, $real_order_sn, $amortize_period, $amortize_type, $down_payment);
                 $commit_res = saveBorrowInfo($user_info, $borrowInfo);
                 if (empty($commit_res)) {
                     order_paid($order_sn, 2, '',$repay_serial_code, $amortize_repay_money, $amortization_money, $amortize_period, $amortize_type);
