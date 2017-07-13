@@ -224,6 +224,7 @@ function saveBorrowInfo($userInfo,$borrowInfo)
     if($newBorrow['borrow_type'] == "购物贷")
     {
         $newBorrow['status'] = '已打款';
+        $newBorrow['init_repay'] = $borrowInfo['init_repay'];
     }else if($newBorrow['borrow_type'] == "商享贷")
     {
         $newBorrow['status'] = '待审核';
@@ -546,6 +547,28 @@ function getUserInfoFromPost($_POST, $user_id)
     $profile['friends'] = getFriendsFromPost($_POST);
     return $profile;
 }
+
+
+//还有分期没有偿还
+function haveOldAmortize($userId)
+{
+//    SELECT * from ecs_borrow_amortize WHERE user_id='21' AND `status` IN ('未还款','逾期未还')
+        $sql = "SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('borrow_amortize') .
+            " WHERE user_id = $userId AND status IN ('未还款','逾期未还','待审核')";
+
+    return $GLOBALS['db']->getOne($sql) > 0;
+}
+
+//还有贷款申请在审批中
+function haveOldBorrow($userId)
+{
+//    SELECT * from ecs_borrow WHERE user_id='22' AND `status`='待审核'
+    $sql = "SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('borrow') .
+        " WHERE user_id = $userId AND status IN ('待审核')";
+
+    return $GLOBALS['db']->getOne($sql) > 0;
+}
+
 
 /**
  * 获取用户帐号信息

@@ -46,6 +46,7 @@
     <th>用户名称</th>
     <th>贷款类型</th>
     <th>贷款总额</th>
+    <th>购物首付款</th>
     <th>贷款目的</th>
     <th>贷款日期</th>
     <th>银行卡号</th>
@@ -61,12 +62,19 @@
   <td valign="top" nowrap="nowrap">{$borrow.actual_name}</td>
   <td valign="top" nowrap="nowrap">{$borrow.borrow_type}</td>
   <td valign="top" nowrap="nowrap">{$borrow.total_money}</td>
+  <td valign="top" nowrap="nowrap">{$borrow.init_repay}</td>
   <td valign="top" nowrap="nowrap">{$borrow.borrow_purpose}</td>
   <td valign="top" nowrap="nowrap">{$borrow.borrow_date}</td>
   <td valign="top" nowrap="nowrap">{$borrow.user_bank_id}</td>
   <td valign="top" nowrap="nowrap">{$borrow.user_opening_bank}</td>
   <td valign="top" nowrap="nowrap">{$borrow.amortize_period}</td>
-  <td valign="top" nowrap="nowrap">{$borrow.amortize_type}</td>
+  <td valign="top" nowrap="nowrap">
+    {if $borrow.amortize_type eq '1'}
+    等额本息
+    {else if $borrow.amortize_type eq '2'}
+    先息后本
+    {/if}
+  </td>
   <td valign="top" nowrap="nowrap">{$borrow.status}</td>
   <td align="center" valign="top"  nowrap="nowrap">
      <a href="borrow.php?act=info&borrow_id={$borrow.borrow_id}&user_id={$borrow.user_id}">查看</a>

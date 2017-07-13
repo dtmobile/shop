@@ -94,6 +94,11 @@
               </td>
           </tr>
 
+             <tr>
+                 <td width="28%" align="right" bgcolor="#FFFFFF">贷款产品： </td>
+                 <td width="72%" align="left" bgcolor="#FFFFFF">商享贷</td>
+             </tr>
+
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">银行卡号： </td>
               <td width="72%" align="left" bgcolor="#FFFFFF"><input name="user_bank_id" type="text" value="{$profile.user_bank_id}" size="25" class="inputBg" placeholder="请输入您用于收款的银行卡号"/>
@@ -386,50 +391,6 @@
           </tr>
           {/foreach}
 
-          {foreach from=$extend_info_list item=field}
-		<!-- {if $field.id eq 6} -->
-		<tr>
-		  <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.passwd_question}：</td>
-		  <td width="72%" align="left" bgcolor="#FFFFFF">
-		  <select name='sel_question'>
-		  <option value='0'>{$lang.sel_question}</option>
-		  {html_options options=$passwd_questions selected=$profile.passwd_question}
-		  </select>
-		  </td>
-		</tr>
-		<tr>
-		  <td width="28%" align="right" bgcolor="#FFFFFF"  id="passwd_quesetion">{$lang.passwd_answer}：</td>
-		  <td width="72%" align="left" bgcolor="#FFFFFF">
-		  <input name="passwd_answer" type="text" size="25" class="inputBg" maxlengt='20' value="{$profile.passwd_answer}"/><!-- {if $field.is_need} --><span style="color:#FF0000"> *</span><!-- {/if} -->
-		  </td>
-		</tr>
-		<!-- {elseif $field.reg_field_name=='手机'} -->
-			<!-- {if $_CFG['ecsdxt_mobile_bind']=='1'} -->
-				<td width="28%" align="right" bgcolor="#FFFFFF" <!-- {if $field.is_need} -->id="extend_field{$field.id}i"<!--{/if}-->>{$field.reg_field_name}：</td>
-				<td width="72%" align="left" bgcolor="#FFFFFF">
-				<input name="extend_field{$field.id}" type="text" class="inputBg" value="{$field.content}" readonly="readonly" /><!-- {if $field.is_need} --><span style="color:#FF0000"> *</span><!-- {/if} -->
-				&nbsp;
-				<!-- {if $field.content!=''} -->
-				<a href="user.php?act=bindmobile">重新绑定</a>
-				<!-- {else} -->
-				<a href="user.php?act=bindmobile">绑定手机</a>
-				<!-- {/if} -->
-				</td>
-			<!-- {else} -->
-				<td width="28%" align="right" bgcolor="#FFFFFF" <!-- {if $field.is_need} -->id="extend_field{$field.id}i"<!--{/if}-->>{$field.reg_field_name}：</td>
-				<td width="72%" align="left" bgcolor="#FFFFFF">
-				<input name="extend_field{$field.id}" type="text" class="inputBg" value="{$field.content}"/><!-- {if $field.is_need} --><span style="color:#FF0000"> *</span><!-- {/if} -->
-				</td>
-			<!-- {/if} -->
-		<!-- {else} -->
-		<tr>
-			<td width="28%" align="right" bgcolor="#FFFFFF" <!-- {if $field.is_need} -->id="extend_field{$field.id}i"<!--{/if}-->>{$field.reg_field_name}：</td>
-			<td width="72%" align="left" bgcolor="#FFFFFF">
-			<input name="extend_field{$field.id}" type="text" class="inputBg" value="{$field.content}"/><!-- {if $field.is_need} --><span style="color:#FF0000"> *</span><!-- {/if} -->
-			</td>
-		</tr>
-		<!-- {/if} -->
-		{/foreach}
              <tr>
                  {if $action eq 'profile'}
                  <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_profile" />

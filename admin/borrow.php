@@ -141,7 +141,7 @@ function borrowList()
     $filter['page_count'] = $filter['record_count'] > 0 ? ceil($filter['record_count'] / $filter['page_size']) : 1;
 
     /* 查询 */
-    $sql = "SELECT b.borrow_id,b.user_id, b.total_money,b.borrow_type, b.borrow_purpose, b.borrow_date, b.user_bank_id, b.user_opening_bank, b.amortize_period, b.amortize_type, b.status, a.actual_name FROM " . $condition . " LIMIT " . ($filter['page'] - 1) * $filter['page_size'] . ",$filter[page_size]";
+    $sql = "SELECT b.borrow_id,b.user_id, b.total_money,b.init_repay,b.borrow_type, b.borrow_purpose, b.borrow_date, b.user_bank_id, b.user_opening_bank, b.amortize_period, b.amortize_type, b.status, a.actual_name FROM " . $condition . " LIMIT " . ($filter['page'] - 1) * $filter['page_size'] . ",$filter[page_size]";
 
     foreach ($fileds as $filed) {
         $filter[$filed] = stripslashes($filter[$filed]);
@@ -152,6 +152,9 @@ function borrowList()
     return array('borrow_list' => $row, 'filter' => $filter, 'page_count' => $filter['page_count'], 'record_count' => $filter['record_count']);
 }
 
+
+$content = array();
+$result = array();
 /*------------------------------------------------------ */
 //-- 贷款订单查询
 /*------------------------------------------------------ */
@@ -226,7 +229,6 @@ if ($_REQUEST['act'] == 'borrow_list') {
         $borrowId = intval($_REQUEST['borrow_id']);
         removeBorrowById($borrowerId,$borrowId);
 
-        $content = array();
         $result['error'] = 0;
         $result['message'] = "";
         die($json->encode($result));
@@ -253,7 +255,7 @@ if ($_REQUEST['act'] == 'borrow_list') {
     //save params to db
     $errMsg = changeBorrwoStatus($borrowerId,$borrowId,$totalMoney);
 
-    $content = array();
+
     if (!empty($errMsg)) {
         $result['error'] = 1;
         $result['message'] = $errMsg;
@@ -280,7 +282,6 @@ if ($_REQUEST['act'] == 'borrow_list') {
     //save params to db
     $errMsg = changeTotalBorrow($borrowerId,$borrowId,$totalMoney);
 
-    $content = array();
     if (!empty($errMsg)) {
         $result['error'] = 1;
         $result['message'] = $errMsg;
@@ -299,26 +300,32 @@ if ($_REQUEST['act'] == 'borrow_list') {
     $result = array('error' => 0, 'message' => '');
     $errMsg = changeAmortizeStatus($_REQUEST['user_id'],$_REQUEST['amortize_id'],$_REQUEST['borrow_id'],$_REQUEST['amortize_status']);
 
-    $content = array();
     if (!empty($errMsg)) {
         $result['error'] = 1;
         $result['message'] = $errMsg;
         $content['change_result'] = false;
-    } else if($_REQUEST['amortize_status'] == '已还款') {
-        $result = changeCreditLine($_REQUEST['user_id'],$_REQUEST['borrow_id'],$_REQUEST['amortize_id']);
-        if (!$result)
+        $result['content'] = json_encode($content);
+        die($json->encode($result));
+    }else{
+        $content['change_result'] = true;
+    }
+
+    if($_REQUEST['amortize_status'] == '已还款') {
+        $rlt = changeCreditLine($_REQUEST['user_id'],$_REQUEST['borrow_id'],$_REQUEST['amortize_id']);
+        if ($rlt)
         {
+            $content['change_result'] = true;
+        } else{
             $result['error'] = 1;
             $result['message'] = "恢复分期失败";
             $content['change_result'] = false;
-        } else{
-            $content['change_result'] = true;
         }
-    } else {
-        $content['change_result'] = true;
     }
+
     $result['content'] = json_encode($content);
     die($json->encode($result));
+
+
 }
 
 ?>
