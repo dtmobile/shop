@@ -141,7 +141,7 @@ function borrowList()
     $filter['page_count'] = $filter['record_count'] > 0 ? ceil($filter['record_count'] / $filter['page_size']) : 1;
 
     /* 查询 */
-    $sql = "SELECT b.borrow_id,b.user_id, b.total_money,b.borrow_type, b.borrow_purpose, b.borrow_date, b.user_bank_id, b.user_opening_bank, b.amortize_period, b.amortize_type, b.status, a.actual_name FROM " . $condition . " LIMIT " . ($filter['page'] - 1) * $filter['page_size'] . ",$filter[page_size]";
+    $sql = "SELECT b.borrow_id,b.user_id, b.total_money,b.init_repay,b.borrow_type, b.borrow_purpose, b.borrow_date, b.user_bank_id, b.user_opening_bank, b.amortize_period, b.amortize_type, b.status, a.actual_name FROM " . $condition . " LIMIT " . ($filter['page'] - 1) * $filter['page_size'] . ",$filter[page_size]";
 
     foreach ($fileds as $filed) {
         $filter[$filed] = stripslashes($filter[$filed]);

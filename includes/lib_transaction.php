@@ -224,6 +224,7 @@ function saveBorrowInfo($userInfo,$borrowInfo)
     if($newBorrow['borrow_type'] == "购物贷")
     {
         $newBorrow['status'] = '已打款';
+        $newBorrow['init_repay'] = $borrowInfo['init_repay'];
     }else if($newBorrow['borrow_type'] == "商享贷")
     {
         $newBorrow['status'] = '待审核';
