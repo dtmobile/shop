@@ -108,8 +108,8 @@ class alipayamortization
 <input name="repay_serial_code" type="text" size="25" class="inputBg" placeholder="请输入商享贷卡号"/>
 </div>
 <div>
-<span class="newroman font_16">请输入您的姓名</span>
-<input name="repay_name" type="text" size="25" class="inputBg" placeholder="请输入您的姓名"/>
+<span class="newroman font_16">请输入支付人姓名</span>
+<input name="repay_name" type="text" size="25" class="inputBg" placeholder="请输入支付人姓名"/>
 </div>
 <button class="font_20" style="background-color: #008CBA;" onclick="repaySuccess({$order['log_id']},{$order['down_payment']},'amortization')">支付成功</button>
 <button class="font_20" style="background-color: #555555;" onclick="repayCancel()">取消支付</button>
