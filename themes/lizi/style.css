@@ -604,7 +604,7 @@ canvas {
 	width:214px;
 	height:35px;
 	color:#fff;
-	background-color:#000;
+	background-color: #929292;
 	overflow:hidden
 }
 .hd_nav .main_nav .main_nav_link a {
@@ -802,7 +802,7 @@ canvas {
 	width:214px;
 	padding:10px 0;
 	overflow:hidden;
-	background-color:#3b3b3b;
+	background-color:#929292;
 	border-bottom:1px solid #ccc;
 	box-shadow:-2px 4px 4px rgba(200,200,200,0.3)
 }
@@ -821,7 +821,7 @@ canvas {
 	text-indent:58px;
 }
 .main_cata li h3 a {
-	font-size:13px;
+	font-size:17px;
 	font-family:Arial;
 	color:#fff;
 }

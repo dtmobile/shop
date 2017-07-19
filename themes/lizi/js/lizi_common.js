@@ -68,11 +68,6 @@ $(function(){
 	g = false;
 	f = false;
 
-	// i.addClass("main_nav_hover");
-	// b.stop().show().animate({
-	// 				opacity: 1
-	// 		}, 300);
-
 	i.on("mouseenter", function() {
 		var m = $(this);
 		if (l !== null) {
