@@ -1,9 +1,9 @@
 /**
- * ²úÆ·Ãû³Æ: EcshopÉúÏÊÊß²ËÉÌ³ÇÄ£°å 
- * Ê¹ÓÃ°æ±¾£ºEcshop v2.7.3°æ
- * ³öÆ·µ¥Î»: O²ËÁú¹¤×÷ÊÒ³öÆ·
- * ¸ü¶àÄ£°å£ºhttp://www.ocailong.com/
- * Éè¼ÆÕßQQ£º763191200£¨o²ËÁú£©
+ * ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½: Ecshopï¿½ï¿½ï¿½ï¿½ï¿½ß²ï¿½ï¿½Ì³ï¿½Ä£ï¿½ï¿½ 
+ * Ê¹ï¿½Ã°æ±¾ï¿½ï¿½Ecshop v2.7.3ï¿½ï¿½
+ * ï¿½ï¿½Æ·ï¿½ï¿½Î»: Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½Æ·
+ * ï¿½ï¿½ï¿½ï¿½Ä£ï¿½å£ºhttp://www.ocailong.com/
+ * ï¿½ï¿½ï¿½ï¿½ï¿½QQï¿½ï¿½763191200ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 html{background-color:#f8f8f8;color:#333}
 body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,select,textarea,th,td{margin:0;padding:0}
@@ -53,7 +53,7 @@ canvas{-ms-touch-action:double-tap-zoom}
 .hd_bar .hd_rbar a{display:inline-block;height:57px;line-height:57px;color:#eee;padding:0 12px;background-color:#222}
 .hd_bar .hd_rbar a:hover{background-color:#444;color:#fff;text-decoration:none}
 #header .logo{position:absolute;top:0;left:0}
-#header .logo a{display:block;width:182px;height:0;padding-top:68px;overflow:hidden;background:#f70 url(images/flow_logo.png) center 0 no-repeat}
+#header .logo a{display:block;width:182px;height:0;padding-top:57px;overflow:hidden;background:#f70 url(images/flow_logo.png) center 0 no-repeat}
 .hd-step{float:right;width:484px;padding-top:18px}
 .hd-step li{float:left;width:116px;height:28px;color:#bbb;font-size:14px;position:relative}
 .hd-step li em{font-weight:bold;font-size:16px;color:#fff;padding:0 12px 0 8px;font-family:arial;text-shadow:1px 1px 1px rgba(0,0,0,0.3)}
