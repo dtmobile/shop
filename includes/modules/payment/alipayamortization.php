@@ -97,7 +97,7 @@ class alipayamortization
 
         $button = <<<EOT
 
-<img src="images/alipay/wetchat.jpg"/>
+<img src="images/alipay/wetchat.jpg" width="250px" height="350px"/>
 <br>
 <div >
 <span class="newroman font_16">请输入实际支付金额</span>

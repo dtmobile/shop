@@ -144,7 +144,7 @@ class wxpay
         }
 
         $button = <<<EOT
-<img src="images/wetchatpay/wetchat.jpg"/>
+<img src="images/wetchatpay/wetchat.jpg" width="250px" height="350px"/>
 <br>
 <div >
 <span class="newroman font_16">请输入实际支付金额</span>
