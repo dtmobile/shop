@@ -8,7 +8,7 @@
 .add_ok {
 	display:none;
 	background:#fff;
-	padding:40px 0;
+	padding:0px 0;
 	text-align:center;
 	width:480px;
 	border:3px solid #09c762;
@@ -17,7 +17,7 @@
 }
 .add_ok .tip {
 	font-size:30px;
-	margin-bottom:20px
+	margin-bottom:2px
 }
 .add_ok .tip i {
 	font-size:60px;
@@ -49,8 +49,8 @@
 .font_20{
 	font-size: 20px;
 }
-.font_60{
-	font-size: 60px;
+.font_50{
+	font-size: 50px;
 }
 
 .newroman{

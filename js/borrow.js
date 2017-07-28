@@ -30,10 +30,24 @@ function amortizeRepay(userId,borrowId,amortizeId,amortizeNeedMoney) {
     repayDialog.borrow_id=borrowId;
     repayDialog.amortize_id=amortizeId;
     repayDialog.amortize_need_money=amortizeNeedMoney;
+
     document.getElementsByName('amortize_repay_money')[0].value="";
     document.getElementsByName('repay_serial_code')[0].value="";
     document.getElementsByName('amortize_need_money_label')[0].innerText = amortizeNeedMoney;
+    var repay_source_select = document.getElementsByName('repay_source')[0];
+    repay_source_select.value="微信";
+    var repay_source_image = document.getElementsByName('repay_image')[0];
+    repay_source_image.src="../../images/wetchatpay/wetchat.jpg";
 
+    repay_source_select.onchange = function(){
+        if(repay_source_select.value == "微信")
+        {
+            repay_source_image.src="../../images/wetchatpay/wetchat.jpg";
+        }else if(repay_source_select.value == "支付宝"){
+            repay_source_image.src="../../images/alipay/alipay.jpg";
+        }
+
+    }
     easyDialog.open({
         container : 'repay_borrow_dialog'
     });
@@ -83,8 +97,8 @@ function repaySuccess() {
     params.repay_source = repaySource;
     params.repay_serial_code = repaySerialCode;
     params.comment = '';
-    // console.log("还款信息如下");
-    // console.log(params);
+    console.log("还款信息如下");
+    console.log(params);
     Ajax.call('borrow.php?act=repay_info_commit', 'parmas=' + $.toJSON(params),repayInfoCommitResponse, 'POST', 'JSON');
 
 
