@@ -66,14 +66,5 @@
 		});
 	});
 </script>
-<ul id="side-bar" class="side-pannel side-bar">
-  {foreach from=$qq item=im}
-    <a href="http://wpa.qq.com/msgrd?v=3&uin={$im}&site={$shop_name}&menu=yes" target="_blank" class="kefuqq"></a>
-  {/foreach}
-  {foreach from=$ww item=im}
-    <a href="http://amos1.taobao.com/msg.ww?v=2&uid={$im|escape:u8_url}&s=2" target="_blank" class="kefuww"></a>
-  {/foreach}
-  <a href="javascript:;" class="qr weixin"><i></i></a>
-  <a href="javascript:;" class="gotop" style="display:none;"></a>
-</ul>
+
 <!-- 客服代码 结束 -->
