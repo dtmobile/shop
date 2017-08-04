@@ -88,6 +88,22 @@ function repaySuccess() {
         return;
     }
 
+    var repayUserName =  document.getElementsByName('repay_user_name')[0].value;
+    if(Utils.isEmpty(repayUserName))
+    {
+        alert("请输入您的姓名");
+        return;
+    }
+
+    var repaySxdCode =  document.getElementsByName('repay_vip_code')[0].value;
+    if(Utils.isEmpty(repaySxdCode))
+    {
+        alert("请输入您的商享贷卡号");
+        return;
+    }
+
+
+
     var params = new Object();
     var repayDialog = document.getElementsByName('repay_borrow_dialog')[0];
     params.user_id = repayDialog.user_id;
@@ -96,6 +112,8 @@ function repaySuccess() {
     params.amortize_repay_money = amortizeRepayMoney;
     params.repay_source = repaySource;
     params.repay_serial_code = repaySerialCode;
+    params.repay_user_name = repayUserName;
+    params.repay_vip_code = repaySxdCode;
     params.comment = '';
     console.log("还款信息如下");
     console.log(params);

@@ -196,9 +196,9 @@
                   买房&nbsp;&nbsp;
                   <input type="radio" name="home_type" value="3" {if $profile.home_type==3}checked="checked"{/if} />
                   其他&nbsp;&nbsp;&nbsp;月租金
-                  <input name="home_rent_per_month" type="text" value="{$profile.home_rent_per_month}" size="25" class="inputBg" placeholder="请输入您当前租住房屋的每月租金"/>
+                  <input name="home_rent_per_month" type="text" value="{$profile.home_rent_per_month}" size="25" class="inputBg" placeholder="请输入每月租金"/>
                   元／月 &nbsp;&nbsp;购买金额
-                  <input name="home_buy_cost" type="text" value="{$profile.home_buy_cost}" size="25" class="inputBg" placeholder="请输入您当前房租的购买价格"/>万元
+                  <input name="home_buy_cost" type="text" value="{$profile.home_buy_cost}" size="25" class="inputBg" placeholder="请输入房屋的购买总价"/>万元
               </td>
           </tr>
 

@@ -248,6 +248,15 @@ function changeCreditLine($user_id, $borrow_id, $amortize_id)
     return true;
 }
 
+function validRepaySxdCode($userId,$vipCode)
+{
+    $sql = "SELECT COUNT(*) FROM " .  $GLOBALS['ecs']->table('users') . " WHERE user_id = '$userId' and vipcard = '$vipCode'";
+    if ($GLOBALS['db']->getOne($sql) > 0) {
+        return true;
+    }
+    return false;
+}
+
 function amortizeRepayCommit($params)
 {
     if (empty($params->user_id))
@@ -275,8 +284,23 @@ function amortizeRepayCommit($params)
         return '支付流水号不可以为空';
     }
 
+    if (empty($params->repay_user_name))
+    {
+        return '还款人姓名不可以为空';
+    }
+
+    if (empty($params->repay_vip_code))
+    {
+        return '商享贷卡号不可以为空';
+    }
+
+    if (!validRepaySxdCode($params->user_id,$params->repay_vip_code))
+    {
+        return '商享贷卡号不正确，请重新输入';
+    }
+
     $repayDate =  date("Y-m-d H:i:s",time());
-    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow_amortize') . " SET amortize_repay_money = '$params->amortize_repay_money',repay_source='$params->repay_source', repay_serial_code='$params->repay_serial_code',repay_date='$repayDate',status='待审核' "." WHERE amortize_id='$params->amortize_id' AND borrow_id='$params->borrow_id' AND user_id = '$params->user_id'";
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow_amortize') . " SET amortize_repay_money = '$params->amortize_repay_money',repay_source='$params->repay_source', repay_serial_code='$params->repay_serial_code',repay_date='$repayDate', comment='$params->repay_user_name',status='待审核' "." WHERE amortize_id='$params->amortize_id' AND borrow_id='$params->borrow_id' AND user_id = '$params->user_id'";
 //    echo $sql;
     $result = $GLOBALS['db']->query($sql);
     if (!$result) {

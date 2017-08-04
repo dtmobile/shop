@@ -119,7 +119,7 @@
     </div>
 </div>
 
-<div class="add_ok" name="repay_borrow_dialog" id="repay_borrow_dialog" style="width: 900px;height: 650px">
+<div class="add_ok" name="repay_borrow_dialog" id="repay_borrow_dialog" style="width: 900px;height: 700px">
     <div class="tip">
         <i class="iconfont"></i>请使用手机扫描二维码来支付
         <span class="newroman font_50" style="color: darkgreen" name="amortize_need_money_label"></span>
@@ -168,6 +168,22 @@
                     </td>
                     <td>
                         <input name="repay_serial_code" type="text" size="25" class="inputBg" placeholder="请填写支付流水号" style="width: 100%"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="newroman font_16">还款人姓名</span>
+                    </td>
+                    <td>
+                        <input name="repay_user_name" type="text" size="25" class="inputBg" placeholder="请输入您的姓名" style="width: 100%"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="newroman font_16">商享贷卡号</span>
+                    </td>
+                    <td>
+                        <input name="repay_vip_code" type="text" size="25" class="inputBg" placeholder="请输入您的商享贷卡号" style="width: 100%"/>
                     </td>
                 </tr>
 
