@@ -66,6 +66,15 @@ if ($action == 'repay') {
     $info = array();
 
     $info['title'] = "我的贷款/分期";
+
+    $sql = "SELECT vipcard FROM " .  $GLOBALS['ecs']->table('users') . " WHERE user_id = '$user_id'";
+    $row = $GLOBALS['db']->GetRow($sql);
+    if ($row) {
+        $info['user_vip_card'] = $row['vipcard'];
+    }else{
+        $info['user_vip_card'] = 0;
+    }
+
     $smarty->assign('info', $info);
     $borrowList = getBorrowByUserId($user_id);
 

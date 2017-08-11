@@ -20,7 +20,7 @@ function repayInfoCommitResponse(result)
     }
 }
 
-function amortizeRepay(userId,borrowId,amortizeId,amortizeNeedMoney) {
+function amortizeRepay(userId,borrowId,amortizeId,amortizeNeedMoney,userVipCode) {
     // console.log("还款人编号"+userId);
     // console.log("贷款编号"+borrowId);
     // console.log("分期编号"+amortizeId);
@@ -34,6 +34,9 @@ function amortizeRepay(userId,borrowId,amortizeId,amortizeNeedMoney) {
     document.getElementsByName('amortize_repay_money')[0].value="";
     document.getElementsByName('repay_serial_code')[0].value="";
     document.getElementsByName('amortize_need_money_label')[0].innerText = amortizeNeedMoney;
+    document.getElementsByName('repay_vip_code')[0].value = userVipCode;
+
+
     var repay_source_select = document.getElementsByName('repay_source')[0];
     repay_source_select.value="微信";
     var repay_source_image = document.getElementsByName('repay_image')[0];
@@ -101,8 +104,6 @@ function repaySuccess() {
         alert("请输入您的商享贷卡号");
         return;
     }
-
-
 
     var params = new Object();
     var repayDialog = document.getElementsByName('repay_borrow_dialog')[0];

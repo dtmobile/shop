@@ -101,7 +101,7 @@
                   <td bgcolor="#ffffff">{$amortize.status}</td>
                   <td bgcolor="#ffffff">
                       {if $amortize.status eq '未还款'}
-                      <a style="color: blue" href="javascript:amortizeRepay({$amortize.user_id},{$amortize.borrow_id},{$amortize.amortize_id},{$amortize.amortize_need_money})" class="f6">还款</a>
+                      <a style="color: blue" href="javascript:amortizeRepay({$amortize.user_id},{$amortize.borrow_id},{$amortize.amortize_id},{$amortize.amortize_need_money},{$info.user_vip_card})" class="f6">还款</a>
                       {/if}
                   </td>
               </tr>
