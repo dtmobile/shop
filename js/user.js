@@ -51,6 +51,15 @@ function daikuanInfoValid(frm) {
     }
 
 }
+function isCardNo(card)
+{
+
+     var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+     if(reg.test(card) === false) {
+         return  false;
+     }
+     return true;
+}
 
 function userInfoValid(frm) {
 
@@ -92,7 +101,7 @@ function userInfoValid(frm) {
     if (Utils.isEmpty(identityCard)) {
         msg += '请输入身份证号\n';
     } else {
-        if (!Utils.isInt(identityCard) || identityCard.length != 18) {
+        if (!isCardNo(identityCard) || identityCard.length != 18) {
             msg += '身份证号格式不正确\n';
         }
     }
