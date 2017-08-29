@@ -84,6 +84,24 @@ if ($_REQUEST['step'] == 'add_to_cart')
     $result = array('error' => 0, 'message' => '', 'content' => '', 'goods_id' => '');
     $json  = new JSON;
 
+    /* 检查用户是否已经登录
+* 如果用户已经登录了则检查是否有默认的收货地址
+* 如果没有登录则跳转到登录和注册页面
+*/
+    include_once(ROOT_PATH . 'includes/lib_borrow.php');
+    if (empty($_SESSION['direct_shopping']) && $_SESSION['user_id'] == 0)
+    {
+        $result['error'] = 1;
+        $result['message'] = '抱歉，购物前请先登录';
+        die($json->encode($result));
+    }
+
+    if (!userIsVIP($_SESSION['user_id']))
+    {
+        $result['error'] = 1;
+        $result['message'] = '很抱歉，非 VIP 用户暂时无法添加购物车，请申请为VIP 后再来购买';
+        die($json->encode($result));
+    }
     if (empty($_POST['goods']))
     {
         $result['error'] = 1;
@@ -195,6 +213,7 @@ elseif ($_REQUEST['step'] == 'add_to_cart_combo') //by mike
     $_POST['goods']=strip_tags(urldecode($_POST['goods']));
     $_POST['goods'] = json_str_iconv($_POST['goods']);
 
+
     if (!empty($_REQUEST['goods_id']) && empty($_POST['goods']))
     {
         if (!is_numeric($_REQUEST['goods_id']) || intval($_REQUEST['goods_id']) <= 0)
@@ -208,6 +227,24 @@ elseif ($_REQUEST['step'] == 'add_to_cart_combo') //by mike
     $result = array('error' => 0, 'message' => '', 'content' => '', 'goods_id' => '');
     $json  = new JSON;
 
+    /* 检查用户是否已经登录
+* 如果用户已经登录了则检查是否有默认的收货地址
+* 如果没有登录则跳转到登录和注册页面
+*/
+    include_once(ROOT_PATH . 'includes/lib_borrow.php');
+    if (empty($_SESSION['direct_shopping']) && $_SESSION['user_id'] == 0)
+    {
+        $result['error'] = 1;
+        $result['message'] = '抱歉，购物前请先登录';
+        die($json->encode($result));
+    }
+
+    if (!userIsVIP($_SESSION['user_id']))
+    {
+        $result['error'] = 1;
+        $result['message'] = '很抱歉，非 VIP 用户暂时无法添加购物车，请申请为VIP 后再来购买';
+        die($json->encode($result));
+    }
     if (empty($_POST['goods']))
     {
         $result['error'] = 1;
@@ -373,8 +410,28 @@ elseif ($_REQUEST['step'] == 'add_to_cart_group') //套餐添加到购物车 by 
     $_POST['goods'] = strip_tags(urldecode($_POST['goods']));
     $_POST['goods'] = json_str_iconv($_POST['goods']);
 
+
     $result = array('error' => 0, 'message' => '');
     $json  = new JSON;
+
+    /* 检查用户是否已经登录
+* 如果用户已经登录了则检查是否有默认的收货地址
+* 如果没有登录则跳转到登录和注册页面
+*/
+    include_once(ROOT_PATH . 'includes/lib_borrow.php');
+    if (empty($_SESSION['direct_shopping']) && $_SESSION['user_id'] == 0)
+    {
+        $result['error'] = 1;
+        $result['message'] = '抱歉，购物前请先登录';
+        die($json->encode($result));
+    }
+
+    if (!userIsVIP($_SESSION['user_id']))
+    {
+        $result['error'] = 1;
+        $result['message'] = '很抱歉，非 VIP 用户暂时无法添加购物车，请申请为VIP 后再来购买';
+        die($json->encode($result));
+    }
 
     if (empty($_POST['goods']))
     {
