@@ -656,20 +656,11 @@ padding: 10px 20px 12px; height:auto; cursor:pointer; border:none;" value="加�
                                3期&nbsp;&nbsp;
                                <input type="radio" name="amortize_period" value="6" {if $profile.amortize_period==6}checked="checked"{/if} />
                                6期&nbsp;&nbsp;
-                               <input type="radio" name="amortize_period" value="12" {if $profile.amortize_period==12}checked="checked"{/if} />
-                               12期&nbsp;&nbsp;
-                               <input type="radio" name="amortize_period" value="24" {if $profile.amortize_period==24}checked="checked"{/if} />
-                               24期&nbsp;&nbsp;
-                               <input type="radio" name="amortize_period" value="36" {if $profile.amortize_period==36}checked="checked"{/if} />
-                               36期&nbsp;&nbsp;
-                               <span style="color:#FF0000"> *</span>
                            </td>
                        </tr>
                          <tr>
                            <td width="28%" align="right">还款方式： </td>
                            <td width="72%" align="left" >
-                               <input type="radio" name="amortize_type" value="1" {if $profile.amortize_type==1}checked="checked"{/if} />
-                               等额本息&nbsp;&nbsp;
                                <input type="radio" name="amortize_type" value="2" {if $profile.amortize_type==2}checked="checked"{/if} />
                                先息后本&nbsp;&nbsp;
                                <span style="color:#FF0000"> *</span>
