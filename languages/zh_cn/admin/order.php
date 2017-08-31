@@ -36,6 +36,7 @@ $_LANG['os'][OS_INVALID] = '<font color="red">无效</font>';
 $_LANG['os'][OS_RETURNED] = '<font color="red">退货</font>';
 $_LANG['os'][OS_SPLITED] = '已分单';
 $_LANG['os'][OS_SPLITING_PART] = '部分分单';
+$_LANG['os'][OS_ADMINCONFIRMED] = '管理员已确认';
 
 $_LANG['ss'][SS_UNSHIPPED] = '未发货';
 $_LANG['ss'][SS_PREPARING] = '配货中';
@@ -57,6 +58,7 @@ $_LANG['label_invoice_no'] = '发货单号：';
 $_LANG['label_cancel_note'] = '取消原因：';
 $_LANG['notice_cancel_note'] = '（会记录在商家给客户的留言中）';
 $_LANG['op_confirm'] = '确认';
+$_LANG['op_admin_confirm'] = '管理员确认';
 $_LANG['op_pay'] = '付款';
 $_LANG['op_prepare'] = '配货';
 $_LANG['op_ship'] = '发货';

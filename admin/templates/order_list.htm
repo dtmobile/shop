@@ -34,6 +34,7 @@
     <th><a href="javascript:listTable.sort('total_fee', 'DESC'); ">{$lang.total_fee}</a>{$sort_total_fee}</th>
     <th><a href="javascript:listTable.sort('order_amount', 'DESC'); ">{$lang.order_amount}</a>{$sort_order_amount}</th>
     <th>商享贷卡号</th>
+    <th>管理员确认</th>
     <th>{$lang.all_status}</th>
     <th>{$lang.handler}</th>
   <tr>
@@ -45,12 +46,14 @@
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_total_fee}</td>
     <td align="right" valign="top" nowrap="nowrap">{$order.formated_order_amount}</td>
     <td align="right" valign="top" nowrap="nowrap">{$order.repay_serial_code}</td>
+    <td align="right" valign="top" nowrap="nowrap">{$lang.os[$order.admin_order_status]}</td>
     <td align="center" valign="top" nowrap="nowrap">{$lang.os[$order.order_status]},{$lang.ps[$order.pay_status]},{$lang.ss[$order.shipping_status]}</td>
     <td align="center" valign="top"  nowrap="nowrap">
      <a href="order.php?act=info&order_id={$order.order_id}">{$lang.detail}</a>
      {if $order.can_remove}
      <br /><a href="javascript:;" onclick="listTable.remove({$order.order_id}, remove_confirm, 'remove_order')">{$lang.remove}</a>
      {/if}
+       <br />
     </td>
   </tr>
   {/foreach}
@@ -68,6 +71,7 @@
 {if $full_page}
   </div>
   <div>
+      <input name="admin_confirm" type="submit" id="btnSubmit5" value="{$lang.op_admin_confirm}" class="button" disabled="true" onclick="this.form.target = '_self'" />
     <input name="confirm" type="submit" id="btnSubmit" value="{$lang.op_confirm}" class="button" disabled="true" onclick="this.form.target = '_self'" />
     <input name="invalid" type="submit" id="btnSubmit1" value="{$lang.op_invalid}" class="button" disabled="true" onclick="this.form.target = '_self'" />
     <input name="cancel" type="submit" id="btnSubmit2" value="{$lang.op_cancel}" class="button" disabled="true" onclick="this.form.target = '_self'" />

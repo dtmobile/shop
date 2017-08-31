@@ -105,7 +105,6 @@ elseif ($_REQUEST['act'] == 'query')
 /*------------------------------------------------------ */
 //-- 订单详情页面
 /*------------------------------------------------------ */
-
 elseif ($_REQUEST['act'] == 'info')
 {
     /* 根据订单id或订单号查询订单信息 */
@@ -2543,6 +2542,13 @@ elseif ($_REQUEST['act'] == 'operate')
         $action         = $_LANG['op_confirm'];
         $operation      = 'confirm';
     }
+    /* 管理员确认 */
+    if (isset($_POST['admin_confirm']))
+    {
+        $require_note   = false;
+        $action         = $_LANG['op_admin_confirm'];
+        $operation      = 'admin_confirm';
+    }
     /* 付款 */
     elseif (isset($_POST['pay']))
     {
@@ -3181,6 +3187,41 @@ elseif ($_REQUEST['act'] == 'batch_operate_post')
         }
 
         $sn_str = $_LANG['confirm_order'];
+    } elseif ('admin_confirm' == $operation)
+    {
+
+        foreach($order_id_list as $id_order)
+        {
+            $sql = "SELECT * FROM " . $ecs->table('order_info') .
+                " WHERE order_sn = '$id_order'" .
+                " AND admin_order_status = '" . OS_ADMINUNCONFIRMED . "'";
+            $order = $db->getRow($sql);
+
+            if($order)
+            {
+
+                $order_id = $order['order_id'];
+
+                if ($order['admin_order_status'] == 7 || $order['admin_order_status'] ) {
+                    continue;
+                }
+                /* 标记订单为已确认 */
+                update_order($order_id, array('admin_order_status' => OS_ADMINCONFIRMED, 'confirm_time' => gmtime()));
+
+                /* 记录log */
+                order_action($order['order_sn'], OS_ADMINCONFIRMED, SS_UNSHIPPED, PS_PAYED, $action_note);
+
+                $sn_list[] = $order['order_sn'];
+            }
+            else
+            {
+                $sn_not_list[] = $id_order;
+            }
+        }
+
+        $sn_str = $_LANG['confirm_order'];
+
+
     }
     /* 无效 */
     elseif ('invalid' == $operation)
@@ -5071,7 +5112,7 @@ function order_list()
         $filter['page_count']     = $filter['record_count'] > 0 ? ceil($filter['record_count'] / $filter['page_size']) : 1;
 
         /* 查询 */
-        $sql = "SELECT o.order_id, o.order_sn, o.add_time, o.order_status, o.shipping_status, o.order_amount, o.money_paid," .
+        $sql = "SELECT o.order_id, o.order_sn, o.add_time, o.admin_order_status ,o.order_status, o.shipping_status, o.order_amount, o.money_paid," .
                     "o.pay_status, o.consignee, o.address, o.amortization_money,o.repay_serial_code,o.amortize_period,o.amortize_type,o.email, o.tel, o.extension_code, o.extension_id, " .
                     "(" . order_amount_field('o.') . ") AS total_fee, " .
                     "IFNULL(u.user_name, '" .$GLOBALS['_LANG']['anonymous']. "') AS buyer ".
