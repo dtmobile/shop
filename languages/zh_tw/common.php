@@ -351,7 +351,7 @@ $_LANG['article_comment'] = '文章評論';
 $_LANG['pay_status'] = '支付狀態';
 $_LANG['pay_not_exist'] = '此支付方式不存在或者參數錯誤！';
 $_LANG['pay_disabled'] = '此支付方式還沒有被啟用！';
-$_LANG['pay_success'] = '您此次的支付操作已成功！';
+$_LANG['pay_success'] = '您此次的支付操作已成功，请等待审核人员确认！';
 $_LANG['pay_fail'] = '支付操作失敗，請返回重試！';
 
 /* 文章部分 */
