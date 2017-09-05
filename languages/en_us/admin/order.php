@@ -59,6 +59,7 @@ $_LANG['label_invoice_no'] = 'Invoice NO.:';
 $_LANG['label_cancel_note'] = 'Cause of cancel:';
 $_LANG['notice_cancel_note'] = '(Note in message of shopkeeper)';
 $_LANG['op_confirm'] = 'Confirm';
+$_LANG['op_admin_confirm'] = 'Admin Confirm';
 $_LANG['op_pay'] = 'Payment';
 $_LANG['op_prepare'] = 'Distribution';
 $_LANG['op_ship'] = 'Shipping';

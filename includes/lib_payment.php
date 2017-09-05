@@ -172,7 +172,7 @@ function get_order_sn_for_paid($log_id)
     if(is_numeric($log_id))
     {
         $sql = 'SELECT '.$GLOBALS['ecs']->table('order_info').'.order_sn FROM ' .$GLOBALS['ecs']->table('order_info').' left join '. $GLOBALS['ecs']->table('pay_log') .
-            " on ".$GLOBALS['ecs']->table('order_info').".order_id = ".$GLOBALS['ecs']->table('order_info').".order_id WHERE ".$GLOBALS['ecs']->table('pay_log').".log_id = '$log_id'";
+            " on ".$GLOBALS['ecs']->table('order_info').".order_id = ".$GLOBALS['ecs']->table('pay_log').".order_id WHERE ".$GLOBALS['ecs']->table('pay_log').".log_id = '$log_id'";
         $order_sn = $GLOBALS['db']->getOne($sql);
         return $order_sn;
     }
