@@ -212,6 +212,7 @@ if ($_REQUEST['act'] == 'borrow_list') {
     assign_query_info();
     $smarty->display('borror_info.htm');
 } elseif ($_REQUEST['act'] == 'query') {
+    $smarty->assign('admin_name', $_SESSION['admin_name']);
     $borrow_list = borrowList();
     $smarty->assign('borrow_list', $borrow_list['borrow_list']);
     $smarty->assign('filter', $borrow_list['filter']);
