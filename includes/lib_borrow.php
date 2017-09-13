@@ -25,7 +25,7 @@ function getBorrowByUserId($userId)
         $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
         return false;
     }
-    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('borrow') . " WHERE user_id = '$userId'";
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('borrow') . " WHERE user_id = '$userId' AND removed=0 ";
     return $GLOBALS['db']->getAll($sql);
 }
 
