@@ -140,19 +140,19 @@
         </div>
 
             <table style="margin:auto;">
+            <!--
                 <tr>
                     <td>
                         <span class="newroman font_16" >支付渠道</span>
                     </td>
                     <td>
                         <select name='repay_source' style="width: 100%">
-                            <!--<option value=''>请选择</option>-->
                             <option value='支付宝'>支付宝</option>
                             <option value='微信'>微信</option>
                         </select>
                     </td>
                 </tr>
-
+            -->
                 <tr>
                     <td>
                         <span class="newroman font_16" >支付金额</span>

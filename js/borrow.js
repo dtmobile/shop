@@ -37,20 +37,20 @@ function amortizeRepay(userId,borrowId,amortizeId,amortizeNeedMoney,userVipCode)
     document.getElementsByName('repay_vip_code')[0].value = userVipCode;
 
 
-    var repay_source_select = document.getElementsByName('repay_source')[0];
-    repay_source_select.value="微信";
+    // var repay_source_select = document.getElementsByName('repay_source')[0];
+    // repay_source_select.value="微信";
     var repay_source_image = document.getElementsByName('repay_image')[0];
-    repay_source_image.src="../../images/wetchatpay/wetchat.jpg";
+    repay_source_image.src="../../images/alipay/alipay.jpg";
 
-    repay_source_select.onchange = function(){
-        if(repay_source_select.value == "微信")
-        {
-            repay_source_image.src="../../images/wetchatpay/wetchat.jpg";
-        }else if(repay_source_select.value == "支付宝"){
-            repay_source_image.src="../../images/alipay/alipay.jpg";
-        }
-
-    }
+    // repay_source_select.onchange = function(){
+    //     if(repay_source_select.value == "微信")
+    //     {
+    //         repay_source_image.src="../../images/wetchatpay/wetchat.jpg";
+    //     }else if(repay_source_select.value == "支付宝"){
+    //         repay_source_image.src="../../images/alipay/alipay.jpg";
+    //     }
+    //
+    // }
     easyDialog.open({
         container : 'repay_borrow_dialog'
     });
@@ -70,12 +70,12 @@ function repaySuccess() {
     }
 
 
-    var repaySource =  document.getElementsByName('repay_source')[0].value;
-    if(Utils.isEmpty(repaySource))
-    {
-        alert("请选中支付方式");
-        return;
-    }
+    // var repaySource =  document.getElementsByName('repay_source')[0].value;
+    // if(Utils.isEmpty(repaySource))
+    // {
+    //     alert("请选中支付方式");
+    //     return;
+    // }
 
     var repaySerialCode =  document.getElementsByName('repay_serial_code')[0].value;
     if(Utils.isEmpty(repaySerialCode))
@@ -111,7 +111,7 @@ function repaySuccess() {
     params.borrow_id = repayDialog.borrow_id;
     params.amortize_id = repayDialog.amortize_id;
     params.amortize_repay_money = amortizeRepayMoney;
-    params.repay_source = repaySource;
+    params.repay_source = "支付宝";
     params.repay_serial_code = repaySerialCode;
     params.repay_user_name = repayUserName;
     params.repay_vip_code = repaySxdCode;
