@@ -190,6 +190,7 @@ function getBorrowById($userId,$borrowId)
     return $GLOBALS['db']->getRow($sql);
 }
 
+//删除贷款申请记录
 function removeBorrowById($userId, $borrowId)
 {
     if (empty($userId)) {
@@ -198,8 +199,23 @@ function removeBorrowById($userId, $borrowId)
     }
 
     $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow') . " SET removed = 1 "." WHERE user_id='$userId' AND borrow_id='$borrowId'";
-    $result = $GLOBALS['db']->query($sql);
+    $GLOBALS['db']->query($sql);
+
+    removeAmortizeByBorrowId($userId, $borrowId);
 }
+
+//删除分期记录
+function removeAmortizeByBorrowId($userId, $borrowId)
+{
+    if (empty($userId)) {
+        $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
+        return false;
+    }
+
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow_amortize') . " SET status = '已删除' "." WHERE user_id='$userId' AND borrow_id='$borrowId'";
+    $GLOBALS['db']->query($sql);
+}
+
 
 function getAmortizeList($userId,$borrowId)
 {

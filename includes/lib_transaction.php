@@ -560,11 +560,11 @@ function haveOldAmortize($userId)
 }
 
 //还有贷款申请在审批中
-function haveOldBorrow($userId)
+function haveBorrowRequest($userId)
 {
 //    SELECT * from ecs_borrow WHERE user_id='22' AND `status`='待审核'
     $sql = "SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('borrow') .
-        " WHERE user_id = $userId AND status IN ('待审核')";
+        " WHERE user_id = $userId AND removed !=1 AND status IN ('待审核')";
 
     return $GLOBALS['db']->getOne($sql) > 0;
 }

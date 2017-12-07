@@ -642,7 +642,7 @@ elseif ($action == 'profile') {
 elseif ($action == 'daikuan') {
     include_once(ROOT_PATH . 'includes/lib_transaction.php');
 
-    if(haveOldBorrow($user_id))
+    if(haveBorrowRequest($user_id))
     {
         show_message("很抱歉，您的贷款申请还在审批中，暂时无法申请新的贷款，如有疑问请联系管理员", "前往还款专区查看", 'borrow.php?act=repay', 'info');
         return;
