@@ -3122,6 +3122,7 @@ elseif ($_REQUEST['act'] == 'operate')
 
 elseif ($_REQUEST['act'] == 'batch_operate_post')
 {
+
     /* 检查权限 */
     admin_priv('order_os_edit');
 
@@ -3301,7 +3302,6 @@ elseif ($_REQUEST['act'] == 'batch_operate_post')
                 }
 
                 $order_id = $order['order_id'];
-
                 /* 标记订单为“取消”，记录取消原因 */
                 $cancel_note = trim($_REQUEST['cancel_note']);
                 update_order($order_id, array('order_status' => OS_CANCELED, 'to_buyer' => $cancel_note));
@@ -3313,6 +3313,12 @@ elseif ($_REQUEST['act'] == 'batch_operate_post')
                 if ($_CFG['use_storage'] == '1' && $_CFG['stock_dec_time'] == SDT_PLACE)
                 {
                     change_order_goods_storage($order_id, false, SDT_PLACE);
+                }
+
+                /*如果有购物贷款， 则取消贷款*/
+                include_once(ROOT_PATH . 'includes/lib_borrow.php');
+                if ($order["pay_id"] == 6 || $order["pay_id"] == 7 ) {
+                    removeBorrowByOrderSn($user_id, $order['order_sn']);
                 }
 
                 /* 发送邮件 */
@@ -4019,7 +4025,11 @@ elseif ($_REQUEST['act'] == 'operate_post')
         {
             change_order_goods_storage($order_id, false, SDT_PLACE);
         }
-
+        /*如果有购物贷款， 则取消贷款*/
+        include_once(ROOT_PATH . 'includes/lib_borrow.php');
+        if ($order["pay_id"] == 6 || $order["pay_id"] == 7 ) {
+            removeBorrowByOrderSn($order['user_id'], $order['order_sn']);
+        }
         /* 退还用户余额、积分、红包 */
         return_user_surplus_integral_bonus($order);
 

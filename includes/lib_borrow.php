@@ -199,9 +199,25 @@ function removeBorrowById($userId, $borrowId)
     }
 
     $sql = "UPDATE " . $GLOBALS['ecs']->table('borrow') . " SET removed = 1 "." WHERE user_id='$userId' AND borrow_id='$borrowId'";
+
     $GLOBALS['db']->query($sql);
 
     removeAmortizeByBorrowId($userId, $borrowId);
+}
+
+//删除贷款申请记录
+function removeBorrowByOrderSn($userId, $order_sn)
+{
+    if (empty($userId)) {
+        $GLOBALS['err']->add($GLOBALS['_LANG']['not_login']);
+        return false;
+    }
+    $borrow_purpose = '购物分期, 订单号为 :'. $order_sn;
+    $sql = "SELECT borrow_id  FROM " . $GLOBALS['ecs']->table('borrow') . " WHERE user_id = '$userId' AND borrow_purpose='$borrow_purpose'";
+    $res = $GLOBALS['db']->getRow($sql);
+    if (!empty($res)) {
+        removeBorrowById($userId, $res["borrow_id"]);
+    }
 }
 
 //删除分期记录
