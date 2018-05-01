@@ -198,7 +198,7 @@
                   其他&nbsp;&nbsp;&nbsp;月租金
                   <input name="home_rent_per_month" type="text" value="{$profile.home_rent_per_month}" size="25" class="inputBg" placeholder="请输入每月租金"/>
                   元／月 &nbsp;&nbsp;购买金额
-                  <input name="home_buy_cost" type="text" value="{$profile.home_buy_cost}" size="25" class="inputBg" placeholder="请输入房屋的购买总价"/>万元
+                  <input name="home_buy_cost" type="text" value="{$profile.home_buy_cost}" size="25" class="inputBg" placeholder="请输入房屋的购买总价"/>万元<span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
@@ -211,7 +211,7 @@
                   <input type="radio" name="have_house" value="1" {if $profile.have_house==1}checked="checked"{/if} />
                   有&nbsp;&nbsp;
                   <span >房产地址</span>
-                  <input name="house_address" type="text" value="{$profile.house_address}" size="25" class="inputBg" placeholder="请输入房产地址、购买年限等信息"/>
+                  <input name="house_address" type="text" value="{$profile.house_address}" size="25" class="inputBg" placeholder="请输入房产地址、购买年限等信息"/><span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
@@ -223,7 +223,7 @@
                   <input type="radio" name="have_car" value="1" {if $profile.have_car==1}checked="checked"{/if} />
                   有&nbsp;&nbsp;
                   <span >汽车状况</span>
-                  <input name="car_description" type="text" value="{$profile.car_description}" size="25" class="inputBg" placeholder="请输入该汽车的购买价格、年限等信息"/>
+                  <input name="car_description" type="text" value="{$profile.car_description}" size="25" class="inputBg" placeholder="请输入该汽车的购买价格、年限等信息"/><span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
@@ -239,7 +239,7 @@
                   <input type="radio" name="live_partner" value="3" {if $profile.live_partner==3}checked="checked"{/if} />
                   朋友&nbsp;&nbsp;
                   <input type="radio" name="live_partner" value="4" {if $profile.live_partner==4}checked="checked"{/if} />
-                  其它&nbsp;&nbsp;
+                  其它&nbsp;&nbsp;<span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
@@ -253,7 +253,7 @@
                   <input type="radio" name="health" value="3" {if $profile.health==3}checked="checked"{/if} />
                   较差&nbsp;&nbsp;
                   疾病史&nbsp;&nbsp;
-                  <input name="sick_history" type="text" value="{$profile.sick_history}" size="25" class="inputBg" />
+                  <input name="sick_history" type="text" value="{$profile.sick_history}" size="25" class="inputBg" /><span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
@@ -269,7 +269,7 @@
                   <input type="radio" name="education" value="3" {if $profile.education==3}checked="checked"{/if} />
                   高中／中专&nbsp;&nbsp;
                   <input type="radio" name="education" value="4" {if $profile.education==4}checked="checked"{/if} />
-                  初中及以下&nbsp;&nbsp;
+                  初中及以下&nbsp;&nbsp;<span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
@@ -285,7 +285,7 @@
                   <input type="radio" name="marital_status" value="3" {if $profile.marital_status==3}checked="checked"{/if} />
                   丧偶&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   结婚日期
-                  {html_select_date field_order=YMD prefix=marry_date start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.marry_date}
+                  {html_select_date field_order=YMD prefix=marry_date start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.marry_date}<span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
@@ -317,38 +317,38 @@
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">现工作单位全称：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="company_name" type="text" value="{$profile.company_name}" size="25" class="inputBg" placeholder="请输入..."/>
-                  &nbsp;&nbsp;&nbsp;所属行业 <input name="company_industury" type="text" value="{$profile.company_industury}" size="25" class="inputBg" placeholder="请输入..."/>
+                  <input name="company_name" type="text" value="{$profile.company_name}" size="25" class="inputBg" placeholder="请输入..."/> <span style="color:#FF0000"> *</span>
+                  &nbsp;&nbsp;&nbsp;所属行业 <input name="company_industury" type="text" value="{$profile.company_industury}" size="25" class="inputBg" placeholder="请输入..."/><span style="color:#FF0000"> *</span>
               </td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">单位地址：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="company_address" type="text" value="{$profile.company_address}" size="25" class="inputBg" placeholder="请输入..."/>
+                  <input name="company_address" type="text" value="{$profile.company_address}" size="25" class="inputBg" placeholder="请输入..."/><span style="color:#FF0000"> *</span>
                   &nbsp;&nbsp;&nbsp;单位电话
-                  <input name="company_phone" type="text" value="{$profile.company_phone}" size="25" class="inputBg" placeholder="请输入..."/>
+                  <input name="company_phone" type="text" value="{$profile.company_phone}" size="25" class="inputBg" placeholder="请输入..."/><span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">所在部门：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="company_department" type="text" value="{$profile.company_department}" size="25" class="inputBg" placeholder="请输入..."/>
+                  <input name="company_department" type="text" value="{$profile.company_department}" size="25" class="inputBg" placeholder="请输入..."/><span style="color:#FF0000"> *</span>
                   &nbsp;&nbsp;&nbsp;担任职位
-                  <input name="company_duty" type="text" value="{$profile.company_duty}" size="25" class="inputBg" placeholder="请输入..."/>
+                  <input name="company_duty" type="text" value="{$profile.company_duty}" size="25" class="inputBg" placeholder="请输入..."/><span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">当前月收入：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input name="company_income_month" type="text" value="{$profile.company_income_month}" size="25" class="inputBg" placeholder="请输入..."/>万元
+                  <input name="company_income_month" type="text" value="{$profile.company_income_month}" size="25" class="inputBg" placeholder="请输入..."/>万元<span style="color:#FF0000"> *</span>
               </td>
           </tr>
           <tr>
               <td width="28%" align="right" bgcolor="#FFFFFF">入职时间：</td>
               <td width="72%" align="left" bgcolor="#FFFFFF">
-                  {html_select_date field_order=YMD prefix=company_entry_time start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.company_entry_time}
+                  {html_select_date field_order=YMD prefix=company_entry_time start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.company_entry_time}<span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
@@ -369,26 +369,85 @@
                   <input type="radio" name="company_type" value="5" {if $profile.company_type==5}checked="checked"{/if} />
                   合资&nbsp;&nbsp;
                   <input type="radio" name="company_type" value="6" {if $profile.company_type==6}checked="checked"{/if} />
-                  其它&nbsp;&nbsp;
+                  其它&nbsp;&nbsp;<span style="color:#FF0000"> *</span>
               </td>
           </tr>
 
           <tr style="background-color:#09c762;">
               <td width="100%" align="center"  colspan="2" ><strong>主要社会关系</strong></td>
           </tr>
-          {foreach from=$profile.friends item=friend key=key}
-          <tr>
-              <td width="28%" align="right" bgcolor="#FFFFFF">
-                  姓名<input name="friend_id_{$key}" type="hidden" value="{$friend.friend_id}"  />
-                  <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="friendName" placeholder="请输入亲属(好友)姓名"/>
-                  </td>
-              <td width="72%" align="left" bgcolor="#FFFFFF">关系
-                  <input name="firend_type_{$key}" type="text" value="{$friend.firend_type}" size="25" class="friendRelation" placeholder="请输入亲属(好友)与您的关系"/>
-                  &nbsp;&nbsp;电话
-                  <input name="friend_phone_{$key}" type="text" value="{$friend.friend_phone}" size="25" class="friendPhone" placeholder="请输入亲属(好友)的手机号"/>
-                  &nbsp;&nbsp;住址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="friendAddress" placeholder="请输入亲属(好友)的住址"/>
-              </td>
-          </tr>
+          {foreach from=$profile.friends item=friend key=key name=relationship}
+          {if $smarty.foreach.relationship.iteration eq 1}
+              <tr>
+                     <td width="28%" align="right" bgcolor="#FFFFFF">
+                         姓名<input name="friend_id_{$key}" type="hidden" value="{$friend.friend_id}"  />
+                         <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="friendName" placeholder="请输入亲属(好友)姓名"/>
+                         </td>
+                     <td width="72%" align="left" bgcolor="#FFFFFF">关系
+                         <input name="firend_type_{$key}" type="text" value="直系亲属" size="25" class="friendRelation" readonly/>
+                         &nbsp;&nbsp;电话
+                         <input name="friend_phone_{$key}" type="text" value="{$friend.friend_phone}" size="25" class="friendPhone" placeholder="请输入亲属(好友)的手机号"/>
+                         &nbsp;&nbsp;住址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="friendAddress" placeholder="请输入亲属(好友)的住址"/><span style="color:#FF0000"> *</span>
+                     </td>
+                 </tr>
+          {/if}
+
+         {if $smarty.foreach.relationship.iteration eq 2}
+              <tr>
+                     <td width="28%" align="right" bgcolor="#FFFFFF">
+                         姓名<input name="friend_id_{$key}" type="hidden" value="{$friend.friend_id}"  />
+                         <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="friendName" placeholder="请输入亲属(好友)姓名"/>
+                         </td>
+                     <td width="72%" align="left" bgcolor="#FFFFFF">关系
+                         <input name="firend_type_{$key}" type="text" value="直系亲属" size="25" class="friendRelation" readonly/>
+                         &nbsp;&nbsp;电话
+                         <input name="friend_phone_{$key}" type="text" value="{$friend.friend_phone}" size="25" class="friendPhone" placeholder="请输入亲属(好友)的手机号"/>
+                         &nbsp;&nbsp;住址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="friendAddress" placeholder="请输入亲属(好友)的住址"/><span style="color:#FF0000"> *</span>
+                     </td>
+                 </tr>
+          {/if}
+       {if $smarty.foreach.relationship.iteration eq 3}
+            <tr>
+                   <td width="28%" align="right" bgcolor="#FFFFFF">
+                       姓名<input name="friend_id_{$key}" type="hidden" value="{$friend.friend_id}"  />
+                       <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="friendName" placeholder="请输入亲属(好友)姓名"/>
+                       </td>
+                   <td width="72%" align="left" bgcolor="#FFFFFF">关系
+                       <input name="firend_type_{$key}" type="text" value="同事" size="25" class="friendRelation" readonly/>
+                       &nbsp;&nbsp;电话
+                       <input name="friend_phone_{$key}" type="text" value="{$friend.friend_phone}" size="25" class="friendPhone" placeholder="请输入亲属(好友)的手机号"/>
+                       &nbsp;&nbsp;住址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="friendAddress" placeholder="请输入亲属(好友)的住址"/><span style="color:#FF0000"> *</span>
+                   </td>
+               </tr>
+        {/if}
+         {if $smarty.foreach.relationship.iteration eq 4}
+              <tr>
+                     <td width="28%" align="right" bgcolor="#FFFFFF">
+                         姓名<input name="friend_id_{$key}" type="hidden" value="{$friend.friend_id}"  />
+                         <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="friendName" placeholder="请输入亲属(好友)姓名"/>
+                         </td>
+                     <td width="72%" align="left" bgcolor="#FFFFFF">关系
+                         <input name="firend_type_{$key}" type="text" value="同事" size="25" class="friendRelation" readonly/>
+                         &nbsp;&nbsp;电话
+                         <input name="friend_phone_{$key}" type="text" value="{$friend.friend_phone}" size="25" class="friendPhone" placeholder="请输入亲属(好友)的手机号"/>
+                         &nbsp;&nbsp;住址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="friendAddress" placeholder="请输入亲属(好友)的住址"/><span style="color:#FF0000"> *</span>
+                     </td>
+                 </tr>
+          {/if}
+         {if $smarty.foreach.relationship.iteration eq 5}
+                    <tr>
+                           <td width="28%" align="right" bgcolor="#FFFFFF">
+                               姓名<input name="friend_id_{$key}" type="hidden" value="{$friend.friend_id}"  />
+                               <input name="friend_name_{$key}" type="text" value="{$friend.friend_name}" size="25" class="friendName" placeholder="请输入亲属(好友)姓名"/>
+                               </td>
+                           <td width="72%" align="left" bgcolor="#FFFFFF">关系
+                               <input name="firend_type_{$key}" type="text" value="朋友" size="25" class="friendRelation" readonly/>
+                               &nbsp;&nbsp;电话
+                               <input name="friend_phone_{$key}" type="text" value="{$friend.friend_phone}" size="25" class="friendPhone" placeholder="请输入亲属(好友)的手机号"/>
+                               &nbsp;&nbsp;住址<input name="friend_address_{$key}" type="text" value="{$friend.friend_address}" size="25" class="friendAddress" placeholder="请输入亲属(好友)的住址"/><span style="color:#FF0000"> *</span>
+                           </td>
+                       </tr>
+                {/if}
           {/foreach}
 
              <tr>
